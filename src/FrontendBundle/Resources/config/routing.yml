@@ -1,0 +1,9 @@
+frontend_homepage:
+    path:     /
+    defaults: { _controller: FrontendBundle:Accueil:index }
+frontend_test:
+    path:     /test
+    defaults: { _controller: FrontendBundle:Accueil:index }
+frontend_erreur:
+    path:     /erreur
+    defaults: { _controller: FrontendBundle:Accueil:erreur }
