@@ -44,6 +44,11 @@ class Utilisateur implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @Assert\Length(max=4096)
+     */
+    protected $plainPassword;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -109,6 +114,15 @@ class Utilisateur implements UserInterface
         $this->password = $password;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
 
     public function getSalt()
     {

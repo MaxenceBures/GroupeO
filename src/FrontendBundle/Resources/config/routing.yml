@@ -14,6 +14,18 @@ frontend_erreur:
 connexion_formulaire:
     path:     /connexion
     defaults: { _controller: FrontendBundle:Connexion:formulaire }
+connexion_login:
+    path:     /login
+    defaults: { _controller: FrontendBundle:Connexion:login }
+connexion_login_check:
+    path:     /login_check
+    defaults: { _controller: FrontendBundle:Connexion:login_check }
+connexion_logout:
+    path:     /logout
+    defaults: { _controller: FrontendBundle:Connexion:logout }
+connexion_register:
+    path:     /register
+    defaults: { _controller: FrontendBundle:Connexion:register }
 #CONNEXION
 
 #UTILISATEUR
