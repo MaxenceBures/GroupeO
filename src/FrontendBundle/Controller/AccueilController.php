@@ -9,9 +9,9 @@ class AccueilController extends Controller
 {
     public function indexAction()
     {
-        #if(!$this->getUser()){
-        #    return $this->redirect( $this->generateUrl('connexion_login'));
-        #}
+        if(!$this->getUser()){
+            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+        }
 
         return $this->render('FrontendBundle:Accueil:index.html.twig');
     }

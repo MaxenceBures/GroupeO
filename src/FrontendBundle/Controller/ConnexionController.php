@@ -84,10 +84,5 @@ class ConnexionController extends Controller
 
     }
 
-    public function estConnecte(){
-        if(!$this->getUser()){
-            return $this->redirect( $this->generateUrl('connexion_login'));
-        }
-    }
 
 }
