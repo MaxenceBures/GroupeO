@@ -1,3 +1,4 @@
+#FRONTEND
 frontend_homepage:
     path:     /
     defaults: { _controller: FrontendBundle:Accueil:index }
@@ -7,3 +8,16 @@ frontend_test:
 frontend_erreur:
     path:     /erreur
     defaults: { _controller: FrontendBundle:Accueil:erreur }
+#FRONTEND
+
+#CONNEXION
+connexion_formulaire:
+    path:     /connexion
+    defaults: { _controller: FrontendBundle:Connexion:formulaire }
+#CONNEXION
+
+#UTILISATEUR
+utilisateur_liste:
+    path:     /utilisateur/liste
+    defaults: { _controller: FrontendBundle:Utilisateur:liste }
+#UTILISATEUR

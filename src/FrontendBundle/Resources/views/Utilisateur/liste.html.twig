@@ -1,0 +1,15 @@
+<html>
+    <H1>Liste Utilisateur</H1>
+    {% for utilisateur in utilisateurs %}
+        <tr>
+            <td>{{ utilisateur.id }}</td>
+            <td>{{ utilisateur.name }}</td>
+            <td>{{ utilisateur.email }}</td>
+            <td>{{ utilisateur.role }}</td>
+            <td><a href="utilisateur/edit/{{ utilisateur.id }}">Edit</a></td>
+        </tr>
+    {% endfor %}
+
+</html>
+
+
