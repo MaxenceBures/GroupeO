@@ -13,7 +13,7 @@ class AccueilController extends Controller
             return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
         }
 
-        return $this->render('FrontendBundle:Accueil:index.html.twig');
+        return $this->render('FrontendBundle:Accueil:accueil.html.twig');
     }
 
     public function erreurAction()
