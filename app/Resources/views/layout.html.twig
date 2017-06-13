@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('template/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('template/css/bootstrap-responsive.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('template/css/matrix-style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('template/css/matrix-media.css') }}" />
+        <link rel="stylesheet" href="{{ asset('template/font-awesome/css/font-awesome.css') }}" />
+        <link rel="stylesheet" href="{{ asset('template/css/jquery.gritter.css') }}" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+    <div id="header">
+        <h1><a href="dashboard.html">Matrix Admin</a></h1>
+    </div>
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+
+            <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--start-top-serch-->
+
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+    <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+        <ul>
+            <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+            <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
+
+            <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important">5</span></a>
+                <ul>
+                    <li><a href="index2.html">Dashboard2</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="invoice.html">Invoice</a></li>
+                    <li><a href="chat.html">Chat option</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+
+    <!--main-container-part-->
+    <div id="content">
+        <!--breadcrumbs-->
+
+        <!--End-breadcrumbs-->
+
+        <!--Action boxes-->
+        <div class="container-fluid">
+
+    {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+
+        </div>
+    </div>
+
+    <!--end-main-container-part-->
+
+    <!--Footer-part-->
+
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+    </div>
+    </body>
+    <script src="{{ asset('template/js/excanvas.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
+    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.dashboard.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.gritter.min.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.interface.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.chat.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.form_validation.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.popover.js') }}"></script>
+    <script src="{{ asset('template/js/select2.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
+
+</html>
