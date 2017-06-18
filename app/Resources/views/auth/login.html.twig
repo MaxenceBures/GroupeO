@@ -36,13 +36,36 @@
             </div>
         </div>
         <div class="form-actions">
+            <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="open_modal">Mot de passe perdu ?</a></span>
             <span class="pull-right"><button type="submit" class="btn btn-success">Connexion</button></span>
         </div>
+
     </form>
 </div>
 
+<div id="modal_password" class="modal">
+    <div class="modal-content">
+        <form id="recoverform" action="#" class="form-vertical">
+            <p class="normal_text">Entrez votre adresse mail afin de recevoir votre nouveau mot de passe.</p>
+
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="xxxxx@eni-ecole.fr" />
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="close_modal">&laquo; Retour vers la connexion</a></span>
+                <span class="pull-right"><a class="btn btn-info">Recuperer</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="{{ asset('template/js/jquery.min.js') }}"></script>
-<script src="{{ asset('template/js/matrix.login.js') }}"></script>
+<!--<script src="{{ asset('template/js/matrix.login.js') }}"></script>-->
+<script src="{{ asset('Js/login.js') }}"></script>
+
 </body>
 
 </html>
