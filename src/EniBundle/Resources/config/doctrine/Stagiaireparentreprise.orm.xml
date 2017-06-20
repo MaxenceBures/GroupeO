@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Stagiaireparentreprise" table="StagiaireParEntreprise">
+    <id name="numlien" type="integer" column="NumLien">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="codestagiaire" type="integer" column="CodeStagiaire" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codeentreprise" type="integer" column="CodeEntreprise" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="datelien" type="datetime" column="DateLien" nullable="false"/>
+    <field name="codetypelien" type="string" column="CodeTypeLien" length="5" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="datedebutenets" type="datetime" column="DateDebutEnEts" nullable="true"/>
+    <field name="datefinenets" type="datetime" column="DateFinEnEts" nullable="true"/>
+    <field name="codefonction" type="string" column="CodeFonction" length="5" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="commentaire" type="string" column="Commentaire" length="0" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Champs de saisie libre pour ajouter des informations additionnelles sur le lien en question.</option>
+      </options>
+    </field>
+    <field name="codetuteur" type="integer" column="CodeTuteur" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="responsableets" type="integer" column="ResponsableEts" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="gererpar" type="integer" column="GererPar" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="interruption" type="integer" column="Interruption" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="sujetstage" type="text" column="SujetStage" length="-1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="titrevise" type="string" column="TitreVise" length="5" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="codecontacteni" type="integer" column="CodeContactEni" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

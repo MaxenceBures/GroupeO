@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Entreprise" table="Entreprise">
+    <id name="codeentreprise" type="integer" column="CodeEntreprise">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="raisonsociale" type="string" column="RaisonSociale" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse1" type="string" column="Adresse1" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse2" type="string" column="Adresse2" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse3" type="string" column="Adresse3" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="codepostal" type="string" column="CodePostal" length="5" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="ville" type="string" column="Ville" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telephone" type="string" column="Telephone" length="14" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="fax" type="string" column="Fax" length="14" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="siteweb" type="string" column="SiteWeb" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="Email" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="observation" type="text" column="Observation" length="-1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="codetypeentreprise" type="string" column="CodeTypeEntreprise" length="5" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="coderegion" type="string" column="CodeRegion" length="2" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="codesecteur" type="integer" column="CodeSecteur" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Référence un secteur d'activité (table SecteursActivite) dans le cas où les contact de l'entreprise sont susceptibles d'être jurys pour des CQP de ce secteur.</option>
+      </options>
+    </field>
+    <field name="codeorganisme" type="integer" column="CodeOrganisme" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nomcommercial" type="string" column="NomCommercial" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="siret" type="integer" column="siret" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codecontacteni" type="integer" column="CodeContactEni" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codeorganismefavoris" type="integer" column="CodeOrganismeFavoris" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

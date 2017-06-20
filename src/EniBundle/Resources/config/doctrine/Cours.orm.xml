@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Cours" table="Cours">
+    <indexes>
+      <index name="IDX_3C0BA39827D389CC" columns="CodePromotion"/>
+      <index name="IDX_3C0BA3989643ECE4" columns="IdModule"/>
+    </indexes>
+    <id name="idcours" type="guid" column="IdCours">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="debut" type="datetime" column="Debut" nullable="false"/>
+    <field name="fin" type="datetime" column="Fin" nullable="false"/>
+    <field name="dureereelleenheures" type="smallint" column="DureeReelleEnHeures" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Duree en heures prévues - les jours fériés éventuels</option>
+      </options>
+    </field>
+    <field name="prixpublicaffecte" type="float" column="PrixPublicAffecte" precision="53" scale="0" nullable="false">
+      <options>
+        <option name="comment">Prix sans prise en charge</option>
+      </options>
+    </field>
+    <field name="datecreation" type="datetime" column="DateCreation" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="libellecours" type="string" column="LibelleCours" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dureeprevueenheures" type="smallint" column="DureePrevueEnHeures" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Duree standard du cours. Issue du Module.</option>
+      </options>
+    </field>
+    <field name="dateadefinir" type="boolean" column="DateAdefinir" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="codesalle" type="string" column="CodeSalle" length="5" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="codeformateur" type="integer" column="CodeFormateur" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codelieu" type="integer" column="CodeLieu" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idmodule" target-entity="Module" fetch="LAZY">
+      <join-columns>
+        <join-column name="IdModule" referenced-column-name="IdModule"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="codepromotion" target-entity="Promotion" fetch="LAZY">
+      <join-columns>
+        <join-column name="CodePromotion" referenced-column-name="CodePromotion"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

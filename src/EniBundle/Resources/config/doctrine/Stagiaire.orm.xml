@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Stagiaire" table="Stagiaire">
+    <id name="codestagiaire" type="integer" column="CodeStagiaire">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="civilite" type="string" column="Civilite" length="3" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="nom" type="string" column="Nom" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenom" type="string" column="Prenom" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse1" type="string" column="Adresse1" length="500" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse2" type="string" column="Adresse2" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresse3" type="string" column="Adresse3" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="codepostal" type="string" column="Codepostal" length="5" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="ville" type="string" column="Ville" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telephonefixe" type="string" column="TelephoneFixe" length="14" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="telephoneportable" type="string" column="TelephonePortable" length="14" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="email" type="string" column="Email" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datenaissance" type="datetime" column="DateNaissance" nullable="true"/>
+    <field name="coderegion" type="string" column="CodeRegion" length="2" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="codenationalite" type="string" column="CodeNationalite" length="2" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="codeoriginemedia" type="string" column="CodeOrigineMedia" length="3" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="datedernierenvoidoc" type="datetime" column="DateDernierEnvoiDoc" nullable="true"/>
+    <field name="datecreation" type="datetime" column="DateCreation" nullable="true"/>
+    <field name="repertoire" type="string" column="Repertoire" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="permis" type="boolean" column="Permis" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="photo" type="string" column="Photo" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="envoidocencours" type="boolean" column="EnvoiDocEnCours" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="historique" type="text" column="Historique" length="-1" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

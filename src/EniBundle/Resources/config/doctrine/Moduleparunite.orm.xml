@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Moduleparunite" table="ModuleParUnite">
+    <indexes>
+      <index name="IDX_53FF79899643ECE4" columns="IdModule"/>
+      <index name="IDX_53FF7989C51DBB99" columns="IdUnite"/>
+    </indexes>
+    <id name="id" type="integer" column="Id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="position" type="smallint" column="Position" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idunite" target-entity="Uniteparformation" fetch="LAZY">
+      <join-columns>
+        <join-column name="IdUnite" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idmodule" target-entity="Module" fetch="LAZY">
+      <join-columns>
+        <join-column name="IdModule" referenced-column-name="IdModule"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

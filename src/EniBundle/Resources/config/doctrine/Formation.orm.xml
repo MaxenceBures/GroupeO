@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="EniBundle\Entity\Formation" table="Formation">
+    <id name="codeformation" type="string" column="CodeFormation" length="8">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="libellelong" type="string" column="LibelleLong" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="libellecourt" type="string" column="LibelleCourt" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dureeenheures" type="smallint" column="DureeEnHeures" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="tauxhoraire" type="float" column="TauxHoraire" precision="53" scale="0" nullable="false"/>
+    <field name="datecreation" type="datetime" column="DateCreation" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="codetitre" type="string" column="CodeTitre" length="8" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="prixpublicencours" type="float" column="PrixPublicEnCours" precision="53" scale="0" nullable="false"/>
+    <field name="heurescentre" type="smallint" column="HeuresCentre" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="heuresstage" type="smallint" column="HeuresStage" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="semainescentre" type="smallint" column="SemainesCentre" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="semainesstage" type="smallint" column="SemainesStage" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dureeensemaines" type="smallint" column="DureeEnSemaines" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="archiver" type="boolean" column="Archiver" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="ecfapasser" type="integer" column="ECFaPasser" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="typeformation" type="integer" column="TypeFormation" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codelieu" type="integer" column="CodeLieu" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>
