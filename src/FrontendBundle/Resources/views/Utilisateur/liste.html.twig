@@ -15,13 +15,13 @@
                 <th>Edition</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="liste_utilisateur_ligne">
             {% for utilisateur in utilisateurs %}
-                <tr>
+                <tr id="liste_utilisateur_ligne_{{ utilisateur.id }}">
                     <td>{{ utilisateur.name }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.role }}</td>
-                    <td><a href="utilisateur/edit/{{ utilisateur.id }}">Edit</a></td>
+                    <td><a class="click" value="{{ utilisateur.id }}">Edit</a> <a class="supprimer" value="{{ utilisateur.id }}">Supprimer</a> <a class="mail" value="{{ utilisateur.id }}">Mail</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -39,14 +39,10 @@
                     <table>
                         <tr>
                             <td>
-                                Nom
-                                <input style="margin-left: 10px" class="span4" placeholder="Nom" type="text" id="input_nom">
+                                Nom Prenom
+                                <input style="margin-left: 10px" class="span8" placeholder="Nom Prenom" type="text" id="input_nom">
                             </td>
-                            <td> </td>
-                            <td>
-                                Prenom
-                                <input style="margin-left: 10px" class="span4" placeholder="Prenom" type="text" id="input_prenom">
-                            </td>
+
                         </tr>
                         <tr>
                             <td>
@@ -69,7 +65,8 @@
                             <td colspan="8"></td>
                             <td>
                                 <div class="form-actions">
-                                    <button id="save_datas" class="btn btn-success">Save</button>
+                                    <button id="save_datas" class="btn btn-success">Sauvegarder</button>
+                                    <button id="clear_datas" class="btn btn-danger">Vider</button>
                                 </div>
                             </td>
                         </tr>

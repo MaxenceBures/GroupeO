@@ -36,4 +36,12 @@ utilisateur_ajouter:
     path:     /utilisateur/ajouter
     defaults: { _controller: FrontendBundle:Utilisateur:ajouter }
     methods: [post]
+utilisateur_modifier:
+    path:     /utilisateur/modifier
+    defaults: { _controller: FrontendBundle:Utilisateur:modifier }
+    methods: [post]
+utilisateur_supprimer:
+    path:     /utilisateur/supprimer
+    defaults: { _controller: FrontendBundle:Utilisateur:supprimer }
+    methods: [post]
 #UTILISATEUR
