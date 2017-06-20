@@ -2,6 +2,11 @@
 
 namespace FrontendBundle\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\DriverManager;
+
+
 /**
  * UtilisateurRepository
  *
@@ -10,4 +15,17 @@ namespace FrontendBundle\Repository;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function insertUtilisateur($utilisateur){
+
+        $em = $this->getEntityManager()->getManager();
+        $em->persist($utilisateur);
+
+        /*$em = $doctrine->getManager();
+        $sql = "INSERT INTO utilisateur (name, email,role,password,is_active) VALUES ($utilisateur->getName(), $utilisateur->getEmail(), $utilisateur->getRole(), $utilisateur->getPassword(),TRUE )";
+        $stmt = $em->getConnection()->prepare($sql);
+        $result = $stmt->execute();*/
+
+        return 0;
+    }
+
 }

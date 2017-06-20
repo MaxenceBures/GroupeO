@@ -40,7 +40,7 @@ class ConnexionController extends Controller
             $user->setRole('ROLE_USER');
 
             // Save
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine('groupeo')->getManager();
             $em->persist($user);
             $em->flush();
 

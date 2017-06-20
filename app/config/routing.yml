@@ -1,3 +1,7 @@
+eni:
+    resource: "@EniBundle/Resources/config/routing.yml"
+    prefix:   /
+
 frontend:
     resource: "@FrontendBundle/Resources/config/routing.yml"
     prefix:   /

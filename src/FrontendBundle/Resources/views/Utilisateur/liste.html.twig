@@ -15,25 +15,67 @@
                 <th>Edition</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="liste_utilisateur_ligne">
             {% for utilisateur in utilisateurs %}
-                <tr>
+                <tr id="liste_utilisateur_ligne_{{ utilisateur.id }}">
                     <td>{{ utilisateur.name }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.role }}</td>
-                    <td><a href="utilisateur/edit/{{ utilisateur.id }}">Edit</a></td>
+                    <td><a class="click" value="{{ utilisateur.id }}">Edit</a> <a class="supprimer" value="{{ utilisateur.id }}">Supprimer</a> <a class="mail" value="{{ utilisateur.id }}">Mail</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <div id="div_action">
-        <div class="span12">
-            
+    <div id="div_action" style="margin-top: 100px; background-color: grey;">
+
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Ajouter/Modifier</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form action="#" method="get" class="form-horizontal">
+                    <table>
+                        <tr>
+                            <td>
+                                Nom Prenom
+                                <input style="margin-left: 10px" class="span8" placeholder="Nom Prenom" type="text" id="input_nom">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                Mail
+                                <input style="margin-left: 10px" class="span5" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
+                            </td>
+                            <td> </td>
+                            <td>
+                                Rôle
+                                <select id="select_role">
+                                    <option>Administrateur</option>
+                                    <option>Lecteur</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mot de passe <input class="span4" placeholder="Mot de passe" type="password" id="input_password"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8"></td>
+                            <td>
+                                <div class="form-actions">
+                                    <button id="save_datas" class="btn btn-success">Sauvegarder</button>
+                                    <button id="clear_datas" class="btn btn-danger">Vider</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </form>
+            </div>
         </div>
     </div>
-
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('Js/utilisateur/liste.js') }}"></script>
 
