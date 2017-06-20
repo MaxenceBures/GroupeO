@@ -68,10 +68,25 @@ doctrine:
         #   3. Uncomment next line:
         #path: '%database_path%'
 
+    #orm:
+    #    auto_generate_proxy_classes: '%kernel.debug%'
+    #    naming_strategy: doctrine.orm.naming_strategy.underscore
+    #    auto_mapping: true
     orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+            default_entity_manager: groupeo
+            auto_generate_proxy_classes: "%kernel.debug%"
+            entity_managers:
+                auto_mapping: true
+                groupeo:
+                    naming_strategy: doctrine.orm.naming_strategy.underscore
+                    connection: groupeo
+                    mappings:
+                        FrontendBundle: ~
+                eni:
+                    naming_strategy: doctrine.orm.naming_strategy.underscore
+                    connection: eni
+                    mappings:
+                        EniBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
