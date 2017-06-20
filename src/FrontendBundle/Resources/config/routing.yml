@@ -32,4 +32,8 @@ connexion_register:
 utilisateur_liste:
     path:     /utilisateur/liste
     defaults: { _controller: FrontendBundle:Utilisateur:liste }
+utilisateur_ajouter:
+    path:     /utilisateur/ajouter
+    defaults: { _controller: FrontendBundle:Utilisateur:ajouter }
+    methods: [post]
 #UTILISATEUR

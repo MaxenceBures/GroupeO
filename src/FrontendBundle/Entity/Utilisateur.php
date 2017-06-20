@@ -129,6 +129,14 @@ class Utilisateur implements UserInterface
         return null;
     }
 
+    /*public function getRealRole(){
+        if($this->role == "ROLE_ADMIN"){
+            $this->role = "Administrateur";
+        }elseif($this->role == "ROLE_USER"){
+            $this->role = "Lecteur";
+        }
+    }*/
+
     /** @see \Serializable::serialize() */
     public function serialize()
     {

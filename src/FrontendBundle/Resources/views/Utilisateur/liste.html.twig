@@ -28,13 +28,57 @@
         </table>
     </div>
 
-    <div id="div_action" style="margin-top: 100px;height: 100px; background-color: #0000F0;">
+    <div id="div_action" style="margin-top: 100px; background-color: grey;">
 
-            <div class="col-md-5" style="background-color: red;height: 100px;">.col-md-7</div>
-            <div class="col-md-5" style="background-color: green;height: 100px;">.col-md-5</div>
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Ajouter/Modifier</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form action="#" method="get" class="form-horizontal">
+                    <table>
+                        <tr>
+                            <td>
+                                Nom
+                                <input style="margin-left: 10px" class="span4" placeholder="Nom" type="text" id="input_nom">
+                            </td>
+                            <td> </td>
+                            <td>
+                                Prenom
+                                <input style="margin-left: 10px" class="span4" placeholder="Prenom" type="text" id="input_prenom">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Mail
+                                <input style="margin-left: 10px" class="span5" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
+                            </td>
+                            <td> </td>
+                            <td>
+                                Rôle
+                                <select id="select_role">
+                                    <option>Administrateur</option>
+                                    <option>Lecteur</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mot de passe <input class="span4" placeholder="Mot de passe" type="password" id="input_password"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8"></td>
+                            <td>
+                                <div class="form-actions">
+                                    <button id="save_datas" class="btn btn-success">Save</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
+                </form>
+            </div>
+        </div>
     </div>
-
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('Js/utilisateur/liste.js') }}"></script>
 
