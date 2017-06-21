@@ -313,3 +313,4 @@ class Promotion
         return $this->codeformation;
     }
 }
+

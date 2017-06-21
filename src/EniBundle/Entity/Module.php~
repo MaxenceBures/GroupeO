@@ -3,9 +3,9 @@
 namespace EniBundle\Entity;
 
 /**
- * Uniteformation
+ * Module
  */
-class Uniteformation
+class Module
 {
     /**
      * @var string
@@ -28,6 +28,11 @@ class Uniteformation
     private $dureeensemaines;
 
     /**
+     * @var float
+     */
+    private $prixpublicencours;
+
+    /**
      * @var string
      */
     private $libellecourt;
@@ -40,7 +45,12 @@ class Uniteformation
     /**
      * @var integer
      */
-    private $iduniteformation;
+    private $typemodule;
+
+    /**
+     * @var integer
+     */
+    private $idmodule;
 
 
     /**
@@ -48,7 +58,7 @@ class Uniteformation
      *
      * @param string $libelle
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setLibelle($libelle)
     {
@@ -72,7 +82,7 @@ class Uniteformation
      *
      * @param integer $dureeenheures
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setDureeenheures($dureeenheures)
     {
@@ -96,7 +106,7 @@ class Uniteformation
      *
      * @param \DateTime $datecreation
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setDatecreation($datecreation)
     {
@@ -120,7 +130,7 @@ class Uniteformation
      *
      * @param integer $dureeensemaines
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setDureeensemaines($dureeensemaines)
     {
@@ -140,11 +150,35 @@ class Uniteformation
     }
 
     /**
+     * Set prixpublicencours
+     *
+     * @param float $prixpublicencours
+     *
+     * @return Module
+     */
+    public function setPrixpublicencours($prixpublicencours)
+    {
+        $this->prixpublicencours = $prixpublicencours;
+
+        return $this;
+    }
+
+    /**
+     * Get prixpublicencours
+     *
+     * @return float
+     */
+    public function getPrixpublicencours()
+    {
+        return $this->prixpublicencours;
+    }
+
+    /**
      * Set libellecourt
      *
      * @param string $libellecourt
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setLibellecourt($libellecourt)
     {
@@ -168,7 +202,7 @@ class Uniteformation
      *
      * @param boolean $archiver
      *
-     * @return Uniteformation
+     * @return Module
      */
     public function setArchiver($archiver)
     {
@@ -188,12 +222,37 @@ class Uniteformation
     }
 
     /**
-     * Get iduniteformation
+     * Set typemodule
+     *
+     * @param integer $typemodule
+     *
+     * @return Module
+     */
+    public function setTypemodule($typemodule)
+    {
+        $this->typemodule = $typemodule;
+
+        return $this;
+    }
+
+    /**
+     * Get typemodule
      *
      * @return integer
      */
-    public function getIduniteformation()
+    public function getTypemodule()
     {
-        return $this->iduniteformation;
+        return $this->typemodule;
+    }
+
+    /**
+     * Get idmodule
+     *
+     * @return integer
+     */
+    public function getIdmodule()
+    {
+        return $this->idmodule;
     }
 }
+

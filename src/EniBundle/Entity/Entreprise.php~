@@ -574,3 +574,4 @@ class Entreprise
         return $this->codeentreprise;
     }
 }
+

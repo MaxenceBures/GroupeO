@@ -255,4 +255,3 @@ class Module
         return $this->idmodule;
     }
 }
-

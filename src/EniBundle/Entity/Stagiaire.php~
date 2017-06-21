@@ -661,3 +661,4 @@ class Stagiaire
         return $this->codestagiaire;
     }
 }
+

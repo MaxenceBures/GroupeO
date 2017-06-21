@@ -400,3 +400,4 @@ class Cours
         return $this->codepromotion;
     }
 }
+

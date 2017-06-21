@@ -1,3 +1,11 @@
-eni_homepage:
-    path:     /
-    defaults: { _controller: EniBundle:Default:index }
+#ALTERNANT
+alternant_recherche:
+    path:     /alternant/recherche
+    defaults: { _controller: EniBundle:Alternant:recherche }
+#ALTERNANT
+
+#ENTREPRISE
+entreprise_liste:
+    path:     /entreprise/liste
+    defaults: { _controller: EniBundle:Entreprise:liste }
+#ENTREPRISE
