@@ -2,6 +2,9 @@
 alternant_recherche:
     path:     /alternant/recherche
     defaults: { _controller: EniBundle:Alternant:recherche }
+alternant_chargement:
+    path:     /alternant/chargement
+    defaults: { _controller: EniBundle:Alternant:chargement }
 #ALTERNANT
 
 #ENTREPRISE
@@ -9,3 +12,9 @@ entreprise_liste:
     path:     /entreprise/liste
     defaults: { _controller: EniBundle:Entreprise:liste }
 #ENTREPRISE
+
+#FORMATION
+formation_liste:
+    path:     /formation/liste
+    defaults: { _controller: EniBundle:Formation:liste }
+#FORMATION

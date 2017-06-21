@@ -57,12 +57,10 @@
         <!--End-breadcrumbs-->
 
         <!--Action boxes-->
-        <!--<div class="container-fluid">-->
-
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-
-        <!--</div>-->
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
     </div>
 
     <!--end-main-container-part-->
@@ -77,6 +75,7 @@
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/select2.min.js') }}"></script>
     <script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
     <script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
     <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
@@ -90,7 +89,6 @@
     <script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
     <script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
     <script src="{{ asset('template/js/matrix.popover.js') }}"></script>
-    <script src="{{ asset('template/js/select2.min.js') }}"></script>
     <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
     <script src="{{ asset('template/js/toastr.min.js') }}"></script>
