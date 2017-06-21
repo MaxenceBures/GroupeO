@@ -7,7 +7,10 @@ $(function() {
     loadSelectFormation();
 
     function loadSelectFormation(){
-        $('#select_formation').select2();
+        $('#select_formation').select2({
+            placeholder: "Selectionner une formation",
+            allowClear: true
+        });
     }
 
     function loadSelectEntreprise(){
@@ -24,7 +27,10 @@ $(function() {
                       $('#select_entreprise').append('<option value="'+value.id+'">'+value.raison+' ('+value.ville+')</option>');
                     });
 
-                    $('#select_entreprise').select2();
+                    $('#select_entreprise').select2({
+                        placeholder: "Selectionner une entreprise",
+                        allowClear: true
+                    });
 
 
                 }else{
