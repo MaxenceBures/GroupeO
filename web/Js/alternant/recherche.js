@@ -50,10 +50,10 @@ $(function() {
                         $('#select_formation').append('<option value="'+value.id+'">'+value.long+' ('+value.court+')</option>');
                     });
 
-                    $('#select_formation').select2({
+                    /*$('#select_formation').select2({
                         placeholder: "Selectionner une formation",
                         allowClear: true
-                    });
+                    });*/
                 }else{
                     toastr.error("Erreur lors de la recuperation");
                 }
@@ -76,10 +76,10 @@ $(function() {
                       $('#select_entreprise').append('<option value="'+value.id+'">'+value.raison+' ('+value.ville+')</option>');
                     });
 
-                    $('#select_entreprise').select2({
+                    /*$('#select_entreprise').select2({
                         placeholder: "Selectionner une entreprise",
                         allowClear: true
-                    });
+                    });*/
                 }else{
                     toastr.error("Erreur lors de la recuperation");
                 }

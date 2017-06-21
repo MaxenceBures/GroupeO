@@ -49,15 +49,10 @@ class UtilisateurController extends Controller
                 $utilisateur->setRole("ROLE_USER");
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($utilisateur);
-            $em->flush();
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
+            $new_utilisateur = $repository->insertUtilisateur($utilisateur,$this->getDoctrine()->getManager());
 
-
-            /*$repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
-            $repository->insertUtilisateur($utilisateur)*/
-
-            return new Response(json_encode(array("status" =>"ok","utilisateur_id" => $utilisateur->getId(), "utilisateur_role" => $utilisateur->getRole())));
+            return new Response(json_encode(array("status" =>"ok","utilisateur_id" => $new_utilisateur->getId(), "utilisateur_role" => $new_utilisateur->getRole())));
         }
 
         return "error";
@@ -70,11 +65,12 @@ class UtilisateurController extends Controller
 
         if ($request->isXMLHttpRequest()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('FrontendBundle:Utilisateur');
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
+
             $utilisateur_temp = $request->get("utilisateur");
 
-            $utilisateur = $repository->find($utilisateur_temp["id"]);
+            $utilisateur = $repository->getUtilisateur($utilisateur_temp["id"],$this->getDoctrine()->getManager());
+
             $utilisateur->setName($utilisateur_temp["nom"]);
             $utilisateur->setEmail($utilisateur_temp["mail"]);
 
@@ -84,10 +80,9 @@ class UtilisateurController extends Controller
                 $utilisateur->setRole("ROLE_USER");
             }
 
-            $em->persist($utilisateur);
-            $em->flush();
+            $new_utilisateur = $repository->updateUtilisateur($utilisateur,$this->getDoctrine()->getManager());
 
-            return new Response(json_encode(array("status" =>"ok", "utilisateur_role" => $utilisateur->getRole())));
+            return new Response(json_encode(array("status" =>"ok", "utilisateur_role" => $new_utilisateur->getRole())));
         }
 
         return "error";
@@ -100,15 +95,12 @@ class UtilisateurController extends Controller
 
         if ($request->isXMLHttpRequest()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('FrontendBundle:Utilisateur');
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
             $utilisateur_temp = $request->get("utilisateur");
 
-            $utilisateur = $repository->find($utilisateur_temp["id"]);
+            $utilisateur = $repository->getUtilisateur($utilisateur_temp["id"],$this->getDoctrine()->getManager());
 
-
-            $em->remove($utilisateur);
-            $em->flush();
+            $new_utilisateur = $repository->removeUtilisateur($utilisateur,$this->getDoctrine()->getManager());
 
             return new Response(json_encode(array("status" =>"ok")));
         }
@@ -124,19 +116,16 @@ class UtilisateurController extends Controller
 
         if ($request->isXMLHttpRequest()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('FrontendBundle:Utilisateur');
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
             $utilisateur_temp = $request->get("utilisateur");
 
-            $utilisateur = $repository->find($utilisateur_temp["id"]);
+            $utilisateur = $repository->getUtilisateur($utilisateur_temp["id"],$this->getDoctrine()->getManager());
 
             $pass = trim($utilisateur->getName());
 
             $utilisateur->setPassword(sha1($pass));
 
-
-            $em->persist($utilisateur);
-            $em->flush();
+            $new_utilisateur = $repository->updateUtilisateur($utilisateur,$this->getDoctrine()->getManager());
 
             return new Response(json_encode(array("status" =>"ok")));
         }
