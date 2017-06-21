@@ -3,18 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('template/css/bootstrap.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('template/css/bootstrap-responsive.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('template/css/matrix-style.css') }}" />
-        <link rel="stylesheet" href="{{ asset('template/css/matrix-media.css') }}" />
-        <link rel="stylesheet" href="{{ asset('template/font-awesome/css/font-awesome.css') }}" />
-        <!--<link rel="stylesheet" href="{{ asset('template/css/jquery.gritter.css') }}" />-->
-        <link rel="stylesheet" href="{{ asset('template/css/toastr.min.css') }}" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/bootstrap-responsive.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/matrix-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/matrix-media.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/font-awesome/css/font-awesome.css') }}" />
+    <!--<link rel="stylesheet" href="{{ asset('template/css/jquery.gritter.css') }}" />-->
+    <link rel="stylesheet" href="{{ asset('template/css/toastr.min.css') }}" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
     <div id="header">
         <h1><a href="dashboard.html">Matrix Admin</a></h1>
     </div>
@@ -53,46 +53,48 @@
     <!--main-container-part-->
     <div id="content">
         <!--breadcrumbs-->
-
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="index.html" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Accueil</a></div>
+        </div>
         <!--End-breadcrumbs-->
 
         <!--Action boxes-->
         <!--<div class="container-fluid">-->
 
     {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
+{% block javascripts %}{% endblock %}
 
-        <!--</div>-->
-    </div>
+<!--</div>-->
+</div>
 
-    <!--end-main-container-part-->
+<!--end-main-container-part-->
 
-    <!--Footer-part-->
+<!--Footer-part-->
 
-    <div class="row-fluid">
-        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
-    </div>
-    </body>
-    <script src="{{ asset('template/js/excanvas.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
-    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.dashboard.js') }}"></script>
-    <!--<script src="{{ asset('template/js/jquery.gritter.min.js') }}"></script>-->
-    <script src="{{ asset('template/js/matrix.interface.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.chat.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.validate.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.form_validation.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.popover.js') }}"></script>
-    <script src="{{ asset('template/js/select2.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
-    <script src="{{ asset('template/js/toastr.min.js') }}"></script>
+<div class="row-fluid">
+    <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+</div>
+</body>
+<script src="{{ asset('template/js/excanvas.min.js') }}"></script>
+<script src="{{ asset('template/js/jquery.min.js') }}"></script>
+<script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
+<script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
+<script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
+<script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('template/js/matrix.js') }}"></script>
+<script src="{{ asset('template/js/matrix.dashboard.js') }}"></script>
+<!--<script src="{{ asset('template/js/jquery.gritter.min.js') }}"></script>-->
+<script src="{{ asset('template/js/matrix.interface.js') }}"></script>
+<script src="{{ asset('template/js/matrix.chat.js') }}"></script>
+<script src="{{ asset('template/js/jquery.validate.js') }}"></script>
+<script src="{{ asset('template/js/matrix.form_validation.js') }}"></script>
+<script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
+<script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
+<script src="{{ asset('template/js/matrix.popover.js') }}"></script>
+<script src="{{ asset('template/js/select2.min.js') }}"></script>
+<script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('template/js/matrix.tables.js') }}"></script>
+<script src="{{ asset('template/js/toastr.min.js') }}"></script>
 
 </html>
