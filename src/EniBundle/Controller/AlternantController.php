@@ -31,15 +31,27 @@ class AlternantController extends Controller
     {
         if ($request->isXMLHttpRequest()) {
 
-            $recherche_temp = $request->get("recherche");
+            $repository = $this->getDoctrine()->getEntityManager('eni')->getRepository('EniBundle:Entreprise');
+
+            //dump($repository);
+
+            //die($repository);
+
+            //$utilisateur = $repository->search(null,$this->getDoctrine()->getManager('eni'));
+            $utilisateur = $repository->test();
+
+            dump($utilisateur);
+            die('ok');
+
+            /*$recherche_temp = $request->get("recherche");
 
             $repository = $this->getDoctrine()->getManager('eni')->getRepository('EniBundle:Stagiaire');
 
-            $utilisateurs = $repository->test($recherche_temp,$this->getDoctrine()->getManager());
+            $utilisateurs = $repository->test($recherche_temp,$this->getDoctrine()->getManager('eni'));
 
             dump($recherche_temp);
             die("");
-
+            /*
             /*
             $em = $this->getDoctrine()->getManager('eni');
             $repository = $em->getRepository('EniBundle:Alternant');

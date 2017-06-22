@@ -12,11 +12,16 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
 
-class StagiaireRepository extends \Doctrine\ORM\EntityRepository
+class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
 {
     public function search($search,$em)
     {
         die('recherche');
         return 0;
     }
+
+    public function test(){
+        die('test');
+    }
+
 }
