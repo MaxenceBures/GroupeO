@@ -110,4 +110,3 @@ class Moduleparunite
         return $this->idmodule;
     }
 }
-

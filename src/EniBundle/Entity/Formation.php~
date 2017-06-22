@@ -487,4 +487,3 @@ class Formation
         return $this->codeformation;
     }
 }
-

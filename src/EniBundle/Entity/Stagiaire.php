@@ -4,6 +4,8 @@ namespace EniBundle\Entity;
 
 /**
  * Stagiaire
+ * @ORM\Entity(repositoryClass="GroupeO\EniBundle\Entity\StagiaireRepository)
+ * @ORM\Table(name="stagiaire")
  */
 class Stagiaire
 {

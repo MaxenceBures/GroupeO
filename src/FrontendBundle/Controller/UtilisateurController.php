@@ -119,7 +119,7 @@ class UtilisateurController extends Controller
             $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
             $utilisateur_temp = $request->get("utilisateur");
 
-            $utilisateur = $repository->getUtilisateur($utilisateur_temp["id"],$this->getDoctrine()->getManager());
+            $utilisateur = $repository->getUtilisateur($utilisateur_temp["id"]);
 
             $pass = trim($utilisateur->getName());
 

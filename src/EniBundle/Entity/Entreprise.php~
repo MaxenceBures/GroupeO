@@ -4,6 +4,7 @@ namespace EniBundle\Entity;
 
 /**
  * Entreprise
+ * @ORM\Table(name='Entreprise')
  */
 class Entreprise
 {
@@ -574,4 +575,3 @@ class Entreprise
         return $this->codeentreprise;
     }
 }
-

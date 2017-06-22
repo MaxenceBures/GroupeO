@@ -313,4 +313,3 @@ class Lieu
         return $this->codelieu;
     }
 }
-

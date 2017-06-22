@@ -33,6 +33,10 @@ class AlternantController extends Controller
 
             $recherche_temp = $request->get("recherche");
 
+            $repository = $this->getDoctrine()->getManager('eni')->getRepository('EniBundle:Stagiaire');
+
+            $utilisateurs = $repository->test($recherche_temp,$this->getDoctrine()->getManager());
+
             dump($recherche_temp);
             die("");
 
