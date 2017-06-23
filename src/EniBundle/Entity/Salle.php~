@@ -110,4 +110,3 @@ class Salle
         return $this->codesalle;
     }
 }
-

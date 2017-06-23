@@ -15,17 +15,33 @@ use Doctrine\DBAL\DriverManager;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function insertUtilisateur($utilisateur){
-
-        $em = $this->getEntityManager()->getManager();
+    public function insertUtilisateur($utilisateur,$em){
         $em->persist($utilisateur);
+        $em->flush();
 
-        /*$em = $doctrine->getManager();
-        $sql = "INSERT INTO utilisateur (name, email,role,password,is_active) VALUES ($utilisateur->getName(), $utilisateur->getEmail(), $utilisateur->getRole(), $utilisateur->getPassword(),TRUE )";
-        $stmt = $em->getConnection()->prepare($sql);
-        $result = $stmt->execute();*/
-
-        return 0;
+        return $utilisateur;
     }
+
+    public function updateUtilisateur($utilisateur,$em){
+        $em->persist($utilisateur);
+        $em->flush();
+
+        return $utilisateur;
+    }
+
+    public function removeUtilisateur($utilisateur,$em){
+        $em->remove($utilisateur);
+        $em->flush();
+
+        return $utilisateur;
+    }
+
+    public function getUtilisateur($utilisateur,$em){
+        $repository = $em->getRepository('FrontendBundle:Utilisateur');
+        $utilisateur_temp = $repository->find($utilisateur);
+
+        return $utilisateur_temp;
+    }
+
 
 }

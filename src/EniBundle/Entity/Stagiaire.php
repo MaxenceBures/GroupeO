@@ -4,6 +4,7 @@ namespace EniBundle\Entity;
 
 /**
  * Stagiaire
+ *
  */
 class Stagiaire
 {

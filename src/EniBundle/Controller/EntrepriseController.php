@@ -34,16 +34,6 @@ class EntrepriseController extends Controller
 
             return new Response(json_encode(array("status" =>"ok","entreprises" => json_encode($temp))));
         }
-        /*$em = $this->getDoctrine()->getManager('eni');
-        $repository = $em->getRepository('EniBundle:Entreprise');
-
-s
-        $entreprises_temp = $repository->findAll();*/
-
-        //dump($entreprises_temp);
-        //return $this->render('FrontendBundle:Utilisateur:liste.html.twig',array('utilisateurs'=> $utilisateurs_temp));
-        //return $this->render('EniBundle:Alternant:recherche.html.twig');
-
         return new Response(json_encode("error"));
     }
 }

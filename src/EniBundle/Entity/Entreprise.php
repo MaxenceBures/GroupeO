@@ -4,6 +4,7 @@ namespace EniBundle\Entity;
 
 /**
  * Entreprise
+ * @ORM\Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
  */
 class Entreprise
 {
