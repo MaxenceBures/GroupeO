@@ -31,19 +31,9 @@ class AlternantController extends Controller
     {
         if ($request->isXMLHttpRequest()) {
 
-            $repository = $this->getDoctrine()->getEntityManager('eni')->getRepository('EniBundle:Entreprise');
+            $repository = $this->getDoctrine()->getEntityManager('eni')->getRepository('EniBundle:Stagiaire');
 
-            //dump($this->getDoctrine()->getEntityManager('eni2')->getRepository('SiteEniBundle:Entreprise') instanceOf EniBunble\Repository\EntrepriseRepository);
-            //die('ok');
-            //dump($repository);
-
-            //die($repository);
-
-            //$utilisateur = $repository->search(null,$this->getDoctrine()->getManager('eni'));
-
-            //echo 'le repository est de classe '.get_class($repository);exit;
-
-            $utilisateur = $repository->test();
+            $stagiaires = $repository->search($request->get("recherche"),$this->getDoctrine()->getEntityManager('eni'));
             //dump($utilisateur);
 
             //dump($utilisateur);

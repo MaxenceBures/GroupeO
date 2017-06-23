@@ -12,20 +12,5 @@ use Doctrine\ORM\EntityRepository;
 
 class EntrepriseRepository extends EntityRepository
 {
-    public function search($search,$em)
-    {
-        die('recherche');
-        return 0;
-    }
-
-    public function test(){
-        die('test');
-        return 0;
-    }
-
-    public function findByville(){
-        die('test');
-        return array('test' => 'test');
-    }
 
 }
