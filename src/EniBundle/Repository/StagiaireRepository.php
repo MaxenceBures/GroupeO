@@ -20,3 +20,4 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         return 0;
     }
 }
+

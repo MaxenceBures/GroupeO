@@ -8,20 +8,9 @@
 namespace EniBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\DBAL\DriverManager;
 
-class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
+
+class EntrepriseRepository extends EntityRepository
 {
-    public function search($search,$em)
-    {
-        die('recherche');
-        return 0;
-    }
-
-    public function test(){
-        die('test');
-    }
 
 }

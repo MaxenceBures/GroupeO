@@ -2,9 +2,11 @@
 
 namespace EniBundle\Entity;
 
-/**
- * Entreprise
- * @ORM\Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
+use Doctrine\ORM\Mapping as ORM;
+
+/** @Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
+ *  @ORM\Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
+ *  @Table(name="entreprise")
  */
 class Entreprise
 {
