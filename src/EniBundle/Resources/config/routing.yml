@@ -17,4 +17,5 @@ entreprise_liste:
 formation_liste:
     path:     /formation/liste
     defaults: { _controller: EniBundle:Formation:liste }
+    methods: [post]
 #FORMATION
