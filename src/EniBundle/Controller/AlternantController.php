@@ -33,14 +33,20 @@ class AlternantController extends Controller
 
             $repository = $this->getDoctrine()->getEntityManager('eni')->getRepository('EniBundle:Entreprise');
 
+            //dump($this->getDoctrine()->getEntityManager('eni2')->getRepository('SiteEniBundle:Entreprise') instanceOf EniBunble\Repository\EntrepriseRepository);
+            //die('ok');
             //dump($repository);
 
             //die($repository);
 
             //$utilisateur = $repository->search(null,$this->getDoctrine()->getManager('eni'));
-            $utilisateur = $repository->test();
 
-            dump($utilisateur);
+            echo 'le repository est de classe '.get_class($repository);exit;
+
+            $utilisateur = $repository->test();
+            //dump($utilisateur);
+
+            //dump($utilisateur);
             die('ok');
 
             /*$recherche_temp = $request->get("recherche");

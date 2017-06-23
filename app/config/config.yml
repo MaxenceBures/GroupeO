@@ -88,6 +88,8 @@ doctrine:
                     mappings:
                         EniBundle: ~
 
+
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'

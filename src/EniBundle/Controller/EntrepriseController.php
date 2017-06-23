@@ -23,7 +23,6 @@ class EntrepriseController extends Controller
             $em = $this->getDoctrine()->getManager('eni');
             $repository = $em->getRepository('EniBundle:Entreprise');
 
-
             $entreprises_temp = $repository->findAll();
 
             $temp = array();
