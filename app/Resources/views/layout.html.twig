@@ -59,6 +59,7 @@
         <!--End-breadcrumbs-->
 
         <!--Action boxes-->
+<<<<<<< HEAD
         <!--<div class="container-fluid">-->
 
     {% block body %}{% endblock %}
@@ -66,11 +67,19 @@
 
 <!--</div>-->
 </div>
+=======
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
+    </div>
+>>>>>>> 40752b2408c539d9ae5859d566e96342f15df0fb
 
 <!--end-main-container-part-->
 
 <!--Footer-part-->
 
+<<<<<<< HEAD
 <div class="row-fluid">
     <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>
@@ -96,5 +105,32 @@
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
 <script src="{{ asset('template/js/toastr.min.js') }}"></script>
+=======
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
+    </div>
+    </body>
+    <script src="{{ asset('template/js/excanvas.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
+    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/select2.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.dashboard.js') }}"></script>
+    <!--<script src="{{ asset('template/js/jquery.gritter.min.js') }}"></script>-->
+    <script src="{{ asset('template/js/matrix.interface.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.chat.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.form_validation.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.popover.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
+    <script src="{{ asset('template/js/toastr.min.js') }}"></script>
+>>>>>>> 40752b2408c539d9ae5859d566e96342f15df0fb
 
 </html>
