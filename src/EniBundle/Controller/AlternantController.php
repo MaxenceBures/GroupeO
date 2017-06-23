@@ -41,7 +41,7 @@ class AlternantController extends Controller
 
             //$utilisateur = $repository->search(null,$this->getDoctrine()->getManager('eni'));
 
-            echo 'le repository est de classe '.get_class($repository);exit;
+            //echo 'le repository est de classe '.get_class($repository);exit;
 
             $utilisateur = $repository->test();
             //dump($utilisateur);

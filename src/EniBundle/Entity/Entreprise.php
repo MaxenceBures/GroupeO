@@ -5,6 +5,7 @@ namespace EniBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
+ *  @ORM\Entity(repositoryClass="EniBundle\Entity\EntrepriseRepository")
  *  @Table(name="entreprise")
  */
 class Entreprise
