@@ -1,0 +1,51 @@
+FrontendBundle\Entity\Planning:
+    type: entity
+    table: PLANNING
+    id:
+        idPlanning:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_planning
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        dateCreation:
+            type: date
+            nullable: false
+            column: date_creation
+        dateDebut:
+            type: date
+            nullable: false
+            column: date_debut
+        dateFin:
+            type: date
+            nullable: false
+            column: date_fin
+        maxHeureFormation:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: max_heure_formation
+        maxTempsFormation:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: max_temps_formation
+        stagiaireEntrepriseNumlien:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: stagiaire_entreprise_numlien
+    lifecycleCallbacks: {  }

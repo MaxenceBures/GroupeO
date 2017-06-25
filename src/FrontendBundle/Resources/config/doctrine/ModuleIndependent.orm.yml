@@ -1,0 +1,63 @@
+FrontendBundle\Entity\ModuleIndependent:
+    type: entity
+    table: MODULE_INDEPENDENT
+    id:
+        idModule:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_module
+            generator:
+                strategy: IDENTITY
+    fields:
+        libelle:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        dureeEnHeures:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+            column: duree_en_heures
+        dateCreation:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+            column: date_creation
+        dureeEnSemaines:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+            column: duree_en_semaines
+        prixPublicEnCours:
+            type: float
+            nullable: false
+            precision: 53
+            scale: 0
+            column: prix_public_en_cours
+        libelleCourt:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+            column: libelle_court
+        archiver:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        typeModule:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: type_module
+    lifecycleCallbacks: {  }

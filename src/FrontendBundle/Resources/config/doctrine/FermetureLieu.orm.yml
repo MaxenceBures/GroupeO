@@ -1,0 +1,35 @@
+FrontendBundle\Entity\FermetureLieu:
+    type: entity
+    table: FERMETURE_LIEU
+    id:
+        idFermeture:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_fermeture
+            generator:
+                strategy: IDENTITY
+    fields:
+        description:
+            type: string
+            nullable: false
+            length: 140
+            options:
+                fixed: false
+        dateDebut:
+            type: date
+            nullable: false
+            column: date_debut
+        dateFin:
+            type: date
+            nullable: false
+            column: date_fin
+        lieuCode:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: lieu_code
+    lifecycleCallbacks: {  }

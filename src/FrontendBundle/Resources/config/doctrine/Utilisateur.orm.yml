@@ -5,37 +5,40 @@ FrontendBundle\Entity\Utilisateur:
     id:
         id:
             type: integer
+            nullable: false
+            options:
+                unsigned: false
             id: true
             generator:
                 strategy: AUTO
 
     fields:
-            email:
-                type: string
-                nullable: true
-                length: 150
-                options:
-                    fixed: true
-            name:
-                type: string
-                nullable: true
-                length: 50
-                options:
-                     fixed: true
-            role:
-                 type: string
-                 nullable: true
-                 length: 150
-                 options:
-                      fixed: true
-            password:
-                  type: string
-                  nullable: true
-                  length: 64
-                  options:
-                    fixed: true
-            isActive:
-                  type: boolean
-                  nullable: false
-                  length: 1
+        email:
+            type: string
+            nullable: true
+            length: 150
+            options:
+                fixed: true
+        name:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: true
+        role:
+            type: string
+            nullable: true
+            length: 150
+            options:
+                fixed: true
+        password:
+            type: string
+            nullable: true
+            length: 64
+            options:
+                fixed: true
+        isActive:
+            type: boolean
+            nullable: false
+            length: 1
     lifecycleCallbacks: {  }

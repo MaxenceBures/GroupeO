@@ -1,0 +1,32 @@
+FrontendBundle\Entity\OrdreModule:
+    type: entity
+    table: ORDRE_MODULE
+    id:
+        idOrdre:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_ordre
+            generator:
+                strategy: IDENTITY
+    fields:
+        moduleId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: module_id
+        precedentId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: precedent_id
+        ordre:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

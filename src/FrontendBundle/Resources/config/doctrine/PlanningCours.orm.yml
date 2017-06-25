@@ -1,0 +1,41 @@
+FrontendBundle\Entity\PlanningCours:
+    type: entity
+    table: PLANNING_COURS
+    indexes:
+        IDX_80E249083D865311:
+            columns:
+                - planning_id
+    id:
+        idPlanningCours:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_planning_cours
+            generator:
+                strategy: IDENTITY
+    fields:
+        coursId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: cours_id
+        ordre:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        planning:
+            targetEntity: Planning
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                planning_id:
+                    referencedColumnName: id_planning
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
