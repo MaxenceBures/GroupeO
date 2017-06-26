@@ -29,14 +29,35 @@
     </div>
 
     <div id="div_action" style="margin-top: 100px; background-color: grey;">
-
-        <div class="widget-box">
+    <div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Recherche</h3>
+        <!--<div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
                 <h5>Ajouter/Modifier</h5>
             </div>
-            <div class="widget-content nopadding">
+            <div class="widget-content nopadding">-->
                 <form action="#" method="get" class="form-horizontal">
-                    <table>
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <input class="form-control" placeholder="Nom Prenom" type="text" id="input_nom">
+                        </div>
+                        <div class="col-xs-5">
+                            <input class="form-control" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-xs-5">
+                            <select id="select_role" class="form-control select2" style="width: 300px;">
+                                <option>Administrateur</option>
+                                <option>Lecteur</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <input class="form-control" placeholder="Mot de passe" type="password" id="input_password">
+                        </div>
+                    </div>
+                    <!--<table>
                         <tr>
                             <td>
                                 Nom Prenom
@@ -60,8 +81,16 @@
                         </tr>
                         <tr>
                             <td>Mot de passe <input class="span4" placeholder="Mot de passe" type="password" id="input_password"></td>
-                        </tr>
-                        <tr>
+                        </tr>-->
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <button id="save_datas" class="btn btn-success">Sauvegarder</button>
+                        </div>
+                        <div class="col-xs-1">
+                            <button id="clear_datas" class="btn btn-danger">Vider</button>
+                        </div>
+                    </div>
+                       <!-- <tr>
                             <td colspan="8"></td>
                             <td>
                                 <div class="form-actions">
@@ -70,7 +99,7 @@
                                 </div>
                             </td>
                         </tr>
-                    </table>
+                    </table>-->
 
                 </form>
             </div>
