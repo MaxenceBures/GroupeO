@@ -21,29 +21,29 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_cd522e95d76925bab98e32069d8e89cf99f55626b125dafb1db91f326b6dbfd4 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_cd522e95d76925bab98e32069d8e89cf99f55626b125dafb1db91f326b6dbfd4->enter($__internal_cd522e95d76925bab98e32069d8e89cf99f55626b125dafb1db91f326b6dbfd4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756->enter($__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
-        $__internal_acc6ab0a27227dccd0bb4ca15285009495995440945650f8d1abab0098a7c757 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_acc6ab0a27227dccd0bb4ca15285009495995440945650f8d1abab0098a7c757->enter($__internal_acc6ab0a27227dccd0bb4ca15285009495995440945650f8d1abab0098a7c757_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd->enter($__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_cd522e95d76925bab98e32069d8e89cf99f55626b125dafb1db91f326b6dbfd4->leave($__internal_cd522e95d76925bab98e32069d8e89cf99f55626b125dafb1db91f326b6dbfd4_prof);
+        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756->leave($__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756_prof);
 
         
-        $__internal_acc6ab0a27227dccd0bb4ca15285009495995440945650f8d1abab0098a7c757->leave($__internal_acc6ab0a27227dccd0bb4ca15285009495995440945650f8d1abab0098a7c757_prof);
+        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd->leave($__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_fc2b2acadf1d777b1b76909840dfc72714929891b3b6574ca992e3ce8199fc70 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_fc2b2acadf1d777b1b76909840dfc72714929891b3b6574ca992e3ce8199fc70->enter($__internal_fc2b2acadf1d777b1b76909840dfc72714929891b3b6574ca992e3ce8199fc70_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f->enter($__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_defff88971df5083de198f82680dd24b33f82eeb758bb3275e1a4c718e8cffa2 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_defff88971df5083de198f82680dd24b33f82eeb758bb3275e1a4c718e8cffa2->enter($__internal_defff88971df5083de198f82680dd24b33f82eeb758bb3275e1a4c718e8cffa2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da->enter($__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <H1>Liste Alternants</H1>
@@ -56,7 +56,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
                         <h5>Recherche</h5>
                     </div>
                     <div class=\"widget-content nopadding\">
-                        <form class=\"form-inline\" action=\"#\" method=\"post\">
+                        <form class=\"form-inline\" id=\"form_search\">
 
                             Nom <input type=\"text\" id=\"input_nom\" placeholder=\"Nom\"/>
                             Prenom <input type=\"text\" id=\"input_prenom\" placeholder=\"Prenom\"/>
@@ -65,7 +65,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
                            <br>
                             <select id=\"select_entreprise\" style=\"width: 200px;\">Entreprise</select>
                             <select id=\"select_formation\" style=\"width: 200px;\">Formation</select>
-                            <button>Rechercher</button>
+                            <button id=\"rechercher\">Rechercher</button>
                         </form>
                     </div>
                 </div>
@@ -79,7 +79,8 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
             <tr>
                 <th>Nom - Prénom</th>
                 <th>Mail</th>
-                <th>Role</th>
+                <th>Entreprise</th>
+                <th>Formation</th>
                 <th>Edition</th>
             </tr>
             </thead>
@@ -91,20 +92,20 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
 
     <script src=\"";
-        // line 48
+        // line 49
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("template/js/jquery.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 49
+        // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("Js/alternant/recherche.js"), "html", null, true);
         echo "\"></script>
 
 ";
         
-        $__internal_defff88971df5083de198f82680dd24b33f82eeb758bb3275e1a4c718e8cffa2->leave($__internal_defff88971df5083de198f82680dd24b33f82eeb758bb3275e1a4c718e8cffa2_prof);
+        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da->leave($__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da_prof);
 
         
-        $__internal_fc2b2acadf1d777b1b76909840dfc72714929891b3b6574ca992e3ce8199fc70->leave($__internal_fc2b2acadf1d777b1b76909840dfc72714929891b3b6574ca992e3ce8199fc70_prof);
+        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f->leave($__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f_prof);
 
     }
 
@@ -120,7 +121,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     public function getDebugInfo()
     {
-        return array (  99 => 49,  95 => 48,  49 => 4,  40 => 3,  11 => 1,);
+        return array (  100 => 50,  96 => 49,  49 => 4,  40 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -146,7 +147,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
                         <h5>Recherche</h5>
                     </div>
                     <div class=\"widget-content nopadding\">
-                        <form class=\"form-inline\" action=\"#\" method=\"post\">
+                        <form class=\"form-inline\" id=\"form_search\">
 
                             Nom <input type=\"text\" id=\"input_nom\" placeholder=\"Nom\"/>
                             Prenom <input type=\"text\" id=\"input_prenom\" placeholder=\"Prenom\"/>
@@ -155,7 +156,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
                            <br>
                             <select id=\"select_entreprise\" style=\"width: 200px;\">Entreprise</select>
                             <select id=\"select_formation\" style=\"width: 200px;\">Formation</select>
-                            <button>Rechercher</button>
+                            <button id=\"rechercher\">Rechercher</button>
                         </form>
                     </div>
                 </div>
@@ -169,7 +170,8 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
             <tr>
                 <th>Nom - Prénom</th>
                 <th>Mail</th>
-                <th>Role</th>
+                <th>Entreprise</th>
+                <th>Formation</th>
                 <th>Edition</th>
             </tr>
             </thead>

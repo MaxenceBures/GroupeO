@@ -9,6 +9,10 @@ div.dataTables_length select {
 	display: inline-block;
 }
 
+div.dataTables_length{
+    float: left;
+}
+
 div.dataTables_filter {
 	text-align: right;
 }
@@ -17,6 +21,11 @@ div.dataTables_filter label {
 	font-weight: normal;
 	white-space: nowrap;
 	text-align: left;
+}
+
+/* Rajout a la main */
+table.dataTable td.dataTables_empty{
+    text-align:center
 }
 
 div.dataTables_filter input {

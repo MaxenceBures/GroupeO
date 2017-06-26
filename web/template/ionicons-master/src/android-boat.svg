@@ -1,0 +1,45 @@
+
+
+function submitModulesForm() {
+    var continu = false;
+    var titre = $("#titre").val();
+    var description = $('#description').val();
+    var application = $("#application").val();
+
+    var module = [titre, description, application];
+
+    if ($("#action").val() !== "suppression") {
+        continu = checkIfEmpty(module);
+    } else {
+        continu = true;
+    }
+
+    if (continu) {
+        $.ajax({
+            url: "./../BLL/MgtModule.php",
+            method: "POST",
+            dataType: "html",
+            data: {actionModule: $("#action").val(), id: $("#id").val(), titre: titre, description: description, application: application},
+            async: true,
+            success: function (result) {
+                var type = "";
+                if (result == "ok") {
+                    type = "success";
+                } else {
+                    type = "error";
+                }
+                displayAlert($("#action").val(), type, "modules",null);
+                syncModules();
+            }
+        });
+    } else {
+        $("#msgErreur").html("<label class='text text-danger'>Les champs suivis de * sont obligatoire</label>");
+    }
+}
+
+function syncModules() {
+    $.ajax({
+        url: "./../BLL/MgtModule.php",
+        method: "POST",
+        dataType: "html",
+        data: {actionModule: "

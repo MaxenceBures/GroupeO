@@ -1,0 +1,58 @@
+'use strict';
+
+/**
+ * Déclaration de l'application demoApp
+ */
+var gestion_app = angular.module('gestion_app', [
+    // Dépendances du "module"
+    'index'
+]);
+
+var tNotif = setInterval(getNotification, 5000);
+
+
+function frameData(action, data, id) {
+    var url = "";
+    switch (data) {
+        case 'taches' :
+            url = "./../VIEW/frame/fmTache.php";
+            break;
+        case 'modules' :
+            url = "./../BLL/MgtModule.php";
+            break;
+        case 'applications' :
+            url = "./../BLL/MgtApplication.php";
+            break;
+    }
+    getFrame(url, data, action, id);
+}
+
+function getFrame(url, data, action, id) {
+    $.ajax({
+        url: url,
+        method: "POST",
+        dataType: "html",
+        data: {action: action, id: id, actionModule: "frame"},
+        async: false,
+        success: function (result) {
+            $("body").append(result);
+            $("#modal-admin-" + data).modal({keyboard: false});
+            $("#modal-admin-" + data).on('hidden.bs.modal', function (e) {
+                $(this).remove();
+            });
+            submitForm(data);
+        }
+    });
+}
+
+function insertTooltips() {
+    $('[data-toggle="tooltip"]').tooltip({html: true});
+}
+
+function getMessageAnnulerCrud(idFrame) {
+    if (confirm("Voulez vraiment annuler votre saisie ? \nLes données non sauvegardées seront perdus.")) {
+        $("#" + idFrame).modal('hide');
+    }
+}
+
+fun

@@ -5,101 +5,110 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ asset('template/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('template/css/bootstrap-responsive.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('template/css/matrix-style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('template/css/matrix-media.css') }}" />
-    <link rel="stylesheet" href="{{ asset('template/font-awesome/css/font-awesome.css') }}" />
-    <!--<link rel="stylesheet" href="{{ asset('template/css/jquery.gritter.css') }}" />-->
-    <link rel="stylesheet" href="{{ asset('template/css/toastr.min.css') }}" />
+    <link href="{{ asset('template/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/ionicons-master/css/ionicons.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/dist/css/skins/_all-skins.css') }}" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
-<body>
-    <div id="header">
-        <h1><a href="dashboard.html">Matrix Admin</a></h1>
-    </div>
+<body class="sidebar-mini skin-blue fixed">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <!-- header -->
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>E</b>NI</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>ENI Ecole</b></span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
 
-
-    <div id="user-nav" class="navbar navbar-inverse">
-        <ul class="nav">
-
-            <li class=""><a title="" href="./login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-        </ul>
-    </div>
-    <!--close-top-Header-menu-->
-    <!--start-top-serch-->
-
-    <!--close-top-serch-->
-    <!--sidebar-menu-->
-    <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
-        <ul>
-            <li><a href="register"><i class="icon icon-home"></i> <span>Enregistrement</span></a> </li>
-            <li><a href="utilisateur/liste"><i class="icon icon-home"></i> <span>Utilisateur - Liste</span></a> </li>
-            <li><a href="alternant/recherche"><i class="icon icon-home"></i> <span>Alternant - Recherche</span></a> </li>
-            <li><a href="logout"><i class="icon icon-home"></i> <span>Deconnexion</span></a> </li>
-
-
-            <li> <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a> </li>
-
-            <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important">5</span></a>
-                <ul>
-                    <li><a href="index2.html">Dashboard2</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="calendar.html">Calendar</a></li>
-                    <li><a href="invoice.html">Invoice</a></li>
-                    <li><a href="chat.html">Chat option</a></li>
-                </ul>
-            </li>
-
-        </ul>
-    </div>
-    <!--sidebar-menu-->
-
-    <!--main-container-part-->
-    <div id="content">
-        <!--breadcrumbs-->
-        <div id="content-header">
-            <div id="breadcrumb"> <a href="/" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Accueil</a></div>
-        </div>
-        <!--End-breadcrumbs-->
-
-        <!--Action boxes-->
-
-        <div class="container-fluid">
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="{{asset ('image/user.png') }}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">admin@admin</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="{{asset ('image/user.png') }}" alt="" class="img-circle" alt="User Image"/>
+                                        <p> 
+                                            Admin
+                                            <small> Groupe </small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-right">
+                                            <a href="logout" class="btn btn-default btn-flat">Se deconnecter</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- /.header -->
+            <!-- Left side column. contains the logo and sidebar -->
+            {% block aside %}
+                <aside class="main-sidebar">
+                    <!-- sidebar: style can be found in sidebar.less -->
+                    <section class="sidebar">
+                        <!-- Sidebar user panel -->
+                        <!-- sidebar menu: : style can be found in sidebar.less -->
+                        <ul class="sidebar-menu">
+                            <li class="header"><i class="fa"></i> MENU</li>
+                            <li>
+                                <a href="../">
+                                    <i class="fa fa-home"></i> <span>Accueil</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <!-- /.sidebar -->
+                </aside>
+            {% endblock %}
+            <section class="content">
             {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
+        </section>
+        <!-- /.content -->
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0
         </div>
-    </div>
-
-        <!--<div class="container-fluid">-->
-
-
-<!--</div>-->
+        <img src="./../../../Ressources/Images/Logo_Claas.png" />
+        <strong>Copyright &copy; 2017 <a href="#">Groupe O</a>.</strong> Tout droits reservés.
+    </footer>
+    <div class="control-sidebar-bg"></div>
 </div>
-
-    <div class="row-fluid">
-        <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
-    </div>
+{% block javascripts %}{% endblock %}
+<script src="{{ asset('template/plugins/jQuery/jQuery-2.2.0.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/jQueryUI/jquery-ui.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/fastclick/fastclick.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/slimScroll/jquery.slimscroll.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/chartjs/Chart.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/dist/js/app.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/daterangepicker/moment.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/datepicker/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/datatables/jquery.dataTables.js') }}" type="text/javascript"></script>
+<script src="{{ asset('template/plugins/datatables/dataTables.bootstrap.js') }}" type="text/javascript"></script>
 </body>
-    <script src="{{ asset('template/js/excanvas.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.ui.custom.js') }}"></script>
-    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('template/js/select2.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.flot.min.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.dashboard.js') }}"></script>
-    <!--<script src="{{ asset('template/js/jquery.gritter.min.js') }}"></script>-->
-    <script src="{{ asset('template/js/matrix.interface.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.chat.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.validate.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.form_validation.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.wizard.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.uniform.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.popover.js') }}"></script>
-    <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('template/js/matrix.tables.js') }}"></script>
-    <script src="{{ asset('template/js/toastr.min.js') }}"></script>
 </html>

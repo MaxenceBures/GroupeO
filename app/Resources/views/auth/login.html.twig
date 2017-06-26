@@ -96,7 +96,6 @@
                 <a href="../../index2.html"><b>Application Calendrier</b> ENI Ecole</a>
             </div><!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Entrez votre adresse mail afin de recevoir votre nouveau mot de passe.</p>
                 <form method="POST" action="{{ path('connexion_login_check') }}">
                     <div class="form-group has-feedback">
                         <input class="form-control" placeholder="xxxxx@eni-ecole.fr" id="email" type="email" class="form-control" name="_email" value="{{ last_username }}" >
@@ -108,20 +107,67 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="" class="btn btn-primary btn-block btn-flat">Mot de passe oublié ?</button>
+                            <button type="button" class="btn btn-primary btn-block btn-flat" data-toggle="modal" href="#modal_password"> Mot de passe oublié ?</button>
                         </div>
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
                         </div><!-- /.col -->
                     </div>
+                    {% if error %}
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    {{ error.messageKey|trans(error.messageData) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </form>
             </div><!-- /.login-box-body -->
-        </div><!-- /.login-box -->
-        <!-- jQuery 2.1.4 -->
-        <script src="{{ asset('template/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="{{ asset('template/bootstrap/js/bootstrap.min.js') }}"></script>
-        <!-- iCheck -->
-        <script src="{{ asset('template/plugins/iCheck/icheck.min.js') }}"></script>
+
+            <!-- modal_password -->
+
+            <form id="recoverform" action="#" class="">
+                <div class="modal" id="modal_password" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3>Récupération du mot de passe</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Entrez votre adresse mail afin de recevoir votre nouveau mot de passe.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                                            <input type="text" class="form-control" placeholder="xxxxx@eni-ecole.fr" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="modal-footer">
+                                    <span class="pull-left"><a href="#" class="flip-link btn btn-default" data-dismiss="modal">Fermer</a></span>
+                                    <span class="pull-right"><a class="btn btn-primary">Récuperer</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.modal_password -->
+                </div><!-- /.login-box -->
+            </form>
+
+            <!-- jQuery 2.1.4 -->
+            <script src="{{ asset('template/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+            <!-- Bootstrap 3.3.5 -->
+            <script src="{{ asset('template/bootstrap/js/bootstrap.min.js') }}"></script>
+            <!-- iCheck -->
+            <script src="{{ asset('template/plugins/iCheck/icheck.min.js') }}"></script>
     </body>
 </html>

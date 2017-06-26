@@ -386,6 +386,8 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_scrollBody {
   *margin-top: -1px;
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden!important;
+  overflow-y: auto;
 }
 .dataTables_wrapper .ui-widget-header {
   font-weight: normal;

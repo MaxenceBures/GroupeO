@@ -10,6 +10,7 @@ class __TwigTemplate_aeabe486b98982501eddecf218fb4ba597c4bd152f35db66e5978de168f
         // line 1
         $this->parent = $this->loadTemplate("layout.html.twig", "FrontendBundle:Accueil:accueil.html.twig", 1);
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -21,49 +22,65 @@ class __TwigTemplate_aeabe486b98982501eddecf218fb4ba597c4bd152f35db66e5978de168f
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3e6c2b98f6d5437bb6a11252824ff80d1f1098b1621fd40c80924c2f4991e7df = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_3e6c2b98f6d5437bb6a11252824ff80d1f1098b1621fd40c80924c2f4991e7df->enter($__internal_3e6c2b98f6d5437bb6a11252824ff80d1f1098b1621fd40c80924c2f4991e7df_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FrontendBundle:Accueil:accueil.html.twig"));
+        $__internal_5aedabad61e353bcf6999c16924845721e2dd64360dddac2c79d3a6dec323178 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_5aedabad61e353bcf6999c16924845721e2dd64360dddac2c79d3a6dec323178->enter($__internal_5aedabad61e353bcf6999c16924845721e2dd64360dddac2c79d3a6dec323178_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FrontendBundle:Accueil:accueil.html.twig"));
 
-        $__internal_33dedcf267d671d35469a29dee151cfb5afb1cc2c2660c7e5d22eadd0ad4b743 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_33dedcf267d671d35469a29dee151cfb5afb1cc2c2660c7e5d22eadd0ad4b743->enter($__internal_33dedcf267d671d35469a29dee151cfb5afb1cc2c2660c7e5d22eadd0ad4b743_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FrontendBundle:Accueil:accueil.html.twig"));
+        $__internal_46a5a1401641d18b5340a034acbdda16cf96cf91e22882f0c4dd38fe6ca208b4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_46a5a1401641d18b5340a034acbdda16cf96cf91e22882f0c4dd38fe6ca208b4->enter($__internal_46a5a1401641d18b5340a034acbdda16cf96cf91e22882f0c4dd38fe6ca208b4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "FrontendBundle:Accueil:accueil.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_3e6c2b98f6d5437bb6a11252824ff80d1f1098b1621fd40c80924c2f4991e7df->leave($__internal_3e6c2b98f6d5437bb6a11252824ff80d1f1098b1621fd40c80924c2f4991e7df_prof);
+        $__internal_5aedabad61e353bcf6999c16924845721e2dd64360dddac2c79d3a6dec323178->leave($__internal_5aedabad61e353bcf6999c16924845721e2dd64360dddac2c79d3a6dec323178_prof);
 
         
-        $__internal_33dedcf267d671d35469a29dee151cfb5afb1cc2c2660c7e5d22eadd0ad4b743->leave($__internal_33dedcf267d671d35469a29dee151cfb5afb1cc2c2660c7e5d22eadd0ad4b743_prof);
+        $__internal_46a5a1401641d18b5340a034acbdda16cf96cf91e22882f0c4dd38fe6ca208b4->leave($__internal_46a5a1401641d18b5340a034acbdda16cf96cf91e22882f0c4dd38fe6ca208b4_prof);
 
     }
 
-    // line 5
+    // line 2
+    public function block_title($context, array $blocks = array())
+    {
+        $__internal_2818a199d15235b7c4e2d48d6dbe4cdcb6ac39257415bfaf3ae2d2c98581b81c = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_2818a199d15235b7c4e2d48d6dbe4cdcb6ac39257415bfaf3ae2d2c98581b81c->enter($__internal_2818a199d15235b7c4e2d48d6dbe4cdcb6ac39257415bfaf3ae2d2c98581b81c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+
+        $__internal_1ebaabad9211cd411799e1536ea8421ba97c99cfa47ef0b9a35a5fdd3e9da62b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_1ebaabad9211cd411799e1536ea8421ba97c99cfa47ef0b9a35a5fdd3e9da62b->enter($__internal_1ebaabad9211cd411799e1536ea8421ba97c99cfa47ef0b9a35a5fdd3e9da62b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+
+        echo "ENI Ecole - Accueil";
+        
+        $__internal_1ebaabad9211cd411799e1536ea8421ba97c99cfa47ef0b9a35a5fdd3e9da62b->leave($__internal_1ebaabad9211cd411799e1536ea8421ba97c99cfa47ef0b9a35a5fdd3e9da62b_prof);
+
+        
+        $__internal_2818a199d15235b7c4e2d48d6dbe4cdcb6ac39257415bfaf3ae2d2c98581b81c->leave($__internal_2818a199d15235b7c4e2d48d6dbe4cdcb6ac39257415bfaf3ae2d2c98581b81c_prof);
+
+    }
+
+    // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_cf5bc11ab2c1f82e1752f56edec3a1cb85647fa301f6ce12c3cff314b215a765 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_cf5bc11ab2c1f82e1752f56edec3a1cb85647fa301f6ce12c3cff314b215a765->enter($__internal_cf5bc11ab2c1f82e1752f56edec3a1cb85647fa301f6ce12c3cff314b215a765_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_29f9305ead045f5c019851800f03e89ccb8bc7a89c5e991ba40cac961507c29b = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_29f9305ead045f5c019851800f03e89ccb8bc7a89c5e991ba40cac961507c29b->enter($__internal_29f9305ead045f5c019851800f03e89ccb8bc7a89c5e991ba40cac961507c29b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_9cdffb713f1fb0691ba9e4c32ff1a31c9d1f8b21de379507998bc88e80802c48 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9cdffb713f1fb0691ba9e4c32ff1a31c9d1f8b21de379507998bc88e80802c48->enter($__internal_9cdffb713f1fb0691ba9e4c32ff1a31c9d1f8b21de379507998bc88e80802c48_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_037a111500498c5eb6a74ab4ea5f05b11a339607d89335aca3bf002d51345140 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_037a111500498c5eb6a74ab4ea5f05b11a339607d89335aca3bf002d51345140->enter($__internal_037a111500498c5eb6a74ab4ea5f05b11a339607d89335aca3bf002d51345140_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
+        // line 4
         echo "    <H1>Accueil</H1>
-
-Hello World!
     <ul>
-
         <li><a href=\"register\">Enregistrement</a></li>
         <li><a href=\"utilisateur/liste\">Utilisateur - Liste</a></li>
         <li><a href=\"alternant/recherche\">Alternant - Recherche</a></li>
+        <li><a href=\"alternant/recherche\">Création de planning</a></li>
         <li><a href=\"logout\">Deconnexion</a></li>
         <li><a href=\"erreur\">phpinfo</a></li>
     </ul>
 
 ";
         
-        $__internal_9cdffb713f1fb0691ba9e4c32ff1a31c9d1f8b21de379507998bc88e80802c48->leave($__internal_9cdffb713f1fb0691ba9e4c32ff1a31c9d1f8b21de379507998bc88e80802c48_prof);
+        $__internal_037a111500498c5eb6a74ab4ea5f05b11a339607d89335aca3bf002d51345140->leave($__internal_037a111500498c5eb6a74ab4ea5f05b11a339607d89335aca3bf002d51345140_prof);
 
         
-        $__internal_cf5bc11ab2c1f82e1752f56edec3a1cb85647fa301f6ce12c3cff314b215a765->leave($__internal_cf5bc11ab2c1f82e1752f56edec3a1cb85647fa301f6ce12c3cff314b215a765_prof);
+        $__internal_29f9305ead045f5c019851800f03e89ccb8bc7a89c5e991ba40cac961507c29b->leave($__internal_29f9305ead045f5c019851800f03e89ccb8bc7a89c5e991ba40cac961507c29b_prof);
 
     }
 
@@ -79,7 +96,7 @@ Hello World!
 
     public function getDebugInfo()
     {
-        return array (  49 => 6,  40 => 5,  11 => 1,);
+        return array (  68 => 4,  59 => 3,  41 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -93,18 +110,14 @@ Hello World!
     public function getSourceContext()
     {
         return new Twig_Source("{% extends 'layout.html.twig' %}
-
-
-
+{% block title %}ENI Ecole - Accueil{% endblock %}
 {% block body %}
     <H1>Accueil</H1>
-
-Hello World!
     <ul>
-
         <li><a href=\"register\">Enregistrement</a></li>
         <li><a href=\"utilisateur/liste\">Utilisateur - Liste</a></li>
         <li><a href=\"alternant/recherche\">Alternant - Recherche</a></li>
+        <li><a href=\"alternant/recherche\">Création de planning</a></li>
         <li><a href=\"logout\">Deconnexion</a></li>
         <li><a href=\"erreur\">phpinfo</a></li>
     </ul>
