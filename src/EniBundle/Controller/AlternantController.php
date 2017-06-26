@@ -31,37 +31,24 @@ class AlternantController extends Controller
     {
         if ($request->isXMLHttpRequest()) {
 
-            $repository = $this->getDoctrine()->getEntityManager('eni')->getRepository('EniBundle:Stagiaire');
+            $em =  $this->getDoctrine()->getEntityManager('eni');
+            $recherche_temp = $request->get("recherche");
 
-            $stagiaires = $repository->search($request->get("recherche"),$this->getDoctrine()->getEntityManager('eni'));
-            //dump($utilisateur);
+            if(($recherche_temp["nom"] != "") OR ($recherche_temp["prenom"] != "") OR ($recherche_temp["mail"] != "") AND $recherche_temp["entreprise"] == -1 AND $recherche_temp["formation"] == -1){
+                $repository = $em->getRepository('EniBundle:Stagiaire');
+                $utilisateurs = $repository->rechercherNominative($recherche_temp,$this->getDoctrine()->getManager('eni'));
+            }
 
-            //dump($utilisateur);
-            die('ok');
+            if($recherche_temp["entreprise"] != -1){
+                $repository = $em->getRepository('EniBundle:Stagiaire');
+                $utilisateurs = $repository->rechercherNominativeEntreprise($recherche_temp,$this->getDoctrine()->getManager('eni'));
+            }
 
-            /*$recherche_temp = $request->get("recherche");
+            if($recherche_temp["formation"] != -1){
 
-            $repository = $this->getDoctrine()->getManager('eni')->getRepository('EniBundle:Stagiaire');
+            }
 
-            $utilisateurs = $repository->test($recherche_temp,$this->getDoctrine()->getManager('eni'));
-
-            dump($recherche_temp);
-            die("");
-            /*
-            /*
-            $em = $this->getDoctrine()->getManager('eni');
-            $repository = $em->getRepository('EniBundle:Alternant');
-
-
-            $formations_temp = $repository->findAll();
-
-            $temp = array();
-            foreach ($formations_temp as $x){
-                array_push($temp,array('court' => $x->getLibellecourt(), 'long' => $x->getLibellelong(), 'id' => $x->getCodeformation()));
-            }*/
-
-
-            return new Response(json_encode(array("status" =>"ok")));
+            return new Response(json_encode(array("status" =>"ok", "datas" => $utilisateurs)));
         }
         return new Response(json_encode("error"));
     }

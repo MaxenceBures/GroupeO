@@ -118,15 +118,37 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
         }
 
+        // alternant_chargement
+        if ('/alternant/chargement' === $pathinfo) {
+            return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
+        }
+
         // entreprise_liste
         if ('/entreprise/liste' === $pathinfo) {
+            if ('POST' !== $canonicalMethod) {
+                $allow[] = 'POST';
+                goto not_entreprise_liste;
+            }
+
             return array (  '_controller' => 'EniBundle\\Controller\\EntrepriseController::listeAction',  '_route' => 'entreprise_liste',);
         }
+        not_entreprise_liste:
 
         // frontend_erreur
         if ('/erreur' === $pathinfo) {
             return array (  '_controller' => 'FrontendBundle\\Controller\\AccueilController::erreurAction',  '_route' => 'frontend_erreur',);
         }
+
+        // formation_liste
+        if ('/formation/liste' === $pathinfo) {
+            if ('POST' !== $canonicalMethod) {
+                $allow[] = 'POST';
+                goto not_formation_liste;
+            }
+
+            return array (  '_controller' => 'EniBundle\\Controller\\FormationController::listeAction',  '_route' => 'formation_liste',);
+        }
+        not_formation_liste:
 
         // frontend_homepage
         if ('' === $trimmedPathinfo) {

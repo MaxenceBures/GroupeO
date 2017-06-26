@@ -11,6 +11,7 @@ alternant_chargement:
 entreprise_liste:
     path:     /entreprise/liste
     defaults: { _controller: EniBundle:Entreprise:liste }
+    methods: [post]
 #ENTREPRISE
 
 #FORMATION

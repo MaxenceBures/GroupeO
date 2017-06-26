@@ -3,14 +3,20 @@
  */
 $(function() {
 
+    var entreprise = 0;
+    var formation = 0;
+
     loadSelectEntreprise();
     loadSelectFormation();
+
+    $('#form_search').submit(false);
 
     $('#rechercher').click(function(){
        search();
     });
 
     function search(){
+        emptyTable();
         var input_nom = $('#input_nom').val();
         var input_prenom = $('#input_prenom').val();
         var input_mail = $('#input_mail').val();
@@ -28,9 +34,21 @@ $(function() {
             dataType: "json",
             success: function(response) {
                 if(response.status == "ok"){
+                    if(response.datas.length == 0){
+                        toastr.warning('Utilisateur introuvable');
+                    }else{
+                        $.each(response.datas, function(index,value){
+                            $('#liste_utilisateur_ligne').append('<tr>' +
+                                '<td>'+value.nom+' '+value.prenom+'</td>' +
+                                '<td>'+value.email+'</td>' +
+                                '<td>'+value.raisonsociale+'('+value.ville+')</td>' +
+                                '<td></td>' +
+                                '<td><button value="'+value.codestagiaire+'">Detail</button></td></tr>');
+                        });
+                    }
 
                 }else{
-                    toastr.error("Erreur lors de la recuperation");
+                    toastr.error("Erreur lors de la recuperation2");
                 }
             },error: function(){
                 toastr.error("Erreur lors de la recuperation");
@@ -38,7 +56,13 @@ $(function() {
         });
     }
 
+    function emptyTable(){
+        $("#liste_utilisateur_ligne").html("");
+    }
+
     function loadSelectFormation(){
+        $('#select_formation').append('<option value="-1">Selectionner une formation</option>');
+
         $.ajax({
             type: "POST",
             url: "/formation/liste",
@@ -64,6 +88,9 @@ $(function() {
     }
 
     function loadSelectEntreprise(){
+
+        $('#select_entreprise').append('<option value="-1">Selectionner une entreprise</option>');
+
         $.ajax({
             type: "POST",
             url: "/entreprise/liste",
