@@ -7,3 +7,4 @@ var/*
 var/cache/*
 app/config/*
 nbproject/private/private.xml
+app/config/config.yml
