@@ -6,3 +6,4 @@ nbproject/
 var/*
 var/cache/*
 app/config/*
+nbproject/private/private.xml
