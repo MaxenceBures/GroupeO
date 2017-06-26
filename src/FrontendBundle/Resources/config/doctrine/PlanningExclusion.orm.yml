@@ -1,0 +1,38 @@
+FrontendBundle\Entity\PlanningExclusion:
+    type: entity
+    table: PLANNING_EXCLUSION
+    indexes:
+        IDX_EDCB04AB3D865311:
+            columns:
+                - planning_id
+    id:
+        idExclusion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_exclusion
+            generator:
+                strategy: IDENTITY
+    fields:
+        dateDebut:
+            type: date
+            nullable: false
+            column: date_debut
+        dateFin:
+            type: date
+            nullable: false
+            column: date_fin
+    manyToOne:
+        planning:
+            targetEntity: Planning
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                planning_id:
+                    referencedColumnName: id_planning
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
