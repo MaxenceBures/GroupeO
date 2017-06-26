@@ -12,3 +12,5 @@ var/logs/dev.log
 var/cache/dev/appDevDebugProjectContainer.php.meta
 var/logs/dev.log
 var/cache/dev/appDevDebugProjectContainer.xml
+var/logs/dev.log
+var/cache/dev/appDevDebugProjectContainer.xml

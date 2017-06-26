@@ -4,17 +4,11 @@
     <H1>Liste Alternants</H1>
 
     <div id="div_recherche" style="margin-top: 30px; background-color: grey;">
-            <!--<div class="col-md-12">-->
-    <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Recherche</h3>
-                    <div class="box-body">
-                        <div class="row">
-                <!--<div class="widget-box">
-                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>Recherche</h5>
-                    </div>
-                    <div class="widget-content nopadding">-->
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Recherche</h3>
+                <div class="box-body">
+                    <div class="row">
                         <form id="form_search">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -36,23 +30,12 @@
                                 </div>
                                 <div class="col-xs-2"><button id="rechercher" class="btn btn-block btn-primary">Rechercher</button></div>
                             </div>
-                            <!--Nom <input type="text" id="input_nom" placeholder="Nom"/>
-                            Prenom <input type="text" id="input_prenom" placeholder="Prenom"/>
-                            Email <input type="email" id="input_mail" placeholder="XXXX@eni-ecole.fr"/>
-
-                           <br>
-                            <select id="select_entreprise" style="width: 200px;">Entreprise</select>
-                            <select id="select_formation" style="width: 200px;">Formation</select>
-                            <button id="rechercher">Rechercher</button>-->
                         </form>
-                        </div>
-                    </div>
                     </div>
                 </div>
-            <!--</div>-->
-
+            </div>
+        </div>
     </div>
-    <!--<div style="height: 100px;width: 100px;"></div>-->
     <div id="div_liste" style="margin-top: 20px;">
         <div class="box box-default">
             <div class="box-header with-border">
@@ -79,8 +62,6 @@
         </div>
     </div>
 
-
-    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('Js/alternant/recherche.js') }}"></script>
 
 {% endblock %}

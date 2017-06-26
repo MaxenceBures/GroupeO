@@ -3,118 +3,76 @@
 {% block body %}
     <H1>Liste Utilisateur</H1>
 
-
-    <!--<div style="height: 100px;width: 100px;"></div>-->
     <div id="div_liste">
-    <div class="box box-default">
-    <div class="box-header with-border">
-    <h3 class="box-title">Liste</h3>
-    <div class="box-body">
-        <table id="liste_utilisateur" class="table table-striped table-bordered" width="100%" cellspacing="0">
-            <thead>
-            <tr>
-                <th>Nom - Prénom</th>
-                <th>Mail</th>
-                <th>Role</th>
-                <th>Edition</th>
-            </tr>
-            </thead>
-            <tbody id="liste_utilisateur_ligne">
-            {% for utilisateur in utilisateurs %}
-                <tr id="liste_utilisateur_ligne_{{ utilisateur.id }}">
-                    <td>{{ utilisateur.name }}</td>
-                    <td>{{ utilisateur.email }}</td>
-                    <td>{{ utilisateur.role }}</td>
-                    <td><a class="click" value="{{ utilisateur.id }}">Edit</a> <a class="supprimer" value="{{ utilisateur.id }}">Supprimer</a> <a class="mail" value="{{ utilisateur.id }}">Mail</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    </div>
-    </div>
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Liste</h3>
+                <div class="box-body">
+                    <table id="liste_utilisateur" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nom - Prénom</th>
+                            <th>Mail</th>
+                            <th>Role</th>
+                            <th>Edition</th>
+                        </tr>
+                        </thead>
+                        <tbody id="liste_utilisateur_ligne">
+                        {% for utilisateur in utilisateurs %}
+                            <tr id="liste_utilisateur_ligne_{{ utilisateur.id }}">
+                                <td>{{ utilisateur.name }}</td>
+                                <td>{{ utilisateur.email }}</td>
+                                <td>{{ utilisateur.role }}</td>
+                                <td><a class="click" value="{{ utilisateur.id }}">Edit</a> <a class="supprimer" value="{{ utilisateur.id }}">Supprimer</a> <a class="mail" value="{{ utilisateur.id }}">Mail</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="div_action" style="margin-top: 20px; background-color: grey;">
-    <div class="box box-default">
-    <div class="box-header with-border">
-        <h3 class="box-title">Recherche</h3>
-        <div class="box-body">
-        <!--<div class="widget-box">
-            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                <h5>Ajouter/Modifier</h5>
-            </div>
-            <div class="widget-content nopadding">-->
-                <form action="#" method="get" class="form-horizontal">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <input class="form-control" placeholder="Nom Prenom" type="text" id="input_nom">
-                        </div>
-                        <div class="col-xs-5">
-                            <input class="form-control" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 30px;">
-                        <div class="col-xs-5">
-                            <select id="select_role" class="form-control select2" style="width: 300px;">
-                                <option>Administrateur</option>
-                                <option>Lecteur</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4">
-                            <input class="form-control" placeholder="Mot de passe" type="password" id="input_password">
-                        </div>
-                    </div>
-                    <!--<table>
-                        <tr>
-                            <td>
-                                Nom Prenom
-                                <input style="margin-left: 10px" class="span8" placeholder="Nom Prenom" type="text" id="input_nom">
-                            </td>
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Recherche</h3>
+                <div class="box-body">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <input class="form-control" placeholder="Nom Prenom" type="text" id="input_nom">
+                                </div>
+                                <div class="col-xs-5">
+                                    <input class="form-control" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 30px;">
+                                <div class="col-xs-5">
+                                    <select id="select_role" class="form-control select2" style="width: 300px;">
+                                        <option>Administrateur</option>
+                                        <option>Lecteur</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" placeholder="Mot de passe" type="password" id="input_password">
+                                </div>
+                            </div>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                Mail
-                                <input style="margin-left: 10px" class="span5" placeholder="mail@eni-ecole.fr" type="text" id="input_mail">
-                            </td>
-                            <td> </td>
-                            <td>
-                                Rôle
-                                <select id="select_role">
-                                    <option>Administrateur</option>
-                                    <option>Lecteur</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mot de passe <input class="span4" placeholder="Mot de passe" type="password" id="input_password"></td>
-                        </tr>-->
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-xs-1">
-                            <button id="save_datas" class="btn btn-success">Sauvegarder</button>
-                        </div>
-                        <div class="col-xs-1">
-                            <button id="clear_datas" class="btn btn-danger">Vider</button>
-                        </div>
-                    </div>
-                       <!-- <tr>
-                            <td colspan="8"></td>
-                            <td>
-                                <div class="form-actions">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-xs-1">
                                     <button id="save_datas" class="btn btn-success">Sauvegarder</button>
+                                </div>
+                                <div class="col-xs-1">
                                     <button id="clear_datas" class="btn btn-danger">Vider</button>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>-->
-
-                </form>
-        </div>
+                            </div>
+                        </form>
+                </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
+
     <script src="{{ asset('Js/utilisateur/liste.js') }}"></script>
 
 {% endblock %}
