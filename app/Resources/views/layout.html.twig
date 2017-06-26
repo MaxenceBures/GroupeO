@@ -65,24 +65,29 @@
             </header>
             <!-- /.header -->
             <!-- Left side column. contains the logo and sidebar -->
-            {% block aside %}
-                <aside class="main-sidebar">
-                    <!-- sidebar: style can be found in sidebar.less -->
-                    <section class="sidebar">
-                        <!-- Sidebar user panel -->
-                        <!-- sidebar menu: : style can be found in sidebar.less -->
-                        <ul class="sidebar-menu">
-                            <li class="header"><i class="fa"></i> MENU</li>
-                            <li>
-                                <a href="../">
-                                    <i class="fa fa-home"></i> <span>Accueil</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    <!-- /.sidebar -->
-                </aside>
-            {% endblock %}
+            
+            {% if app.request.attributes.get('_route') != 'frontend_homepage' %}
+                {% block aside %}
+                    <aside class="main-sidebar">
+                        <!-- sidebar: style can be found in sidebar.less -->
+                        <section class="sidebar">
+                            <!-- Sidebar user panel -->
+                            <!-- sidebar menu: : style can be found in sidebar.less -->
+                            <ul class="sidebar-menu">
+                                <li class="header"><i class="fa"></i> MENU</li>
+                                <li>
+                                    <a href="../">
+                                        <i class="fa fa-home"></i> <span>Accueil</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <!-- /.sidebar -->
+                    </aside>
+                {% endblock %}
+            {% endif %}
+
+
             <section class="content">
             {% block body %}{% endblock %}
         </section>
