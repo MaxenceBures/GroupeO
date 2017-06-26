@@ -16,4 +16,5 @@
 /nbproject/
 /app/config/*
 .gitignore
+/app/config/config.yml
 app/config/config.yml
