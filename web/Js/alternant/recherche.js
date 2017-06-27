@@ -8,6 +8,7 @@ $(function() {
 
     loadSelectEntreprise();
     loadSelectFormation();
+    initDatatable();
 
     $('#form_search').submit(false);
 
@@ -37,6 +38,7 @@ $(function() {
                     if(response.datas.length == 0){
                         toastr.warning('Utilisateur introuvable');
                     }else{
+                        closeDatatable();
                         $.each(response.datas, function(index,value){
                             $('#liste_utilisateur_ligne').append('<tr>' +
                                 '<td>'+value.nom+' '+value.prenom+'</td>' +
@@ -45,6 +47,7 @@ $(function() {
                                 '<td></td>' +
                                 '<td><button value="'+value.codestagiaire+'">Detail</button></td></tr>');
                         });
+                        initDatatable();
                     }
 
                 }else{
@@ -114,5 +117,18 @@ $(function() {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
+    }
+
+    function initDatatable(){
+        $('#liste_utilisateur').DataTable( {
+            "paging":   true,
+            "ordering": false,
+            "info":     false
+        } );
+    }
+
+    function closeDatatable() {
+        $('#liste_utilisateur').dataTable().fnDestroy();
+        emptyTable();
     }
 });
