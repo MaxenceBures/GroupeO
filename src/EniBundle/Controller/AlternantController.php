@@ -52,4 +52,15 @@ class AlternantController extends Controller
         }
         return new Response(json_encode("error"));
     }
+
+    /**
+     * @Route("/alternant/detail", name="alternant_detail")
+     */
+    public function detailAction(Request $request){
+        if(!$this->getUser()){
+            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+        }
+
+        return $this->render('EniBundle:Alternant:detail.html.twig');
+    }
 }
