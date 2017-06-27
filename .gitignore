@@ -16,3 +16,4 @@ var/logs/dev.log
 var/cache/dev/appDevDebugProjectContainer.xml
 nbproject/private/private.xml
 app/config/config.yml
+app/config/config.yml
