@@ -73,6 +73,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('Js/utilisateur/liste.js') }}"></script>
+
+    {% block javascripts %}
+        <script src="{{ asset('Js/utilisateur/liste.js') }}"></script>
+    {% endblock %}
 
 {% endblock %}

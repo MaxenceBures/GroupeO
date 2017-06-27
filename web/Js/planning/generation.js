@@ -20,10 +20,10 @@ function getFramePlanning(id = null) {
                     placeholder: $(this).attr('placeholder')
                 });
             });
-            $("#modal_planning_generation table").dataTable({dom: 'RTC<"clear">'});
+            $("#modal_planning_generation table").dataTable({dom: '<"clear">', filtering: false, ordering: false});
 
             $("#modal_planning_generation .date").datepicker();
-            
+
         }
     });
 }
@@ -44,12 +44,21 @@ function btExclusionClick() {
     var date_debut = $("#date_debut_exclusion").val();
     var date_fin = $("#date_fin_exclusion").val();
     var table = $("#table_exclusion");
-    
-    table.append("<tr><td>"+date_debut+"</td><td>"+date_fin+"</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove-sign'></i></button></td></tr>");
-    
+    if (new Date(date_debut) > new Date(date_fin)) {
+        alert("La date de début doit être plus petite que la date de fin");
+    } else {
+        if (table.find('td').hasClass("dataTables_empty")) {
+            table.find('tbody').html("<tr class='ajout' ><td>" + date_debut + "</td><td>" + date_fin + "</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove'></i></button></td></tr>");
+        } else {
+            table.find('tbody').append("<tr class='ajout'><td>" + date_debut + "</td><td>" + date_fin + "</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove'></i></button></td></tr>");
+        }
+    }
+}
 
-} 
-
-function removeExclusion(bt){
+function removeExclusion(bt) {
     $(bt).parents("tr").remove();
+}
+
+function btRechercherClick(){
+    
 }

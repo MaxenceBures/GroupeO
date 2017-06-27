@@ -5,6 +5,9 @@ alternant_recherche:
 alternant_chargement:
     path:     /alternant/chargement
     defaults: { _controller: EniBundle:Alternant:chargement }
+alternant_detail:
+    path:     /alternant/detail
+    defaults: { _controller: EniBundle:Alternant:detail }
 #ALTERNANT
 
 #ENTREPRISE
