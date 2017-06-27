@@ -11,6 +11,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
         $this->parent = $this->loadTemplate("layout.html.twig", "EniBundle:Alternant:recherche.html.twig", 1);
         $this->blocks = array(
             'body' => array($this, 'block_body'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -21,29 +22,29 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32->enter($__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_897bf1220246903ed5fac8359143b5a4ee044ea77a83813ca01377bd223b5731 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_897bf1220246903ed5fac8359143b5a4ee044ea77a83813ca01377bd223b5731->enter($__internal_897bf1220246903ed5fac8359143b5a4ee044ea77a83813ca01377bd223b5731_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
-        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d->enter($__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_2bca82a1281a2ff95218081a44c5bf88fe90b0787ac8e78c04810fd37dc828db = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_2bca82a1281a2ff95218081a44c5bf88fe90b0787ac8e78c04810fd37dc828db->enter($__internal_2bca82a1281a2ff95218081a44c5bf88fe90b0787ac8e78c04810fd37dc828db_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32->leave($__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32_prof);
+        $__internal_897bf1220246903ed5fac8359143b5a4ee044ea77a83813ca01377bd223b5731->leave($__internal_897bf1220246903ed5fac8359143b5a4ee044ea77a83813ca01377bd223b5731_prof);
 
         
-        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d->leave($__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d_prof);
+        $__internal_2bca82a1281a2ff95218081a44c5bf88fe90b0787ac8e78c04810fd37dc828db->leave($__internal_2bca82a1281a2ff95218081a44c5bf88fe90b0787ac8e78c04810fd37dc828db_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3->enter($__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_29d146c53f964419c76bbaf187e257f69014139228a4f97b1ec110dc87396ea7 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_29d146c53f964419c76bbaf187e257f69014139228a4f97b1ec110dc87396ea7->enter($__internal_29d146c53f964419c76bbaf187e257f69014139228a4f97b1ec110dc87396ea7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c->enter($__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_237d7eadfd9cc33b52fc0f7a24ea3baf24aacc5a477a343bf79a3bafc6597982 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_237d7eadfd9cc33b52fc0f7a24ea3baf24aacc5a477a343bf79a3bafc6597982->enter($__internal_237d7eadfd9cc33b52fc0f7a24ea3baf24aacc5a477a343bf79a3bafc6597982_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <H1>Liste Alternants</H1>
@@ -107,17 +108,40 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
         </div>
     </div>
 
-    <script src=\"";
-        // line 65
-        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("Js/alternant/recherche.js"), "html", null, true);
-        echo "\"></script>
 
+    ";
+        // line 66
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 69
+        echo "
 ";
         
-        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c->leave($__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c_prof);
+        $__internal_237d7eadfd9cc33b52fc0f7a24ea3baf24aacc5a477a343bf79a3bafc6597982->leave($__internal_237d7eadfd9cc33b52fc0f7a24ea3baf24aacc5a477a343bf79a3bafc6597982_prof);
 
         
-        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3->leave($__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3_prof);
+        $__internal_29d146c53f964419c76bbaf187e257f69014139228a4f97b1ec110dc87396ea7->leave($__internal_29d146c53f964419c76bbaf187e257f69014139228a4f97b1ec110dc87396ea7_prof);
+
+    }
+
+    // line 66
+    public function block_javascripts($context, array $blocks = array())
+    {
+        $__internal_a02e4be07a3237f9c0d52f7639b699fc11b4ba909c097fbc78a95ae600acbe9e = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_a02e4be07a3237f9c0d52f7639b699fc11b4ba909c097fbc78a95ae600acbe9e->enter($__internal_a02e4be07a3237f9c0d52f7639b699fc11b4ba909c097fbc78a95ae600acbe9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_89fa17d4ff85d0967bb49e696665c7d2954b797454e9acc0af83c010cf55fa2d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_89fa17d4ff85d0967bb49e696665c7d2954b797454e9acc0af83c010cf55fa2d->enter($__internal_89fa17d4ff85d0967bb49e696665c7d2954b797454e9acc0af83c010cf55fa2d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 67
+        echo "        <script src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("Js/alternant/recherche.js"), "html", null, true);
+        echo "\"></script>
+    ";
+        
+        $__internal_89fa17d4ff85d0967bb49e696665c7d2954b797454e9acc0af83c010cf55fa2d->leave($__internal_89fa17d4ff85d0967bb49e696665c7d2954b797454e9acc0af83c010cf55fa2d_prof);
+
+        
+        $__internal_a02e4be07a3237f9c0d52f7639b699fc11b4ba909c097fbc78a95ae600acbe9e->leave($__internal_a02e4be07a3237f9c0d52f7639b699fc11b4ba909c097fbc78a95ae600acbe9e_prof);
 
     }
 
@@ -133,7 +157,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     public function getDebugInfo()
     {
-        return array (  112 => 65,  49 => 4,  40 => 3,  11 => 1,);
+        return array (  136 => 67,  127 => 66,  116 => 69,  114 => 66,  50 => 4,  41 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -210,7 +234,10 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
         </div>
     </div>
 
-    <script src=\"{{ asset('Js/alternant/recherche.js') }}\"></script>
+
+    {% block javascripts %}
+        <script src=\"{{ asset('Js/alternant/recherche.js') }}\"></script>
+    {% endblock %}
 
 {% endblock %}", "EniBundle:Alternant:recherche.html.twig", "C:\\wamp\\www\\GroupeO\\src\\EniBundle/Resources/views/Alternant/recherche.html.twig");
     }

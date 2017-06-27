@@ -33,7 +33,7 @@ class AlternantController extends Controller
 
             $em =  $this->getDoctrine()->getEntityManager('eni');
             $recherche_temp = $request->get("recherche");
-
+            
             if(($recherche_temp["nom"] != "") OR ($recherche_temp["prenom"] != "") OR ($recherche_temp["mail"] != "") AND $recherche_temp["entreprise"] == -1 AND $recherche_temp["formation"] == -1){
                 $repository = $em->getRepository('EniBundle:Stagiaire');
                 $utilisateurs = $repository->rechercherNominative($recherche_temp,$this->getDoctrine()->getManager('eni'));

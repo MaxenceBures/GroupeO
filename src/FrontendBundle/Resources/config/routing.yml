@@ -52,3 +52,9 @@ planning_frame:
     defaults: { _controller: FrontendBundle:Planning:frame }
     methods: [post]
 #PLANNING
+
+#TEST
+alternant_chargement:
+    path:     /alternant/chargement
+    defaults: { _controller: EniBundle:Alternant:chargement }
+#/TEST
