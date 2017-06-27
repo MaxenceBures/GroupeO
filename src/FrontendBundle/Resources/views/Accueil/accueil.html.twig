@@ -6,9 +6,13 @@
         <li><a href="register">Enregistrement</a></li>
         <li><a href="utilisateur/liste">Utilisateur - Liste</a></li>
         <li><a href="alternant/recherche">Alternant - Recherche</a></li>
-        <li><a href="alternant/recherche">Création de planning</a></li>
+        <li><a href="#" onclick="getFramePlanning()">Création de planning</a></li>
         <li><a href="logout">Deconnexion</a></li>
         <li><a href="erreur">phpinfo</a></li>
     </ul>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('Js/planning/generation.js') }}" type="text/javascript"></script>
 {% endblock %}

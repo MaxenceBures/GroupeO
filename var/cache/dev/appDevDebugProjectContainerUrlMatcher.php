@@ -233,6 +233,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // planning_frame
+        if ('/planning/frame' === $pathinfo) {
+            if ('POST' !== $canonicalMethod) {
+                $allow[] = 'POST';
+                goto not_planning_frame;
+            }
+
+            return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::frameAction',  '_route' => 'planning_frame',);
+        }
+        not_planning_frame:
+
         // homepage
         if ('' === $trimmedPathinfo) {
             if (substr($pathinfo, -1) !== '/') {

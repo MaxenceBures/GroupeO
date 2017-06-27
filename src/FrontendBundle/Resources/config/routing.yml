@@ -45,3 +45,10 @@ utilisateur_supprimer:
     defaults: { _controller: FrontendBundle:Utilisateur:supprimer }
     methods: [post]
 #UTILISATEUR
+
+#PLANNING
+planning_frame:
+    path:     /planning/frame
+    defaults: { _controller: FrontendBundle:Planning:frame }
+    methods: [post]
+#PLANNING
