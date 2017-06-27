@@ -46,5 +46,86 @@ class PlanningCours
     private $planning;
 
 
-}
 
+    /**
+     * Get idPlanningCours
+     *
+     * @return integer
+     */
+    public function getIdPlanningCours()
+    {
+        return $this->idPlanningCours;
+    }
+
+    /**
+     * Set coursId
+     *
+     * @param integer $coursId
+     *
+     * @return PlanningCours
+     */
+    public function setCoursId($coursId)
+    {
+        $this->coursId = $coursId;
+    
+        return $this;
+    }
+
+    /**
+     * Get coursId
+     *
+     * @return integer
+     */
+    public function getCoursId()
+    {
+        return $this->coursId;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     *
+     * @return PlanningCours
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+    
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
+    }
+
+    /**
+     * Set planning
+     *
+     * @param \FrontendBundle\Entity\Planning $planning
+     *
+     * @return PlanningCours
+     */
+    public function setPlanning(\FrontendBundle\Entity\Planning $planning = null)
+    {
+        $this->planning = $planning;
+    
+        return $this;
+    }
+
+    /**
+     * Get planning
+     *
+     * @return \FrontendBundle\Entity\Planning
+     */
+    public function getPlanning()
+    {
+        return $this->planning;
+    }
+}

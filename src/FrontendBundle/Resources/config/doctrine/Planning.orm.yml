@@ -48,4 +48,11 @@ FrontendBundle\Entity\Planning:
             options:
                 unsigned: false
             column: stagiaire_entreprise_numlien
+        formationCode:
+            type: string
+            nullable: false
+            length: 8
+            options:
+                fixed: true
+            column: formation_code
     lifecycleCallbacks: {  }

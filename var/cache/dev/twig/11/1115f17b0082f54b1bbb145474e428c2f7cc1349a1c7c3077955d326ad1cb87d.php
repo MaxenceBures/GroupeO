@@ -21,91 +21,103 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756->enter($__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32->enter($__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
-        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd->enter($__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
+        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d->enter($__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "EniBundle:Alternant:recherche.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756->leave($__internal_c16720817bd82a57ffe0166ac1cd35f2d0e4700d2dde2f39adbeb0430d594756_prof);
+        $__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32->leave($__internal_cd8109196342402ecceb3699ca891f68b03129a0fc6917b0062d9ff1cdbfec32_prof);
 
         
-        $__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd->leave($__internal_4e9aadcf101c200075c6b93b25948fb7cde731f5f5e379bba2246fcb8bb68efd_prof);
+        $__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d->leave($__internal_fc78a5e09b4eb0b3afb8ff59e58c80c04cb06d8ddca306d7f9cd8e431b5e343d_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f->enter($__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3->enter($__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da->enter($__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c->enter($__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <H1>Liste Alternants</H1>
 
-    <div id=\"div_recherche\" style=\"margin-top: 100px; background-color: grey;\">
-
-            <div class=\"col-md-12\">
-                <div class=\"widget-box\">
-                    <div class=\"widget-title\"> <span class=\"icon\"> <i class=\"icon-align-justify\"></i> </span>
-                        <h5>Recherche</h5>
-                    </div>
-                    <div class=\"widget-content nopadding\">
-                        <form class=\"form-inline\" id=\"form_search\">
-
-                            Nom <input type=\"text\" id=\"input_nom\" placeholder=\"Nom\"/>
-                            Prenom <input type=\"text\" id=\"input_prenom\" placeholder=\"Prenom\"/>
-                            Email <input type=\"email\" id=\"input_mail\" placeholder=\"XXXX@eni-ecole.fr\"/>
-
-                           <br>
-                            <select id=\"select_entreprise\" style=\"width: 200px;\">Entreprise</select>
-                            <select id=\"select_formation\" style=\"width: 200px;\">Formation</select>
-                            <button id=\"rechercher\">Rechercher</button>
+    <div id=\"div_recherche\" style=\"margin-top: 30px; background-color: grey;\">
+        <div class=\"box box-default\">
+            <div class=\"box-header with-border\">
+                <h3 class=\"box-title\">Recherche</h3>
+                <div class=\"box-body\">
+                    <div class=\"row\">
+                        <form id=\"form_search\">
+                            <div class=\"row\">
+                                <div class=\"col-xs-3\">
+                                    <input class=\"form-control\" placeholder=\"Nom\" type=\"text\" id=\"input_nom\">
+                                </div>
+                                <div class=\"col-xs-3\">
+                                    <input class=\"form-control\" placeholder=\"Prenom\" type=\"text\" id=\"input_prenom\">
+                                </div>
+                                <div class=\"col-xs-6\">
+                                    <input class=\"form-control\" placeholder=\"XXXX@eni-ecole.fr\" type=\"text\" id=\"input_mail\">
+                                </div>
+                            </div>
+                            <div class=\"row\" style=\"margin-top: 30px;\">
+                                <div class=\"col-xs-4\">
+                                    <select id=\"select_entreprise\" class=\"form-control select2\" style=\"width: 300px;\">Entreprise</select>
+                                </div>
+                                <div class=\"col-xs-4\">
+                                    <select id=\"select_formation\" class=\"form-control select2\" style=\"width: 300px;\">Formation</select>
+                                </div>
+                                <div class=\"col-xs-2\"><button id=\"rechercher\" class=\"btn btn-block btn-primary\">Rechercher</button></div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-
+        </div>
     </div>
-    <!--<div style=\"height: 100px;width: 100px;\"></div>-->
-    <div id=\"div_liste\">
-        <table id=\"liste_utilisateur\" class=\"table table-striped table-bordered\" width=\"100%\" cellspacing=\"0\">
-            <thead>
-            <tr>
-                <th>Nom - Prénom</th>
-                <th>Mail</th>
-                <th>Entreprise</th>
-                <th>Formation</th>
-                <th>Edition</th>
-            </tr>
-            </thead>
-            <tbody id=\"liste_utilisateur_ligne\">
+    <div id=\"div_liste\" style=\"margin-top: 20px;\">
+        <div class=\"box box-default\">
+            <div class=\"box-header with-border\">
+                <h3 class=\"box-title\">Liste</h3>
+                <div class=\"box-body\">
+                    <div class=\"row\">
+                <table id=\"liste_utilisateur\" class=\"table table-striped table-bordered\" width=\"100%\" cellspacing=\"0\">
+                    <thead>
+                    <tr>
+                        <th>Nom - Prénom</th>
+                        <th>Mail</th>
+                        <th>Entreprise</th>
+                        <th>Formation</th>
+                        <th>Edition</th>
+                    </tr>
+                    </thead>
+                    <tbody id=\"liste_utilisateur_ligne\">
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 
     <script src=\"";
-        // line 49
-        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("template/js/jquery.min.js"), "html", null, true);
-        echo "\"></script>
-    <script src=\"";
-        // line 50
+        // line 65
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("Js/alternant/recherche.js"), "html", null, true);
         echo "\"></script>
 
 ";
         
-        $__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da->leave($__internal_9ada005f8482db6db77b1686c946cf990fc5b79f58701cbb20697e1b459fb6da_prof);
+        $__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c->leave($__internal_81b9a5b43733518821f1b56bbfdf8c4af20578ef9c3fb7deee3f316381f2be1c_prof);
 
         
-        $__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f->leave($__internal_84a8f997135fc14fe2ebc60e4c072acb561c880195c40e8191dadf312adbb89f_prof);
+        $__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3->leave($__internal_49dd50cbe73508fb37787e880512fd8e2cc277c01f165e34739c504fed4107d3_prof);
 
     }
 
@@ -121,7 +133,7 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 
     public function getDebugInfo()
     {
-        return array (  100 => 50,  96 => 49,  49 => 4,  40 => 3,  11 => 1,);
+        return array (  112 => 65,  49 => 4,  40 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -139,50 +151,65 @@ class __TwigTemplate_49f0d1767e01109b9a1d6cce6267a026b1b316150f6fc8a96ee3b33c594
 {% block body %}
     <H1>Liste Alternants</H1>
 
-    <div id=\"div_recherche\" style=\"margin-top: 100px; background-color: grey;\">
-
-            <div class=\"col-md-12\">
-                <div class=\"widget-box\">
-                    <div class=\"widget-title\"> <span class=\"icon\"> <i class=\"icon-align-justify\"></i> </span>
-                        <h5>Recherche</h5>
-                    </div>
-                    <div class=\"widget-content nopadding\">
-                        <form class=\"form-inline\" id=\"form_search\">
-
-                            Nom <input type=\"text\" id=\"input_nom\" placeholder=\"Nom\"/>
-                            Prenom <input type=\"text\" id=\"input_prenom\" placeholder=\"Prenom\"/>
-                            Email <input type=\"email\" id=\"input_mail\" placeholder=\"XXXX@eni-ecole.fr\"/>
-
-                           <br>
-                            <select id=\"select_entreprise\" style=\"width: 200px;\">Entreprise</select>
-                            <select id=\"select_formation\" style=\"width: 200px;\">Formation</select>
-                            <button id=\"rechercher\">Rechercher</button>
+    <div id=\"div_recherche\" style=\"margin-top: 30px; background-color: grey;\">
+        <div class=\"box box-default\">
+            <div class=\"box-header with-border\">
+                <h3 class=\"box-title\">Recherche</h3>
+                <div class=\"box-body\">
+                    <div class=\"row\">
+                        <form id=\"form_search\">
+                            <div class=\"row\">
+                                <div class=\"col-xs-3\">
+                                    <input class=\"form-control\" placeholder=\"Nom\" type=\"text\" id=\"input_nom\">
+                                </div>
+                                <div class=\"col-xs-3\">
+                                    <input class=\"form-control\" placeholder=\"Prenom\" type=\"text\" id=\"input_prenom\">
+                                </div>
+                                <div class=\"col-xs-6\">
+                                    <input class=\"form-control\" placeholder=\"XXXX@eni-ecole.fr\" type=\"text\" id=\"input_mail\">
+                                </div>
+                            </div>
+                            <div class=\"row\" style=\"margin-top: 30px;\">
+                                <div class=\"col-xs-4\">
+                                    <select id=\"select_entreprise\" class=\"form-control select2\" style=\"width: 300px;\">Entreprise</select>
+                                </div>
+                                <div class=\"col-xs-4\">
+                                    <select id=\"select_formation\" class=\"form-control select2\" style=\"width: 300px;\">Formation</select>
+                                </div>
+                                <div class=\"col-xs-2\"><button id=\"rechercher\" class=\"btn btn-block btn-primary\">Rechercher</button></div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-
+        </div>
     </div>
-    <!--<div style=\"height: 100px;width: 100px;\"></div>-->
-    <div id=\"div_liste\">
-        <table id=\"liste_utilisateur\" class=\"table table-striped table-bordered\" width=\"100%\" cellspacing=\"0\">
-            <thead>
-            <tr>
-                <th>Nom - Prénom</th>
-                <th>Mail</th>
-                <th>Entreprise</th>
-                <th>Formation</th>
-                <th>Edition</th>
-            </tr>
-            </thead>
-            <tbody id=\"liste_utilisateur_ligne\">
+    <div id=\"div_liste\" style=\"margin-top: 20px;\">
+        <div class=\"box box-default\">
+            <div class=\"box-header with-border\">
+                <h3 class=\"box-title\">Liste</h3>
+                <div class=\"box-body\">
+                    <div class=\"row\">
+                <table id=\"liste_utilisateur\" class=\"table table-striped table-bordered\" width=\"100%\" cellspacing=\"0\">
+                    <thead>
+                    <tr>
+                        <th>Nom - Prénom</th>
+                        <th>Mail</th>
+                        <th>Entreprise</th>
+                        <th>Formation</th>
+                        <th>Edition</th>
+                    </tr>
+                    </thead>
+                    <tbody id=\"liste_utilisateur_ligne\">
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-    <script src=\"{{ asset('template/js/jquery.min.js') }}\"></script>
     <script src=\"{{ asset('Js/alternant/recherche.js') }}\"></script>
 
 {% endblock %}", "EniBundle:Alternant:recherche.html.twig", "C:\\wamp\\www\\GroupeO\\src\\EniBundle/Resources/views/Alternant/recherche.html.twig");

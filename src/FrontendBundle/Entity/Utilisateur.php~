@@ -44,6 +44,11 @@ class Utilisateur implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @Assert\Length(max=4096)
+     */
+    protected $plainPassword;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -109,11 +114,28 @@ class Utilisateur implements UserInterface
         $this->password = $password;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
 
     public function getSalt()
     {
         return null;
     }
+
+    /*public function getRealRole(){
+        if($this->role == "ROLE_ADMIN"){
+            $this->role = "Administrateur";
+        }elseif($this->role == "ROLE_USER"){
+            $this->role = "Lecteur";
+        }
+    }*/
 
     /** @see \Serializable::serialize() */
     public function serialize()
@@ -140,4 +162,28 @@ class Utilisateur implements UserInterface
     }
 
 
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Utilisateur
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
 }

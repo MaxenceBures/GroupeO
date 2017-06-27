@@ -1,12 +1,15 @@
 {% extends 'layout.html.twig' %}
 {% block title %}ENI Ecole - Accueil{% endblock %}
+{% block stylesheets %}
+    <style> .content-wrapper,.main-footer{ margin-left : 0!important}</style>
+{% endblock %}
 {% block body %}
     <H1>Accueil</H1>
     <ul>
         <li><a href="register">Enregistrement</a></li>
         <li><a href="utilisateur/liste">Utilisateur - Liste</a></li>
         <li><a href="alternant/recherche">Alternant - Recherche</a></li>
-        <li><a href="#" onclick="getFramePlanning()">Création de planning</a></li>
+        <li><a href="#" onclick="getFramePlanning();">Création de planning</a></li>
         <li><a href="logout">Deconnexion</a></li>
         <li><a href="erreur">phpinfo</a></li>
     </ul>

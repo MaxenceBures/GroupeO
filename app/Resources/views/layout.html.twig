@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link href="{{ asset('template/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('template/ionicons-master/css/ionicons.css') }}" rel="stylesheet" type="text/css"/>
@@ -14,6 +13,7 @@
     <link href="{{ asset('template/plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('template/plugins/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    {% block stylesheets %}{% endblock %}
 
 </head>
 <body class="sidebar-mini skin-blue fixed">

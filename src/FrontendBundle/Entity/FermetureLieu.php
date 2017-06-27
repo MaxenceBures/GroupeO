@@ -50,5 +50,110 @@ class FermetureLieu
     private $lieuCode;
 
 
-}
 
+    /**
+     * Get idFermeture
+     *
+     * @return integer
+     */
+    public function getIdFermeture()
+    {
+        return $this->idFermeture;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return FermetureLieu
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return FermetureLieu
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return FermetureLieu
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set lieuCode
+     *
+     * @param integer $lieuCode
+     *
+     * @return FermetureLieu
+     */
+    public function setLieuCode($lieuCode)
+    {
+        $this->lieuCode = $lieuCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get lieuCode
+     *
+     * @return integer
+     */
+    public function getLieuCode()
+    {
+        return $this->lieuCode;
+    }
+}

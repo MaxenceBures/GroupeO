@@ -38,7 +38,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-primary btn-block btn-flat" data-toggle="modal" href="#modal_password"> Mot de passe oublié ?</button>
+                            <a class="btn btn-primary btn-block btn-flat" data-toggle="modal" href="#modalpassword"> Mot de passe oublié ?</a>
                         </div>
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
@@ -59,8 +59,8 @@
 
             <!-- modal_password -->
 
-            <form id="recoverform" action="#" class="">
-                <div class="modal" id="modal_password" tabindex="-1" role="dialog">
+            <div class="modal" id="modalpassword" tabindex="-1" role="dialog">
+                <form id="recoverform" action="#" class="">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -91,8 +91,8 @@
                         </div>
                     </div>
                     <!-- /.modal_password -->
-                </div><!-- /.login-box -->
-            </form>
+                </form>
+            </div><!-- /.login-box -->
 
             <!-- jQuery 2.1.4 -->
             <script src="{{ asset('template/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>

@@ -15,11 +15,11 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ba79b5d0164cae348a50acbf002d1fce5a2c94e5ab89300018b70b93b885dbbe = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_ba79b5d0164cae348a50acbf002d1fce5a2c94e5ab89300018b70b93b885dbbe->enter($__internal_ba79b5d0164cae348a50acbf002d1fce5a2c94e5ab89300018b70b93b885dbbe_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "auth/login.html.twig"));
+        $__internal_10c6f4c13d0c8f719ca9e87e9aa734ee6fd05b3cd17959197f140dac006dfe8f = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_10c6f4c13d0c8f719ca9e87e9aa734ee6fd05b3cd17959197f140dac006dfe8f->enter($__internal_10c6f4c13d0c8f719ca9e87e9aa734ee6fd05b3cd17959197f140dac006dfe8f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "auth/login.html.twig"));
 
-        $__internal_a4b8c78c81c611e3635797f6817ce777269d89b49313b47db528dc724057ac47 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_a4b8c78c81c611e3635797f6817ce777269d89b49313b47db528dc724057ac47->enter($__internal_a4b8c78c81c611e3635797f6817ce777269d89b49313b47db528dc724057ac47_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "auth/login.html.twig"));
+        $__internal_5165031743f97f73dbb9588e59ec5dbfd7b8db1b61d31f6ea6f8f18e85199146 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_5165031743f97f73dbb9588e59ec5dbfd7b8db1b61d31f6ea6f8f18e85199146->enter($__internal_5165031743f97f73dbb9588e59ec5dbfd7b8db1b61d31f6ea6f8f18e85199146_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "auth/login.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -74,7 +74,7 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
                     </div>
                     <div class=\"row\">
                         <div class=\"col-md-6\">
-                            <button type=\"button\" class=\"btn btn-primary btn-block btn-flat\" data-toggle=\"modal\" href=\"#modal_password\"> Mot de passe oublié ?</button>
+                            <a class=\"btn btn-primary btn-block btn-flat\" data-toggle=\"modal\" href=\"#modalpassword\"> Mot de passe oublié ?</a>
                         </div>
                         <div class=\"col-md-6\">
                             <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\">Connexion</button>
@@ -103,8 +103,8 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
 
             <!-- modal_password -->
 
-            <form id=\"recoverform\" action=\"#\" class=\"\">
-                <div class=\"modal\" id=\"modal_password\" tabindex=\"-1\" role=\"dialog\">
+            <div class=\"modal\" id=\"modalpassword\" tabindex=\"-1\" role=\"dialog\">
+                <form id=\"recoverform\" action=\"#\" class=\"\">
                     <div class=\"modal-dialog\">
                         <div class=\"modal-content\">
                             <div class=\"modal-header\">
@@ -135,8 +135,8 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
                         </div>
                     </div>
                     <!-- /.modal_password -->
-                </div><!-- /.login-box -->
-            </form>
+                </form>
+            </div><!-- /.login-box -->
 
             <!-- jQuery 2.1.4 -->
             <script src=\"";
@@ -157,10 +157,10 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
 </html>
 ";
         
-        $__internal_ba79b5d0164cae348a50acbf002d1fce5a2c94e5ab89300018b70b93b885dbbe->leave($__internal_ba79b5d0164cae348a50acbf002d1fce5a2c94e5ab89300018b70b93b885dbbe_prof);
+        $__internal_10c6f4c13d0c8f719ca9e87e9aa734ee6fd05b3cd17959197f140dac006dfe8f->leave($__internal_10c6f4c13d0c8f719ca9e87e9aa734ee6fd05b3cd17959197f140dac006dfe8f_prof);
 
         
-        $__internal_a4b8c78c81c611e3635797f6817ce777269d89b49313b47db528dc724057ac47->leave($__internal_a4b8c78c81c611e3635797f6817ce777269d89b49313b47db528dc724057ac47_prof);
+        $__internal_5165031743f97f73dbb9588e59ec5dbfd7b8db1b61d31f6ea6f8f18e85199146->leave($__internal_5165031743f97f73dbb9588e59ec5dbfd7b8db1b61d31f6ea6f8f18e85199146_prof);
 
     }
 
@@ -229,7 +229,7 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
                     </div>
                     <div class=\"row\">
                         <div class=\"col-md-6\">
-                            <button type=\"button\" class=\"btn btn-primary btn-block btn-flat\" data-toggle=\"modal\" href=\"#modal_password\"> Mot de passe oublié ?</button>
+                            <a class=\"btn btn-primary btn-block btn-flat\" data-toggle=\"modal\" href=\"#modalpassword\"> Mot de passe oublié ?</a>
                         </div>
                         <div class=\"col-md-6\">
                             <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\">Connexion</button>
@@ -250,8 +250,8 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
 
             <!-- modal_password -->
 
-            <form id=\"recoverform\" action=\"#\" class=\"\">
-                <div class=\"modal\" id=\"modal_password\" tabindex=\"-1\" role=\"dialog\">
+            <div class=\"modal\" id=\"modalpassword\" tabindex=\"-1\" role=\"dialog\">
+                <form id=\"recoverform\" action=\"#\" class=\"\">
                     <div class=\"modal-dialog\">
                         <div class=\"modal-content\">
                             <div class=\"modal-header\">
@@ -282,8 +282,8 @@ class __TwigTemplate_3742eeb441ab53dea47220d1e24d3c12b2444154e4626dbfba6534fcc4e
                         </div>
                     </div>
                     <!-- /.modal_password -->
-                </div><!-- /.login-box -->
-            </form>
+                </form>
+            </div><!-- /.login-box -->
 
             <!-- jQuery 2.1.4 -->
             <script src=\"{{ asset('template/plugins/jQuery/jQuery-2.1.4.min.js') }}\"></script>
