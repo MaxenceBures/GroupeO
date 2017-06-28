@@ -14,6 +14,7 @@ use Doctrine\DBAL\DriverManager;
 
 class FormationRepository extends \Doctrine\ORM\EntityRepository
 {
+    
     public function getFormationId($id,$em){
         $sql = "SELECT f.libellelong  
                 FROM EniBundle:Formation f  

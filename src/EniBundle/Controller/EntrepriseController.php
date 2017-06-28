@@ -35,4 +35,5 @@ class EntrepriseController extends Controller
         }
         return new Response(json_encode("error"));
     }
+
 }
