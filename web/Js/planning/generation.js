@@ -21,13 +21,8 @@ function getFramePlanning(id = null) {
                     language: "fr"
                 });
             });
-            $("#modal_planning_generation table").dataTable({
-                dom: '<"clear">',
-                filtering: false,
-                ordering: false,
-                scrollY: "100px",
-                scrollCollapse: true
-            });
+
+            initDatatableAlternant();
 
             $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'})();
 
@@ -87,15 +82,8 @@ function btRechercherClick() {
                     if (response.datas.length == 0) {
                         toastr.warning('Utilisateur introuvable');
                     } else {
-                        $.each(response.datas, function (index, value) {
-                            $('#table_apprenti tbody').append('<tr>' +
-                                    '<td>' + value.nom + ' ' + value.prenom + '</td>' +
-                                    '<td>' + value.raisonsociale + ' (' + value.ville + ')</td>' +
-                                    '<td><button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '"><i class="fa fa-plus"></i></button></td>' +
-                                    '</tr>');
-                        });
+                        setDataAlternant(response.datas);
                     }
-
                 } else {
                     toastr.error("Erreur lors de la recuperation2");
                 }
@@ -103,7 +91,47 @@ function btRechercherClick() {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
-    }else{
-         toastr.warning("Veuillez saisir au moins un champ");
+    } else {
+        toastr.warning("Veuillez saisir au moins un champ");
     }
+}
+
+function setDataAlternant(alternants) {
+    var html = "";
+    $.each(alternants.datas, function (index, value) {
+        html += '<tr>';
+        html += '<td>' + value.nom + ' ' + value.prenom + '</td>';
+        html += '<td>' + value.raisonsociale + ' (' + value.ville + ')</td>';
+        html += '<td><button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '" id="bt_add_' + value.codestagiaire + '" onclick="btSelectStagiaireClick(this)"><i class="fa fa-plus"></i></button>';
+        html += '<button type="button" class="btn btn-sm btn-danger hidden" value="' + value.codestagiaire + '" id="bt_remove_' + value.codestagiaire + '" onclick="btUnSelectStagiaireClick(this)"><i class="fa fa-remove"></i></button></td>';
+        html += '</tr>';
+    });
+    $('#table_apprenti tbody').append(html);
+}
+
+function btSelectStagiaireClick(bt) {
+    var value_stagiaire = $(bt).attr('value');
+    var tr_html = $(bt).parents('tr').html();
+    $('#table_apprenti tbody').html(tr_html);
+    $("bt_add_" + value_stagiaire).addClass('hidden');
+    $("bt_remove_" + value_stagiaire).removeClass('hidden');
+    $("#modal-content-search").addClass('hidden');
+}
+function btUnSelectStagiaireClick(bt) {
+    var value_stagiaire = $(bt).attr('value');
+    initDatatableAlternant();
+    $("bt_add_" + value_stagiaire).removeClass('hidden');
+    $("bt_remove_" + value_stagiaire).addClass('hidden');
+    $("#modal-content-search").removeClass('hidden');
+}
+
+function initDatatableAlternant() {
+    $("#table_apprenti").dataTable({
+        destroy : true,
+        dom: '<"clear">',
+        filtering: false,
+        ordering: false,
+        scrollY: "100px",
+        scrollCollapse: true
+    });
 }
