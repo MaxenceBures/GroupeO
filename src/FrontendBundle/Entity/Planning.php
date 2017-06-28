@@ -73,6 +73,8 @@ class Planning
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="formation_code", type="string", length=8, nullable=false)
      */
     private $formationCode;
 
