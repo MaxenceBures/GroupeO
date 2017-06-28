@@ -2,6 +2,7 @@
 
 namespace FrontendBundle\Controller;
 
+use EniBundle\Entity\Formation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,9 @@ class PlanningController extends Controller
     */
     public function frameAction()
     {
+        
         return $this->render('FrontendBundle:Planning:frame.html.twig', array(
-            "status" =>"ok"
+            "status" =>"ok", "formations" => array()
         ));
     }
 

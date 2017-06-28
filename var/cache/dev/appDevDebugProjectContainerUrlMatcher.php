@@ -113,14 +113,22 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // alternant_recherche
-        if ('/alternant/recherche' === $pathinfo) {
-            return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
-        }
+        elseif (0 === strpos($pathinfo, '/alternant')) {
+            // alternant_recherche
+            if ('/alternant/recherche' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
+            }
 
-        // alternant_chargement
-        if ('/alternant/chargement' === $pathinfo) {
-            return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
+            // alternant_detail
+            if ('/alternant/detail' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::detailAction',  '_route' => 'alternant_detail',);
+            }
+
+            // alternant_chargement
+            if ('/alternant/chargement' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
+            }
+
         }
 
         // entreprise_liste

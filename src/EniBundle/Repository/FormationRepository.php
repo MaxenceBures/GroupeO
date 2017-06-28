@@ -25,4 +25,3 @@ class FormationRepository extends \Doctrine\ORM\EntityRepository
     }
 
 }
-
