@@ -16,4 +16,7 @@ app/config/config.yml
 var/cache/dev/pools/wwlEMsVAJ6/W/X/aClqzlxgclNaCT1owqaF
 web/Js/planning/generation.js
 var/logs/dev.log
+<<<<<<< HEAD
 var/logs/dev.log
+=======
+>>>>>>> 1eded79924648ca787eb9d6690e340b3f7556cc9
