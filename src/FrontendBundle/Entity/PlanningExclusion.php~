@@ -46,5 +46,86 @@ class PlanningExclusion
     private $planning;
 
 
-}
 
+    /**
+     * Get idExclusion
+     *
+     * @return integer
+     */
+    public function getIdExclusion()
+    {
+        return $this->idExclusion;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return PlanningExclusion
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return PlanningExclusion
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set planning
+     *
+     * @param \FrontendBundle\Entity\Planning $planning
+     *
+     * @return PlanningExclusion
+     */
+    public function setPlanning(\FrontendBundle\Entity\Planning $planning = null)
+    {
+        $this->planning = $planning;
+    
+        return $this;
+    }
+
+    /**
+     * Get planning
+     *
+     * @return \FrontendBundle\Entity\Planning
+     */
+    public function getPlanning()
+    {
+        return $this->planning;
+    }
+}

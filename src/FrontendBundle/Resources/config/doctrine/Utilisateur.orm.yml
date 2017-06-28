@@ -1,5 +1,6 @@
 FrontendBundle\Entity\Utilisateur:
     type: entity
+    repositoryClass: FrontendBundle\Repository\UtilisateurRepository
     table: UTILISATEUR
     id:
         id:

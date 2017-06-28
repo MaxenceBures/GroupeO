@@ -11,24 +11,33 @@
                     <div class="row">
                         <form id="form_search">
                             <div class="row">
-                                <div class="col-xs-3">
-                                    <input class="form-control" placeholder="Nom" type="text" id="input_nom">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" id="input_nom" value="{{ utilisateur.nom }}">
                                 </div>
-                                <div class="col-xs-3">
-                                    <input class="form-control" placeholder="Prenom" type="text" id="input_prenom">
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_prenom" value="{{ utilisateur.prenom }}">
                                 </div>
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_naissance" value="{{ utilisateur.datenaissance |date('d-m-Y') }}">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-6">
-                                    <input class="form-control" placeholder="XXXX@eni-ecole.fr" type="text" id="input_mail">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_mail" value="{{ utilisateur.email }}">
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 30px;">
-                                <div class="col-xs-4">
-                                    <select id="select_entreprise" class="form-control select2" style="width: 300px;">Entreprise</select>
+                                <div class="col-xs-8">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_adresse" value="{{ utilisateur.adresse1 }}">
                                 </div>
-                                <div class="col-xs-4">
-                                    <select id="select_formation" class="form-control select2" style="width: 300px;">Formation</select>
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_codepostal" value="{{ utilisateur.codepostal }}">
                                 </div>
-                                <div class="col-xs-2"><button id="rechercher" class="btn btn-block btn-primary">Rechercher</button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" id="input_ville" value="{{ utilisateur.ville }}">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -37,10 +46,8 @@
         </div>
     </div>
 
+{% endblock %}
 
-        {% block javascripts %}
-            <script src="{{ asset('Js/alternant/detail.js') }}"></script>
-        {% endblock %}
-
-
+{% block javascripts %}
+    <script src="{{ asset('Js/alternant/detail.js') }}"></script>
 {% endblock %}

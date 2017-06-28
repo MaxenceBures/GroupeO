@@ -78,5 +78,206 @@ class ModuleIndependent
     private $typeModule;
 
 
-}
 
+    /**
+     * Get idModule
+     *
+     * @return integer
+     */
+    public function getIdModule()
+    {
+        return $this->idModule;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return ModuleIndependent
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+    
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set dureeEnHeures
+     *
+     * @param integer $dureeEnHeures
+     *
+     * @return ModuleIndependent
+     */
+    public function setDureeEnHeures($dureeEnHeures)
+    {
+        $this->dureeEnHeures = $dureeEnHeures;
+    
+        return $this;
+    }
+
+    /**
+     * Get dureeEnHeures
+     *
+     * @return integer
+     */
+    public function getDureeEnHeures()
+    {
+        return $this->dureeEnHeures;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return ModuleIndependent
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * Set dureeEnSemaines
+     *
+     * @param integer $dureeEnSemaines
+     *
+     * @return ModuleIndependent
+     */
+    public function setDureeEnSemaines($dureeEnSemaines)
+    {
+        $this->dureeEnSemaines = $dureeEnSemaines;
+    
+        return $this;
+    }
+
+    /**
+     * Get dureeEnSemaines
+     *
+     * @return integer
+     */
+    public function getDureeEnSemaines()
+    {
+        return $this->dureeEnSemaines;
+    }
+
+    /**
+     * Set prixPublicEnCours
+     *
+     * @param float $prixPublicEnCours
+     *
+     * @return ModuleIndependent
+     */
+    public function setPrixPublicEnCours($prixPublicEnCours)
+    {
+        $this->prixPublicEnCours = $prixPublicEnCours;
+    
+        return $this;
+    }
+
+    /**
+     * Get prixPublicEnCours
+     *
+     * @return float
+     */
+    public function getPrixPublicEnCours()
+    {
+        return $this->prixPublicEnCours;
+    }
+
+    /**
+     * Set libelleCourt
+     *
+     * @param string $libelleCourt
+     *
+     * @return ModuleIndependent
+     */
+    public function setLibelleCourt($libelleCourt)
+    {
+        $this->libelleCourt = $libelleCourt;
+    
+        return $this;
+    }
+
+    /**
+     * Get libelleCourt
+     *
+     * @return string
+     */
+    public function getLibelleCourt()
+    {
+        return $this->libelleCourt;
+    }
+
+    /**
+     * Set archiver
+     *
+     * @param boolean $archiver
+     *
+     * @return ModuleIndependent
+     */
+    public function setArchiver($archiver)
+    {
+        $this->archiver = $archiver;
+    
+        return $this;
+    }
+
+    /**
+     * Get archiver
+     *
+     * @return boolean
+     */
+    public function getArchiver()
+    {
+        return $this->archiver;
+    }
+
+    /**
+     * Set typeModule
+     *
+     * @param integer $typeModule
+     *
+     * @return ModuleIndependent
+     */
+    public function setTypeModule($typeModule)
+    {
+        $this->typeModule = $typeModule;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeModule
+     *
+     * @return integer
+     */
+    public function getTypeModule()
+    {
+        return $this->typeModule;
+    }
+}

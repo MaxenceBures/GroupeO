@@ -1,5 +1,6 @@
 FrontendBundle\Entity\Planning:
     type: entity
+    repositoryClass: FrontendBundle\Repository\PlanningRepository
     table: PLANNING
     id:
         idPlanning:

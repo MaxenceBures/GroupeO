@@ -24,6 +24,14 @@ $(function() {
         var select_entreprise = $("#select_entreprise option:selected" ).val();
         var select_formation = $("#select_formation option:selected" ).val();
 
+        if(select_formation === undefined){
+            select_formation = -1;
+        }
+
+        if(select_entreprise === undefined){
+            select_entreprise = -1;
+        }
+
         var recherche = {'nom' : input_nom, 'prenom' : input_prenom, 'mail' : input_mail, 'entreprise' : select_entreprise, 'formation' : select_formation};
 
         $.ajax({
@@ -44,8 +52,8 @@ $(function() {
                                 '<td>'+value.nom+' '+value.prenom+'</td>' +
                                 '<td>'+value.email+'</td>' +
                                 '<td>'+value.raisonsociale+'('+value.ville+')</td>' +
-                                '<td></td>' +
-                                '<td><button value="'+value.codestagiaire+'">Detail</button></td></tr>');
+                                '<td>'+value.libelle_formation+'('+value.code_formation+')'+'</td>' +
+                                '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>');
                         });
                         initDatatable();
                     }

@@ -25,10 +25,10 @@
                                 <div class="col-xs-4">
                                     <select id="select_entreprise" class="form-control select2" style="width: 300px;">Entreprise</select>
                                 </div>
-                                <div class="col-xs-4">
-                                    <select id="select_formation" class="form-control select2" style="width: 300px;">Formation</select>
+                                <div class="col-xs-6">
+                                    <select id="select_formation" class="form-control select2" style="width: 500px;">Formation</select>
                                 </div>
-                                <div class="col-xs-2"><button id="rechercher" class="btn btn-block btn-primary">Rechercher</button></div>
+                                <div class="col-xs-1"><button id="rechercher" class="btn btn-block btn-primary">Rechercher</button></div>
                             </div>
                         </form>
                     </div>
@@ -63,8 +63,10 @@
     </div>
 
 
-    {% block javascripts %}
-        <script src="{{ asset('Js/alternant/recherche.js') }}"></script>
-    {% endblock %}
 
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('Js/alternant/recherche.js') }}"></script>
 {% endblock %}
