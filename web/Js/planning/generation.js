@@ -76,7 +76,7 @@ function btRechercherClick() {
     if (input_nom != "" || input_prenom != "" || input_mail != "") {
         $.ajax({
             type: "POST",
-            url: 'alternant/chargement',
+            url: '/alternant/chargement',
             data: {
                 recherche: recherche
             },

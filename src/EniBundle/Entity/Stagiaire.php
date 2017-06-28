@@ -6,8 +6,8 @@ namespace EniBundle\Entity;
  * Stagiaire
  *
  */
-class Stagiaire
-{
+class Stagiaire {
+
     /**
      * @var string
      */
@@ -123,7 +123,6 @@ class Stagiaire
      */
     private $codestagiaire;
 
-
     /**
      * Set civilite
      *
@@ -131,8 +130,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setCivilite($civilite)
-    {
+    public function setCivilite($civilite) {
         $this->civilite = $civilite;
 
         return $this;
@@ -143,8 +141,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getCivilite()
-    {
+    public function getCivilite() {
         return $this->civilite;
     }
 
@@ -155,8 +152,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -167,8 +163,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -179,8 +174,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom) {
         $this->prenom = $prenom;
 
         return $this;
@@ -191,8 +185,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
     }
 
@@ -203,8 +196,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setAdresse1($adresse1)
-    {
+    public function setAdresse1($adresse1) {
         $this->adresse1 = $adresse1;
 
         return $this;
@@ -215,8 +207,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getAdresse1()
-    {
+    public function getAdresse1() {
         return $this->adresse1;
     }
 
@@ -227,8 +218,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setAdresse2($adresse2)
-    {
+    public function setAdresse2($adresse2) {
         $this->adresse2 = $adresse2;
 
         return $this;
@@ -239,8 +229,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getAdresse2()
-    {
+    public function getAdresse2() {
         return $this->adresse2;
     }
 
@@ -251,8 +240,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setAdresse3($adresse3)
-    {
+    public function setAdresse3($adresse3) {
         $this->adresse3 = $adresse3;
 
         return $this;
@@ -263,8 +251,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getAdresse3()
-    {
+    public function getAdresse3() {
         return $this->adresse3;
     }
 
@@ -275,8 +262,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setCodepostal($codepostal)
-    {
+    public function setCodepostal($codepostal) {
         $this->codepostal = $codepostal;
 
         return $this;
@@ -287,8 +273,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getCodepostal()
-    {
+    public function getCodepostal() {
         return $this->codepostal;
     }
 
@@ -299,8 +284,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setVille($ville)
-    {
+    public function setVille($ville) {
         $this->ville = $ville;
 
         return $this;
@@ -311,8 +295,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getVille()
-    {
+    public function getVille() {
         return $this->ville;
     }
 
@@ -323,8 +306,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setTelephonefixe($telephonefixe)
-    {
+    public function setTelephonefixe($telephonefixe) {
         $this->telephonefixe = $telephonefixe;
 
         return $this;
@@ -335,8 +317,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getTelephonefixe()
-    {
+    public function getTelephonefixe() {
         return $this->telephonefixe;
     }
 
@@ -347,8 +328,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setTelephoneportable($telephoneportable)
-    {
+    public function setTelephoneportable($telephoneportable) {
         $this->telephoneportable = $telephoneportable;
 
         return $this;
@@ -359,8 +339,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getTelephoneportable()
-    {
+    public function getTelephoneportable() {
         return $this->telephoneportable;
     }
 
@@ -371,8 +350,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -383,8 +361,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -395,8 +372,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setDatenaissance($datenaissance)
-    {
+    public function setDatenaissance($datenaissance) {
         $this->datenaissance = $datenaissance;
 
         return $this;
@@ -407,8 +383,7 @@ class Stagiaire
      *
      * @return \DateTime
      */
-    public function getDatenaissance()
-    {
+    public function getDatenaissance() {
         return $this->datenaissance;
     }
 
@@ -419,8 +394,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setCoderegion($coderegion)
-    {
+    public function setCoderegion($coderegion) {
         $this->coderegion = $coderegion;
 
         return $this;
@@ -431,8 +405,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getCoderegion()
-    {
+    public function getCoderegion() {
         return $this->coderegion;
     }
 
@@ -443,8 +416,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setCodenationalite($codenationalite)
-    {
+    public function setCodenationalite($codenationalite) {
         $this->codenationalite = $codenationalite;
 
         return $this;
@@ -455,8 +427,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getCodenationalite()
-    {
+    public function getCodenationalite() {
         return $this->codenationalite;
     }
 
@@ -467,8 +438,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setCodeoriginemedia($codeoriginemedia)
-    {
+    public function setCodeoriginemedia($codeoriginemedia) {
         $this->codeoriginemedia = $codeoriginemedia;
 
         return $this;
@@ -479,8 +449,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getCodeoriginemedia()
-    {
+    public function getCodeoriginemedia() {
         return $this->codeoriginemedia;
     }
 
@@ -491,8 +460,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setDatedernierenvoidoc($datedernierenvoidoc)
-    {
+    public function setDatedernierenvoidoc($datedernierenvoidoc) {
         $this->datedernierenvoidoc = $datedernierenvoidoc;
 
         return $this;
@@ -503,8 +471,7 @@ class Stagiaire
      *
      * @return \DateTime
      */
-    public function getDatedernierenvoidoc()
-    {
+    public function getDatedernierenvoidoc() {
         return $this->datedernierenvoidoc;
     }
 
@@ -515,8 +482,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setDatecreation($datecreation)
-    {
+    public function setDatecreation($datecreation) {
         $this->datecreation = $datecreation;
 
         return $this;
@@ -527,8 +493,7 @@ class Stagiaire
      *
      * @return \DateTime
      */
-    public function getDatecreation()
-    {
+    public function getDatecreation() {
         return $this->datecreation;
     }
 
@@ -539,8 +504,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setRepertoire($repertoire)
-    {
+    public function setRepertoire($repertoire) {
         $this->repertoire = $repertoire;
 
         return $this;
@@ -551,8 +515,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getRepertoire()
-    {
+    public function getRepertoire() {
         return $this->repertoire;
     }
 
@@ -563,8 +526,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setPermis($permis)
-    {
+    public function setPermis($permis) {
         $this->permis = $permis;
 
         return $this;
@@ -575,8 +537,7 @@ class Stagiaire
      *
      * @return boolean
      */
-    public function getPermis()
-    {
+    public function getPermis() {
         return $this->permis;
     }
 
@@ -587,8 +548,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setPhoto($photo)
-    {
+    public function setPhoto($photo) {
         $this->photo = $photo;
 
         return $this;
@@ -599,8 +559,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getPhoto()
-    {
+    public function getPhoto() {
         return $this->photo;
     }
 
@@ -611,8 +570,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setEnvoidocencours($envoidocencours)
-    {
+    public function setEnvoidocencours($envoidocencours) {
         $this->envoidocencours = $envoidocencours;
 
         return $this;
@@ -623,8 +581,7 @@ class Stagiaire
      *
      * @return boolean
      */
-    public function getEnvoidocencours()
-    {
+    public function getEnvoidocencours() {
         return $this->envoidocencours;
     }
 
@@ -635,8 +592,7 @@ class Stagiaire
      *
      * @return Stagiaire
      */
-    public function setHistorique($historique)
-    {
+    public function setHistorique($historique) {
         $this->historique = $historique;
 
         return $this;
@@ -647,8 +603,7 @@ class Stagiaire
      *
      * @return string
      */
-    public function getHistorique()
-    {
+    public function getHistorique() {
         return $this->historique;
     }
 
@@ -657,8 +612,10 @@ class Stagiaire
      *
      * @return integer
      */
-    public function getCodestagiaire()
-    {
+    public function getCodestagiaire() {
         return $this->codestagiaire;
     }
+
+    
+    
 }
