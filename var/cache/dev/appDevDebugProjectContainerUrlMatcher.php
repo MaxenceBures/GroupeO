@@ -120,9 +120,15 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             }
 
             // alternant_detail
-            if ('/alternant/detail' === $pathinfo) {
-                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::detailAction',  '_route' => 'alternant_detail',);
+            if (0 === strpos($pathinfo, '/alternant/detail') && preg_match('#^/alternant/detail/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if ('GET' !== $canonicalMethod) {
+                    $allow[] = 'GET';
+                    goto not_alternant_detail;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'alternant_detail')), array (  '_controller' => 'EniBundle\\Controller\\AlternantController::detailAction',));
             }
+            not_alternant_detail:
 
             // alternant_chargement
             if ('/alternant/chargement' === $pathinfo) {
