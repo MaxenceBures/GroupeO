@@ -48,12 +48,27 @@ $(function() {
                     }else{
                         closeDatatable();
                         $.each(response.datas, function(index,value){
-                            $('#liste_utilisateur_ligne').append('<tr>' +
+                            if(value.code_formation === 0){
+                                $('#liste_utilisateur_ligne').append('<tr>' +
+                                    '<td>'+value.nom+' '+value.prenom+'</td>' +
+                                    '<td>'+value.email+'</td>' +
+                                    '<td>'+value.raisonsociale+'('+value.ville+')</td>' +
+                                    '<td>'+value.libelle_formation+'</td>' +
+                                    '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>');
+                            }else{
+                                $('#liste_utilisateur_ligne').append('<tr>' +
+                                    '<td>'+value.nom+' '+value.prenom+'</td>' +
+                                    '<td>'+value.email+'</td>' +
+                                    '<td>'+value.raisonsociale+'('+value.ville+')</td>' +
+                                    '<td>'+value.libelle_formation+'('+value.code_formation+')'+'</td>' +
+                                    '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>');
+                            }
+                            /*$('#liste_utilisateur_ligne').append('<tr>' +
                                 '<td>'+value.nom+' '+value.prenom+'</td>' +
                                 '<td>'+value.email+'</td>' +
                                 '<td>'+value.raisonsociale+'('+value.ville+')</td>' +
                                 '<td>'+value.libelle_formation+'('+value.code_formation+')'+'</td>' +
-                                '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>');
+                                '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>');*/
                         });
                         initDatatable();
                     }

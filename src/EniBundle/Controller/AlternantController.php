@@ -49,9 +49,16 @@ class AlternantController extends Controller
                 foreach ($utilisateurs as $k => $v){
                     $temp = $v;
                     $codeFormation = $repository_planning->getPlanningFormation($v["numlien"],$this->getDoctrine()->getManager('groupeo'));
-                    $formation = $repository_formation->getFormationId($codeFormation[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
-                    $temp["code_formation"] = $codeFormation[0]["formationCode"];
-                    $temp["libelle_formation"] = $formation[0]["libellelong"];
+
+                    if(trim($codeFormation[0]["formationCode"]) != ""){
+                        $formation = $repository_formation->getFormationId($codeFormation[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
+                        $temp["code_formation"] = $codeFormation[0]["formationCode"];
+                        $temp["libelle_formation"] = $formation[0]["libellelong"];
+                    }else{
+                        $temp["code_formation"] = 0;
+                        $temp["libelle_formation"] = "Aucune formation";
+                    }
+
 
                     array_push($utilisateurs_temp,$temp);
                 }
@@ -65,9 +72,15 @@ class AlternantController extends Controller
                 foreach ($utilisateurs as $k => $v){
                     $temp = $v;
                     $codeFormation = $repository_planning->getPlanningFormation($v["numlien"],$this->getDoctrine()->getManager('groupeo'));
-                    $formation = $repository_formation->getFormationId($codeFormation[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
-                    $temp["code_formation"] = $codeFormation[0]["formationCode"];
-                    $temp["libelle_formation"] = $formation[0]["libellelong"];
+
+                    if(trim($codeFormation[0]["formationCode"]) != ""){
+                        $formation = $repository_formation->getFormationId($codeFormation[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
+                        $temp["code_formation"] = $codeFormation[0]["formationCode"];
+                        $temp["libelle_formation"] = $formation[0]["libellelong"];
+                    }else{
+                        $temp["code_formation"] = 0;
+                        $temp["libelle_formation"] = "Aucune formation";
+                    }
 
                     array_push($utilisateurs_temp,$temp);
                 }
