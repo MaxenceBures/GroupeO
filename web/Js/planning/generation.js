@@ -7,30 +7,20 @@ function getFramePlanning(id = null) {
         dataType: "html",
         success: function (response) {
             $("body").append(response);
-
             $("#modal_planning_generation").modal({
                 keyboard: false,
                 backdrop: 'static'
             }).on("hide.bs.modal", function () {
                 $(this).remove();
             });
-
             $("#modal_planning_generation .select2").each(function () {
                 $(this).select2({
                     placeholder: $(this).attr('placeholder'),
                     language: "fr"
                 });
             });
-            $("#modal_planning_generation table").dataTable({
-                dom: '<"clear">',
-                filtering: false,
-                ordering: false,
-                scrollY: "100px",
-                scrollCollapse: true
-            });
-
+            initDatatableAlternant();
             $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'})();
-
         }
     });
 }
@@ -38,7 +28,6 @@ function getFramePlanning(id = null) {
 function checkExclusion() {
     var date_debut = $("#date_debut_exclusion").val();
     var date_fin = $("#date_fin_exclusion").val();
-
     if (date_debut != "" && date_fin != "") {
         if (new Date(date_debut) > new Date(date_fin)) {
             alert("La date de début doit être plus petite que la date de fin");
@@ -71,12 +60,11 @@ function btRechercherClick() {
     var input_nom = $('#name').val();
     var input_prenom = $('#surname').val();
     var input_mail = $('#email').val();
-
     var recherche = {'nom': input_nom, 'prenom': input_prenom, 'mail': input_mail, 'entreprise': -1, 'formation': -1};
     if (input_nom != "" || input_prenom != "" || input_mail != "") {
         $.ajax({
             type: "POST",
-            url: '/alternant/chargement',
+            url: '/alternant/recherchePlanning',
             data: {
                 recherche: recherche
             },
@@ -87,15 +75,8 @@ function btRechercherClick() {
                     if (response.datas.length == 0) {
                         toastr.warning('Utilisateur introuvable');
                     } else {
-                        $.each(response.datas, function (index, value) {
-                            $('#table_apprenti tbody').append('<tr>' +
-                                    '<td>' + value.nom + ' ' + value.prenom + '</td>' +
-                                    '<td>' + value.raisonsociale + ' (' + value.ville + ')</td>' +
-                                    '<td><button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '"><i class="fa fa-plus"></i></button></td>' +
-                                    '</tr>');
-                        });
+                        setDataAlternant(response);
                     }
-
                 } else {
                     toastr.error("Erreur lors de la recuperation2");
                 }
@@ -103,7 +84,50 @@ function btRechercherClick() {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
-    }else{
-         toastr.warning("Veuillez saisir au moins un champ");
+    } else {
+        toastr.warning("Veuillez saisir au moins un champ");
     }
 }
+
+function setDataAlternant(alternants) {
+    var html = "";
+    $.each(alternants.datas, function (index, value) {
+        html += '<tr>';
+        html += '<td>' + value.nom + ' ' + value.prenom + '</td>';
+        html += '<td>' + value.raisonsociale + ' (' + value.ville + ')</td>';
+        html += '<td class="text-center"><button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '" id="bt_add_' + value.codestagiaire + '" onclick="btSelectStagiaireClick(this)"><i class="fa fa-plus"></i></button>';
+        html += '<button type="button" class="btn btn-sm btn-danger hidden" value="' + value.codestagiaire + '" id="bt_remove_' + value.codestagiaire + '" onclick="btUnSelectStagiaireClick(this)"><i class="fa fa-remove"></i></button></td>';
+        html += '</tr>';
+    });
+    $('#table_apprenti tbody').append(html);
+}
+
+function btSelectStagiaireClick(bt) {
+    var value_stagiaire = $(bt).attr('value');
+    var tr_html = $(bt).parents('tr').html();
+    $('#table_apprenti tbody').html("");
+    $('#table_apprenti tbody').append(tr_html);
+    $("#bt_add_" + value_stagiaire).addClass('hidden');
+    $("#bt_remove_" + value_stagiaire).removeClass('hidden');
+    $("#modal-content-search").addClass('hidden');
+    
+}
+function btUnSelectStagiaireClick(bt) {
+    var value_stagiaire = $(bt).attr('value');
+    initDatatableAlternant();
+    $("bt_add_" + value_stagiaire).removeClass('hidden');
+    $("bt_remove_" + value_stagiaire).addClass('hidden');
+    $("#modal-content-search").removeClass('hidden');
+}
+
+function initDatatableAlternant() {
+    $("#table_apprenti").dataTable().fnDestroy();
+    $("#table_apprenti").dataTable({
+        dom: '<"clear">',
+        filtering: false,
+        ordering: false,
+        scrollY: "100px",
+        scrollCollapse: true
+    });
+}
+

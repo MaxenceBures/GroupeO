@@ -49,6 +49,18 @@ FrontendBundle\Entity\Planning:
             options:
                 unsigned: false
             column: stagiaire_entreprise_numlien
+        stagiaireCode:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: stagiaire_code
+        entrepriseCode:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: entreprise_code
         formationCode:
             type: string
             nullable: false

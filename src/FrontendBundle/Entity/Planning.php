@@ -280,4 +280,62 @@ class Planning
     {
         return $this->formationCode;
     }
+    /**
+     * @var integer
+     */
+    private $stagiaireCode;
+
+    /**
+     * @var integer
+     */
+    private $entrepriseCode;
+
+
+    /**
+     * Set stagiaireCode
+     *
+     * @param integer $stagiaireCode
+     *
+     * @return Planning
+     */
+    public function setStagiaireCode($stagiaireCode)
+    {
+        $this->stagiaireCode = $stagiaireCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get stagiaireCode
+     *
+     * @return integer
+     */
+    public function getStagiaireCode()
+    {
+        return $this->stagiaireCode;
+    }
+
+    /**
+     * Set entrepriseCode
+     *
+     * @param integer $entrepriseCode
+     *
+     * @return Planning
+     */
+    public function setEntrepriseCode($entrepriseCode)
+    {
+        $this->entrepriseCode = $entrepriseCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get entrepriseCode
+     *
+     * @return integer
+     */
+    public function getEntrepriseCode()
+    {
+        return $this->entrepriseCode;
+    }
 }

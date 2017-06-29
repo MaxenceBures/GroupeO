@@ -7,21 +7,23 @@
                     <h4><label>Génération d'un planning</label></h4>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <label>Recherche d'un alternant : </label>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <input class="form-control" name="name" id="name" placeholder="Nom"/>
+                    <div id="modal-content-search">
+                        <div>
+                            <label>Recherche d'un alternant : </label>
                         </div>
-                        <div class="col-md-3">
-                            <input class="form-control" name="surname" id="surname" placeholder="Prénom"/>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" name="email" id="email" placeholder="Email"/>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-default btn-flat pull-right" type="button" onclick="btRechercherClick();">Rechercher</button>
+                        <div class="row" >
+                            <div class="col-md-3">
+                                <input class="form-control" name="name" id="name" placeholder="Nom"/>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="surname" id="surname" placeholder="Prénom"/>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" name="email" id="email" placeholder="Email"/>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default btn-flat pull-right" type="button" onclick="btRechercherClick();">Rechercher</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -49,14 +51,18 @@
                     <div class="row">
                         <div class="col-md-7">
                             <select class="form-control select2" name="entreprise" id="entreprise" placeholder="Entreprise" >
-
+                                {% for entreprise in entreprises %}
+                                    <option value="formation_{{ entreprise.id }}">
+                                        {{ entreprise.raison ~ " (" ~ entreprise.ville~ ")"  }}
+                                    </option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-md-5">
                             <select class="form-control select2" name="formation" id="formation" placeholder="Formation" >
                                 {% for formation in formations %}
-                                    <option value="formation_{{ formation.codelieu }}">
-                                        {{ formation.libellelong }}
+                                    <option value="formation_{{ formation.id }}">
+                                        {{ formation.court }}
                                     </option>
                                 {% endfor %}
                             </select>
@@ -129,6 +135,7 @@
                                         <th></th>
                                     </tr>
                                 </thead>
+                                <tbody></tbody>
                             </table>
                         </div>
                         <div class="col-md-4">

@@ -23,7 +23,7 @@ class FormationController extends Controller
             $repository = $em->getRepository('EniBundle:Formation');
 
 
-            $formations_temp = $repository->findAll();
+            $formations_temp = $repository->findBy(array("archiver" => "0"));
 
             $temp = array();
             foreach ($formations_temp as $x){
