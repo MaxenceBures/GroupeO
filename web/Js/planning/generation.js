@@ -15,7 +15,10 @@ function getFramePlanning(id = null) {
             });
             $("#modal_planning_generation .select2").each(function () {
                 $(this).select2({
-                    placeholder: $(this).attr('placeholder'),
+                    placeholder: {
+                        id: '-1', // the value of the option
+                        text: $(this).attr('placeholder')
+                    },
                     language: "fr"
                 });
             });
@@ -44,10 +47,11 @@ function btExclusionClick() {
     var date_debut = $("#date_debut_exclusion").val();
     var date_fin = $("#date_fin_exclusion").val();
     var table = $("#table_exclusion");
+    var html_table = "<tr class='ajout' ><td>" + date_debut + "</td><td>" + date_fin + "</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove'></i></button></td></tr>";
     if (table.find('td').hasClass("dataTables_empty")) {
-        table.find('tbody').html("<tr class='ajout' ><td>" + date_debut + "</td><td>" + date_fin + "</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove'></i></button></td></tr>");
+        table.find('tbody').html(html_table);
     } else {
-        table.find('tbody').append("<tr class='ajout'><td>" + date_debut + "</td><td>" + date_fin + "</td><td><button class='btn btn-danger' onclick='removeExclusion(this)'><i class='fa fa-remove'></i></button></td></tr>");
+        table.find('tbody').append(html_table);
     }
 
 }
@@ -95,23 +99,26 @@ function setDataAlternant(alternants) {
         html += '<tr>';
         html += '<td>' + value.nom + ' ' + value.prenom + '</td>';
         html += '<td>' + value.raisonsociale + ' (' + value.ville + ')</td>';
-        html += '<td class="text-center"><button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '" id="bt_add_' + value.codestagiaire + '" onclick="btSelectStagiaireClick(this)"><i class="fa fa-plus"></i></button>';
+        html += '<td class="text-center">';
+        html += '<button type="button" class="btn btn-sm btn-success" value="' + value.codestagiaire + '" id="bt_add_' + value.codestagiaire + '" onclick="btSelectStagiaireClick(this,' + value.codeentreprise + ')"><i class="fa fa-plus"></i></button>';
         html += '<button type="button" class="btn btn-sm btn-danger hidden" value="' + value.codestagiaire + '" id="bt_remove_' + value.codestagiaire + '" onclick="btUnSelectStagiaireClick(this)"><i class="fa fa-remove"></i></button></td>';
         html += '</tr>';
     });
     $('#table_apprenti tbody').append(html);
 }
 
-function btSelectStagiaireClick(bt) {
+function btSelectStagiaireClick(bt, entreprise) {
     var value_stagiaire = $(bt).attr('value');
     var tr_html = $(bt).parents('tr').html();
     $('#table_apprenti tbody').html("");
-    $('#table_apprenti tbody').append(tr_html);
+    $('#table_apprenti tbody').html(tr_html);
     $("#bt_add_" + value_stagiaire).addClass('hidden');
     $("#bt_remove_" + value_stagiaire).removeClass('hidden');
     $("#modal-content-search").addClass('hidden');
-    
+    $("#entreprise").val("formation_" + entreprise);
+    $("#entreprise").trigger("change");
 }
+
 function btUnSelectStagiaireClick(bt) {
     var value_stagiaire = $(bt).attr('value');
     initDatatableAlternant();
@@ -131,3 +138,14 @@ function initDatatableAlternant() {
     });
 }
 
+function btGenerationClick(){
+    $.ajax({
+        type: "POST",
+        url: "/planning/editeur",
+        data: {id_utilisateur: id},
+        dataType: "html",
+        success: function (response) {
+            
+        }
+    });
+}

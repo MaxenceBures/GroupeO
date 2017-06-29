@@ -114,9 +114,28 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         elseif (0 === strpos($pathinfo, '/alternant')) {
-            // alternant_recherche
-            if ('/alternant/recherche' === $pathinfo) {
-                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
+            if (0 === strpos($pathinfo, '/alternant/recherche')) {
+                // alternant_recherche
+                if ('/alternant/recherche' === $pathinfo) {
+                    return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
+                }
+
+                // recherche_alternant_planning
+                if ('/alternant/recherchePlanning' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_recherche_alternant_planning;
+                    }
+
+                    return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::recherchePlanningAction',  '_route' => 'recherche_alternant_planning',);
+                }
+                not_recherche_alternant_planning:
+
+            }
+
+            // alternant_chargement
+            if ('/alternant/chargement' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
             }
 
             // alternant_detail
@@ -129,11 +148,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'alternant_detail')), array (  '_controller' => 'EniBundle\\Controller\\AlternantController::detailAction',));
             }
             not_alternant_detail:
-
-            // alternant_chargement
-            if ('/alternant/chargement' === $pathinfo) {
-                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
-            }
 
         }
 
@@ -257,6 +271,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::frameAction',  '_route' => 'planning_frame',);
         }
         not_planning_frame:
+
+        // planning_editeur
+        if ('/planning/editeur' === $pathinfo) {
+            if ('POST' !== $canonicalMethod) {
+                $allow[] = 'POST';
+                goto not_planning_editeur;
+            }
+
+            return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::editeurAction',  '_route' => 'planning_editeur',);
+        }
+        not_planning_editeur:
 
         // homepage
         if ('' === $trimmedPathinfo) {

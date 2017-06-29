@@ -51,10 +51,8 @@ planning_frame:
     path:     /planning/frame
     defaults: { _controller: FrontendBundle:Planning:frame }
     methods: [post]
+planning_editeur:
+    path:     /planning/editeur
+    defaults: { _controller: FrontendBundle:Planning:editeur }
+    methods: [post]
 #PLANNING
-
-#TEST
-alternant_chargement:
-    path:     /alternant/chargement
-    defaults: { _controller: EniBundle:Alternant:chargement }
-#/TEST
