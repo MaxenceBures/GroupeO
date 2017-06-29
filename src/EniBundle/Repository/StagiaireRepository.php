@@ -59,6 +59,81 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function rechercherNominativeUnion($search,$em){
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
+                FROM EniBundle:Stagiaire s
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se
+                  WITH se.codestagiaire = s.codestagiaire
+                  LEFT JOIN EniBundle:Entreprise e
+                  WITH e.codeentreprise = se.codeentreprise
+                  INNER JOIN (
+                               SELECT s.codestagiaire, max(se.DateLien) as date_max
+                                FROM EniBundle:Stagiaire s
+                                  LEFT JOIN EniBundle:Stagiaireparentreprise se
+                                  WITH se.codestagiaire = s.codestagiaire
+                                  LEFT JOIN EniBundle:Entreprise e
+                                  WITH e.codeentreprise = se.codeentreprise
+                                  GROUP BY s.CodeStagiaire)
+                   temp ON temp.CodeStagiaire = s.CodeStagiaire and se.DateLien = temp.date_max
+                 WHERE ';
+
+        $sql2 = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
+                FROM EniBundle:Stagiaire s
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se
+                  WITH se.codestagiaire = s.codestagiaire
+                  LEFT JOIN EniBundle:Entreprise e
+                  WITH e.codeentreprise = se.codeentreprise
+                  INNER JOIN (
+                               SELECT s.codestagiaire, max(se.DateLien) as date_max
+                                FROM EniBundle:Stagiaire s
+                                  LEFT JOIN EniBundle:Stagiaireparentreprise se
+                                  WITH se.codestagiaire = s.codestagiaire
+                                  LEFT JOIN EniBundle:Entreprise e
+                                  WITH e.codeentreprise = se.codeentreprise
+                                  GROUP BY s.CodeStagiaire)
+                   temp ON temp.CodeStagiaire = s.CodeStagiaire and temp.date_max is null
+                 WHERE ';
+
+
+        $nom = $search["nom"];
+        $prenom = $search["prenom"];
+        $mail = $search["mail"];
+
+        $not_empty = array();
+
+        if($nom != ""){
+            $not_empty["nom"] = $nom;
+        }
+
+        if($prenom != ""){
+            $not_empty["prenom"] = $prenom;
+        }
+
+        if($mail != ""){
+            $not_empty["email"] = $mail;
+        }
+
+
+        $i = 0;
+        foreach ($not_empty as $field => $value){
+            if($i == 0){
+                $sql .= "s.".$field." = '".$value."' ";
+                $sql2 .= "s.".$field." = '".$value."' ";
+            }else{
+                $sql .= "AND s.".$field." = '".$value."' ";
+                $sql2 .= "AND s.".$field." = '".$value."' ";
+            }
+            $i++;
+        }
+
+        $temp_sql = $sql.' UNION '.$sql2;
+
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
     public function rechercherNominativeId($id,$em){
         $sql = "SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, s.datenaissance, s.adresse1, s.codepostal, s.ville   
                 FROM EniBundle:Stagiaire s  

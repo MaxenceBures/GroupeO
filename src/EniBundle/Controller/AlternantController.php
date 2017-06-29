@@ -64,7 +64,7 @@ class AlternantController extends Controller {
 
             //input_nom input_prenom input_mail
             if((($recherche_temp["nom"] != "") OR ($recherche_temp["prenom"] != "") OR ($recherche_temp["mail"] != "")) AND ($recherche_temp["entreprise"] == -1) AND ($recherche_temp["formation"] == -1)){
-                $utilisateurs = $repository_stagiaire->rechercherNominative($recherche_temp,$this->getDoctrine()->getManager('eni'));
+                $utilisateurs = $repository_stagiaire->rechercherNominativeUnion($recherche_temp,$this->getDoctrine()->getManager('eni'));
 
                 $utilisateurs_temp = array();
 

@@ -114,9 +114,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         elseif (0 === strpos($pathinfo, '/alternant')) {
-            // alternant_recherche
-            if ('/alternant/recherche' === $pathinfo) {
-                return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
+            if (0 === strpos($pathinfo, '/alternant/recherche')) {
+                // alternant_recherche
+                if ('/alternant/recherche' === $pathinfo) {
+                    return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::rechercheAction',  '_route' => 'alternant_recherche',);
+                }
+
+                // recherche_alternant_planning
+                if ('/alternant/recherchePlanning' === $pathinfo) {
+                    return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::recherchePlanningAction',  '_route' => 'recherche_alternant_planning',);
+                }
+
             }
 
             // alternant_detail
