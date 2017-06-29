@@ -17,9 +17,9 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
     public function rechercherNominative($search,$em){
         $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien  
                 FROM EniBundle:Stagiaire s  
-                  INNER JOIN EniBundle:Stagiaireparentreprise se 
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se 
                   WITH se.codestagiaire = s.codestagiaire 
-                  INNER JOIN EniBundle:Entreprise e 
+                  LEFT JOIN EniBundle:Entreprise e 
                   WITH e.codeentreprise = se.codeentreprise 
                  WHERE ';
 
@@ -66,7 +66,25 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
                   WITH se.codestagiaire = s.codestagiaire 
                   INNER JOIN EniBundle:Entreprise e 
                   WITH e.codeentreprise = se.codeentreprise 
-                 WHERE s.codestagiaire = ".$id;
+                 WHERE s.codestagiaire = ".$id." 
+                 ORDER BY se.datelien DESC";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function rechercherNominativeDetail($id,$em){
+        $sql = "SELECT s.codestagiaire as stagiaire_code, s.nom as stagiaire_nom, s.prenom as stagiaire_prenom, s.email as stagiaire_email, s.datenaissance as stagiaire_naissance,s.codepostal as stagiaire_codepostal, s.ville as stagiaire_ville, s.adresse1 as stagiaire_adresse, 
+                      se.codeentreprise as entreprise_code, se.numlien as stagiaire_entreprise_lien, se.responsableets as stagiaire_entreprise_responsable, se.commentaire as stagiaire_entreprise_commentaire, se.datedebutenets as entreprise_datedebut, se.datefinenets as entreprise_datefin, se.codefonction as entreprise_fonction,   
+                      e.raisonsociale as entreprise_raisonsociale, e.ville as entreprise_ville, e.adresse1 as entreprise_adresse1, e.adresse2 as entreprise_adresse2, e.adresse3 as entreprise_adresse3, e.codepostal as entreprise_codepostal         
+                FROM EniBundle:Stagiaire s  
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se 
+                  WITH se.codestagiaire = s.codestagiaire 
+                  LEFT JOIN EniBundle:Entreprise e 
+                  WITH e.codeentreprise = se.codeentreprise 
+                 WHERE s.codestagiaire = ".$id." 
+                 ORDER BY se.datelien DESC";
 
         $query = $em->createQuery($sql);
 
@@ -108,6 +126,8 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         foreach ($not_empty as $field => $value){
                 $sql .= "AND s.".$field." = '".$value."' ";
         }
+
+        $sql .= " ORDER BY se.datelien DESC";
 
         $query = $em->createQuery($sql);
 
@@ -217,9 +237,12 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
             $i++;
         }
 
-        $sql .= "AND se.numlien = ".$id." ";
+        if($i == 0){
+            $sql .= " se.numlien = ".$id." ";
+        }else{
+            $sql .= "AND se.numlien = ".$id." ";
+        }
         $sql .= "AND e.codeentreprise = ".$entreprise;
-
 
         $query = $em->createQuery($sql);
 

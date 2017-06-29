@@ -3,7 +3,7 @@
 {% block body %}
     <H1>Detail</H1>
 
-    <div id="div_recherche" style="margin-top: 30px; background-color: grey;">
+    <div id="div_identification" style="margin-top: 30px; background-color: grey;">
         <div class="box box-default">
             <div class="box-header with-border">
                 <h3 class="box-title">Identification</h3>
@@ -12,34 +12,157 @@
                         <form id="form_search">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <input class="form-control" disabled="disabled" type="text" id="input_nom" value="{{ utilisateur.nom }}">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.stagiaire_nom }}">
                                 </div>
                                 <div class="col-xs-4">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_prenom" value="{{ utilisateur.prenom }}">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_prenom }}">
                                 </div>
                                 <div class="col-xs-2">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_naissance" value="{{ utilisateur.datenaissance |date('d-m-Y') }}">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_naissance |date('d/m/Y') }}">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top: 15px;">
                                 <div class="col-xs-6">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_mail" value="{{ utilisateur.email }}">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_email }}">
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 30px;">
-                                <div class="col-xs-8">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_adresse" value="{{ utilisateur.adresse1 }}">
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_adresse }}">
                                 </div>
                                 <div class="col-xs-2">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_codepostal" value="{{ utilisateur.codepostal }}">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_codepostal }}">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top: 15px;">
                                 <div class="col-xs-2">
-                                    <input class="form-control"  disabled="disabled" type="text" id="input_ville" value="{{ utilisateur.ville }}">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_ville }}">
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_entreprise" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Entreprise</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="form_search">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.entreprise_raisonsociale }}">
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse1 }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse2 }}">
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse3 }}">
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_ville }}">
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_codepostal }}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_contrat" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Contrat</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="form_search">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.formation_long }}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="Poste en charge Code - {{ utilisateur.entreprise_fonction }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4">Date de Debut/Fin Entreprise</div>
+
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.entreprise_datedebut == ""%}0{% else %}{{ utilisateur.entreprise_datedebut |date('d/m/Y') }}{% endif %}"></div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.entreprise_datefin == ""%}0{% else %}{{ utilisateur.entreprise_datefin |date('d/m/Y') }}{% endif %}"></div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4">Date de Debut/Fin Formation</div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.planning_debut == ""%}0{% else %}{{ utilisateur.planning_debut |date('d/m/Y') }}{% endif %}"></div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.planning_fin == ""%}0{% else %}{{ utilisateur.planning_fin |date('d/m/Y') }}{% endif %}"></div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="Responsable Entreprise Code - {{ utilisateur.stagiaire_entreprise_responsable }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" disabled="disabled">{{ utilisateur.stagiaire_entreprise_commentaire }}</textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_planning" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Planning</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <table id="liste_planning" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Formation/th>
+                                <th>Entreprise</th>
+                                <th>Date Deb/Fin</th>
+                                <th>Etat</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="liste_planning_ligne">
+                            {% if status == true%}
+                            {% for planning in plannings %}
+                                <tr id="liste_planning_ligne_{{ planning.stagiaire_entreprise_lien }}">
+                                    <td>{{ planning.formation }}</td>
+                                    <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
+                                    <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                            {% endif %}
+                            </tbody>
                     </div>
                 </div>
             </div>
@@ -51,3 +174,4 @@
 {% block javascripts %}
     <script src="{{ asset('Js/alternant/detail.js') }}"></script>
 {% endblock %}
+
