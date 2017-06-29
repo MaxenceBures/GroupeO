@@ -15,7 +15,7 @@ use Doctrine\DBAL\DriverManager;
 class StagiaireRepository extends \Doctrine\ORM\EntityRepository
 {
     public function rechercherNominative($search,$em){
-        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien  
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise  
                 FROM EniBundle:Stagiaire s  
                   LEFT JOIN EniBundle:Stagiaireparentreprise se 
                   WITH se.codestagiaire = s.codestagiaire 

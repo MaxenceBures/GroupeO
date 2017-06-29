@@ -37,4 +37,18 @@ class PlanningController extends Controller {
         ));
     }
 
+    /**
+     * @Route("/planning/editeur", name="planning_editeur")
+     */
+    public function editeurAction(Request $request) {
+        if ($request->get("planning")) {
+            $planning_temp = $request->get("planning");
+        } else {
+            
+        }
+
+        return $this->render('FrontendBundle:Planning:editeur.html.twig', array(
+        ));
+    }
+
 }

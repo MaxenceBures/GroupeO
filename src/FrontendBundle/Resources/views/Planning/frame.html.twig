@@ -1,5 +1,5 @@
 <div class="modal" id="modal_planning_generation" tabindex="-1" role="dialog">
-    <form id="generationform" action="#" class="">
+    <form id="generationform" action="/planning/editeur" class="" method="POST">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -51,6 +51,7 @@
                     <div class="row">
                         <div class="col-md-7">
                             <select class="form-control select2" name="entreprise" id="entreprise" placeholder="Entreprise" >
+                                <option value="-1"></option>
                                 {% for entreprise in entreprises %}
                                     <option value="formation_{{ entreprise.id }}">
                                         {{ entreprise.raison ~ " (" ~ entreprise.ville~ ")"  }}
@@ -60,6 +61,7 @@
                         </div>
                         <div class="col-md-5">
                             <select class="form-control select2" name="formation" id="formation" placeholder="Formation" >
+                                <option value="-1"></option>
                                 {% for formation in formations %}
                                     <option value="formation_{{ formation.id }}">
                                         {{ formation.court }}
@@ -159,7 +161,7 @@
                 </div>
                 <div class="modal-footer">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-default" data-dismiss="modal">Fermer</a></span>
-                    <button class="pull-right btn btn-primary" type="submit">Générer</button>
+                    <button class="pull-right btn btn-primary" type="submit" onclick="">Générer</button>
                 </div>
             </div>
             <!-- /.modal_password -->

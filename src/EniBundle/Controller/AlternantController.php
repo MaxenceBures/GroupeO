@@ -278,8 +278,6 @@ class AlternantController extends Controller {
                         $temp["code_formation"] = 0;
                         $temp["libelle_formation"] = "Aucune formation";
                     }
-
-
                     array_push($utilisateurs_temp, $temp);
                 }
             }

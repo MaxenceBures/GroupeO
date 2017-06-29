@@ -8,6 +8,7 @@ alternant_chargement:
 recherche_alternant_planning:
     path:     /alternant/recherchePlanning
     defaults: { _controller: EniBundle:Alternant:recherchePlanning }
+    methods: [post]
 alternant_detail:
     path:     /alternant/detail/{id}
     defaults: { _controller: EniBundle:Alternant:detail }

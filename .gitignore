@@ -20,3 +20,6 @@ var/logs/dev.log
 var/logs/dev.log
 =======
 >>>>>>> 1eded79924648ca787eb9d6690e340b3f7556cc9
+var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
+*.meta
+var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
