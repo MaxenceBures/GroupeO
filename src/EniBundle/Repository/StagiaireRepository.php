@@ -60,7 +60,7 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function rechercherNominativeUnion($search,$em){
-        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
+        /*$sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
                 FROM EniBundle:Stagiaire s
                   LEFT JOIN EniBundle:Stagiaireparentreprise se
                   WITH se.codestagiaire = s.codestagiaire
@@ -92,8 +92,17 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
                                   WITH e.codeentreprise = se.codeentreprise
                                   GROUP BY s.CodeStagiaire)
                    temp ON temp.CodeStagiaire = s.CodeStagiaire and temp.date_max is null
+                 WHERE ';*/
+
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise    
+                FROM EniBundle:Stagiaire s  
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se 
+                  WITH se.codestagiaire = s.codestagiaire 
+                  LEFT JOIN EniBundle:Entreprise e 
+                  WITH e.codeentreprise = se.codeentreprise 
                  WHERE ';
 
+        //GROUP BY u.id HAVING COUNT(u) < 5
 
         $nom = $search["nom"];
         $prenom = $search["prenom"];
@@ -118,19 +127,23 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         foreach ($not_empty as $field => $value){
             if($i == 0){
                 $sql .= "s.".$field." = '".$value."' ";
-                $sql2 .= "s.".$field." = '".$value."' ";
+                //$sql2 .= "s.".$field." = '".$value."' ";
             }else{
                 $sql .= "AND s.".$field." = '".$value."' ";
-                $sql2 .= "AND s.".$field." = '".$value."' ";
+                //$sql2 .= "AND s.".$field." = '".$value."' ";
             }
             $i++;
         }
 
-        $temp_sql = $sql.' UNION '.$sql2;
+        //$sql .= 'GROUP BY s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise ORDER BY se.DateLien DESC HAVING COUNT(s.codestagiaire) < 2';
+
+        //$temp_sql = $sql.' UNION '.$sql2;
 
 
         $query = $em->createQuery($sql);
+        //$query2 = $em->createQuery($sql2);
 
+        //array_merge($query->getResult(),$query2->getResult())
         return $query->getResult();
     }
 

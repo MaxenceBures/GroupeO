@@ -43,6 +43,12 @@ FrontendBundle\Entity\Planning:
             options:
                 unsigned: false
             column: max_temps_formation
+        etat:
+                    type: integer
+                    nullable: true
+                    options:
+                        unsigned: false
+                    column: etat
         stagiaireEntrepriseNumlien:
             type: integer
             nullable: false

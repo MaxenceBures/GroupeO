@@ -157,8 +157,8 @@
                                             <td>{{ planning.formation }}</td>
                                             <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                             <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ planning.etat }}</td>
+                                            <td><a>Modifier</a> <a>Pdf</a></td>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
