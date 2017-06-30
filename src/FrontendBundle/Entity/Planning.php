@@ -66,6 +66,13 @@ class Planning
     /**
      * @var integer
      *
+     * @ORM\Column(name="etat", type="integer", nullable=true)
+     */
+    private $etat;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="stagiaire_entreprise_numlien", type="integer", nullable=false)
      */
     private $stagiaireEntrepriseNumlien;
@@ -231,6 +238,30 @@ class Planning
     public function getMaxTempsFormation()
     {
         return $this->maxTempsFormation;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param integer $etat
+     *
+     * @return Planning
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return integer
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 
     /**

@@ -37,7 +37,7 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function getPlanningFormationDetail($numlien,$em){
-        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode 
+        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat 
                 FROM FrontendBundle:Planning p
                 WHERE p.stagiaireEntrepriseNumlien = '.$numlien;
 

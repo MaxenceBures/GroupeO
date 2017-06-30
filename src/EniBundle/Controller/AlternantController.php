@@ -64,8 +64,8 @@ class AlternantController extends Controller {
 
             //input_nom input_prenom input_mail
             if((($recherche_temp["nom"] != "") OR ($recherche_temp["prenom"] != "") OR ($recherche_temp["mail"] != "")) AND ($recherche_temp["entreprise"] == -1) AND ($recherche_temp["formation"] == -1)){
-                $utilisateurs = $repository_stagiaire->rechercherNominativeUnion($recherche_temp,$this->getDoctrine()->getManager('eni'));
-
+                $utilisateurs = $repository_stagiaire->rechercherNominative($recherche_temp,$this->getDoctrine()->getManager('eni'));
+                //rechercherNominativeUnion
                 $utilisateurs_temp = array();
 
                 foreach ($utilisateurs as $k => $v){
@@ -146,7 +146,7 @@ class AlternantController extends Controller {
                 foreach ($stagiaires_id as $k => $v){
                     $stagiaire = $repository_stagiaire->rechercherStagiaireNumLienSpec($v["stagiaireEntrepriseNumlien"],$recherche_temp,$this->getDoctrine()->getManager('eni'));
 
-                    if(isset($stagiaires[0])){
+                    if(isset($stagiaire[0])){
                         $temp = $stagiaire[0];
                         $formation = $repository_formation->getFormationId($recherche_temp["formation"],$this->getDoctrine()->getManager('eni'));
 
@@ -211,6 +211,7 @@ class AlternantController extends Controller {
             $temp["planning_fin"] = $planning[0]["dateFin"];
             $temp["formation_long"] = $formation[0]["libellelong"];
             $temp["formation_cout"] = $planning[0]["formationCode"];
+
         }else{
             $temp["planning_debut"] = "";
             $temp["planning_fin"] = "";
@@ -234,6 +235,7 @@ class AlternantController extends Controller {
                 $planning_temp["entreprise_raisonsociale"] = $v["entreprise_raisonsociale"];
                 $planning_temp["entreprise_ville"] = $v["entreprise_ville"];
                 $planning_temp["formation"] = $formation[0]["libellecourt"];
+                $planning_temp["etat"] = $planning[0]["etat"];
 
                 array_push($plannings_temp,$planning_temp);
             }

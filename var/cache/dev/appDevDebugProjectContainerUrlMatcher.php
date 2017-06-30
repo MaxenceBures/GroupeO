@@ -122,11 +122,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
                 // recherche_alternant_planning
                 if ('/alternant/recherchePlanning' === $pathinfo) {
-<<<<<<< HEAD
-                    return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::recherchePlanningAction',  '_route' => 'recherche_alternant_planning',);
-                }
-
-=======
                     if ('POST' !== $canonicalMethod) {
                         $allow[] = 'POST';
                         goto not_recherche_alternant_planning;
@@ -141,7 +136,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             // alternant_chargement
             if ('/alternant/chargement' === $pathinfo) {
                 return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::chargementAction',  '_route' => 'alternant_chargement',);
->>>>>>> origin/master
             }
 
             // alternant_detail

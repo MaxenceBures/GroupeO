@@ -5,14 +5,101 @@
 {% endblock %}
 {% block body %}
     <H1>Accueil</H1>
-    <ul>
-        <li><a href="register">Enregistrement</a></li>
-        <li><a href="utilisateur/liste">Utilisateur - Liste</a></li>
-        <li><a href="alternant/recherche">Alternant - Recherche</a></li>
-        <li><a href="#" onclick="getFramePlanning();">Création de planning</a></li>
-        <li><a href="logout">Deconnexion</a></li>
-        <li><a href="erreur">phpinfo</a></li>
-    </ul>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Generation d'un planning</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Rechercher un alternant</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-md-6"><div class="small-box bg-grey-light">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                                <p>Planning Global</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div></div>
+                    <div class="col-md-6"><div class="small-box bg-black">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                                <p>Gestion des utilisateurs</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Erreurs de planning</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Paramètres</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <ul>
+                <li><a href="register">Enregistrement</a></li>
+                <li><a href="utilisateur/liste">Utilisateur - Liste</a></li>
+                <li><a href="alternant/recherche">Alternant - Recherche</a></li>
+                <li><a href="#" onclick="getFramePlanning();">Création de planning</a></li>
+                <li><a href="logout">Deconnexion</a></li>
+                <li><a href="erreur">phpinfo</a></li>
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}
 
