@@ -1,0 +1,102 @@
+FrontendBundle\Entity\CoursIndependent:
+    type: entity
+    table: COURS_INDEPENDENT
+    indexes:
+        IDX_D25EF8DA8CEFA577:
+            columns:
+                - module_independent_id
+    id:
+        idCours:
+            type: guid
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            id: true
+            column: id_cours
+            generator:
+                strategy: IDENTITY
+    fields:
+        debut:
+            type: datetime
+            nullable: false
+            column: Debut
+        fin:
+            type: datetime
+            nullable: false
+            column: Fin
+        dureereelleenheures:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+            column: DureeReelleEnHeures
+        codepromotion:
+            type: string
+            nullable: true
+            length: 8
+            options:
+                fixed: true
+            column: CodePromotion
+        prixpublicaffecte:
+            type: float
+            nullable: false
+            precision: 53
+            scale: 0
+            column: PrixPublicAffecte
+        datecreation:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+            column: DateCreation
+        libellecours:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: LibelleCours
+        dureeprevueenheures:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+            column: DureePrevueEnHeures
+        dateadefinir:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+            column: DateAdefinir
+        codesalle:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: true
+            column: CodeSalle
+        codeformateur:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CodeFormateur
+        codelieu:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CodeLieu
+    manyToOne:
+        moduleIndependent:
+            targetEntity: ModuleIndependent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                module_independent_id:
+                    referencedColumnName: id_module
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

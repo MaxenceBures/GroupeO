@@ -2,6 +2,10 @@ FrontendBundle\Entity\Planning:
     type: entity
     repositoryClass: FrontendBundle\Repository\PlanningRepository
     table: PLANNING
+    indexes:
+        IDX_12AA23BA73A201E5:
+            columns:
+                - createur_id
     id:
         idPlanning:
             type: integer
@@ -43,12 +47,6 @@ FrontendBundle\Entity\Planning:
             options:
                 unsigned: false
             column: max_temps_formation
-        etat:
-                    type: integer
-                    nullable: true
-                    options:
-                        unsigned: false
-                    column: etat
         stagiaireEntrepriseNumlien:
             type: integer
             nullable: false
@@ -68,10 +66,20 @@ FrontendBundle\Entity\Planning:
                 unsigned: false
             column: entreprise_code
         formationCode:
-            type: string
+            type: integer
             nullable: false
-            length: 8
             options:
-                fixed: true
+                unsigned: false
             column: formation_code
+    manyToOne:
+        createur:
+            targetEntity: Utilisateur
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                createur_id:
+                    referencedColumnName: id
+            orphanRemoval: false
     lifecycleCallbacks: {  }

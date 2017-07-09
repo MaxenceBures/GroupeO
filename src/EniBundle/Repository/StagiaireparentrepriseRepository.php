@@ -22,5 +22,14 @@ class StagiaireparentrepriseRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+    
+    public function getIdStagiaireEntreprise($idStagiaire,$idEntreprise,$em){
+        $sql = 'SELECT se.numlien  
+                FROM EniBundle:Stagiaireparentreprise se 
+                WHERE se.codestagiaire = '.$idStagiaire.' and se.codeentreprise='.$idEntreprise;
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
 }
 

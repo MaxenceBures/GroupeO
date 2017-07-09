@@ -13,17 +13,25 @@ function getFramePlanning(id = null) {
             }).on("hide.bs.modal", function () {
                 $(this).remove();
             });
+            $("#nom,#prenom,#email").keydown(function (e) {
+                if (e.which == 13) {
+                    btRechercherClick();
+                }
+            });
+
             $("#modal_planning_generation .select2").each(function () {
                 $(this).select2({
                     placeholder: {
-                        id: '-1', // the value of the option
+                        id: '', // the value of the option
                         text: $(this).attr('placeholder')
                     },
                     language: "fr"
                 });
             });
+            $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'});
             initDatatableAlternant();
-            $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'})();
+            onGenerationPanningSubmit();
+
         }
     });
 }
@@ -32,8 +40,8 @@ function checkExclusion() {
     var date_debut = $("#date_debut_exclusion").val();
     var date_fin = $("#date_fin_exclusion").val();
     if (date_debut != "" && date_fin != "") {
-        if (new Date(date_debut) > new Date(date_fin)) {
-            alert("La date de début doit être plus petite que la date de fin");
+        if (!checkDate(date_debut, date_fin)) {
+            toastr.warning("La date de début doit être plus petite que la date de fin");
         } else {
             $("#bt_exclusion").prop('disabled', false);
         }
@@ -61,8 +69,8 @@ function removeExclusion(bt) {
 }
 
 function btRechercherClick() {
-    var input_nom = $('#name').val();
-    var input_prenom = $('#surname').val();
+    var input_nom = $('#nom').val();
+    var input_prenom = $('#prenom').val();
     var input_mail = $('#email').val();
     var recherche = {'nom': input_nom, 'prenom': input_prenom, 'mail': input_mail, 'entreprise': -1, 'formation': -1};
     if (input_nom != "" || input_prenom != "" || input_mail != "") {
@@ -109,18 +117,20 @@ function setDataAlternant(alternants) {
 
 function btSelectStagiaireClick(bt, entreprise) {
     var value_stagiaire = $(bt).attr('value');
+    $("#stagiaire").val(value_stagiaire);
     var tr_html = $(bt).parents('tr').html();
     $('#table_apprenti tbody').html("");
-    $('#table_apprenti tbody').html(tr_html);
+    $('#table_apprenti tbody').html("<tr class='selected'>" + tr_html + "</tr>");
     $("#bt_add_" + value_stagiaire).addClass('hidden');
     $("#bt_remove_" + value_stagiaire).removeClass('hidden');
     $("#modal-content-search").addClass('hidden');
-    $("#entreprise").val("formation_" + entreprise);
+    $("#entreprise").val("entreprise_" + entreprise);
     $("#entreprise").trigger("change");
 }
 
 function btUnSelectStagiaireClick(bt) {
     var value_stagiaire = $(bt).attr('value');
+    $("#stagiaire").val(0);
     initDatatableAlternant();
     $("bt_add_" + value_stagiaire).removeClass('hidden');
     $("bt_remove_" + value_stagiaire).addClass('hidden');
@@ -138,14 +148,58 @@ function initDatatableAlternant() {
     });
 }
 
-function btGenerationClick(){
-    $.ajax({
-        type: "POST",
-        url: "/planning/editeur",
-        data: {id_utilisateur: id},
-        dataType: "html",
-        success: function (response) {
+function onGenerationPanningSubmit() {
+    $("#generationform").on('submit', function (e) {
+        e.preventDefault();
+        var continu = false;
+        var stagiaire = "";
+        if ($("#table_apprenti tbody .selected").length > 0) {
+            stagiaire = $("#table_apprenti tbody .selected").find('td').eq(2).find("button").val();
+            continu = true;
+        } else {
+            toastr.warning('Veuillez selectionnez un alternant');
+        }
+        if (checkDate($("#date_debut_contrat").val(), $("#date_fin_contrat").val())) {
+            continu = true;
+        } else {
+            toastr.warning('La date de début de contrat doit être plus petite que la date de fin');
+            continu = false;
+        }
+
+        if (continu) {
+            var exclusions = getExclusions();
+            $.each(exclusions, function (index) {
+                var input_debut = "<input type='hidden' name='exclusion_debut[]' value='"+exclusions[index][0]+"' />";
+                var input_fin = "<input type='hidden' name='exclusion_fin[]' value='"+exclusions[index][1]+"'/>"
+                $("#generationform").append(input_debut+input_fin);
+            });
             
+            $(this).unbind('submit').submit();
+
         }
     });
+}
+
+function getExclusions() {
+    var exclusions = [];
+    $("#table_exclusion .ajout").each(function () {
+        var date_debut = $(this).find("td").eq(0).text();
+        var date_fin = $(this).find("td").eq(0).text();
+        exclusions.push([date_debut, date_fin]);
+    });
+    return exclusions;
+}
+
+function checkDate(dateD, dateF) {
+    var continu = false;
+    var dateDeb = new Date(dateD.substr(6, 4), dateD.substr(3, 2), dateD.substr(0, 2));
+    var dateFin = new Date(dateF.substr(6, 4), dateF.substr(3, 2), dateF.substr(0, 2));
+    if (dateDeb > dateFin) {
+        continu = false;
+    } else if (dateDeb < dateFin) {
+        continu = true;
+    } else {
+        continu = true;
+    }
+    return continu;
 }

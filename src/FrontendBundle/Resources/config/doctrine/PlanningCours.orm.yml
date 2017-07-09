@@ -2,6 +2,9 @@ FrontendBundle\Entity\PlanningCours:
     type: entity
     table: PLANNING_COURS
     indexes:
+        IDX_80E24908901E2E06:
+            columns:
+                - cours_independent
         IDX_80E249083D865311:
             columns:
                 - planning_id
@@ -17,10 +20,11 @@ FrontendBundle\Entity\PlanningCours:
                 strategy: IDENTITY
     fields:
         coursId:
-            type: integer
-            nullable: false
+            type: guid
+            nullable: true
+            length: null
             options:
-                unsigned: false
+                fixed: false
             column: cours_id
         ordre:
             type: integer
@@ -28,6 +32,16 @@ FrontendBundle\Entity\PlanningCours:
             options:
                 unsigned: false
     manyToOne:
+        coursIndependent:
+            targetEntity: CoursIndependent
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cours_independent:
+                    referencedColumnName: id_cours
+            orphanRemoval: false
         planning:
             targetEntity: Planning
             cascade: {  }

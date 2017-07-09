@@ -41,13 +41,32 @@ class PlanningController extends Controller {
      * @Route("/planning/editeur", name="planning_editeur")
      */
     public function editeurAction(Request $request) {
-        if ($request->get("planning")) {
-            $planning_temp = $request->get("planning");
+        $modules = null;
+        $cours = null;
+        $lieux = null;
+        $stagiaire_temp = $request->get("stagiaire");
+        $entreprise_temp = $request->get("entreprise");
+        $formation_temp = $request->get("formation");
+        $planning_temp = $request->get("planning");
+
+        $em_eni = $this->getDoctrine()->getManager('eni');
+        $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
+        $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
+        $repository_formation = $em_eni->getRepository("EniBundle:Formation");
+        $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $stagiaire_temp));
+        $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $entreprise_temp));
+        $formation = $repository_formation->findBy(array("codeformation" => $formation_temp));
+
+
+        if ($planning_temp == "0") {
+            $planning['date_creation'] = date("d/m/Y");
+            $planning['nom'] = $stagiaire[0]->getNom() . "_" . $stagiaire[0]->getPrenom()."_". str_replace(" ", "_",$entreprise[0]->getRaisonSociale())."_".trim($formation[0]->getLibelleCourt())."_V1";
         } else {
             
         }
 
         return $this->render('FrontendBundle:Planning:editeur.html.twig', array(
+                    "planning" => $planning, "modules" => $modules, "lieu" => $lieux
         ));
     }
 

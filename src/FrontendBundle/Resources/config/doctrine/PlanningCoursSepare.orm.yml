@@ -1,0 +1,43 @@
+FrontendBundle\Entity\PlanningCoursSepare:
+    type: entity
+    table: PLANNING_COURS_SEPARE
+    indexes:
+        IDX_C263BE9B49CA2E1D:
+            columns:
+                - planning_cours_id
+    id:
+        idPlanningCoursSepare:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_planning_cours_separe
+            generator:
+                strategy: IDENTITY
+    fields:
+        dateDebut:
+            type: datetime
+            nullable: false
+            column: date_debut
+        dateFin:
+            type: datetime
+            nullable: false
+            column: date_fin
+        ordre:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        planningCours:
+            targetEntity: PlanningCours
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                planning_cours_id:
+                    referencedColumnName: id_planning_cours
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
