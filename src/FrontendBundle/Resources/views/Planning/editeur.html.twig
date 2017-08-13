@@ -1,40 +1,247 @@
 {% extends 'layout.html.twig' %}
-{% block title %}ENI Ecole - Planning{% endblock %}
-{% block stylesheets %}{% endblock %}
+{% block title %}ENI Ecole - Edition planning{% endblock %}
+{% block stylesheets %}
+    <style>
+        .control-sidebar{
+            width: 500px;
+            right: -500px;
+            height: 1280px;
+        }
+        .select2-selection__choice{
+            background-color: #357ca5 !important
+        }
+        .ferie{
+            background-color: #eee;
+        }
+    </style>
+{% endblock %}
 {% block body %}
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2"><label class="">Nom du planning :</label></div>
-        <div class="col-md-6"><input class="form-control" value="{{ planning.nom }}"/></div>
-        <div class="col-md-3">
-            <button class="btn btn-default">Modifier critères</button>
-            <button class="btn btn-danger">Annuler</button>
-            <button class="btn btn-primary">Enregistrer</button>
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2"><label class="">Nom du planning :</label></div>
+                                <div class="col-md-7"><input class="form-control" value="{{ planning.nom }}" id="nom_planning"/></div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-default" type="button" onclick="onBtFramePlanningClick()">Modifier critères</button>
+                                    <button class="btn btn-danger" onclick="btAnnulerClick()">Annuler</button>
+                                    <button class="btn btn-primary" onclick="btSaveClick()">Enregistrer</button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <form action="/planning/editeur" method="POST" id="form-planning">
+                                    <input type="hidden" value="{{ planning.id }}" id="id_planning" name="planning"/>
+                                    <input type="hidden" value="{{ planning.stagiaire.codestagiaire }}" id="stagiaire"/>
+                                    <input type="hidden" value="{{ planning.stagiaire_entreprise }}" id="stagiaire_entreprise" />
+                                    <input type="hidden" value="{{ planning.entreprise.codeentreprise }}" id="entreprise" />
+                                    <input type="hidden" value="{{ formation.codeformation }}" id="formation" />
+                                    <input type="hidden" value="{{ planning.max_heure }}" id="max_heure" />
+                                    <input type="hidden" value="{{ planning.max_semaine }}" id="max_semaine" />
+                                    <input type="hidden" value="{{ planning.createur }}" id="createur" />
+                                </form>
+                                <div class="col-md-2"><label class="">Date de création : {{ planning.date_creation }}</label></div>
+                                <div class="col-md-4 text-center"><label >Formation : {{ formation.libellelong }}</label></div>
+                                <div class="col-md-3">
+                                    <select class="select2" placeholder="Center de formation" multiple id="lieu" style="width: 100%">
+                                        {% for lieu in lieux %}
+                                            <option value="{{ lieu.codelieu }}">
+                                                {{ lieu.libelle  }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-default " data-toggle="control-sidebar"><i class="fa fa-check-square"></i> Modules</button>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <div class="overlay hidden" id="overlay-table">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2"><label class="">Date de création : {{ planning.date_creation }}</label></div>
-        <div class="col-md-4"><label class="pull-right">Formation : Concepteur Développeur Informatique</label></div>
-        <div class="col-md-2">
-            <select class="form-control" placeholder="Center de formation">
-                
-            </select>
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-header" id="box-planning">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="{{asset ('image/ENIEcole-250x250.jpg') }}" alt="logo_eni" style="width:75px;height: 75px"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center"><label> {{ formation.libellelong }}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-left"><label>Date de début : <span id="date_debut_contrat">{{ planning.date_debut_contrat }}</span></label></div>
+                        <div class="col-md-6 text-right"><label>Date de fin : <span id="date_fin_contrat">{{ planning.date_fin_contrat }}</span></label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            Formation en centre : {{ planning.max_heure }} heures
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-left"><label>Entreprise : {{ planning.entreprise.raisonsociale ~ " - " ~ planning.entreprise.ville}}</label></div>
+                        <div class="col-md-6 text-right"><label>Salarié : {{ planning.stagiaire.nom ~ " " ~ planning.stagiaire.prenom}}</label></div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-responsive table-bordered table-striped" id="table-planning" width="100%">
+                        <thead class="bg-light-blue-active">
+                            <tr>
+                                <th class="text-center" colspan="2" width="20%">Date</th>
+                                <th class="text-center" colspan="2" width="80%"></th>
+                            </tr>
+                            <tr>
+                                <th class="text-left" width="15%">Début</th>
+                                <th class="text-right" width="15%">Fin</th>
+                                <th class="text-center" width="15%">Lieu</th>
+                                <th class="text-center">Programmes</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <tr class="start">
+                                <td class="text-center" id="">Début de contrat</td>
+                                <td class="date-fin text-center"></td>
+                                <td class="text-center " colspan="2"><label>Entreprise</label></td>
+                                <td class="hidden"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-right" colspan="4">Total : <span id="table-total">0</span> heures</th> 
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary pull-right " disabled id="generation-planning" onclick="onBtGenerationClick()"><i class="fa fa-file-pdf-o"></i> Générer le fichier PDF</a></button>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-default">Modifier critères</button>
-            <button class="btn btn-danger">Annuler</button>
-            <button class="btn btn-primary">Enregistrer</button>
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div id="calendar" class="fc fc-unthemed fc-ltr">
+                    </div>
+                </div>
+                <div class="overlay">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <div class="box-footer text-center">
+                    <div class="btn-group">
+                        <button class="btn btn-default">A</button>
+                        <button class="btn btn-default">B</button>
+                        <button class="btn btn-default">C</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
 
 
+{% block sidebar %}
+    <aside class="control-sidebar control-sidebar-light">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#modules" data-toggle="tab"><i class="fa fa-database"></i> Modules</a></li>
+            <li><a href="#module-independant" data-toggle="tab"><i class="fa fa-server"></i> Modules indé.</a></li>
+            <li><a href="#close" data-toggle="control-sidebar"><i class="fa fa-remove"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane active" id="modules">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="" >Modules</h4>
+                    </div>
+                    <div class="col-md-6">   
+                        <button type="button" class="btn btn-primary pull-right" id="add-module" onclick="btAddModuleClick();" ><i class="fa fa-plus-circle"></i> Ajouter</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-responsive table-bordered table-striped" id="table-modules" width="100%">
+                            <thead class="bg-light-blue-active">
+                                <tr>
+                                    <th width="2%"></th>
+                                    <th>Libelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="group" id="formation_{{ formation.codeformation|replace(' ','_') }}">
+                                    <td colspan="2"><label>{{ formation.libellelong }}</label></td>
+                                    <td class="hidden"></td>
+                                </tr>
+                                {% for module in modules %}
+                                    <tr data-formation='formation_{{ formation.codeformation|replace(' ','_')|length(6) }}'>
+                                        <td width="2%"><input type="checkbox" value="{{ module.idmodule }}" checked id="module_{{ module.idmodule }}" onchange="onModulesChecked()"/></td>
+                                        <td><label style="font-weight :400!important" for="module_{{ module.idmodule }}">{{ module.libelle }}</label></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="module-independant" class="tab-pane">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="" >Modules indépendants</h4>
+                    </div>
+                    <div class="col-md-6">   
+                        <button type="button" class="btn btn-primary pull-right" id="add-module" onclick="btAddModuleIndependentClick();" ><i class="fa fa-plus-circle"></i> Créer</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-responsive table-bordered table-striped" id="table-modules-independent" width="100%">
+                            <thead class="bg-light-blue-active">
+                                <tr>
+                                    <th width="2%"></th>
+                                    <th>Libelle</th>
+                                    <th width="2%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for module in modulesindependents %}
+                                    <tr>
+                                        <td width="2%"><input type="checkbox" value="{{ module.idmodule }}" checked id="module_{{ module.idmodule }}" onchange="onModulesChecked()"/></td>
+                                        <td><label style="font-weight :400!important" for="module_{{ module.idmodule }}">{{ module.libelle }}</label></td>
+                                        <td><button class="btn btn-sm btn-primary btn-flat" onclick=""><i class="fa fa-edit"></i></button></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="close" class="tab-pane"></div>
+            <!-- /.tab-pane -->
+        </div>    
+    </aside>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('Js/planning/generation.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/plugins/input-mask/jquery.inputmask.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/plugins/input-mask/jquery.inputmask.date.extensions.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/plugins/input-mask/jquery.inputmask.extensions.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/datepicker/locales/bootstrap-datepicker.fr.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/fullcalendar/moment.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/fullcalendar/ferie.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('template/plugins/fullcalendar/fr.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Js/planning/editeur.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('Js/planning/generation.js') }}" type="text/javascript"></script>
 {% endblock %}

@@ -28,3 +28,24 @@ formation_liste:
     defaults: { _controller: EniBundle:Formation:liste }
     methods: [post]
 #FORMATION
+
+#COURS
+recherche :
+    path:     /cours/recherche
+    defaults: { _controller: EniBundle:Cours:recherche }
+liste_cours_planning :
+    path:     /cours/liste_cours_planning
+    defaults: { _controller: EniBundle:Cours:listePlanning }
+#COURS
+
+#MODULE
+frame_search :
+    path :     /module/frameSearch
+    defaults : {_controller : EniBundle:Module:frameSearch}
+    methods: [post]
+liste_search :
+    path :     /module/listeSearch
+    defaults : {_controller : EniBundle:Module:listeSearch}
+    methods: [post]
+#MODULE
+

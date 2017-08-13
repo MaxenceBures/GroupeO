@@ -1,5 +1,6 @@
 FrontendBundle\Entity\PlanningCours:
     type: entity
+    repositoryClass: FrontendBundle\Repository\PlanningCoursRepository
     table: PLANNING_COURS
     indexes:
         IDX_80E24908901E2E06:

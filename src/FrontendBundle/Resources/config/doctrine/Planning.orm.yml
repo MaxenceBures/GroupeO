@@ -66,11 +66,18 @@ FrontendBundle\Entity\Planning:
                 unsigned: false
             column: entreprise_code
         formationCode:
-            type: integer
+            type: string
             nullable: false
+            length: 8
+            options:
+                fixed: false
+            column: formation_code
+        etat:
+            type: integer
+            nullable: true
             options:
                 unsigned: false
-            column: formation_code
+            column: etat
     manyToOne:
         createur:
             targetEntity: Utilisateur

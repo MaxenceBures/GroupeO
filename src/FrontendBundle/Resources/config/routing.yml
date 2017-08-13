@@ -55,4 +55,17 @@ planning_editeur:
     path:     /planning/editeur
     defaults: { _controller: FrontendBundle:Planning:editeur }
     methods: [post]
+planning_ajouter:
+    path:     /planning/ajouter
+    defaults: { _controller: FrontendBundle:Planning:ajouter }
+    methods: [post]
+planning_pdf:
+    path:     /planning/pdf/{id}
+    defaults: { _controller: FrontendBundle:Planning:pdf }
+    methods: [GET]
 #PLANNING
+
+#MODULE INDEPENDENT
+edit_frame:
+    path:     /moduleInde/editFrame
+    defaults: { _controller: FrontendBundle:ModuleIndependent:editFrame }

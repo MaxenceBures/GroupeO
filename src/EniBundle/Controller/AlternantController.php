@@ -1,5 +1,4 @@
 <?php
-
 namespace EniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AlternantController extends Controller {
-
     /**
      * @Route("/alternant/recherche", name="alternant_recherche")
      */

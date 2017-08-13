@@ -1,9 +1,10 @@
 
+
 function getFramePlanning(id = null) {
     $.ajax({
         type: "POST",
-        url: "planning/frame",
-        data: {id_utilisateur: id},
+        url: "/planning/frame",
+        data: {id_planning: id},
         dataType: "html",
         success: function (response) {
             $("body").append(response);
@@ -28,12 +29,26 @@ function getFramePlanning(id = null) {
                     language: "fr"
                 });
             });
-            $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'});
+            initDatepicker();
             initDatatableAlternant();
             onGenerationPanningSubmit();
-
         }
     });
+}
+
+function initDatepicker() {
+    $("#modal_planning_generation .datemask").daterangepicker({
+        "singleDatePicker": true,
+        "showDropdowns": true,
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "daysOfWeek": ["Dim","Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            "monthNames": ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            "firstDay": 0
+        }
+    });
+//    $("#modal_planning_generation .datemask").inputmask('dd/mm/yyyy', {'placeholder': 'jj/mm/aaaa'});
+
 }
 
 function checkExclusion() {
@@ -124,7 +139,7 @@ function btSelectStagiaireClick(bt, entreprise) {
     $("#bt_add_" + value_stagiaire).addClass('hidden');
     $("#bt_remove_" + value_stagiaire).removeClass('hidden');
     $("#modal-content-search").addClass('hidden');
-    $("#entreprise").val("entreprise_" + entreprise);
+    $("#entreprise").val(entreprise);
     $("#entreprise").trigger("change");
 }
 
@@ -169,11 +184,11 @@ function onGenerationPanningSubmit() {
         if (continu) {
             var exclusions = getExclusions();
             $.each(exclusions, function (index) {
-                var input_debut = "<input type='hidden' name='exclusion_debut[]' value='"+exclusions[index][0]+"' />";
-                var input_fin = "<input type='hidden' name='exclusion_fin[]' value='"+exclusions[index][1]+"'/>"
-                $("#generationform").append(input_debut+input_fin);
+                var input_debut = "<input type='hidden' name='exclusion_debut[]' value='" + exclusions[index][0] + "' />";
+                var input_fin = "<input type='hidden' name='exclusion_fin[]' value='" + exclusions[index][1] + "'/>"
+                $("#generationform").append(input_debut + input_fin);
             });
-            
+
             $(this).unbind('submit').submit();
 
         }
