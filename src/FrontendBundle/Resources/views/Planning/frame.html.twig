@@ -1,5 +1,5 @@
-<div class="modal" id="modal_planning_generation" tabindex="-1" role="dialog">
-    <form id="generationform" action="/planning/editeur" class="" method="POST">
+<div class="modal" id="modal_planning_generation" role="dialog">
+    <form id="generationform" action="/planning/editeur" class="" method="POST" name="generationplanning">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -12,11 +12,12 @@
                             <label>Recherche d'un alternant : </label>
                         </div>
                         <div class="row" >
+                            <input type="hidden" name="stagiaire" value="0" id="stagiaire"/>
                             <div class="col-md-3">
-                                <input class="form-control" name="name" id="name" placeholder="Nom"/>
+                                <input class="form-control" name="name" id="nom" placeholder="Nom"/>
                             </div>
                             <div class="col-md-3">
-                                <input class="form-control" name="surname" id="surname" placeholder="Prénom"/>
+                                <input class="form-control" name="surname" id="prenom" placeholder="Prénom"/>
                             </div>
                             <div class="col-md-3">
                                 <input class="form-control" name="email" id="email" placeholder="Email"/>
@@ -50,20 +51,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-7">
-                            <select class="form-control select2" name="entreprise" id="entreprise" placeholder="Entreprise" >
-                                <option value="-1"></option>
+                            <select class="form-control select2" name="entreprise" required id="entreprise" placeholder="Entreprise" >
+                                <option value=""></option>
                                 {% for entreprise in entreprises %}
-                                    <option value="formation_{{ entreprise.id }}">
+                                    <option value="{{ entreprise.id }}">
                                         {{ entreprise.raison ~ " (" ~ entreprise.ville~ ")"  }}
                                     </option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <select class="form-control select2" name="formation" id="formation" placeholder="Formation" >
-                                <option value="-1"></option>
+                            <select class="form-control select2" name="formation" required id="formation" placeholder="Formation" >
+                                <option value=""></option>
                                 {% for formation in formations %}
-                                    <option value="formation_{{ formation.id }}">
+                                    <option value="{{ formation.id }}">
                                         {{ formation.court }}
                                     </option>
                                 {% endfor %}
@@ -78,7 +79,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input class="form-control datemask" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="Date début" type="text"  name="dateD" id="date_debut_contrat">
+                                    <input class="form-control datemask" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="Date début" type="text"  name="date_debut_contrat" id="date_debut_contrat">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -89,7 +90,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input class="form-control datemask" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" name="dateF" id="date_fin_contrat" placeholder="Date fin">
+                                    <input class="form-control datemask" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" name="date_fin_contrat" id="date_fin_contrat" placeholder="Date fin">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -108,17 +109,17 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <select class="form-control select2" name="entreprise" id="planning_identique" placeholder="Planning identique à" >
+                            <select class="form-control select2" name="planning_identique" id="planning_identique" placeholder="Planning identique à" >
 
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control select2" name="formation" id="planning_different" placeholder="Planning différent à" >
+                            <select class="form-control select2" name="planning_different" id="planning_different" placeholder="Planning différent à" >
 
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <input type="number" min="1" class="form-control" name="maxHeure" id="temps_max" placeholder="Temps max"/>
+                        <div class="col-md-4">
+                            <input type="number" min="1" class="form-control" name="planning_different" name="max_semaine" id="temps_max" placeholder="Max semaine "/>
                         </div>
                     </div>
                     <br>
@@ -155,13 +156,17 @@
                             </div>
                             <br>
                             <button class="btn btn-default pull-right" type="button" id="bt_exclusion" disabled onclick="btExclusionClick();">Ajouter</button>
+                            <input type="hidden" value="0" name="planning" id="planning" />
                         </div>
+                    </div>
+                    <div class="row hidden" id="error-content">
+                        
                     </div>
                     <br>
                 </div>
                 <div class="modal-footer">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-default" data-dismiss="modal">Fermer</a></span>
-                    <button class="pull-right btn btn-primary" type="submit" onclick="">Générer</button>
+                    <button class="pull-right btn btn-primary" type="submit" onclick="" name="generationplanning">Générer</button>
                 </div>
             </div>
             <!-- /.modal_password -->

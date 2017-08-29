@@ -1,5 +1,4 @@
 <?php
-
 namespace EniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AlternantController extends Controller {
-
     /**
      * @Route("/recherche", name="user_alternant_recherche")
      */
@@ -260,31 +258,30 @@ class AlternantController extends Controller {
      * @Route("/alternant/detail", name="alternant_detail")
      */
     public function detailAction(Request $request, $id) {
-        if(!$this->getUser()){
-            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+        if (!$this->getUser()) {
+            return $this->redirect($this->generateUrl($this->container->getParameter('url_login')));
         }
 
-        $em =  $this->getDoctrine()->getEntityManager('eni');
-        $em2 =  $this->getDoctrine()->getEntityManager('groupeo');
+        $em = $this->getDoctrine()->getEntityManager('eni');
+        $em2 = $this->getDoctrine()->getEntityManager('groupeo');
 
         $repository_stagiaire = $em->getRepository('EniBundle:Stagiaire');
         $repository_formation = $em->getRepository('EniBundle:Formation');
         $repository_planning = $em2->getRepository('FrontendBundle:Planning');
 
-        $utilisateur = $repository_stagiaire->rechercherNominativeDetail($id,$this->getDoctrine()->getManager('eni'));
+        $utilisateur = $repository_stagiaire->rechercherNominativeDetail($id, $this->getDoctrine()->getManager('eni'));
 
         $temp = $utilisateur[0];
 
-        if(isset($temp["stagiaire_entreprise_lien"])){
-            $planning = $repository_planning->getPlanningFormationDetail($temp["stagiaire_entreprise_lien"],$this->getDoctrine()->getManager('groupeo'));
-            $formation = $repository_formation->getFormationId($planning[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
+        if (isset($temp["stagiaire_entreprise_lien"])) {
+            $planning = $repository_planning->getPlanningFormationDetail($temp["stagiaire_entreprise_lien"], $this->getDoctrine()->getManager('groupeo'));
+            $formation = $repository_formation->getFormationId($planning[0]["formationCode"], $this->getDoctrine()->getManager('eni'));
 
             $temp["planning_debut"] = $planning[0]["dateDebut"];
             $temp["planning_fin"] = $planning[0]["dateFin"];
             $temp["formation_long"] = $formation[0]["libellelong"];
             $temp["formation_cout"] = $planning[0]["formationCode"];
-
-        }else{
+        } else {
             $temp["planning_debut"] = "";
             $temp["planning_fin"] = "";
             $temp["formation_long"] = "";
@@ -294,14 +291,16 @@ class AlternantController extends Controller {
         $plannings_temp = array();
         $status = true;
 
+
         $status_test = array(1 => 'Validée', 2 => 'Refusée', 3 => 'En cours de validation', 4 => 'Terminée', 5 => 'En cours de formation');
 
         if(isset($temp["stagiaire_entreprise_lien"])){
             foreach ($utilisateur as $k => $v){
+
                 $planning_temp = array();
 
-                $planning = $repository_planning->getPlanningFormationDetail($v["stagiaire_entreprise_lien"],$this->getDoctrine()->getManager('groupeo'));
-                $formation = $repository_formation->getFormationId($planning[0]["formationCode"],$this->getDoctrine()->getManager('eni'));
+                $planning = $repository_planning->getPlanningFormationDetail($v["stagiaire_entreprise_lien"], $this->getDoctrine()->getManager('groupeo'));
+                $formation = $repository_formation->getFormationId($planning[0]["formationCode"], $this->getDoctrine()->getManager('eni'));
 
                 //$status = $this->get('planning_status')->getStatutLibelle($planning[0]["etat"]);
 
@@ -313,9 +312,9 @@ class AlternantController extends Controller {
                 $planning_temp["formation"] = $formation[0]["libellecourt"];
                 $planning_temp["etat"] = $status_test[$planning[0]["etat"]];
 
-                array_push($plannings_temp,$planning_temp);
+                array_push($plannings_temp, $planning_temp);
             }
-        }else{
+        } else {
             $status = false;
         }
 
@@ -339,7 +338,7 @@ class AlternantController extends Controller {
 
             $recherche_temp = $request->get("recherche");
 
-            if (($recherche_temp["nom"] != "") OR ( $recherche_temp["prenom"] != "") OR ( $recherche_temp["mail"] != "") AND $recherche_temp["entreprise"] == -1 AND $recherche_temp["formation"] == -1) {
+            if ((($recherche_temp["nom"] != "") OR ( $recherche_temp["prenom"] != "") OR ( $recherche_temp["mail"] != "") AND $recherche_temp["entreprise"] == -1) AND $recherche_temp["formation"] == -1) {
                 $utilisateurs = $repository_stagiaire->rechercherNominative($recherche_temp, $this->getDoctrine()->getManager('eni'));
 
                 $utilisateurs_temp = array();

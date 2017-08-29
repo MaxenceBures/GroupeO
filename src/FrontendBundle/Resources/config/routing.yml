@@ -58,6 +58,7 @@ planning_editeur:
     path:     /planning/editeur
     defaults: { _controller: FrontendBundle:Planning:editeur }
     methods: [post]
+<<<<<<< HEAD
 planning_status_update:
     path:     /planning/status_update
     defaults: { _controller: FrontendBundle:Planning:status_update }
@@ -102,3 +103,19 @@ parametrage_cours_supprimer:
     path:     /parametrage/cours/supprimer
     defaults: { _controller: FrontendBundle:Parametrage:supprimer_cours }
 #PARAMETRAGE
+=======
+planning_ajouter:
+    path:     /planning/ajouter
+    defaults: { _controller: FrontendBundle:Planning:ajouter }
+    methods: [post]
+planning_pdf:
+    path:     /planning/pdf/{id}
+    defaults: { _controller: FrontendBundle:Planning:pdf }
+    methods: [GET]
+#PLANNING
+
+#MODULE Independant
+edit_frame:
+    path:     /moduleInde/editFrame
+    defaults: { _controller: FrontendBundle:ModuleIndependant:editFrame }
+>>>>>>> origin/master

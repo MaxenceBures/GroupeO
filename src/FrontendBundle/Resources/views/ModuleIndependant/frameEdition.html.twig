@@ -1,0 +1,74 @@
+
+<div class="modal" id="modal_module_inde_edit" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form class="form-vertical" id="form-edit-module-inde">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4><label>Ajout de module indépendant :</label></h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs bg-gray-light" >
+                            <li class="active"><a href="#tab_module" data-toggle="tab">Module</a></li>
+                            <li><a href="#tab_cours" data-toggle="tab">Cours associés</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_module">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Libellé court : <i class="text-red">*</i></label>
+                                            <input placeholder="Saississez un libellé court" type="text" name="libellecourt" id="libellecourt" value="{{module.court}}" maxlength="20" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Libellé : <i class="text-red">*</i></label>
+                                            <input placeholder="Saississez un libellé" type="text" name="libelle" value="{{module.libelle}}" maxlength="200" id="libelle" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class=" control-label">Date de création : </label>
+                                            <input placeholder="" type="text"  disabled name="datecreation" id="datecreation" value="{{module.creation}}" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Durée en heures : <i class="text-red">*</i></label>
+                                            <input placeholder="" type="number"  name="dureeheures" value="{{module.dureeheures}}" id="dureeheures" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class=" control-label">Durée en semaines : <i class="text-red">*</i></label>
+                                            <input placeholder="" type="number" name="dureesemaines" value="{{module.dureesemaines}}" id="dureesemaines" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Prix public : <i class="text-red">*</i></label>
+                                            <input placeholder="" type="number" name="prix" pattern="" value="{{module.prix}}" id="prix" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_cours">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Libellé : <i class="text-red">*</i></label>
+                                    </div> 
+                                    <div class="col-md-4">
+                                        <input placeholder="Saissisez un libellé" type="text" name="libellecours" value="{{module.dureesemaines}}" id="dureesemaines" required class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-default" data-dismiss="modal">Fermer</a></span>
+                    <span class="pull-right"><a href="#" class="flip-link btn btn-primary">Valider</a></span>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal_password -->
+    </div>
+</div><!-- /.frame_planning-box -->

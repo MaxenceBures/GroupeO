@@ -97,7 +97,7 @@ FrontendBundle\Entity\CoursIndependant:
             mappedBy: null
             inversedBy: null
             joinColumns:
-                module_independant_id:
+                module_Independant_id:
                     referencedColumnName: id_module
             orphanRemoval: false
     lifecycleCallbacks: {  }

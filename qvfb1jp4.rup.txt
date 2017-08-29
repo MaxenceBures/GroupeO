@@ -1,0 +1,251 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+# Conflicts:
+#	.gitignore
+#	app/config/config.yml
+#	src/EniBundle/Controller/AlternantController.php
+#	src/FrontendBundle/Controller/PlanningController.php
+#	src/FrontendBundle/Entity/CoursIndependant.php
+#	src/FrontendBundle/Entity/ModuleIndependant.php
+#	src/FrontendBundle/Entity/PlanningCours.php
+#	src/FrontendBundle/Repository/PlanningCoursRepository.php
+#	src/FrontendBundle/Repository/PlanningRepository.php
+#	src/FrontendBundle/Resources/config/doctrine/CoursIndependant.orm.yml
+#	src/FrontendBundle/Resources/config/doctrine/ModuleIndependant.orm.yml
+#	src/FrontendBundle/Resources/config/doctrine/PlanningCours.orm.yml
+#	src/FrontendBundle/Resources/config/routing.yml
+#	var/cache/dev/appDevDebugProjectContainer.php
+#	var/cache/dev/appDevDebugProjectContainer.php.meta
+#	var/cache/dev/appDevDebugProjectContainer.xml
+#	var/cache/dev/appDevDebugProjectContainer.xml.meta
+#	var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
+#	var/cache/dev/appDevDebugProjectContainerUrlMatcher.php
+#	var/cache/dev/classes.php
+#	var/cache/dev/pools/wwlEMsVAJ6/0/A/Fcl8UjIjV8WFTJnWPZD0
+#	var/cache/dev/pools/wwlEMsVAJ6/0/X/GVXY9jLu4WVNVQDcA+Uo
+#	var/cache/dev/pools/wwlEMsVAJ6/2/3/qDueb1sRA5W9kmc52fN5
+#	var/cache/dev/pools/wwlEMsVAJ6/5/U/PJoS-k5zYSmVyKShGlm-
+#	var/cache/dev/pools/wwlEMsVAJ6/5/Z/TQ74DwAOSsbErQEaV4AV
+#	var/cache/dev/pools/wwlEMsVAJ6/6/J/IMkBoYMjdX2Z4ZZv-O52
+#	var/cache/dev/pools/wwlEMsVAJ6/7/T/y7Zx1DD9xkqmm69SHFLY
+#	var/cache/dev/pools/wwlEMsVAJ6/8/R/nb2+LxVdNJnPi9ibI8CB
+#	var/cache/dev/pools/wwlEMsVAJ6/A/G/FT+ony8rJq-uN9Neh0qq
+#	var/cache/dev/pools/wwlEMsVAJ6/A/Q/3rEOJYij7xXtwSJ9DqOe
+#	var/cache/dev/pools/wwlEMsVAJ6/A/W/pWowK1X+V-+JqrMMX7nx
+#	var/cache/dev/pools/wwlEMsVAJ6/D/H/DjmJrPlxNfPeCqzSbL6f
+#	var/cache/dev/pools/wwlEMsVAJ6/E/H/eSWnf8V7uSKfroiTvt6-
+#	var/cache/dev/pools/wwlEMsVAJ6/F/I/GRWKH7-g8GCoiD8vjZc6
+#	var/cache/dev/pools/wwlEMsVAJ6/G/M/1ez+fzCi-nbBAtghBFVa
+#	var/cache/dev/pools/wwlEMsVAJ6/G/V/6iHRKi9ZkQWJq5vIXT5d
+#	var/cache/dev/pools/wwlEMsVAJ6/H/-/YLKkA40R9hGfvE+TypGl
+#	var/cache/dev/pools/wwlEMsVAJ6/H/A/OKwsmiaeWeXU29NcQ7X5
+#	var/cache/dev/pools/wwlEMsVAJ6/H/J/y72dIil0Qq-V76cc88g3
+#	var/cache/dev/pools/wwlEMsVAJ6/I/5/chIHOx1o6+SLSW7cqiny
+#	var/cache/dev/pools/wwlEMsVAJ6/I/7/iuYaVs5mFQ7rm+bDBTqf
+#	var/cache/dev/pools/wwlEMsVAJ6/J/E/84yxqyEYtP2w0pIN0VxZ
+#	var/cache/dev/pools/wwlEMsVAJ6/J/S/TRv2Eupj1HWY74NqcJ23
+#	var/cache/dev/pools/wwlEMsVAJ6/M/F/o0ypjG6G9xe9dFimGO02
+#	var/cache/dev/pools/wwlEMsVAJ6/M/M/LxmN0zdnFMTx3Z4B0i3Z
+#	var/cache/dev/pools/wwlEMsVAJ6/M/W/tKwQrMiflSp2FFPjlVsJ
+#	var/cache/dev/pools/wwlEMsVAJ6/N/U/cB4mry8l8QmuAvszgaEU
+#	var/cache/dev/pools/wwlEMsVAJ6/O/C/kk2eNsXNvqLNJlgjx8Lp
+#	var/cache/dev/pools/wwlEMsVAJ6/O/S/NIom65FTazzK8jbRDIJJ
+#	var/cache/dev/pools/wwlEMsVAJ6/Q/+/Wfu9sUXtta1rYehCmhSz
+#	var/cache/dev/pools/wwlEMsVAJ6/Q/W/4Qum0xMOblX1ETi3s5HC
+#	var/cache/dev/pools/wwlEMsVAJ6/Q/Z/7CCqf9-1m0v4ILmjQWso
+#	var/cache/dev/pools/wwlEMsVAJ6/R/6/BnYFoNNsW8AId5gcvdJ2
+#	var/cache/dev/pools/wwlEMsVAJ6/R/9/gO4L-OnOoflaS5r7I6QL
+#	var/cache/dev/pools/wwlEMsVAJ6/R/T/xCcbWBwP0dAIQ4wP4aD-
+#	var/cache/dev/pools/wwlEMsVAJ6/S/K/8YMYJkU6IbXK99i4aglw
+#	var/cache/dev/pools/wwlEMsVAJ6/T/B/myyfxRlR2NIk96Abo6Ta
+#	var/cache/dev/pools/wwlEMsVAJ6/V/0/QxO2M+KkvHgv1JEB9qNB
+#	var/cache/dev/pools/wwlEMsVAJ6/V/H/YJWVQKhE0QL+CSE-Rb7x
+#	var/cache/dev/pools/wwlEMsVAJ6/V/L/Wne1p1fboFyaoxX3mGlK
+#	var/cache/dev/pools/wwlEMsVAJ6/V/W/OJwX-3z+9+63CJPDw+6j
+#	var/cache/dev/pools/wwlEMsVAJ6/W/H/bWW7vVaXlGuXJosJMBYt
+#	var/cache/dev/pools/wwlEMsVAJ6/X/F/cEsIu34Rl94xTM38v6Xd
+#	var/cache/dev/pools/wwlEMsVAJ6/X/T/b+lBMrqZaWzJniS2Tik0
+#	var/cache/dev/pools/wwlEMsVAJ6/Y/+/7moJ9g9oSSl2VipherWD
+#	var/cache/dev/pools/wwlEMsVAJ6/Z/H/8U7g05hGgqN83+BmCA6d
+#	var/logs/dev.log
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 3 and 5 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   app/AppKernel.php
+#	modified:   app/Resources/views/layout.html.twig
+#	modified:   app/config/config.yml
+#	modified:   app/config/parameters.yml
+#	modified:   composer.json
+#	modified:   composer.lock
+#	modified:   nbproject/private/private.xml
+#	modified:   src/EniBundle/Controller/AlternantController.php
+#	new file:   src/EniBundle/Controller/CoursController.php
+#	modified:   src/EniBundle/Controller/FormationController.php
+#	new file:   src/EniBundle/Controller/ModuleController.php
+#	new file:   src/EniBundle/Repository/CoursRepository.php
+#	new file:   src/EniBundle/Repository/ModuleRepository.php
+#	modified:   src/EniBundle/Repository/StagiaireparentrepriseRepository.php
+#	modified:   src/EniBundle/Resources/config/doctrine/Cours.orm.xml
+#	modified:   src/EniBundle/Resources/config/doctrine/Module.orm.xml
+#	modified:   src/EniBundle/Resources/config/routing.yml
+#	new file:   src/EniBundle/Resources/views/Module/frameSearch.html.twig
+#	new file:   src/FrontendBundle/Controller/ModuleIndependantController.php
+#	modified:   src/FrontendBundle/Controller/PlanningController.php
+#	modified:   src/FrontendBundle/Entity/CoursIndependant.php
+#	modified:   src/FrontendBundle/Entity/ModuleIndependant.php
+#	new file:   src/FrontendBundle/Entity/ModuleIndependant.php~Commit
+#	new file:   src/FrontendBundle/Entity/ModuleIndependant.php~HEAD
+#	modified:   src/FrontendBundle/Entity/Planning.php
+#	modified:   src/FrontendBundle/Entity/Planning.php~
+#	modified:   src/FrontendBundle/Entity/PlanningCours.php
+#	modified:   src/FrontendBundle/Entity/PlanningCours.php~
+#	new file:   src/FrontendBundle/Entity/PlanningCoursSepare.php
+#	new file:   src/FrontendBundle/Entity/PlanningCoursSepare.php~
+#	modified:   src/FrontendBundle/Repository/PlanningCoursRepository.php
+#	modified:   src/FrontendBundle/Repository/PlanningRepository.php
+#	modified:   src/FrontendBundle/Resources/config/doctrine/CoursIndependant.orm.yml
+#	modified:   src/FrontendBundle/Resources/config/doctrine/Planning.orm.yml
+#	new file:   src/FrontendBundle/Resources/config/doctrine/PlanningCoursSepare.orm.yml
+#	modified:   src/FrontendBundle/Resources/config/routing.yml
+#	modified:   src/FrontendBundle/Resources/views/Accueil/accueil.html.twig
+#	new file:   src/FrontendBundle/Resources/views/ModuleIndependant/frameEdition.html.twig
+#	modified:   src/FrontendBundle/Resources/views/Planning/editeur.html.twig
+#	modified:   src/FrontendBundle/Resources/views/Planning/frame.html.twig
+#	new file:   src/FrontendBundle/Resources/views/Planning/pdf.html.twig
+#	deleted:    var/cache/dev/annotations.map
+#	deleted:    var/cache/dev/appDevDebugProjectContainerCompiler.log
+#	deleted:    var/cache/dev/appDevDebugProjectContainerDeprecations.log
+#	deleted:    var/cache/dev/appDevDebugProjectContainerUrlGenerator.php.meta
+#	deleted:    var/cache/dev/appDevDebugProjectContainerUrlMatcher.php.meta
+#	deleted:    var/cache/dev/classes.map
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/0/A/Fcl8UjIjV8WFTJnWPZD0
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/0/X/GVXY9jLu4WVNVQDcA+Uo
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/2/3/qDueb1sRA5W9kmc52fN5
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/5/U/PJoS-k5zYSmVyKShGlm-
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/5/Z/TQ74DwAOSsbErQEaV4AV
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/6/J/IMkBoYMjdX2Z4ZZv-O52
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/7/T/y7Zx1DD9xkqmm69SHFLY
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/8/R/nb2+LxVdNJnPi9ibI8CB
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/A/G/FT+ony8rJq-uN9Neh0qq
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/A/Q/3rEOJYij7xXtwSJ9DqOe
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/A/W/pWowK1X+V-+JqrMMX7nx
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/D/H/DjmJrPlxNfPeCqzSbL6f
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/E/H/eSWnf8V7uSKfroiTvt6-
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/F/I/GRWKH7-g8GCoiD8vjZc6
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/G/M/1ez+fzCi-nbBAtghBFVa
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/G/V/6iHRKi9ZkQWJq5vIXT5d
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/H/-/YLKkA40R9hGfvE+TypGl
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/H/A/OKwsmiaeWeXU29NcQ7X5
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/H/J/y72dIil0Qq-V76cc88g3
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/I/5/chIHOx1o6+SLSW7cqiny
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/I/7/iuYaVs5mFQ7rm+bDBTqf
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/J/E/84yxqyEYtP2w0pIN0VxZ
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/J/S/TRv2Eupj1HWY74NqcJ23
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/M/F/o0ypjG6G9xe9dFimGO02
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/M/M/LxmN0zdnFMTx3Z4B0i3Z
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/M/W/tKwQrMiflSp2FFPjlVsJ
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/N/U/cB4mry8l8QmuAvszgaEU
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/O/C/kk2eNsXNvqLNJlgjx8Lp
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/O/S/NIom65FTazzK8jbRDIJJ
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/Q/+/Wfu9sUXtta1rYehCmhSz
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/Q/W/4Qum0xMOblX1ETi3s5HC
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/Q/Z/7CCqf9-1m0v4ILmjQWso
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/R/6/BnYFoNNsW8AId5gcvdJ2
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/R/9/gO4L-OnOoflaS5r7I6QL
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/R/T/xCcbWBwP0dAIQ4wP4aD-
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/S/K/8YMYJkU6IbXK99i4aglw
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/T/B/myyfxRlR2NIk96Abo6Ta
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/V/0/QxO2M+KkvHgv1JEB9qNB
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/V/H/YJWVQKhE0QL+CSE-Rb7x
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/V/L/Wne1p1fboFyaoxX3mGlK
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/V/W/OJwX-3z+9+63CJPDw+6j
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/W/H/bWW7vVaXlGuXJosJMBYt
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/X/F/cEsIu34Rl94xTM38v6Xd
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/X/T/b+lBMrqZaWzJniS2Tik0
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/Y/+/7moJ9g9oSSl2VipherWD
+#	deleted:    var/cache/dev/pools/wwlEMsVAJ6/Z/H/8U7g05hGgqN83+BmCA6d
+#	modified:   var/logs/dev.log
+#	deleted:    var/sessions/dev/sess_0ko69g61sqq3tejqerm3e1krp4
+#	deleted:    var/sessions/dev/sess_ii8qh8igqvcs98l0l8o5flllh4
+#	deleted:    var/sessions/dev/sess_nd6nlk23g3vh1bj9pbkg11gug3
+#	modified:   vendor/composer/autoload_files.php
+#	modified:   vendor/composer/autoload_psr4.php
+#	modified:   vendor/composer/autoload_static.php
+#	modified:   vendor/composer/installed.json
+#	new file:   web/Js/planning/editeur.js
+#	modified:   web/Js/planning/generation.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ar.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.az.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.bg.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ca.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.cs.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.cy.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.da.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.de.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.el.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.es.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.et.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.fa.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.fi.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.gl.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.he.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.hr.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.hu.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.id.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.is.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.it.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ja.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ka.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.kk.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.kr.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.lt.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.lv.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.mk.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ms.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.nb.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.nl-BE.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.nl.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.no.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.pl.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.pt.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ro.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.rs-latin.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.rs.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ru.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.sk.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.sl.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.sq.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.sv.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.sw.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.th.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.tr.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.ua.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.vi.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js
+#	deleted:    web/template/plugins/datepicker/locales/bootstrap-datepicker.zh-TW.js
+#	new file:   web/template/plugins/fullcalendar/ferie.min.js
+#	new file:   web/template/plugins/fullcalendar/fr.js
+#	modified:   web/template/plugins/fullcalendar/fullcalendar.css
+#	modified:   web/template/plugins/fullcalendar/fullcalendar.js
+#	modified:   web/template/plugins/fullcalendar/fullcalendar.min.css
+#	modified:   web/template/plugins/fullcalendar/fullcalendar.min.js
+#	modified:   web/template/plugins/fullcalendar/fullcalendar.print.css
+#	new file:   web/template/plugins/fullcalendar/moment.min.js
+#
+

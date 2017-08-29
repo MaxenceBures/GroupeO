@@ -3,7 +3,7 @@
 namespace FrontendBundle\Entity;
 
 /**
- * CoursIndependent
+ * CoursIndependant
  */
 class CoursIndependant
 {
@@ -377,7 +377,7 @@ class CoursIndependant
     }
 
     /**
-     * Set moduleIndependent
+     * Set moduleIndependant
      *
      * @param \FrontendBundle\Entity\ModuleIndependant $moduleIndependant
      *

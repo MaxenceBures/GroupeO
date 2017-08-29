@@ -3,10 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/GroupeO/src/FrontendBundle/Controller/PlanningController.php</file>
-            <file>file:/C:/wamp/www/GroupeO/src/FrontendBundle/Resources/views/Planning/frame.html.twig</file>
-            <file>file:/C:/wamp/www/GroupeO/web/Js/planning/generation.js</file>
-            <file>file:/C:/wamp/www/GroupeO/web/Js/alternant/recherche.js</file>
+            <file>file:/C:/wamp64/www/GroupeO/web/Js/planning/editeur.js</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/AlternantController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/ModuleIndependent/frameEdition.html.twig</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Entity/Planning.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Controller/ModuleIndependentController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/pdf.html.twig</file>
+            <file>file:/C:/wamp64/www/GroupeO/web/template/plugins/fullcalendar/ferie.min.js</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Controller/PlanningController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/ModuleController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/frame.html.twig</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/config/doctrine/ModuleIndependent.orm.yml</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/editeur.html.twig</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/CoursController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Repository/ModuleRepository.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Accueil/accueil.html.twig</file>
+            <file>file:/C:/wamp64/www/GroupeO/web/Js/planning/generation.js</file>
         </group>
     </open-files>
 </project-private>

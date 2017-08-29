@@ -10,8 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class FormationController extends Controller
-{
+class FormationController extends Controller {
     /**
      * @Route("/formation/liste", name="formation_liste")
      */

@@ -134,6 +134,7 @@ class PlanningCours
         return $this->planning;
     }
 
+
     /**
      * Set coursIndependant
      *

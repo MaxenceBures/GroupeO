@@ -66,6 +66,13 @@ class Planning
     /**
      * @var integer
      *
+     * @ORM\Column(name="etat", type="integer", nullable=true)
+     */
+    private $etat;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="stagiaire_entreprise_numlien", type="integer", nullable=false)
      */
     private $stagiaireEntrepriseNumlien;
@@ -234,6 +241,30 @@ class Planning
     }
 
     /**
+     * Set etat
+     *
+     * @param integer $etat
+     *
+     * @return Planning
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return integer
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
      * Set stagiaireEntrepriseNumlien
      *
      * @param integer $stagiaireEntrepriseNumlien
@@ -337,5 +368,34 @@ class Planning
     public function getEntrepriseCode()
     {
         return $this->entrepriseCode;
+    }
+    /**
+     * @var \FrontendBundle\Entity\Utilisateur
+     */
+    private $createur;
+
+
+    /**
+     * Set createur
+     *
+     * @param \FrontendBundle\Entity\Utilisateur $createur
+     *
+     * @return Planning
+     */
+    public function setCreateur(\FrontendBundle\Entity\Utilisateur $createur = null)
+    {
+        $this->createur = $createur;
+    
+        return $this;
+    }
+
+    /**
+     * Get createur
+     *
+     * @return \FrontendBundle\Entity\Utilisateur
+     */
+    public function getCreateur()
+    {
+        return $this->createur;
     }
 }

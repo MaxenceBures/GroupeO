@@ -369,4 +369,33 @@ class Planning
     {
         return $this->entrepriseCode;
     }
+    /**
+     * @var \FrontendBundle\Entity\Utilisateur
+     */
+    private $createur;
+
+
+    /**
+     * Set createur
+     *
+     * @param \FrontendBundle\Entity\Utilisateur $createur
+     *
+     * @return Planning
+     */
+    public function setCreateur(\FrontendBundle\Entity\Utilisateur $createur = null)
+    {
+        $this->createur = $createur;
+    
+        return $this;
+    }
+
+    /**
+     * Get createur
+     *
+     * @return \FrontendBundle\Entity\Utilisateur
+     */
+    public function getCreateur()
+    {
+        return $this->createur;
+    }
 }
