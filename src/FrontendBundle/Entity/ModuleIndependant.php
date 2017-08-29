@@ -5,12 +5,12 @@ namespace FrontendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ModuleIndependent
+ * ModuleIndependant
  *
- * @ORM\Table(name="MODULE_INDEPENDENT")
+ * @ORM\Table(name="MODULE_Independant")
  * @ORM\Entity
  */
-class ModuleIndependent
+class ModuleIndependant
 {
     /**
      * @var integer
@@ -94,7 +94,7 @@ class ModuleIndependent
      *
      * @param string $libelle
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setLibelle($libelle)
     {
@@ -118,7 +118,7 @@ class ModuleIndependent
      *
      * @param integer $dureeEnHeures
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDureeEnHeures($dureeEnHeures)
     {
@@ -142,7 +142,7 @@ class ModuleIndependent
      *
      * @param \DateTime $dateCreation
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDateCreation($dateCreation)
     {
@@ -166,7 +166,7 @@ class ModuleIndependent
      *
      * @param integer $dureeEnSemaines
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDureeEnSemaines($dureeEnSemaines)
     {
@@ -190,7 +190,7 @@ class ModuleIndependent
      *
      * @param float $prixPublicEnCours
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setPrixPublicEnCours($prixPublicEnCours)
     {
@@ -214,7 +214,7 @@ class ModuleIndependent
      *
      * @param string $libelleCourt
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setLibelleCourt($libelleCourt)
     {
@@ -238,7 +238,7 @@ class ModuleIndependent
      *
      * @param boolean $archiver
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setArchiver($archiver)
     {
@@ -262,7 +262,7 @@ class ModuleIndependent
      *
      * @param integer $typeModule
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setTypeModule($typeModule)
     {

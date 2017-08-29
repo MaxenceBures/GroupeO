@@ -3,9 +3,9 @@
 namespace FrontendBundle\Entity;
 
 /**
- * CoursIndependent
+ * CoursIndependant
  */
-class CoursIndependent
+class CoursIndependant
 {
     /**
      * @var guid
@@ -73,9 +73,9 @@ class CoursIndependent
     private $codelieu;
 
     /**
-     * @var \FrontendBundle\Entity\ModuleIndependent
+     * @var \FrontendBundle\Entity\ModuleIndependant
      */
-    private $moduleIndependent;
+    private $moduleIndependant;
 
 
     /**
@@ -93,7 +93,7 @@ class CoursIndependent
      *
      * @param \DateTime $debut
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setDebut($debut)
     {
@@ -117,7 +117,7 @@ class CoursIndependent
      *
      * @param \DateTime $fin
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setFin($fin)
     {
@@ -141,7 +141,7 @@ class CoursIndependent
      *
      * @param integer $dureereelleenheures
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setDureereelleenheures($dureereelleenheures)
     {
@@ -165,7 +165,7 @@ class CoursIndependent
      *
      * @param string $codepromotion
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setCodepromotion($codepromotion)
     {
@@ -189,7 +189,7 @@ class CoursIndependent
      *
      * @param float $prixpublicaffecte
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setPrixpublicaffecte($prixpublicaffecte)
     {
@@ -213,7 +213,7 @@ class CoursIndependent
      *
      * @param \DateTime $datecreation
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setDatecreation($datecreation)
     {
@@ -237,7 +237,7 @@ class CoursIndependent
      *
      * @param string $libellecours
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setLibellecours($libellecours)
     {
@@ -261,7 +261,7 @@ class CoursIndependent
      *
      * @param integer $dureeprevueenheures
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setDureeprevueenheures($dureeprevueenheures)
     {
@@ -285,7 +285,7 @@ class CoursIndependent
      *
      * @param boolean $dateadefinir
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setDateadefinir($dateadefinir)
     {
@@ -309,7 +309,7 @@ class CoursIndependent
      *
      * @param string $codesalle
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setCodesalle($codesalle)
     {
@@ -333,7 +333,7 @@ class CoursIndependent
      *
      * @param integer $codeformateur
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setCodeformateur($codeformateur)
     {
@@ -357,7 +357,7 @@ class CoursIndependent
      *
      * @param integer $codelieu
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
     public function setCodelieu($codelieu)
     {
@@ -377,26 +377,26 @@ class CoursIndependent
     }
 
     /**
-     * Set moduleIndependent
+     * Set moduleIndependant
      *
-     * @param \FrontendBundle\Entity\ModuleIndependent $moduleIndependent
+     * @param \FrontendBundle\Entity\ModuleIndependant $moduleIndependant
      *
-     * @return CoursIndependent
+     * @return CoursIndependant
      */
-    public function setModuleIndependent(\FrontendBundle\Entity\ModuleIndependent $moduleIndependent = null)
+    public function setModuleIndependant(\FrontendBundle\Entity\ModuleIndependant $moduleIndependant = null)
     {
-        $this->moduleIndependent = $moduleIndependent;
+        $this->moduleIndependant = $moduleIndependant;
     
         return $this;
     }
 
     /**
-     * Get moduleIndependent
+     * Get moduleIndependant
      *
-     * @return \FrontendBundle\Entity\ModuleIndependent
+     * @return \FrontendBundle\Entity\ModuleIndependant
      */
-    public function getModuleIndependent()
+    public function getModuleIndependant()
     {
-        return $this->moduleIndependent;
+        return $this->moduleIndependant;
     }
 }

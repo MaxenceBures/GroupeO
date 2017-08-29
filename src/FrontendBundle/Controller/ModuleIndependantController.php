@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleIndependentController extends Controller {
+class ModuleIndependantController extends Controller {
 
     /**
      * @Route("/moduleInde/editFrame", name="edit_frame")
@@ -23,7 +23,7 @@ class ModuleIndependentController extends Controller {
         } else {
             $module = array("id" => 0, "libelle" => "", "court" => "", "creation" => date('d/m/Y'), "dureeheures" => 0, "dureesemaines" => 0, "prix" => 0);
         }
-//        $repository_formation = $em->getRepository('FrontendBundle:ModuleIndependent');
+//        $repository_formation = $em->getRepository('FrontendBundle:ModuleIndependant');
 //        $formations_temp = $repository_formation->findBy(array("archiver" => "0"));
 //
 //        $formations = array();
@@ -31,7 +31,7 @@ class ModuleIndependentController extends Controller {
 //            array_push($formations, array('court' => $x->getLibellecourt(), 'long' => $x->getLibellelong(), 'id' => $x->getCodeformation()));
 //        }
 
-        return $this->render('FrontendBundle:ModuleIndependent:frameEdition.html.twig', array(
+        return $this->render('FrontendBundle:ModuleIndependant:frameEdition.html.twig', array(
                     "status" => "ok", "module" => $module
         ));
     }

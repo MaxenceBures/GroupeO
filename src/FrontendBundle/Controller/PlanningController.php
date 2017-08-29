@@ -64,9 +64,9 @@ class PlanningController extends Controller {
         $repository_formation = $em_eni->getRepository("EniBundle:Formation");
         $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
         $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
-        $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependent");
+        $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
         $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
-        if ($planning_temp == "0") {
+        if ($planning_temp === "0") {
             $stagiaire_temp = $request->get("stagiaire");
             $entreprise_temp = $request->get("entreprise");
             $formation_temp = $request->get("formation");
@@ -78,6 +78,7 @@ class PlanningController extends Controller {
 //            $planning['']
         } else {
             $repository_planning = $em_front->getRepository("FrontendBundle:Planning");
+            $repository_planning_cours = $em_front->getRepository("FrontendBundle:PlanningCours");
             $planning_obj_temp = $repository_planning->findBy(array("idPlanning" => $planning_temp));
             $stagiaire_temp = $planning_obj_temp[0]->getStagiairecode();
             $entreprise_temp = $planning_obj_temp[0]->getEntreprisecode();
@@ -87,7 +88,7 @@ class PlanningController extends Controller {
             $date_fin_temp = date_format($planning_obj_temp[0]->getDatefin(), "d/m/y");
             $max_heure_temp = $planning_obj_temp[0]->getMaxheureformation();
             $max_semaine_temp = $planning_obj_temp[0]->getMaxtempsformation();
-            
+            $cours_plannifier = $repository_planning_cours->getCoursByPLanning($planning_obj_temp,$em_front);
             
         }
 
@@ -96,7 +97,7 @@ class PlanningController extends Controller {
         $formation = $repository_formation->findBy(array("codeformation" => $formation_temp));
         $lieux = $repository_lieu->findBy(array("archive" => "0"));
         $modules = $repository_modules->getModulesByLieuxFormation(array($lieux[0]->getCodelieu()), $formation[0]->getCodeformation(), $em_eni);
-        $modules_independent = $repository_modules_inde->findAll();
+        $modules_Independant = $repository_modules_inde->findAll();
         $stagiaire_entreprise = $repository_entreprise_stagiaire->getIdStagiaireEntreprise($stagiaire[0]->getCodestagiaire(), $entreprise[0]->getCodeentreprise(), $em_eni);
         $nom_planning_temp = $planning_temp == "0" ? $stagiaire[0]->getNom() . "_" . $stagiaire[0]->getPrenom() . "_" . str_replace(" ", "_", $entreprise[0]->getRaisonSociale()) . "_" . trim($formation[0]->getLibelleCourt()) . "_V1" : $planning_obj_temp[0]->getNom();
         $planning['id'] = $planning_temp;
@@ -111,7 +112,7 @@ class PlanningController extends Controller {
         $planning['max_semaine'] = !empty($max_semaine_temp) ? $max_semaine_temp : 0;
         $planning['createur'] = 1;
         return $this->render('FrontendBundle:Planning:editeur.html.twig', array(
-                    "planning" => $planning, "cours_plannifier" => $cours_plannifier, "modules" => $modules, "modulesindependents" => $modules_independent, "cours" => $cours, "lieux" => $lieux, "formation" => $formation[0]
+                    "planning" => $planning, "cours_plannifier" => $cours_plannifier, "modules" => $modules, "modulesIndependants" => $modules_Independant, "cours" => $cours, "lieux" => $lieux, "formation" => $formation[0]
         ));
     }
 
@@ -155,7 +156,7 @@ class PlanningController extends Controller {
             $cours->setCoursId($pla_cours['id']);
             $cours->setOrdre($pla_cours['ordre']);
             if ($pla_cours['inde']) {
-                $cours->setCoursIndependent($pla_cours['id']);
+                $cours->setCoursIndependant($pla_cours['id']);
             }
             $repository_planning_cours->insertCours($cours, $this->getDoctrine()->getManager());
         }

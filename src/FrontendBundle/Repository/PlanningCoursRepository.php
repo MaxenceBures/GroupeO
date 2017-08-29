@@ -14,6 +14,24 @@ use Doctrine\DBAL\DriverManager;
  */
 class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
 
+    public function getCoursByPLanning($planning, $em) {
+        $sql = "select idPlanningcours,coursId,coursIndependant,ordre,
+                c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
+                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid
+                ,sum(iif(c.dureeReelleenheures is null,0,c.dureeReelleenheures)+ iif(ci.dureeReelleenheures is null, 0, ci.dureeReelleenheures)) over() as total
+                from FrontendBundle:PlanningCours pc
+                join EniBundle:Cours c on c.idCours = pc.coursId
+                full FrontendBundle:CoursIndependant ci on ci.idCours = pc.coursIndependant
+                where planningId = ".$planning[0]->getIdplanning()."
+                group by idPlanningcours,coursId,coursIndependant,ordre,
+                c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
+                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
     public function insertCours($cours, $em) {
         $em->persist($cours);
         $em->flush();

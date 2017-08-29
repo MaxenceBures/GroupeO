@@ -35,13 +35,15 @@
                             <div class="row">
                                 <form action="/planning/editeur" method="POST" id="form-planning">
                                     <input type="hidden" value="{{ planning.id }}" id="id_planning" name="planning"/>
-                                    <input type="hidden" value="{{ planning.stagiaire.codestagiaire }}" id="stagiaire"/>
-                                    <input type="hidden" value="{{ planning.stagiaire_entreprise }}" id="stagiaire_entreprise" />
-                                    <input type="hidden" value="{{ planning.entreprise.codeentreprise }}" id="entreprise" />
-                                    <input type="hidden" value="{{ formation.codeformation }}" id="formation" />
-                                    <input type="hidden" value="{{ planning.max_heure }}" id="max_heure" />
-                                    <input type="hidden" value="{{ planning.max_semaine }}" id="max_semaine" />
-                                    <input type="hidden" value="{{ planning.createur }}" id="createur" />
+                                    <input type="hidden" value="{{ planning.stagiaire.codestagiaire }}" id="stagiaire" name="stagiaire"/>
+                                    <input type="hidden" value="{{ planning.stagiaire_entreprise }}" id="stagiaire_entreprise" name="stagiaire_entreprise"/>
+                                    <input type="hidden" value="{{ planning.entreprise.codeentreprise }}" id="entreprise" name="entreprise"/>
+                                    <input type="hidden" value="{{ formation.codeformation }}" id="formation" name="formation"/>
+                                    <input type="hidden" value="{{ planning.max_heure }}" id="max_heure" name="max_heure"/>
+                                    <input type="hidden" value="{{ planning.max_semaine }}" id="max_semaine" name="max_semaine"/>
+                                    <input type="hidden" value="{{ planning.createur }}" id="createur" name="createur"/>
+                                    <input type="hidden" value="{{ planning.date_debut_contrat }}"  name="date_debut_contrat"/>
+                                    <input type="hidden" value="{{ planning.date_fin_contrat }}"  name="date_fin_contrat"/>
                                 </form>
                                 <div class="col-md-2"><label class="">Date de création : {{ planning.date_creation }}</label></div>
                                 <div class="col-md-4 text-center"><label >Formation : {{ formation.libellelong }}</label></div>
@@ -200,12 +202,12 @@
                         <h4 class="" >Modules indépendants</h4>
                     </div>
                     <div class="col-md-6">   
-                        <button type="button" class="btn btn-primary pull-right" id="add-module" onclick="btAddModuleIndependentClick();" ><i class="fa fa-plus-circle"></i> Créer</button>
+                        <button type="button" class="btn btn-primary pull-right" id="add-module" onclick="btAddModuleIndependantClick();" ><i class="fa fa-plus-circle"></i> Créer</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-responsive table-bordered table-striped" id="table-modules-independent" width="100%">
+                        <table class="table table-responsive table-bordered table-striped" id="table-modules-Independant" width="100%">
                             <thead class="bg-light-blue-active">
                                 <tr>
                                     <th width="2%"></th>
@@ -214,7 +216,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for module in modulesindependents %}
+                                {% for module in modulesIndependants %}
                                     <tr>
                                         <td width="2%"><input type="checkbox" value="{{ module.idmodule }}" checked id="module_{{ module.idmodule }}" onchange="onModulesChecked()"/></td>
                                         <td><label style="font-weight :400!important" for="module_{{ module.idmodule }}">{{ module.libelle }}</label></td>

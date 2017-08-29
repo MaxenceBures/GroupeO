@@ -1,6 +1,6 @@
-FrontendBundle\Entity\ModuleIndependent:
+FrontendBundle\Entity\ModuleIndependant:
     type: entity
-    table: MODULE_INDEPENDENT
+    table: MODULE_INDEPENDANT
     id:
         idModule:
             type: integer

@@ -611,7 +611,7 @@ function btSaveClick() {
 }
 
 function btAnnulerClick() {
-    $("#form-planning").submit()
+    $("#form-planning").submit();
 }
 
 function getCoursPlanning() {

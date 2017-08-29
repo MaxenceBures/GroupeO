@@ -129,32 +129,32 @@ class PlanningCours
         return $this->planning;
     }
     /**
-     * @var \FrontendBundle\Entity\CoursIndependent
+     * @var \FrontendBundle\Entity\CoursIndependant
      */
-    private $coursIndependent;
+    private $coursIndependant;
 
 
     /**
-     * Set coursIndependent
+     * Set coursIndependant
      *
-     * @param \FrontendBundle\Entity\CoursIndependent $coursIndependent
+     * @param \FrontendBundle\Entity\CoursIndependant $coursIndependant
      *
      * @return PlanningCours
      */
-    public function setCoursIndependent(\FrontendBundle\Entity\CoursIndependent $coursIndependent = null)
+    public function setCoursIndependant(\FrontendBundle\Entity\CoursIndependant $coursIndependant = null)
     {
-        $this->coursIndependent = $coursIndependent;
+        $this->coursIndependant = $coursIndependant;
     
         return $this;
     }
 
     /**
-     * Get coursIndependent
+     * Get coursIndependant
      *
-     * @return \FrontendBundle\Entity\CoursIndependent
+     * @return \FrontendBundle\Entity\CoursIndependant
      */
-    public function getCoursIndependent()
+    public function getCoursIndependant()
     {
-        return $this->coursIndependent;
+        return $this->coursIndependant;
     }
 }

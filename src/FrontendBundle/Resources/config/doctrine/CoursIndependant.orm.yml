@@ -1,10 +1,10 @@
-FrontendBundle\Entity\CoursIndependent:
+FrontendBundle\Entity\CoursIndependant:
     type: entity
-    table: COURS_INDEPENDENT
+    table: COURS_INDEPENDANT
     indexes:
         IDX_D25EF8DA8CEFA577:
             columns:
-                - module_independent_id
+                - module_independant_id
     id:
         idCours:
             type: guid
@@ -89,14 +89,14 @@ FrontendBundle\Entity\CoursIndependent:
                 unsigned: false
             column: CodeLieu
     manyToOne:
-        moduleIndependent:
-            targetEntity: ModuleIndependent
+        moduleIndependant:
+            targetEntity: ModuleIndependant
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                module_independent_id:
+                module_Independant_id:
                     referencedColumnName: id_module
             orphanRemoval: false
     lifecycleCallbacks: {  }

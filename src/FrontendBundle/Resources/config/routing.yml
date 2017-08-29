@@ -65,7 +65,7 @@ planning_pdf:
     methods: [GET]
 #PLANNING
 
-#MODULE INDEPENDENT
+#MODULE Independant
 edit_frame:
     path:     /moduleInde/editFrame
-    defaults: { _controller: FrontendBundle:ModuleIndependent:editFrame }
+    defaults: { _controller: FrontendBundle:ModuleIndependant:editFrame }

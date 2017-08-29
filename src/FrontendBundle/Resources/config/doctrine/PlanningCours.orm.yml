@@ -5,7 +5,7 @@ FrontendBundle\Entity\PlanningCours:
     indexes:
         IDX_80E24908901E2E06:
             columns:
-                - cours_independent
+                - cours_Independant
         IDX_80E249083D865311:
             columns:
                 - planning_id
@@ -33,14 +33,14 @@ FrontendBundle\Entity\PlanningCours:
             options:
                 unsigned: false
     manyToOne:
-        coursIndependent:
-            targetEntity: CoursIndependent
+        coursIndependant:
+            targetEntity: CoursIndependant
             cascade: {  }
             fetch: LAZY
             mappedBy: null
             inversedBy: null
             joinColumns:
-                cours_independent:
+                cours_Independant:
                     referencedColumnName: id_cours
             orphanRemoval: false
         planning:
