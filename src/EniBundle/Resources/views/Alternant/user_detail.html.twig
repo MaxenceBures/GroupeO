@@ -1,0 +1,219 @@
+{% extends 'layout_user.html.twig' %}
+
+{% block body %}
+
+    <a href="/recherche">
+        <button type="button" class="btn btn-default btn-md">
+            <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Retour
+        </button>
+    </a>
+
+
+    <H1>Detail</H1>
+
+    <div id="div_identification" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Identification</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="form_search">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.stagiaire_nom }}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_prenom }}">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_naissance |date('d/m/Y') }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-6">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_email }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_adresse }}">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_codepostal }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.stagiaire_ville }}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_entreprise" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Entreprise</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="form_search">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.entreprise_raisonsociale }}">
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse1 }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse2 }}">
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_adresse3 }}">
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-xs-4">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_ville }}">
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <input class="form-control"  disabled="disabled" type="text" value="{{ utilisateur.entreprise_codepostal }}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_contrat" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Contrat</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="form_search">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input class="form-control" disabled="disabled" type="text" value="{{ utilisateur.formation_long }}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="Poste en charge Code - {{ utilisateur.entreprise_fonction }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4">Date de Debut/Fin Entreprise</div>
+
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.entreprise_datedebut == ""%}0{% else %}{{ utilisateur.entreprise_datedebut |date('d/m/Y') }}{% endif %}"></div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.entreprise_datefin == ""%}0{% else %}{{ utilisateur.entreprise_datefin |date('d/m/Y') }}{% endif %}"></div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4">Date de Debut/Fin Formation</div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.planning_debut == ""%}0{% else %}{{ utilisateur.planning_debut |date('d/m/Y') }}{% endif %}"></div>
+                                    <div class="col-xs-3"><input class="form-control" disabled="disabled" type="text" value="{% if utilisateur.planning_fin == ""%}0{% else %}{{ utilisateur.planning_fin |date('d/m/Y') }}{% endif %}"></div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-4">
+                                    <input class="form-control" disabled="disabled" type="text" value="Responsable Entreprise Code - {{ utilisateur.stagiaire_entreprise_responsable }}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px">
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" disabled="disabled">{{ utilisateur.stagiaire_entreprise_commentaire }}</textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_planning" style="margin-top: 30px; background-color: grey;">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Planning</h3>
+                <div class="box-body">
+                    <div class="row">
+                        <table id="liste_planning" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Formation</th>
+                                <th>Entreprise</th>
+                                <th>Date Deb/Fin</th>
+                                <th style="width: 200px">Etat</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="liste_planning_ligne">
+                                {% if status == true%}
+                                    {% for planning in plannings %}
+                                        <tr id="liste_planning_ligne_{{ planning.stagiaire_entreprise_lien }}">
+                                            <td>{{ planning.formation }}</td>
+                                            <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
+                                            <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
+                                            <td id="td_etat_{{ planning.stagiaire_entreprise_lien }}">{{ planning.etat }}</td>
+                                            <td><a id="planning_modifier_{{ planning.stagiaire_entreprise_lien }}">Modifier</a> <a>Pdf</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal_status" tabindex="-1" role="dialog">
+        <form id="change_status" action="#" class="">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="btn_close_1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3>Modification du statut</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control" id="select_status">
+                                    <option value="1">Validée</option>
+                                    <option value="2">Refusée</option>
+                                    <option value="3">En cours de validation</option>
+                                    <option value="4">Terminée</option>
+                                    <option value="5">En cours de formation</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="modal-footer">
+                            <span class="pull-left"><a href="#" class="flip-link btn btn-default" id="btn_close_2">Fermer</a></span>
+                            <span class="pull-right"><a class="btn btn-primary" id="btn_save">Enregistrer</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal_password -->
+        </form>
+    </div><!-- /.login-box -->
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('Js/alternant/user_detail.js') }}"></script>
+{% endblock %}
+

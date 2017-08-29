@@ -132,4 +132,28 @@ class UtilisateurController extends Controller
 
         return "error";
     }
+
+    /**
+     * @Route("/password_update", name="user_utilisateur_modifier_password")
+     */
+    public function user_modifier_passwordAction(Request $request){
+        if ($request->isXMLHttpRequest()) {
+
+            $tmp = $request->get("utilisateur");
+
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');
+
+            $utilisateur = $repository->getUtilisateur($this->getUser()->getId(),$this->getDoctrine()->getManager());
+
+            $utilisateur->setPassword(sha1($tmp["password"]));
+
+            $new_utilisateur = $repository->updateUtilisateur($utilisateur,$this->getDoctrine()->getManager());
+
+            return new Response(json_encode(array("status" =>"ok")));
+        }
+
+        return "error";
+    }
+
+
 }

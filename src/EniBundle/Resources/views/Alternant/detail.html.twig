@@ -146,7 +146,7 @@
                                 <th>Formation</th>
                                 <th>Entreprise</th>
                                 <th>Date Deb/Fin</th>
-                                <th>Etat</th>
+                                <th style="width: 200px">Etat</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -157,8 +157,8 @@
                                             <td>{{ planning.formation }}</td>
                                             <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                             <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
-                                            <td>{{ planning.etat }}</td>
-                                            <td><a>Modifier</a> <a>Pdf</a></td>
+                                            <td id="td_etat_{{ planning.stagiaire_entreprise_lien }}">{{ planning.etat }}</td>
+                                            <td><a id="planning_modifier_{{ planning.stagiaire_entreprise_lien }}">Modifier</a> <a>Pdf</a></td>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
@@ -169,6 +169,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="modal_status" tabindex="-1" role="dialog">
+        <form id="change_status" action="#" class="">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="btn_close_1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3>Modification du statut</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control" id="select_status">
+                                    <option value="1">Validée</option>
+                                    <option value="2">Refusée</option>
+                                    <option value="3">En cours de validation</option>
+                                    <option value="4">Terminée</option>
+                                    <option value="5">En cours de formation</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="modal-footer">
+                            <span class="pull-left"><a href="#" class="flip-link btn btn-default" id="btn_close_2">Fermer</a></span>
+                            <span class="pull-right"><a class="btn btn-primary" id="btn_save">Enregistrer</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div><!-- /.login-box -->
 
 {% endblock %}
 

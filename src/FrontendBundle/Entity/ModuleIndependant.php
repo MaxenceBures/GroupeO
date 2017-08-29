@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ModuleIndependent
  *
- * @ORM\Table(name="MODULE_INDEPENDENT")
+ * @ORM\Table(name="MODULE_INDEPENDANT")
  * @ORM\Entity
  */
-class ModuleIndependent
+class ModuleIndependant
 {
     /**
      * @var integer

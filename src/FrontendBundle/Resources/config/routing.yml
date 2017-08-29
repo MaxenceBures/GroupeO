@@ -4,7 +4,7 @@ frontend_homepage:
     defaults: { _controller: FrontendBundle:Accueil:index }
 frontend_test:
     path:     /test
-    defaults: { _controller: FrontendBundle:Accueil:index }
+    defaults: { _controller: FrontendBundle:Accueil:test }
 frontend_erreur:
     path:     /erreur
     defaults: { _controller: FrontendBundle:Accueil:erreur }
@@ -44,6 +44,9 @@ utilisateur_supprimer:
     path:     /utilisateur/supprimer
     defaults: { _controller: FrontendBundle:Utilisateur:supprimer }
     methods: [post]
+user_utilisateur_modifier_password:
+      path:     /password_update
+      defaults: { _controller: FrontendBundle:Utilisateur:user_modifier_password }
 #UTILISATEUR
 
 #PLANNING
@@ -55,4 +58,47 @@ planning_editeur:
     path:     /planning/editeur
     defaults: { _controller: FrontendBundle:Planning:editeur }
     methods: [post]
+planning_status_update:
+    path:     /planning/status_update
+    defaults: { _controller: FrontendBundle:Planning:status_update }
+    methods: [post]
 #PLANNING
+
+#PARAMETRAGE
+parametrage_module:
+    path:     /parametrage
+    defaults: { _controller: FrontendBundle:Parametrage:liste_modules }
+parametrage_lieu:
+    path:     /parametrage/lieu
+    defaults: { _controller: FrontendBundle:Parametrage:liste_lieux }
+parametrage_fermeture_ajout:
+    path:     /parametrage/lieu/ajouter
+    defaults: { _controller: FrontendBundle:Parametrage:ajouter_fermeture }
+parametrage_fermeture_liste:
+    path:     /parametrage/lieu/fermeture
+    defaults: { _controller: FrontendBundle:Parametrage:liste_fermeture }
+parametrage_fermeture_supprimer:
+    path:     /parametrage/lieu/supprimer
+    defaults: { _controller: FrontendBundle:Parametrage:supprimer_fermeture }
+parametrage_module_ajout:
+    path:     /parametrage/module/ajouter
+    defaults: { _controller: FrontendBundle:Parametrage:ajouter_module }
+parametrage_module_supprimer:
+    path:     /parametrage/module/supprimer
+    defaults: { _controller: FrontendBundle:Parametrage:supprimer_module }
+parametrage_module_liste:
+    path:     /parametrage/module/liste
+    defaults: { _controller: FrontendBundle:Parametrage:liste_module }
+parametrage_module_modifier:
+    path:     /parametrage/module/modifier
+    defaults: { _controller: FrontendBundle:Parametrage:modifier_module }
+parametrage_cours_ajout:
+    path:     /parametrage/cours/ajouter
+    defaults: { _controller: FrontendBundle:Parametrage:ajouter_cours }
+parametrage_cours_liste:
+    path:     /parametrage/cours/liste
+    defaults: { _controller: FrontendBundle:Parametrage:liste_cours }
+parametrage_cours_supprimer:
+    path:     /parametrage/cours/supprimer
+    defaults: { _controller: FrontendBundle:Parametrage:supprimer_cours }
+#PARAMETRAGE

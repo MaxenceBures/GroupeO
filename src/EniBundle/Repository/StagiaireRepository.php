@@ -60,49 +60,13 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function rechercherNominativeUnion($search,$em){
-        /*$sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
-                FROM EniBundle:Stagiaire s
-                  LEFT JOIN EniBundle:Stagiaireparentreprise se
-                  WITH se.codestagiaire = s.codestagiaire
-                  LEFT JOIN EniBundle:Entreprise e
-                  WITH e.codeentreprise = se.codeentreprise
-                  INNER JOIN (
-                               SELECT s.codestagiaire, max(se.DateLien) as date_max
-                                FROM EniBundle:Stagiaire s
-                                  LEFT JOIN EniBundle:Stagiaireparentreprise se
-                                  WITH se.codestagiaire = s.codestagiaire
-                                  LEFT JOIN EniBundle:Entreprise e
-                                  WITH e.codeentreprise = se.codeentreprise
-                                  GROUP BY s.CodeStagiaire)
-                   temp ON temp.CodeStagiaire = s.CodeStagiaire and se.DateLien = temp.date_max
-                 WHERE ';
-
-        $sql2 = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, se.DateLien
-                FROM EniBundle:Stagiaire s
-                  LEFT JOIN EniBundle:Stagiaireparentreprise se
-                  WITH se.codestagiaire = s.codestagiaire
-                  LEFT JOIN EniBundle:Entreprise e
-                  WITH e.codeentreprise = se.codeentreprise
-                  INNER JOIN (
-                               SELECT s.codestagiaire, max(se.DateLien) as date_max
-                                FROM EniBundle:Stagiaire s
-                                  LEFT JOIN EniBundle:Stagiaireparentreprise se
-                                  WITH se.codestagiaire = s.codestagiaire
-                                  LEFT JOIN EniBundle:Entreprise e
-                                  WITH e.codeentreprise = se.codeentreprise
-                                  GROUP BY s.CodeStagiaire)
-                   temp ON temp.CodeStagiaire = s.CodeStagiaire and temp.date_max is null
-                 WHERE ';*/
-
-        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise    
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise, se.datedebutenets 
                 FROM EniBundle:Stagiaire s  
                   LEFT JOIN EniBundle:Stagiaireparentreprise se 
                   WITH se.codestagiaire = s.codestagiaire 
                   LEFT JOIN EniBundle:Entreprise e 
                   WITH e.codeentreprise = se.codeentreprise 
                  WHERE ';
-
-        //GROUP BY u.id HAVING COUNT(u) < 5
 
         $nom = $search["nom"];
         $prenom = $search["prenom"];
@@ -127,23 +91,74 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         foreach ($not_empty as $field => $value){
             if($i == 0){
                 $sql .= "s.".$field." = '".$value."' ";
-                //$sql2 .= "s.".$field." = '".$value."' ";
             }else{
                 $sql .= "AND s.".$field." = '".$value."' ";
-                //$sql2 .= "AND s.".$field." = '".$value."' ";
             }
             $i++;
         }
 
-        //$sql .= 'GROUP BY s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise ORDER BY se.DateLien DESC HAVING COUNT(s.codestagiaire) < 2';
-
-        //$temp_sql = $sql.' UNION '.$sql2;
-
+        $sql .= ' ORDER BY se.datedebutenets DESC';
 
         $query = $em->createQuery($sql);
-        //$query2 = $em->createQuery($sql2);
 
-        //array_merge($query->getResult(),$query2->getResult())
+        return $query->getResult();
+    }
+
+    public function rechercherNominativeDates($search,$em){
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise, se.datedebutenets, se.datelien 
+                FROM EniBundle:Stagiaire s  
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se 
+                  WITH se.codestagiaire = s.codestagiaire 
+                  LEFT JOIN EniBundle:Entreprise e 
+                  WITH e.codeentreprise = se.codeentreprise 
+                 WHERE ';
+
+        switch ($search["date_status"]){
+            case 1:
+                $sql .= " se.datelien  >  '".$search["date_debut"]."'";
+                break;
+            case 2:
+                $sql .= " se.datelien < '".$search["date_fin"]."'";
+                break;
+            case 3:
+                $sql .= " se.datelien BETWEEN '".$search["date_debut"]."' AND '".$search["date_fin"]."'";
+                break;
+        }
+
+
+        $sql .= ' ORDER BY se.datedebutenets DESC';
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function rechercherNominativeDatesFormation($search,$em){
+        $sql = 'SELECT s.codestagiaire, s.nom, s.prenom, s.email, se.codeentreprise, e.raisonsociale, e.ville, se.numlien, e.codeentreprise, se.datedebutenets, se.datelien 
+                FROM EniBundle:Stagiaire s  
+                  LEFT JOIN EniBundle:Stagiaireparentreprise se 
+                  WITH se.codestagiaire = s.codestagiaire 
+                  LEFT JOIN EniBundle:Entreprise e 
+                  WITH e.codeentreprise = se.codeentreprise 
+                 WHERE ';
+
+        switch ($search["date_status"]){
+            case 1:
+                $sql .= " se.datelien  >  '".$search["date_debut"]."'";
+                break;
+            case 2:
+                $sql .= " se.datelien < '".$search["date_fin"]."'";
+                break;
+            case 3:
+                $sql .= " se.datelien BETWEEN '".$search["date_debut"]."' AND '".$search["date_fin"]."'";
+                break;
+        }
+
+
+        $sql .= ' ORDER BY se.datedebutenets DESC';
+
+        $query = $em->createQuery($sql);
+
         return $query->getResult();
     }
 

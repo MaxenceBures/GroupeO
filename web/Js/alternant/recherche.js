@@ -5,16 +5,64 @@ $(function() {
 
     var entreprise = 0;
     var formation = 0;
+    //0 = pas de date
+    //1 = date debut
+    //2 = date fin
+    //3 = date debut fin
+    var date_status = -1;
 
     loadSelectEntreprise();
     loadSelectFormation();
     initDatatable();
+    initDate();
+
+
 
     $('#form_search').submit(false);
 
     $('#rechercher').click(function(){
-       search();
+        var deb_val = $('#date_deb').val();
+        var fin_val = $('#date_fin').val();
+
+        var use_date = $('#use_date').is(':checked');
+
+        if(use_date){
+            if(deb_val != "" && fin_val ==""){
+                date_status = 1;
+            }
+            if(deb_val == "" && fin_val !=""){
+                date_status = 2;
+            }
+            if(deb_val != "" && fin_val !=""){
+                if (new Date(deb_val) > new Date(fin_val)) {
+                    toastr.error("Verifier les dates");
+                }else{
+                    date_status = 3;
+                }
+            }
+            if(deb_val == "" && fin_val ==""){
+                toastr.error("Verifier les dates");
+            }
+        }else{
+            date_status = 0;
+        }
+
+        if(date_status != -1){
+            search();
+        }
+
     });
+
+    function initDate(){
+        $('#date_deb').datepicker({
+            autoclose: true
+        });
+
+        $('#date_fin').datepicker({
+            autoclose: true
+        });
+
+    }
 
     function search(){
         emptyTable();
@@ -23,6 +71,8 @@ $(function() {
         var input_mail = $('#input_mail').val();
         var select_entreprise = $("#select_entreprise option:selected" ).val();
         var select_formation = $("#select_formation option:selected" ).val();
+        var deb_val = $('#date_deb').val();
+        var fin_val = $('#date_fin').val();
 
         if(select_formation === undefined){
             select_formation = -1;
@@ -32,7 +82,21 @@ $(function() {
             select_entreprise = -1;
         }
 
-        var recherche = {'nom' : input_nom, 'prenom' : input_prenom, 'mail' : input_mail, 'entreprise' : select_entreprise, 'formation' : select_formation};
+        switch (date_status){
+            case 0:
+                deb_val = "";
+                fin_val = "";
+                break;
+            case 1:
+                fin_val = "";
+                break;
+            case 2:
+                deb_val = "";
+                break;
+        }
+
+
+        var recherche = {'nom' : input_nom, 'prenom' : input_prenom, 'mail' : input_mail, 'entreprise' : select_entreprise, 'formation' : select_formation, 'date_debut' : deb_val, 'date_fin' : fin_val, 'date_status' : date_status};
 
         $.ajax({
             type: "POST",

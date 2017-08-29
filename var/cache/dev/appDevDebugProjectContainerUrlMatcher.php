@@ -151,6 +151,21 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // user_alternant_recherche
+        if ('/recherche' === $pathinfo) {
+            return array (  '_controller' => 'EniBundle\\Controller\\AlternantController::user_rechercheAction',  '_route' => 'user_alternant_recherche',);
+        }
+
+        // connexion_register
+        if ('/register' === $pathinfo) {
+            return array (  '_controller' => 'FrontendBundle\\Controller\\ConnexionController::registerAction',  '_route' => 'connexion_register',);
+        }
+
+        // user_alternant_detail
+        if (0 === strpos($pathinfo, '/detail') && preg_match('#^/detail/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_alternant_detail')), array (  '_controller' => 'EniBundle\\Controller\\AlternantController::user_detailAction',));
+        }
+
         // entreprise_liste
         if ('/entreprise/liste' === $pathinfo) {
             if ('POST' !== $canonicalMethod) {
@@ -189,7 +204,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         // frontend_test
         if ('/test' === $pathinfo) {
-            return array (  '_controller' => 'FrontendBundle\\Controller\\AccueilController::indexAction',  '_route' => 'frontend_test',);
+            return array (  '_controller' => 'FrontendBundle\\Controller\\AccueilController::testAction',  '_route' => 'frontend_test',);
         }
 
         // connexion_formulaire
@@ -213,11 +228,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         // connexion_logout
         if ('/logout' === $pathinfo) {
             return array (  '_controller' => 'FrontendBundle\\Controller\\ConnexionController::logoutAction',  '_route' => 'connexion_logout',);
-        }
-
-        // connexion_register
-        if ('/register' === $pathinfo) {
-            return array (  '_controller' => 'FrontendBundle\\Controller\\ConnexionController::registerAction',  '_route' => 'connexion_register',);
         }
 
         if (0 === strpos($pathinfo, '/utilisateur')) {
@@ -261,27 +271,121 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // planning_frame
-        if ('/planning/frame' === $pathinfo) {
-            if ('POST' !== $canonicalMethod) {
-                $allow[] = 'POST';
-                goto not_planning_frame;
+        elseif (0 === strpos($pathinfo, '/p')) {
+            // user_utilisateur_modifier_password
+            if ('/password_update' === $pathinfo) {
+                return array (  '_controller' => 'FrontendBundle\\Controller\\UtilisateurController::user_modifier_passwordAction',  '_route' => 'user_utilisateur_modifier_password',);
             }
 
-            return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::frameAction',  '_route' => 'planning_frame',);
-        }
-        not_planning_frame:
+            if (0 === strpos($pathinfo, '/parametrage')) {
+                // parametrage_module
+                if ('/parametrage' === $pathinfo) {
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_modulesAction',  '_route' => 'parametrage_module',);
+                }
 
-        // planning_editeur
-        if ('/planning/editeur' === $pathinfo) {
-            if ('POST' !== $canonicalMethod) {
-                $allow[] = 'POST';
-                goto not_planning_editeur;
+                if (0 === strpos($pathinfo, '/parametrage/lieu')) {
+                    // parametrage_lieu
+                    if ('/parametrage/lieu' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_lieuxAction',  '_route' => 'parametrage_lieu',);
+                    }
+
+                    // parametrage_fermeture_ajout
+                    if ('/parametrage/lieu/ajouter' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_fermetureAction',  '_route' => 'parametrage_fermeture_ajout',);
+                    }
+
+                    // parametrage_fermeture_liste
+                    if ('/parametrage/lieu/fermeture' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_fermetureAction',  '_route' => 'parametrage_fermeture_liste',);
+                    }
+
+                    // parametrage_fermeture_supprimer
+                    if ('/parametrage/lieu/supprimer' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::supprimer_fermetureAction',  '_route' => 'parametrage_fermeture_supprimer',);
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/parametrage/module')) {
+                    // parametrage_module_ajout
+                    if ('/parametrage/module/ajouter' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_moduleAction',  '_route' => 'parametrage_module_ajout',);
+                    }
+
+                    // parametrage_module_supprimer
+                    if ('/parametrage/module/supprimer' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::supprimer_moduleAction',  '_route' => 'parametrage_module_supprimer',);
+                    }
+
+                    // parametrage_module_liste
+                    if ('/parametrage/module/liste' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_moduleAction',  '_route' => 'parametrage_module_liste',);
+                    }
+
+                    // parametrage_module_modifier
+                    if ('/parametrage/module/modifier' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::modifier_moduleAction',  '_route' => 'parametrage_module_modifier',);
+                    }
+
+                }
+
+                elseif (0 === strpos($pathinfo, '/parametrage/cours')) {
+                    // parametrage_cours_ajout
+                    if ('/parametrage/cours/ajouter' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_coursAction',  '_route' => 'parametrage_cours_ajout',);
+                    }
+
+                    // parametrage_cours_liste
+                    if ('/parametrage/cours/liste' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_coursAction',  '_route' => 'parametrage_cours_liste',);
+                    }
+
+                    // parametrage_cours_supprimer
+                    if ('/parametrage/cours/supprimer' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::supprimer_coursAction',  '_route' => 'parametrage_cours_supprimer',);
+                    }
+
+                }
+
             }
 
-            return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::editeurAction',  '_route' => 'planning_editeur',);
+            elseif (0 === strpos($pathinfo, '/planning')) {
+                // planning_frame
+                if ('/planning/frame' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_frame;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::frameAction',  '_route' => 'planning_frame',);
+                }
+                not_planning_frame:
+
+                // planning_editeur
+                if ('/planning/editeur' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_editeur;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::editeurAction',  '_route' => 'planning_editeur',);
+                }
+                not_planning_editeur:
+
+                // planning_status_update
+                if ('/planning/status_update' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_status_update;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::status_updateAction',  '_route' => 'planning_status_update',);
+                }
+                not_planning_status_update:
+
+            }
+
         }
-        not_planning_editeur:
 
         // homepage
         if ('' === $trimmedPathinfo) {
