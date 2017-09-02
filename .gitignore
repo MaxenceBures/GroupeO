@@ -23,4 +23,3 @@ var/logs/dev.log
 var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
 *.meta
 var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
-/vendor/
