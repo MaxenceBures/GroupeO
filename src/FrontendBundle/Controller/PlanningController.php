@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use DateTime;
-use Knp\Snappy\Pdf;
 
 class PlanningController extends Controller {
 
@@ -89,7 +88,8 @@ class PlanningController extends Controller {
             $date_fin_temp = date_format($planning_obj_temp[0]->getDatefin(), "d/m/y");
             $max_heure_temp = $planning_obj_temp[0]->getMaxheureformation();
             $max_semaine_temp = $planning_obj_temp[0]->getMaxtempsformation();
-            $cours_plannifier = $repository_planning_cours->getCoursByPLanning($planning_obj_temp, $em_front);
+            $cours_plannifier = $repository_planning_cours->getCoursByPLanning($planning_obj_temp,$em_front);
+            
         }
 
         $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $stagiaire_temp));
@@ -150,131 +150,36 @@ class PlanningController extends Controller {
         $repository_planning_cours = $this->getDoctrine()->getRepository('FrontendBundle:PlanningCours');
         $new_planning = $repository->insertPlanning($planning, $this->getDoctrine()->getManager());
 
-        if (isset($cours_temps["ajouter"])) {
-            foreach ($cours_temps["ajouter"] as $pla_cours) {
-                $cours = new PlanningCours();
-                $cours->setPlanning($new_planning);
-                $cours->setCoursId($pla_cours['id']);
-                $cours->setOrdre($pla_cours['ordre']);
-                if ($pla_cours['inde']) {
-                    $cours->setCoursIndependant($pla_cours['id']);
-                }
-                $repository_planning_cours->insertCours($cours, $this->getDoctrine()->getManager());
+        foreach ($cours_temps as $pla_cours) {
+            $cours = new PlanningCours();
+            $cours->setPlanning($new_planning);
+            $cours->setCoursId($pla_cours['id']);
+            $cours->setOrdre($pla_cours['ordre']);
+            if ($pla_cours['inde']) {
+                $cours->setCoursIndependant($pla_cours['id']);
             }
+            $repository_planning_cours->insertCours($cours, $this->getDoctrine()->getManager());
         }
+
         return new Response(json_encode(array("status" => "ok", "planning_id" => $new_planning->getIdPlanning())));
-    }
-
-    /**
-     * @Route("/planning/modifier", name="planning_modifier")
-     */
-    public function modifierAction(Request $request) {
-        $planning_temp = $request->get("id");
-        $nom_planning_temp = $request->get("nom");
-        $stagiaire_temp = $request->get("stagiaire");
-        $entreprise_temp = $request->get("entreprise");
-        $stagiaire_entreprise_temp = $request->get("stagiaire_entreprise");
-        $formation_temp = $request->get("formation");
-        $date_debut_temp = $request->get("date_debut");
-        $date_fin_temp = $request->get("date_fin");
-        $max_heure_temp = $request->get("max_heure");
-        $max_semaine_temp = $request->get("max_semaine");
-        $createur_temp = $request->get("createur");
-        $cours_temps = $request->get("cours");
-        $usr = $this->get('security.token_storage')->getToken()->getUser();
-
-        $repository = $this->getDoctrine()->getRepository('FrontendBundle:Planning');
-        $repository_planning_cours = $this->getDoctrine()->getRepository('FrontendBundle:PlanningCours');
-        $planning = $repository->findBy(array("idPlanning" => $planning_temp));
-
-        if (isset($cours_temps["supprimer"])) {
-            foreach ($cours_temps["supprimer"] as $pla_cours) {
-                $cours = new PlanningCours();
-                $cours->setPlanning($planning[0]);
-                $cours->setCoursId($pla_cours['id']);
-                $cours->setOrdre($pla_cours['ordre']);
-                if ($pla_cours['inde']) {
-                    $cours->setCoursIndependant($pla_cours['id']);
-                }
-                $repository_planning_cours->deleteCours($cours, $this->getDoctrine()->getManager());
-            }
-        }
-        if (isset($cours_temps["modifier"])) {
-            foreach ($cours_temps["modifier"] as $pla_cours) {
-                $cours = new PlanningCours();
-                $cours->setPlanning($planning[0]);
-                $cours->setCoursId($pla_cours['id']);
-                $cours->setOrdre($pla_cours['ordre']);
-                if ($pla_cours['inde']) {
-                    $cours->setCoursIndependant($pla_cours['id']);
-                }
-                $repository_planning_cours->updateCours($cours, $this->getDoctrine()->getManager());
-            }
-        }
-        if (isset($cours_temps["ajouter"])) {
-            foreach ($cours_temps["ajouter"] as $pla_cours) {
-                $cours = new PlanningCours();
-                $cours->setPlanning($planning[0]);
-                $cours->setCoursId($pla_cours['id']);
-                $cours->setOrdre($pla_cours['ordre']);
-                if ($pla_cours['inde']) {
-                    $cours->setCoursIndependant($pla_cours['id']);
-                }
-                $repository_planning_cours->insertCours($cours, $this->getDoctrine()->getManager());
-            }
-        }
-
-
-
-        return new Response(json_encode(array("status" => "ok", "planning_id" => $planning[0]->getIdPlanning())));
     }
 
     /**
      * Export to PDF
      * 
-     * @Route("/planning/pdf", name="planning_pdf")
+     * @Route("/planning/pdf/{id}", name="planning_pdf")
      */
     public function pdfAction(Request $request, $id) {
-        $planning_cours = array();
-        $em_eni = $this->getDoctrine()->getManager('eni');
-        $em_front = $this->getDoctrine()->getManager('groupeo');
 
-        $repository_lieu = $em_eni->getRepository("EniBundle:Lieu");
-        $repository_modules = $em_eni->getRepository("EniBundle:Module");
-        $repository_formation = $em_eni->getRepository("EniBundle:Formation");
-        $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
-        $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
-        $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
-        $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
+        $repo_planning = $this->getDoctrine()->getRepository('FrontendBundle:Planning');
+        $planning = $repo_planning->findBy(array("id" => $id));
 
-        $repo_planning = $em_front->getRepository('FrontendBundle:Planning');
-        $repo_planning_cours = $em_front->getRepository('FrontendBundle:PlanningCours');
-        $planning = $repo_planning->findBy(array("idPlanning" => $id));
-        $planning_cours_temp = $repo_planning_cours->findBy(array("planning"=>$id));
+        $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning));
 
-        $formation = $repository_formation->findBy(array("codeformation" => $planning[0]->getFormationCode()));
-        $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
-        $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
-
-        foreach ($planning_cours_temp as $k => $v) {
-            $cours = $v;
-            
-            array_push($planning_cours, $v);
-        }
-
-
-        $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
-            "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours,
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
-
-        $filename = $planning[0]->getNom() . '.pdf';
-
-        $snappy = new Pdf($this->get('kernel')->getRootDir() . '/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf.exe');
+        $filename = sprintf($planning->getNom() . '.pdf', date('Y-m-d'));
 
         return new Response(
-                $snappy->getOutputFromHtml($html, array('lowquality' => false,
-                    'encoding' => 'utf-8',
-                    'images' => true, 'load-error-handling' => 'ignore')), 200, [
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
                 ]

@@ -17,46 +17,22 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
     public function getCoursByPLanning($planning, $em) {
         $sql = "select idPlanningcours,coursId,coursIndependant,ordre,
                 c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
-                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid,m.libelle as libelle_module,mi.libelle as libelle_inde,
-                DATE_ADD(c.fin,3,'DAY') as new_debut_cours,DATE_ADD(c.debut,3,'DAY') as old_fin_cours,DATE_ADD(ci.fin,3,'DAY') as new_debut_inde,DATE_ADD(ci.fin,3,'DAY') as old_fin_inde
+                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid
+                ,sum(iif(c.dureeReelleenheures is null,0,c.dureeReelleenheures)+ iif(ci.dureeReelleenheures is null, 0, ci.dureeReelleenheures)) over() as total
                 from FrontendBundle:PlanningCours pc
                 join EniBundle:Cours c on c.idCours = pc.coursId
                 full FrontendBundle:CoursIndependant ci on ci.idCours = pc.coursIndependant
-                join EniBundle:Module m on m.idmodule = c.idmodule
-                full FrontendBundle:ModuleIndependant ci on ci.moduleIndependantid = ci.idmodule
-                where planningId = " . $planning[0]->getIdplanning() . "
+                where planningId = ".$planning[0]->getIdplanning()."
                 group by idPlanningcours,coursId,coursIndependant,ordre,
                 c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
-                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid
-                order by ordre";
+                ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid";
 
         $query = $em->createQuery($sql);
 
         return $query->getResult();
     }
 
-    public function getCoursPlanning($cours,$planning,$em) {
-        $repository = $em->getRepository('FrontendBundle:Utilisateur');
-        $utilisateur_temp = $repository->findBy(array("coursid" => $cours->getCoursId(), "planning" => $planning->getIdPlanning()));
-
-        return $utilisateur_temp;
-    }
-
     public function insertCours($cours, $em) {
-        $em->persist($cours);
-        $em->flush();
-
-        return $cours;
-    }
-
-    public function deleteCours($cours, $em) {
-        $em->remove($cours);
-        $em->flush();
-
-        return $cours;
-    }
-
-    public function updateCours($cours, $em) {
         $em->persist($cours);
         $em->flush();
 

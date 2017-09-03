@@ -5,15 +5,16 @@
         <group>
             <file>file:/C:/wamp64/www/GroupeO/web/Js/planning/editeur.js</file>
             <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/config/doctrine/PlanningCours.orm.yml</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/AlternantController.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/ModuleIndependent/frameEdition.html.twig</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Entity/Planning.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Controller/ModuleIndependentController.php</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/pdf.html.twig</file>
             <file>file:/C:/wamp64/www/GroupeO/web/template/plugins/fullcalendar/ferie.min.js</file>
-            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Repository/PlanningCoursRepository.php</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Controller/PlanningController.php</file>
             <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/ModuleController.php</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/frame.html.twig</file>
-            <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Entity/Cours.php</file>
+            <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/config/doctrine/ModuleIndependent.orm.yml</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/config/routing.yml</file>
             <file>file:/C:/wamp64/www/GroupeO/src/FrontendBundle/Resources/views/Planning/editeur.html.twig</file>
             <file>file:/C:/wamp64/www/GroupeO/src/EniBundle/Controller/CoursController.php</file>
