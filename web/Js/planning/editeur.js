@@ -27,7 +27,7 @@ $("#table-modules").dataTable({
     "pageLength": 500
 });
 
-$("#table-modules-independent").dataTable({
+$("#table-modules-Independant").dataTable({
     dom: 'rt<"clear">',
     filtering: false,
     ordering: false,
@@ -90,35 +90,6 @@ function getCours() {
 function splitCoursWhenFerie(debut, fin, lieu) {
 
 }
-//
-//function getJoursFeriesCalendar(cours) {
-//    var jours_ferie_temps = [];
-//    var date_debut = new Date(convertDate($("#date_debut_contrat").text(), false));
-//    var date_fin = new Date(convertDate($("#date_fin_contrat").text(), false));
-//    var nb_annee = date_fin.getFullYear() - date_debut.getFullYear();
-//    for (var i = 0; i < nb_annee + 1; i++) {
-//        var list_feries = moment().getFerieList(date_fin.getFullYear() - i)
-//        jours_ferie_temps.push(list_feries);
-//    }
-//    $.each(jours_ferie_temps, function () {
-//        var jour_array = $(this);
-//        for (var i = 0; i < jour_array.length; i++) {
-//            var date = new Date(jour_array[i].date);
-//            cours.push({
-//                "id": "ferie",
-//                "title": "Ferié",
-//                "taskId": "",
-//                "start": date,
-//                "end": date,
-//                "allDay": true,
-//                "backgroundColor": "#eee",
-//                "editable": false
-//            });
-//        }
-//    });
-//    console.log(cours);
-//    return cours;
-//}
 
 function getJoursFeries() {
     var jours_ferie_temps = [];
@@ -271,7 +242,8 @@ function onDropEventToPlanning(event) {
                 var cours = response.cours;
                 var debut_cours = convertDate2(cours.start['date']);
                 var fin_cours = convertDate2(cours.end['date']);
-                var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' value='" + cours.idmodule + "' data-cours='" + idCours + "'>";
+                var ordre = $(".cours_planning").length + 1;
+                var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' value='" + cours.idmodule + "' data-cours='" + idCours + "' data-ordre='" + ordre + "'>";
                 html += "<td class='text-center'><label>" + debut_cours.format('L') + "</label></td>";
                 html += "<td class='text-center'><label>" + fin_cours.format('L') + "</label></td>";
                 html += "<td class='text-center'><label>ENI (" + cours.lieu + ")<br>" + cours.duree + " heures</label></td>";
@@ -305,6 +277,7 @@ function sortPlanning() {
         return $(a).data('_ts') > $(b).data('_ts');
     }).appendTo('#table-planning tbody ');
     recalcDateEntreprise();
+    recalcOrdreCours();
 }
 
 function recalcDateEntreprise() {
@@ -326,6 +299,15 @@ function recalcDateEntreprise() {
         }
 
     })
+}
+
+function recalcOrdreCours() {
+    $.each($("#table-planning tbody tr.cours_planning"), function (index) {
+        if ($(this).attr("data-ordre") != index + 1 && !$(this).hasClass("ajouter") && !$(this).hasClass("modifier") && !$(this).hasClass("supprimer")) {
+            $(this).addClass("modifier");
+        }
+        $(this).attr("data-ordre", index + 1);
+    });
 }
 
 function getDatePlanningOnDrop(cours, debut, fin) {
@@ -530,7 +512,7 @@ function btModuleSearchClick(module) {
     parent.remove();
 }
 
-function btAddModuleIndependentClick() {
+function btAddModuleIndependantClick() {
     $.ajax({
         type: "POST",
         url: "/moduleInde/editFrame",
@@ -573,12 +555,10 @@ function onBtFramePlanningClick() {
     getFramePlanning(id);
 }
 function onBtGenerationClick() {
-    btSaveClick();
-    var id = $("#id_planning").val();
-    window.open("/planning/pdf/" + id);
+    btSaveClick(true);
 }
 
-function btSaveClick() {
+function btSaveClick(generation) {
     var id = $("#id_planning").val();
     $.ajax({
         type: "POST",
@@ -601,8 +581,21 @@ function btSaveClick() {
         success: function (response) {
             if (response.status == "ok") {
                 alert(response.planning_id);
-                $("#id_planning").val(response.planning_id)
+                $("#id_planning").val(response.planning_id);
                 toastr.success("Le planning a été sauvegardé");
+                if (generation) {
+                    open("/planning/pdf/" + response.planning_id);
+//                    $.ajax({type: 'GET',
+//                        url: "/planning/pdf/" + response.planning_id,
+//                        dataType: 'text',
+//                        contentType: 'application/pdf',
+//                        success : function(){
+//                            open("./"+$("#nom_planning").val()+".pdf");
+//                        }
+//                    });
+                }
+                $("#table-planning tbody tr.cours_planning").removeClass("ajouter").removeClass("modifier");
+                $("#table-planning tbody tr.cours_planning .supprimer").remove();
             } else {
                 toastr.error("Erreur a l'enregistrement du planning");
             }
@@ -616,16 +609,31 @@ function btAnnulerClick() {
 
 function getCoursPlanning() {
     var data = [];
-    $("#table-planning tbody tr.cours_planning").each(function (index) {
-        data.push({
+    var ajouter = [];
+    var modifier = [];
+    var supprimer = [];
+    $("#table-planning tbody tr.cours_planning").each(function () {
+        var cours = {
             id: $(this).attr('data-cours') != undefined && $(this).attr('data-cours') != false ? $(this).attr('data-cours') : $(this).attr('data-cours-inde'),
             inde: $(this).attr('data-cours') == undefined && $(this).attr('data-cours') == false ? true : "",
-            ordre: index,
+            ordre: $(this).attr('data-ordre'),
             split: $(this).hasClass('split'),
             date_debut_split: $(this).hasClass('split') ? $(this).attr('debut_split') : "",
             date_fin_split: $(this).hasClass('split') ? $(this).attr('fin_split') : "",
-        });
+        };
+        if ($(this).hasClass("ajouter")) {
+            ajouter.push(cours);
+        } else if ($(this).hasClass("modifier")) {
+            modifier.push(cours);
+        } else if ($(this).hasClass("supprimer")) {
+            supprimer.push(cours);
+        }
     });
+    data = {
+        ajouter: ajouter,
+        modifier: modifier,
+        supprimer: supprimer
+    };
     return data;
 }
 

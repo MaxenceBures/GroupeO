@@ -59,6 +59,10 @@ planning_ajouter:
     path:     /planning/ajouter
     defaults: { _controller: FrontendBundle:Planning:ajouter }
     methods: [post]
+planning_modifier:
+    path:     /planning/modifier
+    defaults: { _controller: FrontendBundle:Planning:modifier }
+    methods: [post]
 planning_pdf:
     path:     /planning/pdf/{id}
     defaults: { _controller: FrontendBundle:Planning:pdf }
