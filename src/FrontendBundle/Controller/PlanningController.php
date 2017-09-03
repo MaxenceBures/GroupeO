@@ -301,7 +301,6 @@ class PlanningController extends Controller {
             'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
                 ]
         );
->>>>>>> origin/master
     }
 
 }
