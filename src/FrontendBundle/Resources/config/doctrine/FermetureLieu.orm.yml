@@ -1,5 +1,6 @@
 FrontendBundle\Entity\FermetureLieu:
     type: entity
+    repositoryClass: FrontendBundle\Repository\FermetureLieuRepository
     table: FERMETURE_LIEU
     id:
         idFermeture:

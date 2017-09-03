@@ -1,5 +1,6 @@
 FrontendBundle\Entity\CoursIndependant:
     type: entity
+    repositoryClass: FrontendBundle\Repository\CoursIndependantRepository
     table: COURS_INDEPENDANT
     indexes:
         IDX_D25EF8DA8CEFA577:

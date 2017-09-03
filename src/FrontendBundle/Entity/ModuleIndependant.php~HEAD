@@ -5,9 +5,9 @@ namespace FrontendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ModuleIndependent
+ * ModuleIndependant
  *
- * @ORM\Table(name="MODULE_INDEPENDANT")
+ * @ORM\Table(name="MODULE_Independant")
  * @ORM\Entity
  */
 class ModuleIndependant

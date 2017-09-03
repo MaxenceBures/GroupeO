@@ -1,5 +1,6 @@
 FrontendBundle\Entity\ModuleIndependant:
     type: entity
+    repositoryClass: FrontendBundle\Repository\ModuleRepository
     table: MODULE_INDEPENDANT
     id:
         idModule:

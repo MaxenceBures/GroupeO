@@ -117,6 +117,28 @@ class PlanningController extends Controller {
     }
 
     /**
+     * @Route("/planning/status_update", name="planning_status_update")
+     */
+    /*public function status_updateAction(Request $request) {
+        if ($request->isXMLHttpRequest()) {
+
+            $em =  $this->getDoctrine()->getEntityManager('groupeo');
+            $repository_planning = $em->getRepository('FrontendBundle:Planning');
+
+            $recherche_temp = $request->get("recherche");
+
+            $plannings = $repository_planning->getPlanningByLien($recherche_temp["planning"],$this->getDoctrine()->getManager('groupeo'));
+
+            $planning = $plannings[0];
+
+            $planning->setEtat($recherche_temp["status"]);
+
+            $new_planning = $repository_planning->modifierPlanningStatus($planning,$this->getDoctrine()->getManager('groupeo'));
+
+            return new Response(json_encode(array("status" =>"ok")));
+        }*/
+        
+    /**
      * @Route("/planning/ajouter", name="planning_ajouter")
      */
     public function ajouterAction(Request $request) {
@@ -279,6 +301,7 @@ class PlanningController extends Controller {
             'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
                 ]
         );
+>>>>>>> origin/master
     }
 
 }

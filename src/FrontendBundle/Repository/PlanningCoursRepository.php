@@ -14,6 +14,7 @@ use Doctrine\DBAL\DriverManager;
  */
 class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
 
+
     public function getCoursByPLanning($planning, $em) {
         $sql = "select idPlanningcours,coursId,coursIndependant,ordre,
                 c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
@@ -49,6 +50,7 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
         return $cours;
     }
 
+<<<<<<< HEAD
     public function deleteCours($cours, $em) {
         $em->remove($cours);
         $em->flush();
@@ -63,4 +65,12 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
         return $cours;
     }
 
+=======
+    public function getPlanningByCours($id,$em){
+        $repository = $em->getRepository('FrontendBundle:PlanningCours');
+        $cours_temp = $repository->findby(array('coursId' => $id));
+
+        return $cours_temp;
+    }
+>>>>>>> 1ad3917bf40f21e3ca0751309117707710daff9f
 }

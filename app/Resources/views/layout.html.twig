@@ -45,15 +45,15 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="{{asset ('image/user.png') }}" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">admin@admin</span>
+                                    <span class="hidden-xs">{{ app.user.email |trim}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
                                         <img src="{{asset ('image/user.png') }}" alt="" class="img-circle" alt="User Image"/>
-                                        <p> 
-                                            Admin
-                                            <small> Groupe </small>
+                                        <p>
+                                            {{ app.user.name |trim}}
+                                            <small> Administrateur </small>
                                         </p>
                                     </li>
                                     <!-- Menu Footer-->
@@ -93,6 +93,11 @@
                                 <li>
                                     <a href="/alternant/recherche">
                                         <i class="fa fa-user "></i> <span>Recherche Alternant</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/parametrage">
+                                        <i class="fa fa-circle-o text-aqua"></i> <span>Paramètrage</span>
                                     </a>
                                 </li>
                             </ul>

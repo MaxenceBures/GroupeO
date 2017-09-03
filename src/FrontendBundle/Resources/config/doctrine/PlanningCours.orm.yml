@@ -5,7 +5,7 @@ FrontendBundle\Entity\PlanningCours:
     indexes:
         IDX_80E24908901E2E06:
             columns:
-                - cours_Independant
+                - cours_independant
         IDX_80E249083D865311:
             columns:
                 - planning_id
@@ -40,7 +40,7 @@ FrontendBundle\Entity\PlanningCours:
             mappedBy: null
             inversedBy: null
             joinColumns:
-                cours_Independant:
+                cours_independant:
                     referencedColumnName: id_cours
             orphanRemoval: false
         planning:

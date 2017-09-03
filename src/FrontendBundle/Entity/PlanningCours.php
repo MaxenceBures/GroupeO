@@ -45,6 +45,11 @@ class PlanningCours
      */
     private $planning;
 
+    /**
+     * @var \FrontendBundle\Entity\CoursIndependant
+     */
+    private $coursIndependant;
+
 
 
     /**
@@ -128,10 +133,6 @@ class PlanningCours
     {
         return $this->planning;
     }
-    /**
-     * @var \FrontendBundle\Entity\CoursIndependant
-     */
-    private $coursIndependant;
 
 
     /**
@@ -144,7 +145,7 @@ class PlanningCours
     public function setCoursIndependant(\FrontendBundle\Entity\CoursIndependant $coursIndependant = null)
     {
         $this->coursIndependant = $coursIndependant;
-    
+
         return $this;
     }
 

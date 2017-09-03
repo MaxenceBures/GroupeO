@@ -1,6 +1,14 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_user.html.twig' %}
 
 {% block body %}
+
+    <a href="/recherche">
+        <button type="button" class="btn btn-default btn-md">
+            <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Retour
+        </button>
+    </a>
+
+
     <H1>Detail</H1>
 
     <div id="div_identification" style="margin-top: 30px; background-color: grey;">
@@ -199,12 +207,13 @@
                     </div>
                 </div>
             </div>
+            <!-- /.modal_password -->
         </form>
     </div><!-- /.login-box -->
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('Js/alternant/detail.js') }}"></script>
+    <script src="{{ asset('Js/alternant/user_detail.js') }}"></script>
 {% endblock %}
 

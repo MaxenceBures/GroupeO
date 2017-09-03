@@ -128,7 +128,7 @@ $(function() {
                                 html +=  '<td>'+value.libelle_formation+'('+value.code_formation+')'+'</td>';
                             }
 
-                            html += '<td><a href="/alternant/detail/'+value.codestagiaire+'">Detail</a></td></tr>';
+                            html += '<td><a href="/detail/'+value.codestagiaire+'">Detail</a></td></tr>';
 
                             $('#liste_utilisateur_ligne').append(html);
 

@@ -23,3 +23,13 @@ var/logs/dev.log
 var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
 *.meta
 var/cache/dev/appDevDebugProjectContainerUrlGenerator.php
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+app/config/config.yml
+=======
+/vendor/
+>>>>>>> origin/master
+>>>>>>> 1ad3917bf40f21e3ca0751309117707710daff9f
+var/logs/dev.log
+src/FrontendBundle/Repository/PlanningCoursRepository.php

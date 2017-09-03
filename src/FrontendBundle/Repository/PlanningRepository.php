@@ -48,7 +48,73 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         $em->persist($planning);
         $em->flush();
 
+    public function rechercherPlanningDates($search,$em){
+        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
+                FROM FrontendBundle:Planning p
+                WHERE ';
+
+        switch ($search["date_status"]){
+            case 1:
+                $sql .= " p.dateDebut  >  '".$search["date_debut"]."'";
+                break;
+            case 2:
+                $sql .= " p.dateDebut < '".$search["date_fin"]."'";
+                break;
+            case 3:
+                $sql .= " p.dateDebut BETWEEN '".$search["date_debut"]."' AND '".$search["date_fin"]."'";
+                break;
+        }
+
+
+        $sql .= ' ORDER BY p.dateDebut DESC';
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function rechercherPlanningDatesFormation($search,$em){
+        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
+                FROM FrontendBundle:Planning p
+                WHERE ';
+
+        switch ($search["date_status"]){
+            case 1:
+                $sql .= " p.dateDebut  >  '".$search["date_debut"]."'";
+                break;
+            case 2:
+                $sql .= " p.dateDebut < '".$search["date_fin"]."'";
+                break;
+            case 3:
+                $sql .= " p.dateDebut BETWEEN '".$search["date_debut"]."' AND '".$search["date_fin"]."'";
+                break;
+        }
+
+        $sql .= " AND p.formationCode = '".$search["formation"]."'";
+
         return $planning;
     }
 
+
+
+        $sql .= ' ORDER BY p.dateDebut DESC';
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function modifierPlanningStatus($planning,$em){
+        $em->persist($planning);
+        $em->flush();
+
+        return $planning;
+    }
+
+    public function getPlanningByLien($id,$em){
+        $repository = $em->getRepository('FrontendBundle:Planning');
+        $planning_temp = $repository->findBy(array('stagiaireEntrepriseNumlien' => $id));
+
+        return $planning_temp;
+    }
 }

@@ -13,6 +13,12 @@ alternant_detail:
     path:     /alternant/detail/{id}
     defaults: { _controller: EniBundle:Alternant:detail }
     methods:  [GET]
+user_alternant_recherche:
+    path:     /recherche
+    defaults: { _controller: EniBundle:Alternant:user_recherche }
+user_alternant_detail:
+    path:     /detail/{id}
+    defaults: { _controller: EniBundle:Alternant:user_detail }
 #ALTERNANT
 
 #ENTREPRISE
