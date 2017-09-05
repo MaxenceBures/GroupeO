@@ -193,6 +193,54 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_formation_liste:
 
+        if (0 === strpos($pathinfo, '/co')) {
+            // recherche
+            if ('/cours/recherche' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\CoursController::rechercheAction',  '_route' => 'recherche',);
+            }
+
+            // liste_cours_planning
+            if ('/cours/liste_cours_planning' === $pathinfo) {
+                return array (  '_controller' => 'EniBundle\\Controller\\CoursController::listePlanningAction',  '_route' => 'liste_cours_planning',);
+            }
+
+            // connexion_formulaire
+            if ('/connexion' === $pathinfo) {
+                return array (  '_controller' => 'FrontendBundle\\Controller\\ConnexionController::formulaireAction',  '_route' => 'connexion_formulaire',);
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/module')) {
+            // frame_search
+            if ('/module/frameSearch' === $pathinfo) {
+                if ('POST' !== $canonicalMethod) {
+                    $allow[] = 'POST';
+                    goto not_frame_search;
+                }
+
+                return array (  '_controller' => 'EniBundle\\Controller\\ModuleController::frameSearchAction',  '_route' => 'frame_search',);
+            }
+            not_frame_search:
+
+            // liste_search
+            if ('/module/listeSearch' === $pathinfo) {
+                if ('POST' !== $canonicalMethod) {
+                    $allow[] = 'POST';
+                    goto not_liste_search;
+                }
+
+                return array (  '_controller' => 'EniBundle\\Controller\\ModuleController::listeSearchAction',  '_route' => 'liste_search',);
+            }
+            not_liste_search:
+
+            // edit_frame
+            if ('/moduleInde/editFrame' === $pathinfo) {
+                return array (  '_controller' => 'FrontendBundle\\Controller\\ModuleIndependantController::editFrameAction',  '_route' => 'edit_frame',);
+            }
+
+        }
+
         // frontend_homepage
         if ('' === $trimmedPathinfo) {
             if (substr($pathinfo, -1) !== '/') {
@@ -205,11 +253,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         // frontend_test
         if ('/test' === $pathinfo) {
             return array (  '_controller' => 'FrontendBundle\\Controller\\AccueilController::testAction',  '_route' => 'frontend_test',);
-        }
-
-        // connexion_formulaire
-        if ('/connexion' === $pathinfo) {
-            return array (  '_controller' => 'FrontendBundle\\Controller\\ConnexionController::formulaireAction',  '_route' => 'connexion_formulaire',);
         }
 
         if (0 === strpos($pathinfo, '/login')) {
@@ -382,6 +425,39 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::status_updateAction',  '_route' => 'planning_status_update',);
                 }
                 not_planning_status_update:
+
+                // planning_ajouter
+                if ('/planning/ajouter' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_ajouter;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::ajouterAction',  '_route' => 'planning_ajouter',);
+                }
+                not_planning_ajouter:
+
+                // planning_modifier
+                if ('/planning/modifier' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_modifier;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::modifierAction',  '_route' => 'planning_modifier',);
+                }
+                not_planning_modifier:
+
+                // planning_pdf
+                if (0 === strpos($pathinfo, '/planning/pdf') && preg_match('#^/planning/pdf/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ('GET' !== $canonicalMethod) {
+                        $allow[] = 'GET';
+                        goto not_planning_pdf;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'planning_pdf')), array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::pdfAction',));
+                }
+                not_planning_pdf:
 
             }
 

@@ -119,25 +119,25 @@ class PlanningController extends Controller {
     /**
      * @Route("/planning/status_update", name="planning_status_update")
      */
-    /*public function status_updateAction(Request $request) {
-        if ($request->isXMLHttpRequest()) {
+    /* public function status_updateAction(Request $request) {
+      if ($request->isXMLHttpRequest()) {
 
-            $em =  $this->getDoctrine()->getEntityManager('groupeo');
-            $repository_planning = $em->getRepository('FrontendBundle:Planning');
+      $em =  $this->getDoctrine()->getEntityManager('groupeo');
+      $repository_planning = $em->getRepository('FrontendBundle:Planning');
 
-            $recherche_temp = $request->get("recherche");
+      $recherche_temp = $request->get("recherche");
 
-            $plannings = $repository_planning->getPlanningByLien($recherche_temp["planning"],$this->getDoctrine()->getManager('groupeo'));
+      $plannings = $repository_planning->getPlanningByLien($recherche_temp["planning"],$this->getDoctrine()->getManager('groupeo'));
 
-            $planning = $plannings[0];
+      $planning = $plannings[0];
 
-            $planning->setEtat($recherche_temp["status"]);
+      $planning->setEtat($recherche_temp["status"]);
 
-            $new_planning = $repository_planning->modifierPlanningStatus($planning,$this->getDoctrine()->getManager('groupeo'));
+      $new_planning = $repository_planning->modifierPlanningStatus($planning,$this->getDoctrine()->getManager('groupeo'));
 
-            return new Response(json_encode(array("status" =>"ok")));
-        }*/
-        
+      return new Response(json_encode(array("status" =>"ok")));
+      } */
+
     /**
      * @Route("/planning/ajouter", name="planning_ajouter")
      */
@@ -263,6 +263,7 @@ class PlanningController extends Controller {
 
         $repository_lieu = $em_eni->getRepository("EniBundle:Lieu");
         $repository_modules = $em_eni->getRepository("EniBundle:Module");
+        $repository_cours = $em_eni->getRepository("EniBundle:Cours");
         $repository_formation = $em_eni->getRepository("EniBundle:Formation");
         $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
         $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
@@ -272,16 +273,25 @@ class PlanningController extends Controller {
         $repo_planning = $em_front->getRepository('FrontendBundle:Planning');
         $repo_planning_cours = $em_front->getRepository('FrontendBundle:PlanningCours');
         $planning = $repo_planning->findBy(array("idPlanning" => $id));
-        $planning_cours_temp = $repo_planning_cours->findBy(array("planning"=>$id));
+        $planning_cours_temp = $repo_planning_cours->findBy(array("planning" => $id), array('ordre' => 'ASC'));
 
         $formation = $repository_formation->findBy(array("codeformation" => $planning[0]->getFormationCode()));
         $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
         $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
 
-        foreach ($planning_cours_temp as $k => $v) {
-            $cours = $v;
-            
-            array_push($planning_cours, $v);
+        foreach ($planning_cours_temp as $k) {
+            // var_dump($k) . "<br>";
+            $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
+            $lieu_temps = ($k->getCoursid() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+            $cours_temps = ($k->getCoursid() != null) ? array("id" => $k->getCoursid(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+            $module = ($k->getCoursid() != null) ? $repository_modules->findBy(array("idmodule" => $cours[0]->getIdmodule())) : null;
+            $module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
+            $cours_inde = null;
+            $module_inde = null;
+
+            $planning_temp = array("cours" => $cours_temps,
+                "module" => $module_temps);
+            array_push($planning_cours, $planning_temp);
         }
 
 

@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Maxence
- * Date: 22/06/2017
- * Time: 09:29
- */
 namespace EniBundle\Repository;
-
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
-
 class StagiaireRepository extends \Doctrine\ORM\EntityRepository
 {
     public function rechercherNominative($search,$em){
@@ -41,7 +33,6 @@ class StagiaireRepository extends \Doctrine\ORM\EntityRepository
         if($mail != ""){
             $not_empty["email"] = $mail;
         }
-
 
         $i = 0;
         foreach ($not_empty as $field => $value){

@@ -10,9 +10,37 @@
         <link href="{{ base_dir ~ asset('template/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ base_dir ~ asset('template/dist/css/skins/_all-skins.css') }}" rel="stylesheet" type="text/css"/>
     </head>
+    <style>
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+            width: 100%;
+        }
+        .col-md-6{
+            width: 50%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+
+        }
+        .col-md-12{
+            width: 100%;
+            float: left;
+
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .text-right{text-align: right;}
+        .text-left{text-align: left;}
+        .text-center{text-align: center;}
+    </style>
     <body>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="">
                     <div class="box-header" id="box-planning">
                         <div class="row">
@@ -54,16 +82,48 @@
                                 </tr>
                             </thead> 
                             <tbody>
-                                <tr class="start">
-                                    <td class="text-center" id="">Début de contrat</td>
-                                    <td class="date-fin text-center"></td>
-                                    <td class="text-center " colspan="2"><label>Entreprise</label></td>
-                                    <td class="hidden"></td>
-                                </tr>
+                                {% set i = 0 %}
+                                {% set date_d_old = null %}
+                                {% set date_f_old = null %}
+                                {% for cours in planning_cours %}
+                                    {% if (i == 0 and (cours.cours is not null and cours.cours.debut|date('d/m/Y') != planning.dateDebut|date('d/m/Y'))) %}
+                                        <tr>
+                                            <td class="text-center" id="">Début de contrat</td>
+                                            <td class="date-fin text-center">{{ (cours.cours is not null) ? cours.cours.debut|date_modify("-3 day")|date('d/m/Y')  : ''  }}</td>
+                                            <td class="text-center " colspan="2"><label>Entreprise</label></td>
+                                            <td class="hidden"></td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if(i > 0 and date_f_old != cours.cours.debut|date_modify("-3 day")) %}
+                                        <tr>
+                                            <td class="text-center" id="">{{ (cours.cours is not null) ? date_f_old|date_modify("+3 day")|date('d/m/Y')  : ''  }}</td>
+                                            <td class="date-fin text-center">{{ (cours.cours is not null) ? cours.cours.debut|date_modify("-3 day")|date('d/m/Y')  : ''  }}</td>
+                                            <td class="text-center " colspan="2"><label>Entreprise</label></td>
+                                            <td class="hidden"></td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr class="start">
+                                        <td class="text-center">{{ (cours.cours is not null) ? cours.cours.debut|date('d/m/Y') : ''  }}</td>
+                                        <td class="text-center">{{ (cours.cours is not null) ? cours.cours.fin|date('d/m/Y') : ''  }}</td>
+                                        <td class="text-center bg-info">ENI ({{ cours.cours.lieu_lib }})<br>{{ cours.cours.dureeheure }} heures</td>
+                                        <td class="">{{ cours.module.libelle }}</td>
+                                    </tr>
+                                    {% if( i == planning_cours|length -1) %}
+                                        <tr>
+                                            <td class="text-center" id="">{{ (cours.cours is not null) ? cours.cours.fin|date_modify("+3 day")|date('d/m/Y')  : ''  }}</td>
+                                            <td class="date-fin text-center">Fin de contrat</td>
+                                            <td class="text-center " colspan="2"><label>ENTREPRISE</label></td>
+                                            <td class="hidden"></td>
+                                        </tr>
+                                    {% endif %}
+                                    {% set i = i + 1%}
+                                    {% set date_d_old = cours.cours.debut %}
+                                    {% set date_f_old = cours.cours.fin %}
+
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                        {{ dump(planning_cours)}}
                 </div>
             </div>
         </div> 

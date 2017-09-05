@@ -33,3 +33,5 @@ app/config/config.yml
 >>>>>>> 1ad3917bf40f21e3ca0751309117707710daff9f
 var/logs/dev.log
 src/FrontendBundle/Repository/PlanningCoursRepository.php
+app/config/config.yml
+nbproject/private/private.xml
