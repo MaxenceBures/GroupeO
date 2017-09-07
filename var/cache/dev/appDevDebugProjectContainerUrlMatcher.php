@@ -332,9 +332,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                         return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::liste_lieuxAction',  '_route' => 'parametrage_lieu',);
                     }
 
-                    // parametrage_fermeture_ajout
-                    if ('/parametrage/lieu/ajouter' === $pathinfo) {
-                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_fermetureAction',  '_route' => 'parametrage_fermeture_ajout',);
+                    if (0 === strpos($pathinfo, '/parametrage/lieu/ajouter')) {
+                        // parametrage_fermeture_ajout
+                        if ('/parametrage/lieu/ajouter' === $pathinfo) {
+                            return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_fermetureAction',  '_route' => 'parametrage_fermeture_ajout',);
+                        }
+
+                        // parametrage_fermeture_ajout_verif
+                        if ('/parametrage/lieu/ajouter_verif' === $pathinfo) {
+                            return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_fermeture_verifAction',  '_route' => 'parametrage_fermeture_ajout_verif',);
+                        }
+
                     }
 
                     // parametrage_fermeture_liste
@@ -373,9 +381,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 }
 
                 elseif (0 === strpos($pathinfo, '/parametrage/cours')) {
-                    // parametrage_cours_ajout
-                    if ('/parametrage/cours/ajouter' === $pathinfo) {
-                        return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_coursAction',  '_route' => 'parametrage_cours_ajout',);
+                    if (0 === strpos($pathinfo, '/parametrage/cours/ajouter')) {
+                        // parametrage_cours_ajout
+                        if ('/parametrage/cours/ajouter' === $pathinfo) {
+                            return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_coursAction',  '_route' => 'parametrage_cours_ajout',);
+                        }
+
+                        // parametrage_cours_ajout_custom
+                        if ('/parametrage/cours/ajouterCustom' === $pathinfo) {
+                            return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::ajouter_cours_customAction',  '_route' => 'parametrage_cours_ajout_custom',);
+                        }
+
                     }
 
                     // parametrage_cours_liste
@@ -388,6 +404,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                         return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::supprimer_coursAction',  '_route' => 'parametrage_cours_supprimer',);
                     }
 
+                }
+
+                // parametrage_indicateur_modifier
+                if ('/parametrage/indicateur/modifier' === $pathinfo) {
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::indicateur_modifierAction',  '_route' => 'parametrage_indicateur_modifier',);
+                }
+
+                // parametrage_indicateur_load
+                if ('/parametrage/indicateur/load' === $pathinfo) {
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\ParametrageController::indicateur_loadAction',  '_route' => 'parametrage_indicateur_load',);
                 }
 
             }

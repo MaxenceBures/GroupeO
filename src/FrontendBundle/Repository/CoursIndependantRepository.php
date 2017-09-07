@@ -36,6 +36,57 @@ class CoursIndependantRepository extends \Doctrine\ORM\EntityRepository
         return $cours_temp;
     }
 
+    public function getCoursFirst($id,$em){
+        $repository = $em->getRepository('FrontendBundle:CoursIndependant');
+        $cours_temp = $repository->findOneby(array('moduleIndependant' => $id));
+
+        return $cours_temp;
+    }
+
+    public function getCoursDateDebutFirst($date,$em){
+        $repository = $em->getRepository('FrontendBundle:CoursIndependant');
+        $cours_temp = $repository->findOneby(array('debut' => $date));
+
+        return $cours_temp;
+    }
+
+    public function getCoursDateFinFirst($date,$em){
+        $repository = $em->getRepository('FrontendBundle:CoursIndependant');
+        $cours_temp = $repository->findOneby(array('fin' => $date));
+
+        return $cours_temp;
+    }
+
+    public function getCoursDateTest1($deb,$fin,$em){
+        $sql = "SELECT c.idCours 
+                FROM FrontendBundle:CoursIndependant c  
+                WHERE c.debut <= '".$deb."' AND c.fin >='".$fin."'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function getCoursDateTest2($deb,$fin,$em){
+        $sql = "SELECT c.idCours 
+                FROM FrontendBundle:CoursIndependant c  
+                WHERE c.fin >= '".$deb."' AND c.fin <='".$fin."'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function getCoursDateTest3($deb,$fin,$em){
+        $sql = "SELECT c.idCours 
+                FROM FrontendBundle:CoursIndependant c  
+                WHERE c.debut >= '".$deb."' AND c.debut <='".$fin."'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
     public function removeCours($cours,$em){
         $em->remove($cours);
         $em->flush();
