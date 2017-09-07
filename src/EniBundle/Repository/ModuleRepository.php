@@ -47,7 +47,7 @@ class ModuleRepository extends \Doctrine\ORM\EntityRepository {
         } else if (empty($codeFormation) && !empty($libelle)) {
             $condition = "and m.libelle like '%$libelle%'";
         }
-        $condition .= " and m.idmodule not in (" . implode(",", $modules) . ")";
+        $condition .= is_array($modules) && count($modules) > 0 ? " and m.idmodule not in (" . implode(",", $modules) . ")" : "";
         $sql = "select distinct m.libelle,m.dureeenheures,f.codeformation,f.libellelong,m.idmodule
                 from EniBundle:Module m
                 join EniBundle:Cours c WITH c.idmodule = m.idmodule

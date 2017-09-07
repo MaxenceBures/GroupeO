@@ -311,6 +311,7 @@ class AlternantController extends Controller {
                 $planning_temp["entreprise_ville"] = $v["entreprise_ville"];
                 $planning_temp["formation"] = $formation[0]["libellecourt"];
                 $planning_temp["etat"] = $status_test[$planning[0]["etat"]];
+                $planning_temp["id"] = $planning[0]["idPlanning"];
 
                 array_push($plannings_temp, $planning_temp);
             }

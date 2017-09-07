@@ -1,94 +1,95 @@
 /**
  * Created by Maxence on 18/06/2017.
  */
-$(function() {
+$(function () {
 
     var lieux = new Object();
     var selected_module = -1;
     var modal_module = -1;
 
     startup();
+    loadFormation();
     loadSelectLieu();
     initDate();
     initActions();
     loadModule();
 
-    function startup(){
+    function startup() {
         closeModal();
 
-        $('#btn_close_1').click(function(){
+        $('#btn_close_1').click(function () {
             closeModal();
         });
 
-        $('#btn_close_2').click(function(){
+        $('#btn_close_2').click(function () {
             closeModal();
         });
     }
 
 
 
-    function initActions(){
-        $('#save_datas_modules_ajouter').click(function(){
-           insertModule();
+    function initActions() {
+        $('#save_datas_modules_ajouter').click(function () {
+            insertModule();
         });
 
-        $('#save_datas').click(function(){
+        $('#save_datas').click(function () {
             insertFermeture();
         });
 
-        $('#save_datas_modules_modifier').click(function(){
+        $('#save_datas_modules_modifier').click(function () {
             modifierModule();
         })
 
-        $('#btn_save_plannfication').click(function(){
+        $('#btn_save_plannfication').click(function () {
             insertPlannification();
         })
 
     }
 
-    function initFermeture(){
-        $('[id^="btn_fermeture_supprimer_"]').click(function() {
-            fermeture = $(this).attr('id').replace('btn_fermeture_supprimer_','');
-            if(confirm("Supprimer ?") === true){
+    function initFermeture() {
+        $('[id^="btn_fermeture_supprimer_"]').click(function () {
+            fermeture = $(this).attr('id').replace('btn_fermeture_supprimer_', '');
+            if (confirm("Supprimer ?") === true) {
                 supprimerFermeture(fermeture);
             }
         });
     }
 
-    function initModule(){
-        $('[id^="btn_module_supprimer_"]').click(function() {
-            var module = $(this).attr('id').replace('btn_module_supprimer_','');
-            if(confirm("Supprimer ?") === true){
+    function initModule() {
+        $('[id^="btn_module_supprimer_"]').click(function () {
+            var module = $(this).attr('id').replace('btn_module_supprimer_', '');
+            if (confirm("Supprimer ?") === true) {
                 supprimerModule(module);
             }
         });
 
-        $('[id^="btn_module_planning_"]').click(function() {
-            var module = $(this).attr('id').replace('btn_module_planning_','');
+        $('[id^="btn_module_planning_"]').click(function () {
+            var module = $(this).attr('id').replace('btn_module_planning_', '');
             modal_module = module;
             $('#liste_plannification_cours_ligne').html();
             loadCours();
             $('#modal_modules').show();
             /*if(confirm("Supprimer ?") === true){
-                supprimerModule(module);
-            }*/
+             supprimerModule(module);
+             }*/
         });
 
-        $('[id^="btn_module_editer_"]').click(function() {
-            var module = $(this).attr('id').replace('btn_module_editer_','');
+        $('[id^="btn_module_editer_"]').click(function () {
+            var module = $(this).attr('id').replace('btn_module_editer_', '');
             loadModuleFromTable(module);
         });
     }
 
-    function initCours(){
-        $('[id^="btn_suppression_cours_"]').click(function() {
-            var cours = $(this).attr('id').replace('btn_suppression_cours_','');
+    function initCours() {
+        $('[id^="btn_suppression_cours_"]').click(function () {
+            var cours = $(this).attr('id').replace('btn_suppression_cours_', '');
             //loadModuleFromTable(module);
             supprimerCours(cours)
         });
     }
 
-    function initDate(){
+    function initDate() {
         $('#date_deb').datepicker({
             autoclose: true
         });
@@ -106,7 +107,7 @@ $(function() {
         });
     }
 
-    function loadSelectLieu(){
+    function loadSelectLieu() {
         $('#select_lieu').append('<option value="-1">Selectionner un lieu</option>');
         $('#select_lieu').append('<option value="99">Tous les lieux</option>');
 
@@ -119,13 +120,13 @@ $(function() {
             type: "POST",
             url: "/parametrage/lieu",
             dataType: "json",
-            success: function(response) {
-                if(response.status == "ok"){
+            success: function (response) {
+                if (response.status == "ok") {
                     var temp = response.datas;
 
-                    $.each($.parseJSON(temp), function(index,value){
-                        $('#select_lieu').append('<option value="'+value.id+'">'+value.libelle+'</option>');
-                        $('#select_planning_lieu').append('<option value="'+value.id+'">'+value.libelle+'</option>');
+                    $.each($.parseJSON(temp), function (index, value) {
+                        $('#select_lieu').append('<option value="' + value.id + '">' + value.libelle + '</option>');
+                        $('#select_planning_lieu').append('<option value="' + value.id + '">' + value.libelle + '</option>');
                         lieux[value.id] = value.libelle;
                     });
 
@@ -136,58 +137,58 @@ $(function() {
 
                     loadFermeture();
                     resizeSelect();
-                }else{
+                } else {
                     toastr.error("Erreur lors de la recuperation");
                 }
-            },error: function(){
+            }, error: function () {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
     }
 
-    function loadModuleFromTable(module){
+    function loadModuleFromTable(module) {
         selected_module = module;
-        var libelles = $('#td_module_libelle_'+module).html();
+        var libelles = $('#td_module_libelle_' + module).html();
 
         var tmp = libelles.split('[');
 
         $('#input_libelle_long').val(tmp[0]);
-        $('#input_libelle_court').val(tmp[1].substring(0,tmp[1].length - 1));
+        $('#input_libelle_court').val(tmp[1].substring(0, tmp[1].length - 1));
     }
 
-    function closeModal(){
+    function closeModal() {
         $('#modal_modules').hide();
     }
 
-    function resizeSelect(){
+    function resizeSelect() {
         //$('#select_lieu').css();
         //$('#select_planning_lieu').css();
     }
 
-    function checkDates(deb,fin){
+    function checkDates(deb, fin) {
 
         var return_val = false;
 
-        var parsed_deb = deb.substr(6,4)+deb.substr(3,2)+deb.substr(0,2);
-        var parsed_fin = fin.substr(6,4)+fin.substr(3,2)+fin.substr(0,2);
+        var parsed_deb = deb.substr(6, 4) + deb.substr(3, 2) + deb.substr(0, 2);
+        var parsed_fin = fin.substr(6, 4) + fin.substr(3, 2) + fin.substr(0, 2);
 
-        if(parsed_deb <= parsed_fin){
+        if (parsed_deb <= parsed_fin) {
             return_val = true;
-        }else{
+        } else {
             toastr.warning("Veuillez selectionner des dates valides");
         }
 
         return return_val;
     }
 
-    function insertFermeture(){
+    function insertFermeture() {
         var deb_val = $('#date_deb').val();
         var fin_val = $('#date_fin').val();
         var description = $('#input_description').val();
-        var select_lieu = $("#select_lieu option:selected" ).val();
+        var select_lieu = $("#select_lieu option:selected").val();
 
-        if(checkDates(deb_val,fin_val)){
-            if(select_lieu != '-1') {
+        if (checkDates(deb_val, fin_val)) {
+            if (select_lieu != '-1') {
                 var ajouter = {'deb': deb_val, 'fin': fin_val, 'description': description, 'lieu': select_lieu};
 
                 $.ajax({
@@ -200,11 +201,11 @@ $(function() {
                     success: function (response) {
                         if (response.status == "ok") {
 
-                            var html = '<tr id="tr_fermeture_'+response.fermeture_id+'">' +
-                                '<td>' + description + '</td>' +
-                                '<td>' +deb_val+ '</td>' +
-                                '<td>' +fin_val+'</td>' +
-                                '<td>' + lieux[select_lieu] + '</td>';
+                            var html = '<tr id="tr_fermeture_' + response.fermeture_id + '">' +
+                                    '<td>' + description + '</td>' +
+                                    '<td>' + deb_val + '</td>' +
+                                    '<td>' + fin_val + '</td>' +
+                                    '<td>' + lieux[select_lieu] + '</td>';
 
                             html += '<td><button id="btn_fermeture_supprimer_' + response.fermeture_id + '">Supprimer</button></td></tr>';
 
@@ -218,48 +219,48 @@ $(function() {
                         toastr.error("Erreur lors de la recuperation");
                     }
                 });
-            }else{
+            } else {
                 toastr.warning("Veuillez selectionner un centre.");
             }
         }
     }
 
-    function loadFermeture(){
+    function loadFermeture() {
 
         $.ajax({
             type: "POST",
             url: "/parametrage/lieu/fermeture",
             dataType: "json",
-            success: function(response) {
-                if(response.status == "ok"){
+            success: function (response) {
+                if (response.status == "ok") {
                     var temp = response.datas;
 
-                    $.each($.parseJSON(temp), function(index,value){
+                    $.each($.parseJSON(temp), function (index, value) {
 
-                        var html = '<tr id="tr_fermeture_'+value.id+'">' +
-                            '<td>'+value.description+'</td>' +
-                            '<td>'+value.deb.date.substr(8,2)+'-'+value.deb.date.substr(5,2)+'-'+value.deb.date.substr(0,4)+'</td>' +
-                            '<td>'+value.fin.date.substr(8,2)+'-'+value.fin.date.substr(5,2)+'-'+value.fin.date.substr(0,4)+'</td>' +
-                            '<td>'+lieux[value.lieu]+'</td>';
+                        var html = '<tr id="tr_fermeture_' + value.id + '">' +
+                                '<td>' + value.description + '</td>' +
+                                '<td>' + value.deb.date.substr(8, 2) + '-' + value.deb.date.substr(5, 2) + '-' + value.deb.date.substr(0, 4) + '</td>' +
+                                '<td>' + value.fin.date.substr(8, 2) + '-' + value.fin.date.substr(5, 2) + '-' + value.fin.date.substr(0, 4) + '</td>' +
+                                '<td>' + lieux[value.lieu] + '</td>';
 
 
-                        html += '<td><button id="btn_fermeture_supprimer_'+value.id+'">Supprimer</button></td></tr>';
+                        html += '<td><button id="btn_fermeture_supprimer_' + value.id + '">Supprimer</button></td></tr>';
 
                         $('#liste_fermeture_ligne').append(html);
 
                     });
 
                     initFermeture();
-                }else{
+                } else {
                     toastr.error("Erreur lors de la recuperation");
                 }
-            },error: function(){
+            }, error: function () {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
     }
 
-    function supprimerFermeture(fermeture){
+    function supprimerFermeture(fermeture) {
         var supprimer = {'id': fermeture};
 
         $.ajax({
@@ -271,7 +272,7 @@ $(function() {
             dataType: "json",
             success: function (response) {
                 if (response.status == "ok") {
-                    $('#tr_fermeture_'+fermeture).remove();
+                    $('#tr_fermeture_' + fermeture).remove();
 
                 } else {
                     toastr.error("Erreur lors de la recuperation2");
@@ -282,20 +283,20 @@ $(function() {
         });
     }
 
-    function loadModule(){
+    function loadModule() {
 
         $.ajax({
             type: "POST",
             url: "/parametrage/module/liste",
             dataType: "json",
-            success: function(response) {
-                if(response.status == "ok"){
+            success: function (response) {
+                if (response.status == "ok") {
                     var temp = response.datas;
 
-                    $.each($.parseJSON(temp), function(index,value){
+                    $.each($.parseJSON(temp), function (index, value) {
 
-                        var html = '<tr id="tr_module_'+value.id+'">' +
-                            '<td id="td_module_libelle_'+value.id+'">'+value.long+'['+value.court+']'+'</td>';
+                        var html = '<tr id="tr_module_' + value.id + '">' +
+                                '<td id="td_module_libelle_' + value.id + '">' + value.long + '[' + value.court + ']' + '</td>';
 
                         html += '<td><button id="btn_module_planning_' + value.id + '">Plannifier</button><button id="btn_module_editer_' + value.id + '">Editer</button><button id="btn_module_supprimer_' + value.id + '">Supprimer</button></td></tr>';
 
@@ -304,21 +305,21 @@ $(function() {
                     });
 
                     initModule();
-                }else{
+                } else {
                     toastr.error("Erreur lors de la recuperation");
                 }
-            },error: function(){
+            }, error: function () {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
     }
 
-    function modifierModule(){
+    function modifierModule() {
         var long = $('#input_libelle_long').val();
         var court = $('#input_libelle_court').val();
 
-        if((long !== '') && (court !== '')){
-            var ajouter = {'id': selected_module,'long': long, 'court': court};
+        if ((long !== '') && (court !== '')) {
+            var ajouter = {'id': selected_module, 'long': long, 'court': court};
 
             $.ajax({
                 type: "POST",
@@ -329,7 +330,7 @@ $(function() {
                 dataType: "json",
                 success: function (response) {
                     if (response.status == "ok") {
-                        $('#td_module_libelle_'+selected_module).html(long+'['+court+']');
+                        $('#td_module_libelle_' + selected_module).html(long + '[' + court + ']');
 
                         toastr.success("Modification effectuée");
                     } else {
@@ -339,12 +340,12 @@ $(function() {
                     toastr.error("Erreur lors de la recuperation");
                 }
             });
-        }else{
+        } else {
             toastr.warning("Veuillez saisir le nom du module");
         }
     }
 
-    function supprimerModule(module){
+    function supprimerModule(module) {
         var supprimer = {'id': module};
 
         $.ajax({
@@ -356,12 +357,11 @@ $(function() {
             dataType: "json",
             success: function (response) {
                 if (response.status == "ok") {
-                    $('#tr_module_'+module).remove();
+                    $('#tr_module_' + module).remove();
 
-                } else if(response.status == "ko"){
+                } else if (response.status == "ko") {
                     toastr.error("Impossible de supprimer le module car il possede des cours associés. Veuillez supprimer les cours avant de supprimer le module.");
-                }
-                else {
+                } else {
                     toastr.error("Erreur lors de la recuperation2");
                 }
             }, error: function () {
@@ -370,11 +370,11 @@ $(function() {
         });
     }
 
-    function insertModule(){
+    function insertModule() {
         var long = $('#input_libelle_long').val();
         var court = $('#input_libelle_court').val();
 
-        if((long !== '') && (court !== '')){
+        if ((long !== '') && (court !== '')) {
             var ajouter = {'long': long, 'court': court};
 
             $.ajax({
@@ -386,8 +386,8 @@ $(function() {
                 dataType: "json",
                 success: function (response) {
                     if (response.status == "ok") {
-                        var html = '<tr id="tr_module_'+response.module_id+'">' +
-                            '<td id="td_module_libelle_'+response.module_id+'">'+long+'['+court+']'+'</td>';
+                        var html = '<tr id="tr_module_' + response.module_id + '">' +
+                                '<td id="td_module_libelle_' + response.module_id + '">' + long + '[' + court + ']' + '</td>';
 
                         html += '<td><button id="btn_module_planning_' + response.module_id + '">Plannifier</button><button id="btn_module_editer_' + response.module_id + '">Editer</button><button id="btn_module_supprimer_' + response.module_id + '">Supprimer</button></td></tr>';
 
@@ -401,64 +401,64 @@ $(function() {
                     toastr.error("Erreur lors de la recuperation");
                 }
             });
-        }else{
+        } else {
             toastr.warning("Veuillez saisir le nom du module");
         }
     }
 
-    function insertPlannification(){
+    function insertPlannification() {
         var deb_val = $('#date_plannification_deb').val();
         var fin_val = $('#date_plannification_fin').val();
-        var select_lieu = $("#select_planning_lieu option:selected" ).val();
+        var select_lieu = $("#select_planning_lieu option:selected").val();
 
         var duree_prevue = $('#input_heure_prevue').val();
         var duree_reelle = $('#input_heure_reelle').val();
 
-        if(checkDates(deb_val,fin_val)){
-            if(select_lieu !== -1){
-                if((parseInt(duree_prevue) >= 0) && (parseInt(duree_reelle) >= 0)){
+        if (checkDates(deb_val, fin_val)) {
+            if (select_lieu !== -1) {
+                if ((parseInt(duree_prevue) >= 0) && (parseInt(duree_reelle) >= 0)) {
 
-                var ajouter = {'module': modal_module, 'deb': deb_val, 'fin': fin_val,'lieu': select_lieu,'duree_prevue': duree_prevue, 'duree_reelle': duree_reelle};
+                    var ajouter = {'module': modal_module, 'deb': deb_val, 'fin': fin_val, 'lieu': select_lieu, 'duree_prevue': duree_prevue, 'duree_reelle': duree_reelle};
 
-                $.ajax({
-                    type: "POST",
-                    url: "/parametrage/cours/ajouter",
-                    data: {
-                        datas: ajouter
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.status == "ok") {
+                    $.ajax({
+                        type: "POST",
+                        url: "/parametrage/cours/ajouter",
+                        data: {
+                            datas: ajouter
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.status == "ok") {
 
 
-                            var html = '<tr id="tr_plannification_cours_'+response.cours_id+'">' +
-                                '<td>'+deb_val+' Au '+fin_val+'</td>'+
-                                '<td>'+lieux[select_lieu]+'</td>';
+                                var html = '<tr id="tr_plannification_cours_' + response.cours_id + '">' +
+                                        '<td>' + deb_val + ' Au ' + fin_val + '</td>' +
+                                        '<td>' + lieux[select_lieu] + '</td>';
 
-                            html += '<td><button id="btn_suppression_cours_' + response.cours_id + '">Suppression</button></td></tr>';
+                                html += '<td><button id="btn_suppression_cours_' + response.cours_id + '">Suppression</button></td></tr>';
 
-                            $('#liste_cours_ligne').append(html);
-                            initCours();
+                                $('#liste_cours_ligne').append(html);
+                                initCours();
 
-                        } else {
-                            toastr.error("Erreur lors de la recuperation2");
+                            } else {
+                                toastr.error("Erreur lors de la recuperation2");
+                            }
+                        }, error: function () {
+                            toastr.error("Erreur lors de la recuperation");
                         }
-                    }, error: function () {
-                        toastr.error("Erreur lors de la recuperation");
-                    }
-                });
-                }else{
+                    });
+                } else {
                     toastr.warning("Veuillez saisir des durées valides");
                 }
-            }else{
+            } else {
                 toastr.warning("Veuillez selectionner un centre");
             }
-        }else{
+        } else {
             toastr.warning("Veuillez saisir des dates valides");
         }
     }
 
-    function loadCours(){
+    function loadCours() {
 
         var param = {'id': modal_module};
 
@@ -469,15 +469,15 @@ $(function() {
                 datas: param
             },
             dataType: "json",
-            success: function(response) {
-                if(response.status == "ok"){
+            success: function (response) {
+                if (response.status == "ok") {
                     var temp = response.datas;
 
-                    $.each($.parseJSON(temp), function(index,value){
+                    $.each($.parseJSON(temp), function (index, value) {
 
-                        var html = '<tr id="tr_cours_'+response.cours_id+'">' +
-                            '<td>'+value.deb.date.substr(8,2)+'-'+value.deb.date.substr(5,2)+'-'+value.deb.date.substr(0,4)+' Au '+value.fin.date.substr(8,2)+'-'+value.fin.date.substr(5,2)+'-'+value.fin.date.substr(0,4)+'</td>'+
-                            '<td>'+lieux[value.lieu]+'</td>';
+                        var html = '<tr id="tr_cours_' + response.cours_id + '">' +
+                                '<td>' + value.deb.date.substr(8, 2) + '-' + value.deb.date.substr(5, 2) + '-' + value.deb.date.substr(0, 4) + ' Au ' + value.fin.date.substr(8, 2) + '-' + value.fin.date.substr(5, 2) + '-' + value.fin.date.substr(0, 4) + '</td>' +
+                                '<td>' + lieux[value.lieu] + '</td>';
 
                         html += '<td><button id="btn_suppression_cours_' + value.id + '">Suppression</button></td></tr>';
 
@@ -487,16 +487,16 @@ $(function() {
                     });
 
                     initModule();
-                }else{
+                } else {
                     toastr.error("Erreur lors de la recuperation");
                 }
-            },error: function(){
+            }, error: function () {
                 toastr.error("Erreur lors de la recuperation");
             }
         });
     }
 
-    function supprimerCours(cours){
+    function supprimerCours(cours) {
         var supprimer = {'id': cours};
 
         $.ajax({
@@ -508,13 +508,66 @@ $(function() {
             dataType: "json",
             success: function (response) {
                 if (response.status == "ok") {
-                    $('#tr_plannification_cours_'+cours).remove();
+                    $('#tr_plannification_cours_' + cours).remove();
 
-                } else if(response.status == "ko"){
+                } else if (response.status == "ko") {
                     toastr.error("Impossible de supprimer le cours car il est associé à des plannings. Veuillez modifier les plannings avant de supprimer le cours.");
-                }
-                else {
+                } else {
                     toastr.error("Erreur lors de la recuperation2");
+                }
+            }, error: function () {
+                toastr.error("Erreur lors de la recuperation");
+            }
+        });
+    }
+
+    function loadFormation() {
+        $.ajax({
+            type: "POST",
+            url: "/formation/liste",
+            dataType: "json",
+            success: function (response) {
+                if (response.status == "ok") {
+                    var temp = response.formations;
+                    $.each($.parseJSON(temp), function (index, value) {
+                        $('#select-formation-module').append('<option value="' + value.id + '">' + value.long + ' (' + value.court + ')</option>');
+                    });
+
+                    $('#select-formation-module').select2({
+                        placeholder: "Selectionner une formation",
+                        allowClear: true
+                    }).on("change", function () {
+                        if ($(this).val() != "") {
+                            var data = {
+                                modules: null,
+                                formation: $("#select-formation-module").val(),
+                                libelle: null
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: "/module/listeSearch",
+                                data: {data: data},
+                                dataType: "json",
+                                success: function (response) {
+                                    var liste = response.modules;
+                                    var html = "";
+                                    for (var i = 0; i < liste.length; i++) {
+                                        html += "<tr>";
+                                        html += "<td><label>" + liste[i].libelle + "</label></td>";
+                                        html += "<td class='text-center'><button type='button' class='btn btn-sm btn-primary' value='" + liste[i].id + "'><i class='fa fa-edit'></i></button></td>";
+                                        html += "</tr>";
+                                    }
+                                    $("#table-modules tbody").html(html);
+                                    setTimeout(resize, 10);
+                                }
+                            });
+                        } else {
+                            $("#table-modules tbody").html("");
+                        }
+                    });
+
+                } else {
+                    toastr.error("Erreur lors de la recuperation");
                 }
             }, error: function () {
                 toastr.error("Erreur lors de la recuperation");

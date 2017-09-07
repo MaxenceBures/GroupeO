@@ -43,6 +43,12 @@ class OrdreModule
     private $ordre;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formation_code", type="string", length=8, nullable=false)
+     */
+    private $formationCode;
 
     /**
      * Get idOrdre
@@ -124,5 +130,29 @@ class OrdreModule
     public function getOrdre()
     {
         return $this->ordre;
+    }
+    
+        /**
+     * Set formationCode
+     *
+     * @param string $formationCode
+     *
+     * @return Planning
+     */
+    public function setFormationCode($formationCode)
+    {
+        $this->formationCode = $formationCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get formationCode
+     *
+     * @return string
+     */
+    public function getFormationCode()
+    {
+        return $this->formationCode;
     }
 }

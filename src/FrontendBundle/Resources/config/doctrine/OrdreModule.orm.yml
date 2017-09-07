@@ -29,4 +29,11 @@ FrontendBundle\Entity\OrdreModule:
             nullable: true
             options:
                 unsigned: false
+        formationCode:
+            type: string
+            nullable: false
+            length: 8
+            options:
+                fixed: false
+            column: formation_code
     lifecycleCallbacks: {  }

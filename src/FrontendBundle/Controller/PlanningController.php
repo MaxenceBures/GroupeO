@@ -167,6 +167,7 @@ class PlanningController extends Controller {
         $planning->setStagiaireCode($stagiaire_temp);
         $planning->setStagiaireEntrepriseNumlien($stagiaire_entreprise_temp);
         $planning->setCreateur($usr);
+        $planning->setEtat(3);
 
         $repository = $this->getDoctrine()->getRepository('FrontendBundle:Planning');
         $repository_planning_cours = $this->getDoctrine()->getRepository('FrontendBundle:PlanningCours');

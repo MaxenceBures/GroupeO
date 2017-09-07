@@ -35,7 +35,7 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
     }
 
     public function getPlanningFormationDetail($numlien, $em) {
-        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat 
+        $sql = 'SELECT p.idPlanning, p.dateDebut, p.dateFin, p.formationCode, p.etat 
                 FROM FrontendBundle:Planning p
                 WHERE p.stagiaireEntrepriseNumlien = ' . $numlien;
 
@@ -52,7 +52,7 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
     }
 
     public function rechercherPlanningDates($search, $em) {
-        $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
+        $sql = 'SELECT p.idplanning,p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
                 FROM FrontendBundle:Planning p
                 WHERE ';
 

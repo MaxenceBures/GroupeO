@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Description of ModuleController
- *
- * @author Alois
- */
-
 namespace EniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,7 +41,7 @@ class ModuleController extends Controller {
             $em = $this->getDoctrine()->getManager('eni');
             $repository = $em->getRepository('EniBundle:Module');
 
-            $modules_temp = $repository->getModulesListeSearch($module_temp,$formation_temp, $libelle_temp,$em);
+            $modules_temp = $repository->getModulesListeSearch($module_temp, $formation_temp, $libelle_temp, $em);
             $temp = array();
             foreach ($modules_temp as $m) {
                 array_push($temp, array("id" => $m["idmodule"], "libelle" => $m["libelle"], "duree" => $m["dureeenheures"], "codeformation" => $m["codeformation"], "libelleformation" => $m['libellelong']));

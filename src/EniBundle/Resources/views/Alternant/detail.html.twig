@@ -158,7 +158,7 @@
                                             <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                             <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
                                             <td id="td_etat_{{ planning.stagiaire_entreprise_lien }}">{{ planning.etat }}</td>
-                                            <td><a id="planning_modifier_{{ planning.stagiaire_entreprise_lien }}">Modifier</a> <a>Pdf</a></td>
+                                            <td><a id="planning_modifier_{{ planning.stagiaire_entreprise_lien }}">Modifier</a> <a href="/planning/pdf/{{ planning.id }}" target="blanck"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a></td>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
