@@ -17,7 +17,11 @@ class UtilisateurController extends Controller
     public function listeAction()
     {
         if(!$this->getUser()){
-            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+            return $this->redirect( $this->generateUrl('connexion_login'));
+        }
+
+        if(trim($this->getUser()->getRole()) == "ROLE_USER"){
+            return $this->render("EniBundle:Alternant:user_recherche.html.twig");
         }
 
         $repository = $this->getDoctrine()->getRepository('FrontendBundle:Utilisateur');

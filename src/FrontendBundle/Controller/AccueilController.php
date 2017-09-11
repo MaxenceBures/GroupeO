@@ -11,7 +11,7 @@ class AccueilController extends Controller
     {
 
         if(!$this->getUser()){
-            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+            return $this->redirect( $this->generateUrl('connexion_login'));
         }
 
         if(trim($this->getUser()->getRole()) == "ROLE_ADMIN"){

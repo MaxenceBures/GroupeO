@@ -159,17 +159,31 @@
                             </tr>
                             </thead>
                             <tbody id="liste_planning_ligne">
-                                {% if status == true%}
-                                    {% for planning in plannings %}
-                                        <tr id="liste_planning_ligne_{{ planning.stagiaire_entreprise_lien }}">
+                            {% if status == true%}
+                                {% for planning in plannings %}
+                                    {% if planning.others is defined %}
+                                        {% set others = planning.others %}
+                                        {% for ligne in others %}
+                                            <tr id="liste_planning_ligne_{{ ligne.idPlanning }}">
+                                                <td>{{ ligne.nom }}({{ planning.formation }})</td>
+                                                <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
+                                                <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
+                                                <td id="td_etat_{{ ligne.idPlanning }}">{{ ligne.etat }}</td>
+                                                <td><a href="/planning/pdf/{{ ligne.idPlanning }}" target="blanck"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr id="liste_planning_ligne_{{ planning.id }}">
                                             <td>{{ planning.formation }}</td>
                                             <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                             <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
-                                            <td id="td_etat_{{ planning.stagiaire_entreprise_lien }}">{{ planning.etat }}</td>
-                                            <td><a id="planning_modifier_{{ planning.stagiaire_entreprise_lien }}">Modifier</a> <a>Pdf</a></td>
+                                            <td id="td_etat_{{ planning.id }}">{{ planning.etat }}</td>
+                                            <td><a href="/planning/pdf/{{ planning.id }}" target="blanck"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a></td>
                                         </tr>
-                                    {% endfor %}
-                                {% endif %}
+                                    {% endif %}
+
+                                {% endfor %}
+                            {% endif %}
                             </tbody>
                         </table>
                     </div>

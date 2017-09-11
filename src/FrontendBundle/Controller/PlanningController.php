@@ -119,7 +119,7 @@ class PlanningController extends Controller {
     /**
      * @Route("/planning/status_update", name="planning_status_update")
      */
-    /* public function status_updateAction(Request $request) {
+     public function status_updateAction(Request $request) {
       if ($request->isXMLHttpRequest()) {
 
       $em =  $this->getDoctrine()->getEntityManager('groupeo');
@@ -136,7 +136,8 @@ class PlanningController extends Controller {
       $new_planning = $repository_planning->modifierPlanningStatus($planning,$this->getDoctrine()->getManager('groupeo'));
 
       return new Response(json_encode(array("status" =>"ok")));
-      } */
+      }
+     }
 
     /**
      * @Route("/planning/ajouter", name="planning_ajouter")

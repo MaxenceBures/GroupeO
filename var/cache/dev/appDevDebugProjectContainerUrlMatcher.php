@@ -199,9 +199,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return array (  '_controller' => 'EniBundle\\Controller\\CoursController::rechercheAction',  '_route' => 'recherche',);
             }
 
-            // liste_cours_planning
-            if ('/cours/liste_cours_planning' === $pathinfo) {
-                return array (  '_controller' => 'EniBundle\\Controller\\CoursController::listePlanningAction',  '_route' => 'liste_cours_planning',);
+            if (0 === strpos($pathinfo, '/cours/liste')) {
+                // liste_cours_planning
+                if ('/cours/liste_cours_planning' === $pathinfo) {
+                    return array (  '_controller' => 'EniBundle\\Controller\\CoursController::listePlanningAction',  '_route' => 'liste_cours_planning',);
+                }
+
+                // planning_liste
+                if ('/cours/liste' === $pathinfo) {
+                    return array (  '_controller' => 'EniBundle\\Controller\\CoursController::listeAction',  '_route' => 'planning_liste',);
+                }
+
             }
 
             // connexion_formulaire
@@ -484,6 +492,19 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'planning_pdf')), array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::pdfAction',));
                 }
                 not_planning_pdf:
+
+                if (0 === strpos($pathinfo, '/planningglobal')) {
+                    // planning_global_index
+                    if ('/planningglobal' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningGlobalController::indexAction',  '_route' => 'planning_global_index',);
+                    }
+
+                    // planning_global_recherche
+                    if ('/planningglobal/recherche' === $pathinfo) {
+                        return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningGlobalController::rechercheAction',  '_route' => 'planning_global_recherche',);
+                    }
+
+                }
 
             }
 

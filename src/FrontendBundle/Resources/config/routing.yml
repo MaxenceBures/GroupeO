@@ -135,3 +135,12 @@ edit_frame:
     path:     /moduleInde/editFrame
     defaults: { _controller: FrontendBundle:ModuleIndependant:editFrame }
 #MODULE Independant
+
+#PLANNING GLOBAL
+planning_global_index:
+    path:     /planningglobal
+    defaults: { _controller: FrontendBundle:PlanningGlobal:index }
+planning_global_recherche:
+    path:     /planningglobal/recherche
+    defaults: { _controller: FrontendBundle:PlanningGlobal:recherche }
+#PLANNING GLOBAL

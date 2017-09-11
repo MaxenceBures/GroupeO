@@ -35,7 +35,7 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
     }
 
     public function getPlanningFormationDetail($numlien, $em) {
-        $sql = 'SELECT p.idPlanning, p.dateDebut, p.dateFin, p.formationCode, p.etat 
+        $sql = 'SELECT p.idPlanning, p.dateDebut, p.dateFin, p.formationCode, p.etat, p.nom
                 FROM FrontendBundle:Planning p
                 WHERE p.stagiaireEntrepriseNumlien = ' . $numlien;
 
@@ -110,9 +110,19 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
 
     public function getPlanningByLien($id, $em) {
         $repository = $em->getRepository('FrontendBundle:Planning');
-        $planning_temp = $repository->findBy(array('stagiaireEntrepriseNumlien' => $id));
+        $planning_temp = $repository->findBy(array('idPlanning' => $id));
 
         return $planning_temp;
+    }
+
+    public function getPlanningNumLienById($id, $em) {
+        $sql = "SELECT p.stagiaireEntrepriseNumlien 
+                FROM FrontendBundle:Planning p
+                WHERE p.idPlanning = '" . $id . "'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
     }
 
 }

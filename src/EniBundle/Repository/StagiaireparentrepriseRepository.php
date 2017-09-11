@@ -31,5 +31,16 @@ class StagiaireparentrepriseRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function getNameByIdStagiaireEntreprise($id,$em){
+        $sql = 'SELECT s.nom, s.prenom, s.codestagiaire  
+                FROM EniBundle:Stagiaireparentreprise se 
+                INNER JOIN EniBundle:Stagiaire s 
+                WITH se.codestagiaire = s.codestagiaire
+                WHERE se.numlien = '.$id;
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
 }
 
