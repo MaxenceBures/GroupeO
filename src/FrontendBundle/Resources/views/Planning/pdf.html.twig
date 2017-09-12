@@ -11,6 +11,9 @@
         <link href="{{ base_dir ~ asset('template/dist/css/skins/_all-skins.css') }}" rel="stylesheet" type="text/css"/>
     </head>
     <style>
+        thead { display: table-header-group }
+        tfoot { display: table-row-group }
+        tr { page-break-inside: avoid }
         .row {
             margin-right: -15px;
             margin-left: -15px;
@@ -59,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                Formation en centre : {{ planning.maxHeureFormation }} heures
+                                Formation en centre : {{ duree_tot }} heures
                             </div>
                         </div>
                         <div class="row">

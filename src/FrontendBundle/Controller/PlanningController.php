@@ -279,7 +279,7 @@ class PlanningController extends Controller {
         $formation = $repository_formation->findBy(array("codeformation" => $planning[0]->getFormationCode()));
         $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
         $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
-
+        $duree_total = 0;
         foreach ($planning_cours_temp as $k) {
             // var_dump($k) . "<br>";
             $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
@@ -289,7 +289,7 @@ class PlanningController extends Controller {
             $module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
             $cours_inde = null;
             $module_inde = null;
-
+            $duree_total += ($k->getCoursid() != null) ? $cours[0]->getDureereelleenheures() : 0;
             $planning_temp = array("cours" => $cours_temps,
                 "module" => $module_temps);
             array_push($planning_cours, $planning_temp);
@@ -297,7 +297,7 @@ class PlanningController extends Controller {
 
 
         $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
-            "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours,
+            "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours, "duree_tot" => $duree_total,
             'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
 
         $filename = $planning[0]->getNom() . '.pdf';
