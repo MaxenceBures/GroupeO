@@ -70,4 +70,12 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
 
         return $cours_temp;
     }
+
+    public function getPlanningByCoursCustom($id,$em){
+        $repository = $em->getRepository('FrontendBundle:PlanningCours');
+        $cours_temp = $repository->findby(array('coursIndependant' => $id));
+
+        return $cours_temp;
+    }
+
 }

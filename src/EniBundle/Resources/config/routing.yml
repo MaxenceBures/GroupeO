@@ -42,6 +42,9 @@ recherche :
 liste_cours_planning :
     path:     /cours/liste_cours_planning
     defaults: { _controller: EniBundle:Cours:listePlanning }
+planning_liste :
+    path:     /cours/liste
+    defaults: { _controller: EniBundle:Cours:liste }
 #COURS
 
 #MODULE

@@ -14,8 +14,8 @@ class AlternantController extends Controller {
      * @Route("/recherche", name="user_alternant_recherche")
      */
     public function user_rechercheAction(){
-        if (!$this->getUser()) {
-            return $this->redirect($this->generateUrl($this->container->getParameter('url_login')));
+        if(!$this->getUser()){
+            return $this->redirect( $this->generateUrl('connexion_login'));
         }
 
         return $this->render('EniBundle:Alternant:user_recherche.html.twig');
@@ -258,8 +258,8 @@ class AlternantController extends Controller {
      * @Route("/alternant/detail", name="alternant_detail")
      */
     public function detailAction(Request $request, $id) {
-        if (!$this->getUser()) {
-            return $this->redirect($this->generateUrl($this->container->getParameter('url_login')));
+        if(!$this->getUser()){
+            return $this->redirect( $this->generateUrl('connexion_login'));
         }
 
         $em = $this->getDoctrine()->getEntityManager('eni');
@@ -275,12 +275,26 @@ class AlternantController extends Controller {
 
         if (isset($temp["stagiaire_entreprise_lien"])) {
             $planning = $repository_planning->getPlanningFormationDetail($temp["stagiaire_entreprise_lien"], $this->getDoctrine()->getManager('groupeo'));
+
             $formation = $repository_formation->getFormationId($planning[0]["formationCode"], $this->getDoctrine()->getManager('eni'));
 
-            $temp["planning_debut"] = $planning[0]["dateDebut"];
-            $temp["planning_fin"] = $planning[0]["dateFin"];
-            $temp["formation_long"] = $formation[0]["libellelong"];
-            $temp["formation_cout"] = $planning[0]["formationCode"];
+            $status_test = array(1 => 'Validée', 2 => 'Refusée', 3 => 'En cours de validation', 4 => 'Terminée', 5 => 'En cours de formation');
+
+            if(count($planning) == 1){
+                $temp["planning_debut"] = $planning[0]["dateDebut"];
+                $temp["planning_fin"] = $planning[0]["dateFin"];
+                $temp["formation_long"] = $formation[0]["libellelong"];
+                $temp["formation_cout"] = $planning[0]["formationCode"];
+                $temp["planning_nom"] = $planning[0]["nom"];
+            }else{
+                foreach ($planning as $val){
+                    $planning[0]["others"][] = array("nom" => $val["nom"],"etat" => $status_test[$val["etat"]], "etat_val" => $val["etat"]);
+                }
+                $temp["planning_debut"] = $planning[0]["dateDebut"];
+                $temp["planning_fin"] = $planning[0]["dateFin"];
+                $temp["formation_long"] = $formation[0]["libellelong"];
+                $temp["formation_cout"] = $planning[0]["formationCode"];
+            }
         } else {
             $temp["planning_debut"] = "";
             $temp["planning_fin"] = "";
@@ -292,7 +306,7 @@ class AlternantController extends Controller {
         $status = true;
 
 
-        $status_test = array(1 => 'Validée', 2 => 'Refusée', 3 => 'En cours de validation', 4 => 'Terminée', 5 => 'En cours de formation');
+        //$status_test = array(1 => 'Validée', 2 => 'Refusée', 3 => 'En cours de validation', 4 => 'Terminée', 5 => 'En cours de formation');
 
         if(isset($temp["stagiaire_entreprise_lien"])){
             foreach ($utilisateur as $k => $v){
@@ -313,13 +327,17 @@ class AlternantController extends Controller {
                 $planning_temp["etat"] = $status_test[$planning[0]["etat"]];
                 $planning_temp["id"] = $planning[0]["idPlanning"];
 
+                if(count($planning ) > 1){
+                    foreach ($planning as $val){
+                        $planning_temp["others"][] = array("nom" => $val["nom"],"etat" => $status_test[$val["etat"]], "etat_val" => $val["etat"], "idPlanning" => $val["idPlanning"]);
+                    }
+                }
+
                 array_push($plannings_temp, $planning_temp);
             }
         } else {
             $status = false;
         }
-
-
 
         return $this->render('EniBundle:Alternant:detail.html.twig', array('utilisateur' => $temp, 'plannings' => $plannings_temp, 'status' => $status));
     }
@@ -368,8 +386,8 @@ class AlternantController extends Controller {
      * @Route("/alternant/recherche", name="alternant_recherche")
      */
     public function rechercheAction() {
-        if (!$this->getUser()) {
-            return $this->redirect($this->generateUrl($this->container->getParameter('url_login')));
+        if(!$this->getUser()){
+            return $this->redirect( $this->generateUrl('connexion_login'));
         }
 
         return $this->render('EniBundle:Alternant:recherche.html.twig');
@@ -380,10 +398,10 @@ class AlternantController extends Controller {
      */
     public function user_detailAction(Request $request, $id) {
         if(!$this->getUser()){
-            return $this->redirect( $this->generateUrl($this->container->getParameter('url_login')));
+            return $this->redirect( $this->generateUrl('connexion_login'));
         }
 
-        $em =  $this->getDoctrine()->getEntityManager('eni');
+        /*$em =  $this->getDoctrine()->getEntityManager('eni');
         $em2 =  $this->getDoctrine()->getEntityManager('groupeo');
 
         $repository_stagiaire = $em->getRepository('EniBundle:Stagiaire');
@@ -433,6 +451,80 @@ class AlternantController extends Controller {
                 array_push($plannings_temp,$planning_temp);
             }
         }else{
+            $status = false;
+        }*/
+
+        $em = $this->getDoctrine()->getEntityManager('eni');
+        $em2 = $this->getDoctrine()->getEntityManager('groupeo');
+
+        $repository_stagiaire = $em->getRepository('EniBundle:Stagiaire');
+        $repository_formation = $em->getRepository('EniBundle:Formation');
+        $repository_planning = $em2->getRepository('FrontendBundle:Planning');
+
+        $utilisateur = $repository_stagiaire->rechercherNominativeDetail($id, $this->getDoctrine()->getManager('eni'));
+
+        $temp = $utilisateur[0];
+
+        if (isset($temp["stagiaire_entreprise_lien"])) {
+            $planning = $repository_planning->getPlanningFormationDetail($temp["stagiaire_entreprise_lien"], $this->getDoctrine()->getManager('groupeo'));
+
+            $formation = $repository_formation->getFormationId($planning[0]["formationCode"], $this->getDoctrine()->getManager('eni'));
+
+            $status_test = array(1 => 'Validée', 2 => 'Refusée', 3 => 'En cours de validation', 4 => 'Terminée', 5 => 'En cours de formation');
+
+            if(count($planning) == 1){
+                $temp["planning_debut"] = $planning[0]["dateDebut"];
+                $temp["planning_fin"] = $planning[0]["dateFin"];
+                $temp["formation_long"] = $formation[0]["libellelong"];
+                $temp["formation_cout"] = $planning[0]["formationCode"];
+                $temp["planning_nom"] = $planning[0]["nom"];
+            }else{
+                foreach ($planning as $val){
+                    $planning[0]["others"][] = array("nom" => $val["nom"],"etat" => $status_test[$val["etat"]], "etat_val" => $val["etat"]);
+                }
+                $temp["planning_debut"] = $planning[0]["dateDebut"];
+                $temp["planning_fin"] = $planning[0]["dateFin"];
+                $temp["formation_long"] = $formation[0]["libellelong"];
+                $temp["formation_cout"] = $planning[0]["formationCode"];
+            }
+        } else {
+            $temp["planning_debut"] = "";
+            $temp["planning_fin"] = "";
+            $temp["formation_long"] = "";
+            $temp["formation_cout"] = "";
+        }
+
+        $plannings_temp = array();
+        $status = true;
+
+        if(isset($temp["stagiaire_entreprise_lien"])){
+            foreach ($utilisateur as $k => $v){
+
+                $planning_temp = array();
+
+                $planning = $repository_planning->getPlanningFormationDetail($v["stagiaire_entreprise_lien"], $this->getDoctrine()->getManager('groupeo'));
+                $formation = $repository_formation->getFormationId($planning[0]["formationCode"], $this->getDoctrine()->getManager('eni'));
+
+                //$status = $this->get('planning_status')->getStatutLibelle($planning[0]["etat"]);
+
+                $planning_temp["stagiaire_entreprise_lien"] = $v["stagiaire_entreprise_lien"];
+                $planning_temp["entreprise_datedebut"] = $v["entreprise_datedebut"];
+                $planning_temp["entreprise_datefin"] = $v["entreprise_datefin"];
+                $planning_temp["entreprise_raisonsociale"] = $v["entreprise_raisonsociale"];
+                $planning_temp["entreprise_ville"] = $v["entreprise_ville"];
+                $planning_temp["formation"] = $formation[0]["libellecourt"];
+                $planning_temp["etat"] = $status_test[$planning[0]["etat"]];
+                $planning_temp["id"] = $planning[0]["idPlanning"];
+
+                if(count($planning ) > 1){
+                    foreach ($planning as $val){
+                        $planning_temp["others"][] = array("nom" => $val["nom"],"etat" => $status_test[$val["etat"]], "etat_val" => $val["etat"], "idPlanning" => $val["idPlanning"]);
+                    }
+                }
+
+                array_push($plannings_temp, $planning_temp);
+            }
+        } else {
             $status = false;
         }
 

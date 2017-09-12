@@ -72,4 +72,26 @@ class CoursController extends Controller {
         return new Response(json_encode("error"));
     }
 
+    /**
+     * @Route("/cours/liste", name="planning_liste")
+     */
+    public function listeAction(Request $request) {
+        if ($request->isXMLHttpRequest()) {
+
+            $em = $this->getDoctrine()->getManager('eni');
+            $repository = $em->getRepository('EniBundle:Cours');
+
+            $cours_temp = $repository->getCours($em);
+
+            $temp = array();
+            foreach ($cours_temp as $c) {
+                array_push($temp, array("id" => $c["idcours"], "title" => $c["libellecours"], "start" => $c["debut"], "end" => $c["fin"], "idmodule" => $c["idmodule"], "libellemodule" => $c["module"], "lieu" => $c["lieu"], 'lieu_code' => $c["lieu_code"]));
+            }
+
+
+            return new Response(json_encode(array("cours" => $temp)));
+        }
+        return new Response(json_encode("error"));
+    }
+
 }
