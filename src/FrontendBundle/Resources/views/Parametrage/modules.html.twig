@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-<link href="{{ asset('template/plugins/vis/vis-network.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('template/plugins/vis/vis-network.min.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 {% block body %}
     <H1>Paramètrage</H1>
@@ -172,6 +172,11 @@
                                 <div class="col-md-4">
                                     <select id="select-formation-module" class="form-control" >
                                         <option value=""></option>
+                                        {% for formation in formations %}
+                                            <option value="{{ formation.id }}">
+                                                {{ formation.long }}
+                                            </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-6"></div>
@@ -182,21 +187,8 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <table class="table table-responsive table-bordered table-striped" id="table-modules">
-                                        <thead>
-                                            <tr>
-                                                <th>Module</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-7">
-
+                                <div class="col-md-12">
+                                    <div id="mynetwork" style="height: 700px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +269,6 @@
 
                             <div class="col-xs-5">
                                 <select id="select_planning_lieu" class="form-control" style="width: 300px;">
-
                                 </select>
                             </div>
                         </div>
@@ -295,6 +286,11 @@
     {% endblock %}
 
     {% block javascripts %}
-        <script src="{{ asset('Js/parametrage/modules.js') }}"></script>
         <script src="{{ asset('template/plugins/vis/vis.js') }}"></script>
+        <script src="{{ asset('Js/parametrage/modules.js') }}"></script>
+
+        <script>
+            // create an array with nodes
+
+        </script>
     {% endblock %}
