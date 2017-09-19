@@ -8,7 +8,6 @@ $(function () {
     var modal_module = -1;
     var exit_module = -1;
     var exit_date = -1;
-
     startup();
     loadSelectLieu();
     initDate();
@@ -16,14 +15,11 @@ $(function () {
     initFormation();
     loadModule();
     loadIndicateur();
-
     function startup() {
         closeModal();
-
         $('#btn_close_1').click(function () {
             closeModal();
         });
-
         $('#btn_close_2').click(function () {
             closeModal();
         });
@@ -36,26 +32,21 @@ $(function () {
             }
 
         });
-
         $('#save_indicateur').click(function () {
             if (confirm("Modifier ?") === true) {
                 modifierIndicateur();
             }
 
         });
-
-
         $('#save_datas').click(function () {
 
             var deb_val = $('#date_deb').val();
             var fin_val = $('#date_fin').val();
             var description = $('#input_description').val();
             var select_lieu = $("#select_lieu option:selected").val();
-
             if (checkDates(deb_val, fin_val)) {
                 if (select_lieu != '-1') {
                     var ajouter = {'deb': deb_val, 'fin': fin_val, 'description': description, 'lieu': select_lieu};
-
                     $.ajax({
                         type: "POST",
                         url: "/parametrage/lieu/ajouter_verif",
@@ -82,7 +73,6 @@ $(function () {
                 }
             }
         });
-
         $('#save_datas_modules_modifier').click(function () {
             if (confirm("Modifier ?") === true) {
                 modifierModule();
@@ -124,7 +114,6 @@ $(function () {
                 "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
             }
         };
-
         $('#liste_fermeture').DataTable(
                 {
                     searching: false,
@@ -162,7 +151,6 @@ $(function () {
                 supprimerModule(module);
             }
         });
-
         $('[id^="btn_module_planning_"]').click(function () {
             var module = $(this).attr('id').replace('btn_module_planning_', '');
             modal_module = module;
@@ -174,7 +162,6 @@ $(function () {
              supprimerModule(module);
              }*/
         });
-
         $('[id^="btn_module_editer_"]').click(function () {
             var module = $(this).attr('id').replace('btn_module_editer_', '');
             loadModuleFromTable(module);
@@ -196,15 +183,12 @@ $(function () {
         $('#date_deb').datepicker({
             autoclose: true
         });
-
         $('#date_fin').datepicker({
             autoclose: true
         });
-
         $('#date_plannification_deb').datepicker({
             autoclose: true
         });
-
         $('#date_plannification_fin').datepicker({
             autoclose: true
         });
@@ -213,12 +197,8 @@ $(function () {
     function loadSelectLieu() {
         $('#select_lieu').append('<option value="-1">Selectionner un lieu</option>');
         $('#select_lieu').append('<option value="99">Tous les lieux</option>');
-
         $('#select_planning_lieu').append('<option value="-1">Selectionner un lieu</option>');
-
         lieux[99] = "Tous les lieux";
-
-
         $.ajax({
             type: "POST",
             url: "/parametrage/lieu",
@@ -226,18 +206,15 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     var temp = response.datas;
-
                     $.each($.parseJSON(temp), function (index, value) {
                         $('#select_lieu').append('<option value="' + value.id + '">' + value.libelle + '</option>');
                         $('#select_planning_lieu').append('<option value="' + value.id + '">' + value.libelle + '</option>');
                         lieux[value.id] = value.libelle;
                     });
-
                     $('#select_lieu').select2({
                         placeholder: "Selectionner un lieu",
                         allowClear: true
                     });
-
                     loadFermeture();
                     resizeSelect();
                 } else {
@@ -252,9 +229,7 @@ $(function () {
     function loadModuleFromTable(module) {
         selected_module = module;
         var libelles = $('#td_module_libelle_' + module).html();
-
         var tmp = libelles.split('[');
-
         $('#input_libelle_long').val(tmp[0]);
         $('#input_libelle_court').val(tmp[1].substring(0, tmp[1].length - 1));
     }
@@ -264,17 +239,15 @@ $(function () {
     }
 
     function resizeSelect() {
-        //$('#select_lieu').css();
-        //$('#select_planning_lieu').css();
+//$('#select_lieu').css();
+//$('#select_planning_lieu').css();
     }
 
     function checkDates(deb, fin) {
 
         var return_val = false;
-
         var parsed_deb = deb.substr(6, 4) + deb.substr(3, 2) + deb.substr(0, 2);
         var parsed_fin = fin.substr(6, 4) + fin.substr(3, 2) + fin.substr(0, 2);
-
         if (parsed_deb <= parsed_fin) {
             return_val = true;
         } else {
@@ -326,11 +299,9 @@ $(function () {
 
     function modifierIndicateur() {
         var nb = $("#input_indicateur").val();
-
         if (nb > 0) {
 
             var modifier = {'indicateur': nb};
-
             $.ajax({
                 type: "POST",
                 url: "/parametrage/indicateur/modifier",
@@ -342,7 +313,6 @@ $(function () {
                     if (response.status == "ok") {
 
                         console.log(response);
-
                     } else {
                         toastr.error("Erreur lors de la recuperation2");
                     }
@@ -365,7 +335,6 @@ $(function () {
                 if (response.status == "ok") {
 
                     $("#input_indicateur").val(response.indicateur);
-
                 } else {
                     toastr.error("Erreur lors de la recuperation2");
                 }
@@ -380,11 +349,9 @@ $(function () {
         var fin_val = $('#date_fin').val();
         var description = $('#input_description').val();
         var select_lieu = $("#select_lieu option:selected").val();
-
         if (checkDates(deb_val, fin_val)) {
             if (select_lieu != '-1') {
                 var ajouter = {'deb': deb_val, 'fin': fin_val, 'description': description, 'lieu': select_lieu};
-
                 $.ajax({
                     type: "POST",
                     url: "/parametrage/lieu/ajouter",
@@ -402,14 +369,10 @@ $(function () {
                                     '<td>' + deb_val + '</td>' +
                                     '<td>' + fin_val + '</td>' +
                                     '<td>' + lieux[select_lieu] + '</td>';
-
                             html += '<td><button id="btn_fermeture_supprimer_' + response.fermeture_id + '">Supprimer</button></td></tr>';
-
                             $('#liste_fermeture_ligne').append(html);
                             initFermeture();
-
                             initTable();
-
                         } else {
                             toastr.error("Erreur lors de la recuperation2");
                         }
@@ -432,7 +395,6 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     var temp = response.datas;
-
                     $.each($.parseJSON(temp), function (index, value) {
 
                         var html = '<tr id="tr_fermeture_' + value.id + '">' +
@@ -440,14 +402,9 @@ $(function () {
                                 '<td>' + value.deb.date.substr(8, 2) + '-' + value.deb.date.substr(5, 2) + '-' + value.deb.date.substr(0, 4) + '</td>' +
                                 '<td>' + value.fin.date.substr(8, 2) + '-' + value.fin.date.substr(5, 2) + '-' + value.fin.date.substr(0, 4) + '</td>' +
                                 '<td>' + lieux[value.lieu] + '</td>';
-
-
                         html += '<td><button id="btn_fermeture_supprimer_' + value.id + '">Supprimer</button></td></tr>';
-
                         $('#liste_fermeture_ligne').append(html);
-
                     });
-
                     initFermeture();
                     initTable()
                 } else {
@@ -461,7 +418,6 @@ $(function () {
 
     function supprimerFermeture(fermeture) {
         var supprimer = {'id': fermeture};
-
         $.ajax({
             type: "POST",
             url: "/parametrage/lieu/supprimer",
@@ -474,7 +430,6 @@ $(function () {
                     destroyTable();
                     $('#tr_fermeture_' + fermeture).remove();
                     initTable();
-
                 } else {
                     toastr.error("Erreur lors de la recuperation2");
                 }
@@ -493,20 +448,15 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     var temp = response.datas;
-
                     $.each($.parseJSON(temp), function (index, value) {
 
                         var html = '<tr id="tr_module_' + value.id + '">' +
                                 '<td id="td_module_libelle_' + value.id + '">' + value.long + '[' + value.cours + ']' + '</td>' +
                                 '<td>' + value.reelle + '</td>' +
                                 '<td>' + value.prevue + '</td>';
-
                         html += '<td><button id="btn_module_planning_' + value.id + '">Plannifier</button><button id="btn_module_editer_' + value.id + '">Editer</button><button id="btn_module_supprimer_' + value.id + '">Supprimer</button></td></tr>';
-
                         $('#liste_module_ligne').append(html);
-
                     });
-
                     initModule();
                 } else {
                     toastr.error("Erreur lors de la recuperation");
@@ -520,10 +470,8 @@ $(function () {
     function modifierModule() {
         var long = $('#input_libelle_long').val();
         var court = $('#input_libelle_court').val();
-
         if ((long !== '') && (court !== '')) {
             var ajouter = {'id': selected_module, 'long': long, 'court': court};
-
             $.ajax({
                 type: "POST",
                 url: "/parametrage/module/modifier",
@@ -534,7 +482,6 @@ $(function () {
                 success: function (response) {
                     if (response.status == "ok") {
                         $('#td_module_libelle_' + selected_module).html(long + '[' + court + ']');
-
                         toastr.success("Modification effectuée");
                     } else {
                         toastr.error("Erreur lors de la recuperation2");
@@ -550,7 +497,6 @@ $(function () {
 
     function supprimerModule(module) {
         var supprimer = {'id': module};
-
         $.ajax({
             type: "POST",
             url: "/parametrage/module/supprimer",
@@ -561,7 +507,6 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     $('#tr_module_' + module).remove();
-
                 } else if (response.status == "ko") {
                     toastr.error("Impossible de supprimer le module car il possede des cours associés. Veuillez supprimer les cours avant de supprimer le module.");
                 } else {
@@ -576,10 +521,8 @@ $(function () {
     function insertModule() {
         var long = $('#input_libelle_long').val();
         var court = $('#input_libelle_court').val();
-
         if ((long !== '') && (court !== '')) {
             var ajouter = {'long': long, 'court': court};
-
             $.ajax({
                 type: "POST",
                 url: "/parametrage/module/ajouter",
@@ -593,12 +536,9 @@ $(function () {
                                 '<td id="td_module_libelle_' + response.module_id + '">' + long + '[' + court + ']' + '</td>' +
                                 '<td>Non Defini</td>' +
                                 '<td>Non Defini</td>';
-
                         html += '<td><button id="btn_module_planning_' + response.module_id + '">Plannifier</button><button id="btn_module_editer_' + response.module_id + '">Editer</button><button id="btn_module_supprimer_' + response.module_id + '">Supprimer</button></td></tr>';
-
                         $('#liste_module_ligne').append(html);
                         initModule();
-
                     } else {
                         toastr.error("Erreur lors de la recuperation2");
                     }
@@ -615,16 +555,13 @@ $(function () {
         var deb_val = $('#date_plannification_deb').val();
         var fin_val = $('#date_plannification_fin').val();
         var select_lieu = $("#select_planning_lieu option:selected").val();
-
         var duree_prevue = $('#input_heure_prevue').val();
         var duree_reelle = $('#input_heure_reelle').val();
-
         if (checkDates(deb_val, fin_val)) {
             if (select_lieu !== -1) {
                 if ((parseInt(duree_prevue) >= 0) && (parseInt(duree_reelle) >= 0)) {
 
                     var ajouter = {'module': modal_module, 'deb': deb_val, 'fin': fin_val, 'lieu': select_lieu, 'duree_prevue': duree_prevue, 'duree_reelle': duree_reelle};
-
                     $.ajax({
                         type: "POST",
                         url: "/parametrage/cours/ajouter",
@@ -639,12 +576,9 @@ $(function () {
                                 var html = '<tr id="tr_plannification_cours_' + response.cours_id + '">' +
                                         '<td>' + deb_val + ' Au ' + fin_val + '</td>' +
                                         '<td>' + lieux[select_lieu] + '</td>';
-
                                 html += '<td><button id="btn_suppression_cours_' + response.cours_id + '">Suppression</button></td></tr>';
-
                                 $('#liste_cours_ligne').append(html);
                                 initCours();
-
                             } else {
                                 toastr.error("Erreur lors de la recuperation2");
                             }
@@ -667,11 +601,9 @@ $(function () {
         var deb_val = $('#date_plannification_deb').val();
         var fin_val = $('#date_plannification_fin').val();
         var select_lieu = $("#select_planning_lieu option:selected").val();
-
         if (checkDates(deb_val, fin_val)) {
             if (select_lieu !== -1) {
                 var ajouter = {'module': modal_module, 'deb': deb_val, 'fin': fin_val, 'lieu': select_lieu};
-
                 $.ajax({
                     type: "POST",
                     url: "/parametrage/cours/ajouterCustom",
@@ -686,12 +618,9 @@ $(function () {
                             var html = '<tr id="tr_plannification_cours_' + response.cours_id + '">' +
                                     '<td>' + deb_val + ' Au ' + fin_val + '</td>' +
                                     '<td>' + lieux[select_lieu] + '</td>';
-
                             html += '<td><button id="btn_suppression_cours_' + response.cours_id + '">Suppression</button></td></tr>';
-
                             $('#liste_cours_ligne').append(html);
                             initCours();
-
                         } else {
                             toastr.error("Erreur lors de la recuperation2");
                         }
@@ -710,7 +639,6 @@ $(function () {
     function loadCours() {
 
         var param = {'id': modal_module};
-
         $.ajax({
             type: "POST",
             url: "/parametrage/cours/liste",
@@ -721,7 +649,6 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     var temp = response.datas;
-
                     if (temp === "[]") {
                         showInputsModal();
                         exit_module = -1;
@@ -732,12 +659,9 @@ $(function () {
                             var html = '<tr id="tr_cours_' + response.cours_id + '">' +
                                     '<td>' + value.deb.date.substr(8, 2) + '-' + value.deb.date.substr(5, 2) + '-' + value.deb.date.substr(0, 4) + ' Au ' + value.fin.date.substr(8, 2) + '-' + value.fin.date.substr(5, 2) + '-' + value.fin.date.substr(0, 4) + '</td>' +
                                     '<td>' + lieux[value.lieu] + '</td>';
-
                             html += '<td><button id="btn_suppression_cours_' + value.id + '">Suppression</button></td></tr>';
-
                             $('#liste_cours_ligne').append(html);
                             initCours();
-
                         });
                     }
 
@@ -753,7 +677,6 @@ $(function () {
 
     function supprimerCours(cours) {
         var supprimer = {'id': cours};
-
         $.ajax({
             type: "POST",
             url: "/parametrage/cours/supprimer",
@@ -764,7 +687,6 @@ $(function () {
             success: function (response) {
                 if (response.status == "ok") {
                     $('#tr_plannification_cours_' + cours).remove();
-
                 } else if (response.status == "ko") {
                     toastr.error("Impossible de supprimer le cours car il est associé à des plannings. Veuillez modifier les plannings avant de supprimer le cours.");
                 } else {
@@ -784,7 +706,7 @@ $(function () {
             if ($(this).val() != "") {
                 getModuleByFormation($(this).val());
             } else {
-                $("#table-modules tbody").html("");
+                $('#mynetwork').html("");
             }
         });
     }
@@ -812,9 +734,8 @@ $(function () {
         for (var i = 0; i < modules.length; i++) {
             nodes_module.push({id: modules[i].id, label: modules[i].libelle});
         }
-        // create an array with nodes
+// create an array with nodes
         var nodes = new vis.DataSet(nodes_module);
-
         // create an array with edges
         var edges = new vis.DataSet([
             {from: 1, to: 3, arrows: 'to'},
@@ -822,7 +743,6 @@ $(function () {
             {from: 2, to: 4, arrows: 'to'},
             {from: 2, to: 5, arrows: 'to'}
         ]);
-
         // create a network
         var container = document.getElementById('mynetwork');
         var data = {
@@ -830,6 +750,8 @@ $(function () {
             edges: edges
         };
         var options = {
+            locale: "fr",
+            locales: getLangageNetwork(),
             nodes: {
                 shape: 'box'
             },
@@ -848,13 +770,38 @@ $(function () {
                     } else {
                         callback(data);
                     }
-                }
-            }
-        }
-        ;
+                },
+                addNode: false,
+                deleteNode: false
+            },
+            autoResize: true,
+            height: '100%',
+            width: '100%',
+            clickToUse: false
+        };
         var network = new vis.Network(container, data, options);
         network.on("stabilizationIterationsDone", function () {
             network.setOptions({physics: false});
         });
     }
 });
+function getLangageNetwork() {
+    var locales = {
+        fr: {
+            edit: 'Editer',
+            del: 'Supprimer la selection',
+            back: 'Retour',
+            addNode: 'Ajouter un noeud',
+            addEdge: 'Ajouter une relation',
+            editNode: 'Editer le noeud',
+            editEdge: 'Editer la relation',
+            addDescription: 'Click in an empty space to place a new node.',
+            edgeDescription: 'Click on a node and drag the edge to another node to connect them.',
+            editEdgeDescription: 'Click on the control points and drag them to a node to connect to it.',
+            createEdgeError: 'Cannot link edges to a cluster.',
+            deleteClusterError: 'Clusters cannot be deleted.',
+            editClusterError: 'Clusters cannot be edited.'
+        }
+    }
+    return locales;
+}
