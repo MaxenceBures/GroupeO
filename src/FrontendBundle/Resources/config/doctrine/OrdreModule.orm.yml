@@ -1,5 +1,6 @@
 FrontendBundle\Entity\OrdreModule:
     type: entity
+    repositoryClass: FrontendBundle\Repository\OrdreModuleRepository
     table: ORDRE_MODULE
     id:
         idOrdre:
@@ -20,7 +21,7 @@ FrontendBundle\Entity\OrdreModule:
             column: module_id
         precedentId:
             type: integer
-            nullable: false
+            nullable: true
             options:
                 unsigned: false
             column: precedent_id

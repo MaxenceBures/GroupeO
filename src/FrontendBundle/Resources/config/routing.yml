@@ -144,3 +144,14 @@ planning_global_recherche:
     path:     /planningglobal/recherche
     defaults: { _controller: FrontendBundle:PlanningGlobal:recherche }
 #PLANNING GLOBAL
+
+
+#ORDRE MODULE
+ordre_module_liste:
+    path:     /ordreModule/liste
+    defaults: { _controller: FrontendBundle:OrdreModule:liste }
+    
+ordre_module_ajouter:
+    path:     /ordreModule/ajouter
+    defaults: { _controller: FrontendBundle:OrdreModule:ajouter }
+#ORDRE MODULE

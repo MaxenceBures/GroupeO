@@ -1,6 +1,9 @@
 /**
  * Created by Maxence on 18/06/2017.
  */
+var network;
+var edges;
+var nodes;
 $(function () {
 
     var lieux = new Object();
@@ -711,80 +714,208 @@ $(function () {
         });
     }
 
-    function getModuleByFormation(formation) {
-        var data = {
-            modules: null,
-            formation: formation,
-            libelle: null
-        };
-        $.ajax({
-            type: "POST",
-            url: "/module/listeSearch",
-            data: {data: data},
-            dataType: "json",
-            success: function (response) {
-                var liste = response.modules;
-                initOrdonnancement(liste);
+
+
+
+});
+
+function getModuleByFormation(formation) {
+    var data = {
+        modules: null,
+        formation: formation,
+        libelle: null
+    };
+    $.ajax({
+        type: "POST",
+        url: "/ordreModule/liste",
+        data: {data: data},
+        dataType: "json",
+        success: function (response) {
+            var liste = response.modules;
+            var relations = response.relations;
+            initOrdonnancement(liste, relations);
+            initTableauModule(liste);
+        }
+    });
+}
+
+function initTableauModule(modules) {
+    $("#liste_module_ordre tbody").html("");
+    for (var i = 0; i < modules.length; i++) {
+        $("#liste_module_ordre tbody").append("<tr id='" + modules[i].id + "' ordre='' data-ordre='" + (i + 1) + "'><td>" + (i + 1) + "</td><td>" + modules[i].libelle + "</td><td><input type='text' class='form-control' disabled /><input type='hidden' id='predecesseurs' class='form-control' disabled /></td></tr>");
+    }
+    completeTableOrdre();
+}
+
+function initOrdonnancement(modules, relations) {
+    var nodes_module = [];
+    for (var i = 0; i < modules.length; i++) {
+        nodes_module.push({id: modules[i].id, label: modules[i].libelle});
+    }
+    var edges_module = []
+    for (var j = 0; j < relations.length; j++) {
+        edges_module.push({from: relations[j].from, to: relations[j].to, arrows: "to"});
+    }
+    console.log(nodes_module);
+// create an array with nodes
+    nodes = new vis.DataSet(nodes_module);
+    // create an array with edges
+    edges = new vis.DataSet(edges_module);
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+        locale: "fr",
+        locales: getLangageNetwork(),
+        nodes: {
+            shape: 'box'
+        },
+        manipulation: {
+            addEdge: function (data, callback) {
+                data.arrows = 'to';
+                if (data.from != data.to) {
+                    callback(data);
+                    completeTableOrdre();
+                }
+            },
+            deleteEdge: function (data, callback) {
+                callback(data);
+                completeTableOrdre();
+            },
+            editEdge: function (data, callback) {
+                callback(data);
+                completeTableOrdre();
+            },
+            addNode: false,
+            deleteNode: false
+        },
+        autoResize: true,
+        height: '100%',
+        width: '100%',
+        clickToUse: true
+    };
+    network = new vis.Network(container, data, options);
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions({physics: false});
+    }).on('doubleClick', function (properties) {
+        network.addEdgeMode();
+    });
+}
+
+function completeTableOrdre() {
+    var modules = getRelations();
+    $("#liste_module_ordre tbody input").val("");
+    $.each(modules, function () {
+        var el = $(this)[0];
+        console.log(el);
+
+        var input = $("#liste_module_ordre tbody").find("#" + el.id).find("td:eq(2)").find("input:not(#predecesseurs)");
+        var inputhidden = $("#liste_module_ordre tbody").find("#" + el.id).find("td:eq(2)").find("#predecesseurs");
+        var numero = $("#liste_module_ordre tbody").find("#" + el.predecesseur).attr("data-ordre");
+        input.val(input.val() + numero + ";")
+        inputhidden.val(inputhidden.val() + el.predecesseur + ";");
+    });
+}
+
+
+function getOrdreFinal() {
+    $("#liste_module_ordre tbody input[value='']").each(function () {
+        var ordre = 0;
+        var parents_tr = $(this).parents("tr");
+        parents_tr.attr("ordre", ordre);
+        var id = parents_tr.attr("id");
+        getOrdreRecurssif(id, ordre);
+    });
+
+}
+
+function getOrdreRecurssif(id, ordre) {
+    var new_ordre = ordre + 1;
+    $("#liste_module_ordre tbody input[value*='" + id + "']").each(function () {
+        var parents_tr = $(this).parents("tr");
+        var id_parent = parents_tr.attr("id");
+        parents_tr.attr("ordre", new_ordre);
+        getOrdreRecurssif(id_parent, new_ordre);
+    });
+}
+
+function btSaveOrdreClick() {
+    getOrdreFinal();
+    var array_final = [];
+    $("#liste_module_ordre tbody tr").each(function () {
+        var ordre = $(this).attr("ordre");
+        var id = $(this).attr("id");
+        var precedents = $(this).find('td:eq(2) #predecesseurs').val();
+        var precedents_array = precedents.split(";");
+        array_final.push({id: id, precedents: precedents_array, ordre: ordre});
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/ordreModule/ajouter",
+        data: {data: array_final, formation: $('#select-formation-module').val()},
+        dataType: "json",
+        success: function (response) {
+            if (response.status == "ok") {
+                toastr.success("Enregistrement effectué");
+            } else {
+                toastr.error("Erreur à l'enregistrement");
             }
-        });
+        }
+    });
+}
+
+function btAnnulerOrdreClick() {
+    $('#select-formation-module').trigger('change');
+}
+
+function getRelations() {
+    var nodes = objectToArray(network.getPositions());
+    nodes.forEach(addConnections);
+    var arrayConnection = [];
+    for (var i = 0; i < nodes.length; i++) {
+        var edgeIds = network.getConnectedEdges(nodes[i].id);
+        var edgeArray = objectToArray(edges.get(edgeIds));
+        for (y = 0; y < edgeArray.length; y++) {
+            arrayConnection.push({
+                id: edgeArray[y].to,
+                predecesseur: edgeArray[y].from
+            });
+        }
     }
 
-    function initOrdonnancement(modules) {
-        var nodes_module = [];
-        for (var i = 0; i < modules.length; i++) {
-            nodes_module.push({id: modules[i].id, label: modules[i].libelle});
-        }
-// create an array with nodes
-        var nodes = new vis.DataSet(nodes_module);
-        // create an array with edges
-        var edges = new vis.DataSet([
-            {from: 1, to: 3, arrows: 'to'},
-            {from: 1, to: 2, arrows: 'to'},
-            {from: 2, to: 4, arrows: 'to'},
-            {from: 2, to: 5, arrows: 'to'}
-        ]);
-        // create a network
-        var container = document.getElementById('mynetwork');
-        var data = {
-            nodes: nodes,
-            edges: edges
-        };
-        var options = {
-            locale: "fr",
-            locales: getLangageNetwork(),
-            nodes: {
-                shape: 'box'
-            },
-            animation: {
-                duration: 0,
-                easingFunction: "linear"
-            },
-            manipulation: {
-                addEdge: function (data, callback) {
-                    data.arrows = 'to';
-                    if (data.from == data.to) {
-                        var r = confirm("Do you want to connect the node to itself?");
-                        if (r == true) {
-                            callback(data);
-                        }
-                    } else {
-                        callback(data);
-                    }
-                },
-                addNode: false,
-                deleteNode: false
-            },
-            autoResize: true,
-            height: '100%',
-            width: '100%',
-            clickToUse: false
-        };
-        var network = new vis.Network(container, data, options);
-        network.on("stabilizationIterationsDone", function () {
-            network.setOptions({physics: false});
-        });
-    }
-});
+    arrayConnection = arrayConnection.map(JSON.stringify).reverse().filter(function (e, i, a) {
+        return a.indexOf(e, i + 1) === -1;
+    }).reverse().map(JSON.parse);
+
+    return arrayConnection;
+}
+
+function addConnections(elem, index) {
+    // need to replace this with a tree of the network, then get child direct children of the element
+    elem.connections = network.getConnectedNodes(index);
+}
+
+function getNodeData(data) {
+    var networkNodes = [];
+
+    data.forEach(function (elem, index, array) {
+        networkNodes.push({id: elem.id, label: elem.id, x: elem.x, y: elem.y});
+    });
+
+    return new vis.DataSet(networkNodes);
+}
+
+function objectToArray(obj) {
+    return Object.keys(obj).map(function (key) {
+        obj[key].id = key;
+        return obj[key];
+    });
+}
+
 function getLangageNetwork() {
     var locales = {
         fr: {
@@ -796,12 +927,12 @@ function getLangageNetwork() {
             editNode: 'Editer le noeud',
             editEdge: 'Editer la relation',
             addDescription: 'Click in an empty space to place a new node.',
-            edgeDescription: 'Click on a node and drag the edge to another node to connect them.',
-            editEdgeDescription: 'Click on the control points and drag them to a node to connect to it.',
+            edgeDescription: 'Cliquez sur un module et deplacez le curseur sur un autre pour creer une relation.',
+            editEdgeDescription: 'Cliquez sur un des points and deplacez le sur sur un module pour le conneter.',
             createEdgeError: 'Cannot link edges to a cluster.',
             deleteClusterError: 'Clusters cannot be deleted.',
             editClusterError: 'Clusters cannot be edited.'
         }
-    }
+    };
     return locales;
 }

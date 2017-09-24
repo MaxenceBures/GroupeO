@@ -510,6 +510,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // ordre_module_liste
+        if ('/ordreModule/liste' === $pathinfo) {
+            return array (  '_controller' => 'FrontendBundle\\Controller\\OrdreModuleController::listeAction',  '_route' => 'ordre_module_liste',);
+        }
+
+        // ordre_module_ajouter
+        if ('/ordreModule/ajouter' === $pathinfo) {
+            return array (  '_controller' => 'FrontendBundle\\Controller\\OrdreModuleController::ajouterAction',  '_route' => 'ordre_module_ajouter',);
+        }
+
         // homepage
         if ('' === $trimmedPathinfo) {
             if (substr($pathinfo, -1) !== '/') {
