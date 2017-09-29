@@ -154,4 +154,8 @@ ordre_module_liste:
 ordre_module_ajouter:
     path:     /ordreModule/ajouter
     defaults: { _controller: FrontendBundle:OrdreModule:ajouter }
+    
+ordre_module_planning:
+    path:     /ordreModule/ordrePlanning
+    defaults: { _controller: FrontendBundle:OrdreModule:ordrePlanning }
 #ORDRE MODULE

@@ -19,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class OrdreModuleController extends Controller {
 
     /**
-     * @Route("/ordreModule/ajouter", name="ordre_module_ajouter")
+     * @Route("/ordreModule/liste", name="ordre_module_liste")
      */
     public function listeAction(Request $request) {
 
@@ -85,6 +85,42 @@ class OrdreModuleController extends Controller {
                 }
             }
             return new Response(json_encode(array("status" => "ok")));
+        }
+        return "error";
+    }
+
+    /**
+     * @Route("/ordreModule/ordrePlanning", name="ordre_module_planning")
+     */
+    public function ordrePlanningAction(Request $request) {
+
+        if ($request->isXMLHttpRequest()) {
+            $module_temp = $request->get("module");
+            $formation_code = $request->get("formation");
+            $couleur_temp = $request->get("couleur");
+            $modules_actif_temps = $request->get("modules_actif");
+            $em_eni = $this->getDoctrine()->getManager('eni');
+            $repository_ordre_module = $this->getDoctrine()->getRepository('FrontendBundle:OrdreModule');
+            $repository_modules = $em_eni->getRepository("EniBundle:Module");
+            $ordre_module_temp = $repository_ordre_module->getModuleSuivant($module_temp, $formation_code, $modules_actif_temps, $this->getDoctrine()->getManager());
+
+            $ordre_module_array = array();
+            $couleur = array("btn-warning", "btn-danger", "btn-info", "btn-success", "bg-gray", "bg-orange", "bg-purple");
+            unset($couleur[array_search($couleur_temp, $couleur)]);
+            $couleur = array_values($couleur);
+            $i = 0;
+            foreach ($ordre_module_temp as $om) {
+                $random = rand(0, count($couleur) - 1);
+                $couleur_module = $i == 0 ? $couleur_temp : $couleur[$random];
+                $module = $repository_modules->findBy(array("idmodule" => $om["moduleId"]));
+                array_push($ordre_module_array, array("module_id" => $om["moduleId"], "libelle" => $module[0]->getLibelle(),
+                    "couleur" => $couleur_module, "ordre" => $om["ordre"]));
+                if ($i != 0) {
+                    unset($couleur[$random]);
+                }
+                $i++;
+            }
+            return new Response(json_encode(array("status" => "ok", "modules" => $ordre_module_array)));
         }
         return "error";
     }

@@ -26,7 +26,7 @@ class CoursRepository extends EntityRepository {
     
     public function getCoursByModulesLieux($modules,$modulesSelected, $lieux, $debutContrat, $finContrat, $em) {
         $selected = $modulesSelected != "0" ? "and c.idmodule not in (" . implode(",", $modulesSelected) . ")" :"";
-        $sql = "SELECT m.idmodule,m.libelle as module ,c.idcours,c.debut,c.fin,c.libellecours,l.libelle as lieu
+        $sql = "SELECT distinct m.idmodule,m.libelle as module ,c.idcours,c.debut,c.fin,c.libellecours,l.libelle as lieu
                 FROM EniBundle:Cours c  
                 JOIN EniBundle:Module m WITH c.idmodule = m.idmodule
                 LEFT JOIN EniBundle:Lieu l WITH l.codelieu = c.codelieu
@@ -41,7 +41,7 @@ class CoursRepository extends EntityRepository {
     }
 
     public function getCours($em){
-        $sql = "SELECT m.idmodule,m.libelle as module ,c.idcours,c.debut,c.fin,c.libellecours,l.libelle as lieu, l.codelieu as lieu_code
+        $sql = "SELECT distinct m.idmodule,m.libelle as module ,c.idcours,c.debut,c.fin,c.libellecours,l.libelle as lieu, l.codelieu as lieu_code
                 FROM EniBundle:Cours c  
                 JOIN EniBundle:Module m WITH c.idmodule = m.idmodule
                 LEFT JOIN EniBundle:Lieu l WITH l.codelieu = c.codelieu

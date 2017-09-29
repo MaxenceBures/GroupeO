@@ -6,6 +6,8 @@ $("#lieu").select2({
         text: $(this).attr('placeholder')
     },
     language: "fr"
+}).on('change', function () {
+    getCours()
 });
 
 $("#table-planning").dataTable({
@@ -146,14 +148,17 @@ function initCalendar(cours) {
                 }
             }
         },
-        eventClick: function (calEvent, jsEvent, view) {
+        eventClick: function (event, jsEvent, view) {
 
-            alert('Event: ' + calEvent.title);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            alert('View: ' + view.name);
-
-            // change the border color just for fun
-            $(this).css('border-color', 'red');
+            if (checkDateOnDrop(event.start, event.end)) {
+                $("#overlay-table").removeClass("hidden");
+                event.className += "hidden";
+                $('#calendar').fullCalendar('updateEvent', event);
+                onDropEventToPlanning(event);
+                setClassHiddenEvent(event.taskId, true);
+            } else {
+                toastr.error("Il y a déja un cours plannifer à ces dates");
+            }
 
         },
         eventAfterAllRender: function (view) {
@@ -250,7 +255,13 @@ function onDropEventToPlanning(event) {
                 html += "<td class='text-center'>" + cours.libellemodule + "<i class='close fa fa-close'></i>&nbsp;<i class='close fa fa-edit'></i></td>";
                 html += "</tr>";
                 html += getDatePlanningOnDrop(cours, convertDate2(cours.start['date']), convertDate2(cours.end['date']));
+
                 $("#module_" + cours.idmodule).prop('disabled', true);
+
+                var modules_precedent = [];
+                $("#table-planning tbody tr.cours_planning:not(.supprimer)").each(function () {
+                    modules_precedent.push($(this).attr("value"));
+                })
                 $('#table-planning tbody').append(html);
                 if ($("#table-planning tbody tr.cours_planning").length > 2) {
                     sortPlanning();
@@ -258,6 +269,7 @@ function onDropEventToPlanning(event) {
                 $("#table-total").text(parseInt($("#table-total").text()) + cours.duree);
                 $("#overlay-table").addClass("hidden");
                 setBtGenerationEnabled();
+                getModuleSuivant(cours.idmodule, modules_precedent);
             }
         });
         setTimeout(resize, 500);
@@ -399,10 +411,11 @@ function setClassHiddenEvent(idmodule, hidden) {
     $('.overlay').removeClass('hidden');
     $.each($("#calendar").fullCalendar('clientEvents'), function (event) {
         if ($(this)[0].taskId == idmodule) {
+            var nameClass = $(this)[0].className;
             if (hidden) {
                 $(this)[0].className += " hidden";
             } else {
-                $(this)[0].className -= " hidden";
+                $(this)[0].className = nameClass.toString().substring(" hidden");
             }
             $('#calendar').fullCalendar('updateEvent', $(this)[0]);
         }
@@ -585,14 +598,6 @@ function btSaveClick(generation) {
                 toastr.success("Le planning a été sauvegardé");
                 if (generation) {
                     open("/planning/pdf/" + response.planning_id);
-//                    $.ajax({type: 'GET',
-//                        url: "/planning/pdf/" + response.planning_id,
-//                        dataType: 'text',
-//                        contentType: 'application/pdf',
-//                        success : function(){
-//                            open("./"+$("#nom_planning").val()+".pdf");
-//                        }
-//                    });
                 }
                 $("#table-planning tbody tr.cours_planning").removeClass("ajouter").removeClass("modifier");
                 $("#table-planning tbody tr.cours_planning .supprimer").remove();
@@ -637,3 +642,71 @@ function getCoursPlanning() {
     return data;
 }
 
+function getEventDisplay(bt) {
+    var event_module = null;
+    var events = [];
+    var id_module = $(bt).attr("value");
+    var couleur_module = $(bt).attr("class").split(" ");
+    var debut_contrat = convertDate2($("#date_debut_contrat").text(), "FR", "US");
+    var date_fin_last_cours = $(".cours_planning:last").find("td:eq(1)").find("label").text();
+    var date_debut = date_fin_last_cours != undefined && date_fin_last_cours != "" ? convertDate2(date_fin_last_cours, "FR", "US") : debut_contrat;
+    console.log(date_fin_last_cours);
+//    $("#table-modules tbody tr").each(function () {
+//        $(this).find('td:eq(0)').find("input:not(#module_" + id_module + ")").prop("checked", false);
+//    });
+    $.each($("#calendar").fullCalendar('clientEvents'), function (event) {
+        var date_debut_event = moment($(this)[0].start);
+        var nameClass = $(this)[0].className;
+        if ($(this)[0].taskId == id_module) {
+            if (event_module == null && date_debut_event.isAfter(date_debut)) {
+                event_module = $(this)[0];
+            }
+            $(this)[0].className += " " + couleur_module[1];
+            //$(this)[0].className -= " hidden";
+        } else {
+            $(this)[0].className = nameClass.toString().substring(" " + couleur_module[1]);
+            //$(this)[0].className += " hidden";
+        }
+        events.push($(this)[0]);
+    });
+    console.log(event_module);
+    $('#calendar').fullCalendar('updateEvents', events);
+    $('#calendar').fullCalendar('gotoDate', event_module.start);
+}
+
+function getModuleSuivant(idmodule, modules) {
+    var btn = $(".btn_ordre[value='" + idmodule + "']");
+    var parent_btn = btn.parents(".btn-group");
+    btn.remove();
+    var btn_last = parent_btn.find(".btn:last");
+    var couleur_btn = btn.attr("class").split(" ");
+    $.ajax({
+        type: "POST",
+        url: "/ordreModule/ordrePlanning",
+        data: {
+            "module": idmodule,
+            "formation": $("#formation").val(),
+            "couleur": couleur_btn[1],
+            "modules_actif": modules
+        },
+        dataType: "json",
+        success: function (data) {
+            var html = "";
+            var modules = data.modules;
+            for (var i = 0; i < modules.length; i++) {
+                if (btn_last.attr("value") == modules[i].module_id) {
+                    btn_last.remove();
+                }
+                html += '<button class="btn ' + modules[i].couleur + ' btn-flat btn_ordre" onclick="getEventDisplay(this)" ordre="' + modules[i].ordre + '" value="' + modules[i].module_id + '">' + modules[i].libelle + '</button>'
+            }
+            if (parent_btn.find(".btn:last").lenght > 0) {
+                parent_btn.find(".btn:last").before(html);
+            } else {
+                parent_btn.append(html);
+            }
+        }
+
+    })
+
+
+}

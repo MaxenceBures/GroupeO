@@ -140,9 +140,9 @@
                 </div>
                 <div class="box-footer text-center">
                     <div class="btn-group">
-                        <button class="btn btn-default">A</button>
-                        <button class="btn btn-default">B</button>
-                        <button class="btn btn-default">C</button>
+                        {% for module in ordre_module %}
+                            <button class="btn {{module.couleur }} btn-flat btn_ordre" onclick="getEventDisplay(this)" ordre="{{module.ordre }}" value="{{ module.module_id }}">{{ module.libelle }}</button>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -66,6 +66,7 @@ class PlanningController extends Controller {
         $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
         $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
         $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
+        $repository_ordre_module = $em_front->getRepository("FrontendBundle:OrdreModule");
         $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
         if ($planning_temp === "0") {
             $stagiaire_temp = $request->get("stagiaire");
@@ -111,33 +112,45 @@ class PlanningController extends Controller {
         $planning['max_heure'] = !empty($max_heure_temp) ? $max_heure_temp : $formation[0]->getHeurescentre();
         $planning['max_semaine'] = !empty($max_semaine_temp) ? $max_semaine_temp : 0;
         $planning['createur'] = 1;
+        $ordre_module_temp = $repository_ordre_module->findBy(array("ordre" => 0, "formationCode" => $formation[0]->getCodeformation()));
+        $ordre_module_array = array();
+        $couleur = array("btn-warning","btn-danger","btn-info","btn-success","bg-gray","bg-orange","bg-purple");
+        foreach ($ordre_module_temp as $om) {
+            $random = rand(0, count($couleur)-1);
+            $module = $repository_modules->findBy(array("idmodule" => $om->getModuleId()));
+            array_push($ordre_module_array, array("module_id" => $om->getModuleId(),"libelle" => $module[0]->getLibelle(),
+                "couleur" => $couleur[$random], "ordre" => 0));
+            unset($couleur[$random]);
+        }
         return $this->render('FrontendBundle:Planning:editeur.html.twig', array(
-                    "planning" => $planning, "cours_plannifier" => $cours_plannifier, "modules" => $modules, "modulesIndependants" => $modules_Independant, "cours" => $cours, "lieux" => $lieux, "formation" => $formation[0]
+                    "planning" => $planning, "cours_plannifier" => $cours_plannifier, "modules" => $modules,
+                    "modulesIndependants" => $modules_Independant, "cours" => $cours, "lieux" => $lieux,
+                    "formation" => $formation[0],"ordre_module" => $ordre_module_array
         ));
     }
 
     /**
      * @Route("/planning/status_update", name="planning_status_update")
      */
-     public function status_updateAction(Request $request) {
-      if ($request->isXMLHttpRequest()) {
+    public function status_updateAction(Request $request) {
+        if ($request->isXMLHttpRequest()) {
 
-      $em =  $this->getDoctrine()->getEntityManager('groupeo');
-      $repository_planning = $em->getRepository('FrontendBundle:Planning');
+            $em = $this->getDoctrine()->getEntityManager('groupeo');
+            $repository_planning = $em->getRepository('FrontendBundle:Planning');
 
-      $recherche_temp = $request->get("recherche");
+            $recherche_temp = $request->get("recherche");
 
-      $plannings = $repository_planning->getPlanningByLien($recherche_temp["planning"],$this->getDoctrine()->getManager('groupeo'));
+            $plannings = $repository_planning->getPlanningByLien($recherche_temp["planning"], $this->getDoctrine()->getManager('groupeo'));
 
-      $planning = $plannings[0];
+            $planning = $plannings[0];
 
-      $planning->setEtat($recherche_temp["status"]);
+            $planning->setEtat($recherche_temp["status"]);
 
-      $new_planning = $repository_planning->modifierPlanningStatus($planning,$this->getDoctrine()->getManager('groupeo'));
+            $new_planning = $repository_planning->modifierPlanningStatus($planning, $this->getDoctrine()->getManager('groupeo'));
 
-      return new Response(json_encode(array("status" =>"ok")));
-      }
-     }
+            return new Response(json_encode(array("status" => "ok")));
+        }
+    }
 
     /**
      * @Route("/planning/ajouter", name="planning_ajouter")
