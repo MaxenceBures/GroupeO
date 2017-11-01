@@ -38,7 +38,7 @@ class ModuleRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
-    public function getModulesListeSearch($modules, $codeFormation, $libelle, $em) {
+    public function getModulesListeSearch($modules, $codeFormation, $libelle, $exclusions, $em) {
         $condition = "";
         if (!empty($codeFormation) && !empty($libelle)) {
             $condition = "and m.libelle like '%$libelle%' and p.codeformation ='$codeFormation'";

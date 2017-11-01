@@ -1,5 +1,6 @@
 FrontendBundle\Entity\PlanningExclusion:
     type: entity
+    repositoryClass: FrontendBundle\Repository\PlanningExclusionRepository
     table: PLANNING_EXCLUSION
     indexes:
         IDX_EDCB04AB3D865311:

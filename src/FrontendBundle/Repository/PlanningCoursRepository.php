@@ -15,7 +15,7 @@ use Doctrine\DBAL\DriverManager;
 class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
 
 
-    public function getCoursByPLanning($planning, $em) {
+    public function getCoursByPlanning($planning, $em) {
         $sql = "select idPlanningcours,coursId,coursIndependant,ordre,
                 c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
                 ci.debut,ci.fin,ci.dureeReelleenheures,ci.idCours,ci.codeLieu,ci.moduleIndependantid,m.libelle as libelle_module,mi.libelle as libelle_inde,

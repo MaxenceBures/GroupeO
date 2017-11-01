@@ -26,6 +26,9 @@ class PlanningController extends Controller {
         if (!empty($planning_temps)) {
             $repository_planning = $em->getRepository('FrontendBundle:Planning');
             $planning = $repository_planning->findBy(array("id" => $planning_temps));
+            $id_planning = $planning[0]->getIdplanning();
+        } else {
+            $id_planning = 0;
         }
         $repository_formation = $em->getRepository('EniBundle:Formation');
         $formations_temp = $repository_formation->findBy(array("archiver" => "0"));
@@ -44,7 +47,8 @@ class PlanningController extends Controller {
         }
 
         return $this->render('FrontendBundle:Planning:frame.html.twig', array(
-                    "status" => "ok", "formations" => $formations, "entreprises" => $entreprises, "planning" => $planning
+                    "status" => "ok", "formations" => $formations, "entreprises" => $entreprises, "planning" => $planning[0],
+                    "id_planning" => $id_planning
         ));
     }
 
@@ -67,16 +71,18 @@ class PlanningController extends Controller {
         $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
         $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
         $repository_ordre_module = $em_front->getRepository("FrontendBundle:OrdreModule");
+        $planning_exclusion = $em_front->getRepository("FrontendBundle:PlanningExclusion");
         $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
-        if ($planning_temp === "0") {
+        if ($planning_temp == "0") {
             $stagiaire_temp = $request->get("stagiaire");
             $entreprise_temp = $request->get("entreprise");
             $formation_temp = $request->get("formation");
             $date_debut_temp = $request->get("date_debut_contrat");
             $date_fin_temp = $request->get("date_fin_contrat");
-            $max_heure_temp = $request->get("max_heure");
-            $max_semaine_temp = $request->get("max_semaine");
+            $max_heure_temp = $request->get("maxHeure");
+            $max_semaine_temp = $request->get("maxSemaine");
             $date_creation_temp = date("d/m/Y");
+            $exclusions = $request->get("exclusion");
 //            $planning['']
         } else {
             $repository_planning = $em_front->getRepository("FrontendBundle:Planning");
@@ -90,9 +96,11 @@ class PlanningController extends Controller {
             $date_fin_temp = date_format($planning_obj_temp[0]->getDatefin(), "d/m/y");
             $max_heure_temp = $planning_obj_temp[0]->getMaxheureformation();
             $max_semaine_temp = $planning_obj_temp[0]->getMaxtempsformation();
-            $cours_plannifier = $repository_planning_cours->getCoursByPLanning($planning_obj_temp, $em_front);
+            $cours_plannifier = $repository_planning_cours->getCoursByPlanning($planning_obj_temp, $em_front);
+            $exclusions = $planning_exclusion->findBy(array("planningId" => $planning_temp));
         }
-
+        $exclusions = !empty($exclusions) ? $exclusions : "";
+        //var_dump($exclusions);
         $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $stagiaire_temp));
         $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $entreprise_temp));
         $formation = $repository_formation->findBy(array("codeformation" => $formation_temp));
@@ -114,18 +122,18 @@ class PlanningController extends Controller {
         $planning['createur'] = 1;
         $ordre_module_temp = $repository_ordre_module->findBy(array("ordre" => 0, "formationCode" => $formation[0]->getCodeformation()));
         $ordre_module_array = array();
-        $couleur = array("btn-warning","btn-danger","btn-info","btn-success","bg-gray","bg-orange","bg-purple");
+        $couleur = array("btn-warning", "btn-danger", "btn-info", "btn-success", "bg-gray", "bg-orange", "bg-purple");
         foreach ($ordre_module_temp as $om) {
-            $random = rand(0, count($couleur)-1);
+            $random = rand(0, count($couleur) - 1);
             $module = $repository_modules->findBy(array("idmodule" => $om->getModuleId()));
-            array_push($ordre_module_array, array("module_id" => $om->getModuleId(),"libelle" => $module[0]->getLibelle(),
+            array_push($ordre_module_array, array("module_id" => $om->getModuleId(), "libelle" => $module[0]->getLibelle(),
                 "couleur" => $couleur[$random], "ordre" => 0));
             unset($couleur[$random]);
         }
         return $this->render('FrontendBundle:Planning:editeur.html.twig', array(
                     "planning" => $planning, "cours_plannifier" => $cours_plannifier, "modules" => $modules,
                     "modulesIndependants" => $modules_Independant, "cours" => $cours, "lieux" => $lieux,
-                    "formation" => $formation[0],"ordre_module" => $ordre_module_array
+                    "formation" => $formation[0], "ordre_module" => $ordre_module_array, "exclusions" => json_encode($exclusions)
         ));
     }
 

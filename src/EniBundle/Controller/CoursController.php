@@ -56,10 +56,11 @@ class CoursController extends Controller {
             $lieux_temp = $data_temp['lieux'];
             $debut_temp = $data_temp['debut'];
             $fin_temp = $data_temp['fin'];
+            $exclusions = json_decode($data_temp['exclusions'],true);
             $em = $this->getDoctrine()->getManager('eni');
             $repository = $em->getRepository('EniBundle:Cours');
 
-            $cours_temp = $repository->getCoursByModulesLieux($modules_temp,$modules_selected_temp, $lieux_temp, $debut_temp, $fin_temp, $em);
+            $cours_temp = $repository->getCoursByModulesLieux($modules_temp, $modules_selected_temp, $lieux_temp, $debut_temp, $fin_temp, $exclusions, $em);
 
             $temp = array();
             foreach ($cours_temp as $c) {

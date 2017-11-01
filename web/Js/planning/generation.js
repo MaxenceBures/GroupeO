@@ -184,8 +184,8 @@ function onGenerationPanningSubmit() {
         if (continu) {
             var exclusions = getExclusions();
             $.each(exclusions, function (index) {
-                var input_debut = "<input type='hidden' name='exclusion_debut[]' value='" + exclusions[index][0] + "' />";
-                var input_fin = "<input type='hidden' name='exclusion_fin[]' value='" + exclusions[index][1] + "'/>"
+                var input_debut = "<input type='hidden' name='exclusion[debut][]' value='" + $(this)[0] + "' />";
+                var input_fin = "<input type='hidden' name='exclusion[fin][]' value='" + $(this)[1] + "'/>";
                 $("#generationform").append(input_debut + input_fin);
             });
 
@@ -199,7 +199,7 @@ function getExclusions() {
     var exclusions = [];
     $("#table_exclusion .ajout").each(function () {
         var date_debut = $(this).find("td").eq(0).text();
-        var date_fin = $(this).find("td").eq(0).text();
+        var date_fin = $(this).find("td").eq(1).text();
         exclusions.push([date_debut, date_fin]);
     });
     return exclusions;

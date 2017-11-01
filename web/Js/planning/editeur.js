@@ -7,7 +7,7 @@ $("#lieu").select2({
     },
     language: "fr"
 }).on('change', function () {
-    getCours()
+    getCours();
 });
 
 $("#table-planning").dataTable({
@@ -55,7 +55,8 @@ function getCours() {
         modules_selected: getModulesSelected().length == 0 ? "0" : getModulesSelected(),
         lieux: $("#lieu").val(),
         debut: $("#date_debut_contrat").text(),
-        fin: $("#date_fin_contrat").text()
+        fin: $("#date_fin_contrat").text(),
+        exclusions : $("#exclusions").val()
     };
     $.ajax({
         type: "POST",
@@ -248,11 +249,11 @@ function onDropEventToPlanning(event) {
                 var debut_cours = convertDate2(cours.start['date']);
                 var fin_cours = convertDate2(cours.end['date']);
                 var ordre = $(".cours_planning").length + 1;
-                var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' value='" + cours.idmodule + "' data-cours='" + idCours + "' data-ordre='" + ordre + "'>";
+                var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' data-duree='" + cours.duree + "' value='" + cours.idmodule + "' data-cours='" + idCours + "' data-ordre='" + ordre + "'>";
                 html += "<td class='text-center'><label>" + debut_cours.format('L') + "</label></td>";
                 html += "<td class='text-center'><label>" + fin_cours.format('L') + "</label></td>";
-                html += "<td class='text-center'><label>ENI (" + cours.lieu + ")<br>" + cours.duree + " heures</label></td>";
-                html += "<td class='text-center'>" + cours.libellemodule + "<i class='close fa fa-close'></i>&nbsp;<i class='close fa fa-edit'></i></td>";
+                html += "<td class='text-center'><label>ENI (" + cours.lieu + ")<br><span>" + cours.duree + "</span> heures</label></td>";
+                html += "<td class='text-center'>" + cours.libellemodule + "<i class='close fa fa-close' onclick='onBtClickSuppCours(this)'></i>&nbsp;<i class='close fa fa-edit'></i></td>";
                 html += "</tr>";
                 html += getDatePlanningOnDrop(cours, convertDate2(cours.start['date']), convertDate2(cours.end['date']));
 
@@ -294,8 +295,8 @@ function sortPlanning() {
 
 function recalcDateEntreprise() {
     $('#table-planning tbody tr.for').each(function () {
-        var tr_prev = $(this).prev("tr").find('td:eq(1)').text();
-        var tr_next = $(this).next("tr").find('td:eq(0)').text();
+        var tr_prev = $(this).prev("tr:not(.supprimer)").find('td:eq(1)').text();
+        var tr_next = $(this).next("tr:not(.supprimer)").find('td:eq(0)').text();
         var date_debut = convertDate2(tr_prev, "FR", "US").add(3, "days");
         var date_fin = convertDate2(tr_next, "FR", "US").subtract(3, "days");
 
@@ -593,7 +594,7 @@ function btSaveClick(generation) {
         dataType: "json",
         success: function (response) {
             if (response.status == "ok") {
-                alert(response.planning_id);
+                //alert(response.planning_id);
                 $("#id_planning").val(response.planning_id);
                 toastr.success("Le planning a été sauvegardé");
                 if (generation) {
@@ -706,7 +707,35 @@ function getModuleSuivant(idmodule, modules) {
             }
         }
 
-    })
+    });
+}
 
+function onBtClickSuppCours(cours) {
+    var module = $(cours).parents('tr');
+    var value = module.attr("value");
+    $("tr[for='module_planning_" + value + "']").remove();
+    $("#table-total").text(parseInt($("#table-total").text()) - parseInt(module.attr("data-duree")));
 
+    var date_prev = module.prev("tr:not(.supprimer)").find('td:eq(1)').text();
+    var date_next = module.next("tr:not(.supprimer)").find('td:eq(0)').text();
+
+    if (module.prev("tr:not(.supprimer)").hasClass("cours_planning") && module.next("tr:not(.supprimer)").hasClass("cours_planning")) {
+        var html = "<tr for='module_planning_" + module.prev("tr:not(.supprimer)").attr("value") + "' class='for'>";
+        html += "<td class='date-debut text-center'>" + module.find('td:eq(0)').text() + "</td>";
+        html += "<td class='date-fin text-center'>Fin de contrat</td>";
+        html += "<td class='text-center' colspan='2'><label>Entreprise</label></td>";
+        html += "<td class='hidden'></td>";
+        html += "</tr>";
+        module.after(html);
+
+    }
+    if (module.hasClass('ajouter')) {
+        module.remove();
+    } else {
+        module.addClass("supprimer").removeClass("modifier");
+    }
+    sortPlanning();
+    recalcDateEntreprise();
+    $("#module_" + value).prop('disabled', false);
+    getCours();
 }

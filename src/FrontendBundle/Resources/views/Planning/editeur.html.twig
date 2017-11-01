@@ -42,8 +42,9 @@
                                     <input type="hidden" value="{{ planning.max_heure }}" id="max_heure" name="max_heure"/>
                                     <input type="hidden" value="{{ planning.max_semaine }}" id="max_semaine" name="max_semaine"/>
                                     <input type="hidden" value="{{ planning.createur }}" id="createur" name="createur"/>
-                                    <input type="hidden" value="{{ planning.date_debut_contrat }}"  name="date_debut_contrat"/>
-                                    <input type="hidden" value="{{ planning.date_fin_contrat }}"  name="date_fin_contrat"/>
+                                    <input type="hidden" value="{{ planning.date_debut_contrat }}" name="date_debut_contrat"/>
+                                    <input type="hidden" value="{{ planning.date_fin_contrat }}" name="date_fin_contrat"/>
+                                    <input type="hidden" value="{{ exclusions }}" id="exclusions"  name="exclusions"/>
                                 </form>
                                 <div class="col-md-2"><label class="">Date de création : {{ planning.date_creation }}</label></div>
                                 <div class="col-md-4 text-center"><label >Formation : {{ formation.libellelong }}</label></div>
