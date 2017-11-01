@@ -12,11 +12,19 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
+
 /**
  * Description of PlanningExclusionRepository
  *
  * @author Alois
  */
 class PlanningExclusionRepository extends \Doctrine\ORM\EntityRepository {
+    
+      public function insertExclusion($exclusion, $em) {
+        $em->persist($exclusion);
+        $em->flush();
+
+        return $exclusion;
+    }   
     
 }

@@ -56,7 +56,7 @@ function getCours() {
         lieux: $("#lieu").val(),
         debut: $("#date_debut_contrat").text(),
         fin: $("#date_fin_contrat").text(),
-        exclusions : $("#exclusions").val()
+        exclusions: $("#exclusions").val()
     };
     $.ajax({
         type: "POST",
@@ -246,31 +246,35 @@ function onDropEventToPlanning(event) {
             dataType: "json",
             success: function (response) {
                 var cours = response.cours;
-                var debut_cours = convertDate2(cours.start['date']);
-                var fin_cours = convertDate2(cours.end['date']);
-                var ordre = $(".cours_planning").length + 1;
-                var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' data-duree='" + cours.duree + "' value='" + cours.idmodule + "' data-cours='" + idCours + "' data-ordre='" + ordre + "'>";
-                html += "<td class='text-center'><label>" + debut_cours.format('L') + "</label></td>";
-                html += "<td class='text-center'><label>" + fin_cours.format('L') + "</label></td>";
-                html += "<td class='text-center'><label>ENI (" + cours.lieu + ")<br><span>" + cours.duree + "</span> heures</label></td>";
-                html += "<td class='text-center'>" + cours.libellemodule + "<i class='close fa fa-close' onclick='onBtClickSuppCours(this)'></i>&nbsp;<i class='close fa fa-edit'></i></td>";
-                html += "</tr>";
-                html += getDatePlanningOnDrop(cours, convertDate2(cours.start['date']), convertDate2(cours.end['date']));
+                if (parseInt($("#table-total").text()) + cours.duree <= parseInt($("#max_heure").val())) {
+                    var debut_cours = convertDate2(cours.start['date']);
+                    var fin_cours = convertDate2(cours.end['date']);
+                    var ordre = $(".cours_planning").length + 1;
+                    var html = "<tr class='cours_planning ajouter' id='module_planning_" + cours.idmodule + "' data-duree='" + cours.duree + "' value='" + cours.idmodule + "' data-cours='" + idCours + "' data-ordre='" + ordre + "'>";
+                    html += "<td class='text-center'><label>" + debut_cours.format('L') + "</label></td>";
+                    html += "<td class='text-center'><label>" + fin_cours.format('L') + "</label></td>";
+                    html += "<td class='text-center'><label>ENI (" + cours.lieu + ")<br><span>" + cours.duree + "</span> heures</label></td>";
+                    html += "<td class='text-center'>" + cours.libellemodule + "<i class='close fa fa-close' onclick='onBtClickSuppCours(this)'></i>&nbsp;<i class='close fa fa-edit'></i></td>";
+                    html += "</tr>";
+                    html += getDatePlanningOnDrop(cours, convertDate2(cours.start['date']), convertDate2(cours.end['date']));
 
-                $("#module_" + cours.idmodule).prop('disabled', true);
+                    $("#module_" + cours.idmodule).prop('disabled', true);
 
-                var modules_precedent = [];
-                $("#table-planning tbody tr.cours_planning:not(.supprimer)").each(function () {
-                    modules_precedent.push($(this).attr("value"));
-                })
-                $('#table-planning tbody').append(html);
-                if ($("#table-planning tbody tr.cours_planning").length > 2) {
-                    sortPlanning();
+                    var modules_precedent = [];
+                    $("#table-planning tbody tr.cours_planning:not(.supprimer)").each(function () {
+                        modules_precedent.push($(this).attr("value"));
+                    })
+                    $('#table-planning tbody').append(html);
+                    if ($("#table-planning tbody tr.cours_planning").length > 2) {
+                        sortPlanning();
+                    }
+                    $("#table-total").text(parseInt($("#table-total").text()) + cours.duree);
+                    $("#overlay-table").addClass("hidden");
+                    setBtGenerationEnabled();
+                    getModuleSuivant(cours.idmodule, modules_precedent);
+                } else {
+                    toastr.error("Impossible d'ajouter ce cours. Vous depassez le nombre d'heure prévue à la formation.");
                 }
-                $("#table-total").text(parseInt($("#table-total").text()) + cours.duree);
-                $("#overlay-table").addClass("hidden");
-                setBtGenerationEnabled();
-                getModuleSuivant(cours.idmodule, modules_precedent);
             }
         });
         setTimeout(resize, 500);
@@ -308,6 +312,10 @@ function recalcDateEntreprise() {
                 $(this).find('td:eq(1)').text(date_fin.format("L"));
             } else {
                 $(this).find('td:eq(1)').text("Fin de contrat");
+            }
+            
+            if(tr_prev == ""){
+               $(this).find('td:eq(1)').text(date_fin.format("L"));
             }
         }
 

@@ -29,10 +29,44 @@ function getFramePlanning(id = null) {
                     language: "fr"
                 });
             });
+
+            initChangeFormation()
+
             initDatepicker();
             initDatatableAlternant();
             onGenerationPanningSubmit();
         }
+    });
+}
+
+function initChangeFormation() {
+    $("#formation").change(function () {
+        var code = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "/planning/liste_stagiaire",
+            data: {code_formation: code},
+            dataType: "json",
+            success: function (response) {
+                if (response.status == "ok") {
+                    var html = "<option></option>";
+                    var stagiaires = response.stagiaires;
+                    for (var i = 0; i < stagiaires.length; i++) {
+                        var stagiaire = stagiaires[i];
+                        html += "<option value='" + stagiaire['codestagiaire'] + "'>" + stagiaire['prenom'] + " " + stagiaire['nom'] + " " + stagiaire['raisonsociale'] + "(" + stagiaire['ville'] + ")</option>";
+                    }
+                    $("#planning_identique").html(html);
+                    $("#planning_identique").select2({
+                        placeholder: {
+                            id: '', // the value of the option
+                            text: $("#planning_identique").attr('placeholder')
+                        },
+                        language: "fr",
+                        allowClear : true
+                    });
+                }
+            }
+        });
     });
 }
 
@@ -42,7 +76,7 @@ function initDatepicker() {
         "showDropdowns": true,
         "locale": {
             "format": "DD/MM/YYYY",
-            "daysOfWeek": ["Dim","Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+            "daysOfWeek": ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
             "monthNames": ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
             "firstDay": 0
         }
@@ -188,9 +222,7 @@ function onGenerationPanningSubmit() {
                 var input_fin = "<input type='hidden' name='exclusion[fin][]' value='" + $(this)[1] + "'/>";
                 $("#generationform").append(input_debut + input_fin);
             });
-
             $(this).unbind('submit').submit();
-
         }
     });
 }

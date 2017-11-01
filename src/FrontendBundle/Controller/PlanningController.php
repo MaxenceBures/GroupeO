@@ -2,17 +2,18 @@
 
 namespace FrontendBundle\Controller;
 
-use FrontendBundle\Entity\Planning;
-use FrontendBundle\Entity\PlanningCours;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\EntityManagerInterface;
+use DateTime;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\EntityManagerInterface;
+use FrontendBundle\Entity\Planning;
+use FrontendBundle\Entity\PlanningCours;
+use FrontendBundle\Entity\PlanningExclusion;
+use Knp\Snappy\Pdf;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use DateTime;
-use Knp\Snappy\Pdf;
 
 class PlanningController extends Controller {
 
@@ -73,6 +74,8 @@ class PlanningController extends Controller {
         $repository_ordre_module = $em_front->getRepository("FrontendBundle:OrdreModule");
         $planning_exclusion = $em_front->getRepository("FrontendBundle:PlanningExclusion");
         $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
+        $repository_planning = $em_front->getRepository("FrontendBundle:Planning");
+        $repository_planning_cours = $em_front->getRepository("FrontendBundle:PlanningCours");
         if ($planning_temp == "0") {
             $stagiaire_temp = $request->get("stagiaire");
             $entreprise_temp = $request->get("entreprise");
@@ -81,12 +84,15 @@ class PlanningController extends Controller {
             $date_fin_temp = $request->get("date_fin_contrat");
             $max_heure_temp = $request->get("maxHeure");
             $max_semaine_temp = $request->get("maxSemaine");
+            $planning_identique_temp = $request->get("planning_identique");
             $date_creation_temp = date("d/m/Y");
             $exclusions = $request->get("exclusion");
+            $planning_obj_temp = $repository_planning->getPlanningMaxIdByStagiaire($planning_identique_temp, $formation_temp, $em_front);
+            $planning_obj_temp = $repository_planning->findBy(array("idPlanning" => $planning_obj_temp[0][1]));
+            $cours_plannifier = $repository_planning_cours->getCoursByPlanning($planning_obj_temp, $em_front);
+
 //            $planning['']
         } else {
-            $repository_planning = $em_front->getRepository("FrontendBundle:Planning");
-            $repository_planning_cours = $em_front->getRepository("FrontendBundle:PlanningCours");
             $planning_obj_temp = $repository_planning->findBy(array("idPlanning" => $planning_temp));
             $stagiaire_temp = $planning_obj_temp[0]->getStagiairecode();
             $entreprise_temp = $planning_obj_temp[0]->getEntreprisecode();
@@ -176,6 +182,7 @@ class PlanningController extends Controller {
         $max_semaine_temp = $request->get("max_semaine");
         $createur_temp = $request->get("createur");
         $cours_temps = $request->get("cours");
+        $exclusions = $request->get("exclusions");
         $usr = $this->get('security.token_storage')->getToken()->getUser();
         $planning = new Planning();
         $planning->setNom($nom_planning_temp);
@@ -193,6 +200,7 @@ class PlanningController extends Controller {
 
         $repository = $this->getDoctrine()->getRepository('FrontendBundle:Planning');
         $repository_planning_cours = $this->getDoctrine()->getRepository('FrontendBundle:PlanningCours');
+        $repository_planning_exclusion = $this->getDoctrine()->getRepository('FrontendBundle:PlanningExclusion');
         $new_planning = $repository->insertPlanning($planning, $this->getDoctrine()->getManager());
 
         if (isset($cours_temps["ajouter"])) {
@@ -207,6 +215,18 @@ class PlanningController extends Controller {
                 $repository_planning_cours->insertCours($cours, $this->getDoctrine()->getManager());
             }
         }
+
+        $exclusions = json_decode($exclusions);
+        if (!empty($exclusions)) {
+            for ($i = 0; $i < count($exclusions['debut']); $i++) {
+                $exclusions_new = new PlanningExclusion();
+                $exclusions_new->setPlanning($new_planning);
+                $exclusions_new->setDateDebut(exclusions['debut'][$i]);
+                $exclusions_new->setDateFin(exclusions['fin'][$i]);
+                $repository_planning_exclusion->insertExclusion($exclusions_new, $this->getDoctrine()->getManager());
+            }
+        }
+
         return new Response(json_encode(array("status" => "ok", "planning_id" => $new_planning->getIdPlanning())));
     }
 
@@ -334,6 +354,29 @@ class PlanningController extends Controller {
             'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
                 ]
         );
+    }
+
+    /**
+     * Liste des stagiaire possédant déja un planning
+     * 
+     * @Route("/planning/liste_stagiaire", name="planning_liste_stagiaire")
+     */
+    public function listeStagiaireAction(Request $request) {
+        $stagiaires = array();
+        $em_eni = $this->getDoctrine()->getManager('eni');
+        $em_front = $this->getDoctrine()->getManager('groupeo');
+        $formation_temp = $request->get("code_formation");
+        $repository = $em_front->getRepository('FrontendBundle:Planning');
+        $repository_stagiaire = $em_eni->getRepository('EniBundle:Stagiaire');
+        $stagiaires_temps = $repository->getPlanningStagiaires($formation_temp, $em_front);
+
+        foreach ($stagiaires_temps as $stagiaire) {
+            $stagiaire_temp = $repository_stagiaire->rechercherStagiaireNumLien($stagiaire["stagiaireEntrepriseNumlien"], $em_eni);
+            array_push($stagiaires, $stagiaire_temp[0]);
+        }
+
+
+        return new Response(json_encode(array("status" => "ok", "stagiaires" => $stagiaires)));
     }
 
 }

@@ -25,7 +25,7 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
     }
 
     public function getPlanningStagiaires($formation, $em) {
-        $sql = "SELECT p.stagiaireEntrepriseNumlien 
+        $sql = "SELECT distinct p.stagiaireEntrepriseNumlien 
                 FROM FrontendBundle:Planning p
                 WHERE p.formationCode = '" . $formation . "'";
 
@@ -119,6 +119,17 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         $sql = "SELECT p.stagiaireEntrepriseNumlien 
                 FROM FrontendBundle:Planning p
                 WHERE p.idPlanning = '" . $id . "'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    public function getPlanningMaxIdByStagiaire($stagiaire, $formation, $em) {
+
+        $sql = "SELECT max(p.idPlanning)
+                FROM FrontendBundle:Planning p
+                WHERE p.stagiaireCode = " . $stagiaire . " and p.formationCode='$formation'";
 
         $query = $em->createQuery($sql);
 

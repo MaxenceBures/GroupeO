@@ -493,6 +493,17 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 }
                 not_planning_pdf:
 
+                // planning_liste_stagiaire
+                if ('/planning/liste_stagiaire' === $pathinfo) {
+                    if ('POST' !== $canonicalMethod) {
+                        $allow[] = 'POST';
+                        goto not_planning_liste_stagiaire;
+                    }
+
+                    return array (  '_controller' => 'FrontendBundle\\Controller\\PlanningController::listeStagiaireAction',  '_route' => 'planning_liste_stagiaire',);
+                }
+                not_planning_liste_stagiaire:
+
                 if (0 === strpos($pathinfo, '/planningglobal')) {
                     // planning_global_index
                     if ('/planningglobal' === $pathinfo) {
