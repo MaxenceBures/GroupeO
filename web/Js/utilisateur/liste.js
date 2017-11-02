@@ -15,10 +15,18 @@ $(function() {
 
     $('#save_datas').click(function() {
         if(utilisateur_id == 0){
-            saveDatas();
+            if(checkDatas(true) == true){
+                saveDatas();
+            }else{
+                toastr.error("Veuillez remplir tous les champs");
+            }
         }
         else{
-            updateDatas();
+            if(checkDatas(false) == true){
+                updateDatas();
+            }else{
+                toastr.error("Veuillez remplir tous les champs");
+            }
         }
     });
 
@@ -84,27 +92,31 @@ $(function() {
     function removeDatas(id){
         var utilisateur = {id:id};
 
-        $.ajax({
-            type: "POST",
-            url: "/utilisateur/supprimer",
-            data: {
-                utilisateur: utilisateur
-            },
-            dataType: "json",
-            success: function(response) {
-                if(response.status == "ok"){
-                    toastr.success("Suppression effectué");
+        if(confirm("Supprimer ?") == true){
 
-                     closeDatatable();
-                     $('#liste_utilisateur_ligne_'+id).remove();
-                     initDatatable();
-                }else{
+            $.ajax({
+                type: "POST",
+                url: "/utilisateur/supprimer",
+                data: {
+                    utilisateur: utilisateur
+                },
+                dataType: "json",
+                success: function(response) {
+                    if(response.status == "ok"){
+                        toastr.success("Suppression effectuée");
+
+                         closeDatatable();
+                         $('#liste_utilisateur_ligne_'+id).remove();
+                         initDatatable();
+                    }else{
+                        toastr.error("Erreur lors de l'enregistrement");
+                    }
+                },error: function(){
                     toastr.error("Erreur lors de l'enregistrement");
                 }
-            },error: function(){
-                toastr.error("Erreur lors de l'enregistrement");
-            }
-        });
+            });
+
+        }
     }
 
     function clearDatas(){
@@ -115,8 +127,10 @@ $(function() {
 
         $('#input_nom').val(utilisateur_name);
         $('#input_mail').val(utilisateur_mail);
+        $('#input_password').val("");
 
         $("#input_password").prop('disabled', false);
+        $("#input_mail").prop('disabled', false);
     }
 
     function loadDatas(){
@@ -130,6 +144,7 @@ $(function() {
         }
 
         $("#input_password").prop('disabled', true);
+        $("#input_mail").prop('disabled', true);
 
 
     }
@@ -219,6 +234,27 @@ $(function() {
         });
     }
 
+    function checkDatas(pass){
+        var input_nom = $('#input_nom').val();
+        var input_mail = $('#input_mail').val();
+        var input_pass = $('#input_password').val();
+
+        var result = true;
+
+        if( input_nom == "" | input_mail == ""){
+            result = false;
+        }
+
+        if( pass == true){
+            if(input_pass == ""){
+                result = false;
+            }
+        }
+
+
+        return result;
+    }
+
     function saveDatas(){
         var input_nom = $('#input_nom').val();
         var input_mail = $('#input_mail').val();
@@ -243,7 +279,7 @@ $(function() {
                     toastr.success("Enregistrement effectué");
 
                     closeDatatable();
-                    $('#liste_utilisateur_ligne').append('<tr><td>'+input_nom+'</td><td>'+input_mail+'</td><td>'+utilisateur_role+'</td><td><a class="click" value="'+utilisateur_id+'">Edit</a> <a class="supprimer" value="'+utilisateur_id+'">Supprimer</a> <a class="mail" value="'+utilisateur_id+'">Mail</a></td></tr>');
+                    $('#liste_utilisateur_ligne').append('<tr><td>'+input_nom+'</td><td>'+input_mail+'</td><td>'+utilisateur_role+'</td><td><a class="click" value="'+utilisateur_id+'"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a class="supprimer" value="'+utilisateur_id+'"><i class="fa fa-trash" aria-hidden="true"></i></a> <a class="mail" value="'+utilisateur_id+'"><i class="fa fa-key" aria-hidden="true"></i></a></td></tr>');
                     initDatatable();
                 }else{
                     toastr.error("Erreur lors de l'enregistrement");

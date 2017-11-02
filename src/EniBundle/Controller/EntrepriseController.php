@@ -10,11 +10,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class EntrepriseController extends Controller
 {
     /**
      * @Route("/entreprise/liste", name="entreprise_liste")
+	 * Affichage de la liste des entreprises
      */
     public function listeAction(Request $request)
     {

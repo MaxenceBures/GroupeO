@@ -8,6 +8,9 @@ frontend_test:
 frontend_erreur:
     path:     /erreur
     defaults: { _controller: FrontendBundle:Accueil:erreur }
+frontend_password:
+    path:     /password/layout
+    defaults: { _controller: FrontendBundle:Accueil:password }
 #FRONTEND
 
 #CONNEXION
@@ -26,6 +29,10 @@ connexion_logout:
 connexion_register:
     path:     /register
     defaults: { _controller: FrontendBundle:Connexion:register }
+connexion_password:
+    path:     /password
+    defaults: { _controller: FrontendBundle:Connexion:password }
+    methods: [post]
 #CONNEXION
 
 #UTILISATEUR
@@ -47,6 +54,9 @@ utilisateur_supprimer:
 user_utilisateur_modifier_password:
       path:     /password_update
       defaults: { _controller: FrontendBundle:Utilisateur:user_modifier_password }
+utilisateur_envoyer_password:
+      path:     /utilisateur/envoi_mdp
+      defaults: { _controller: FrontendBundle:Utilisateur:envoi_mdp }
 #UTILISATEUR
 
 #PLANNING
@@ -128,11 +138,14 @@ planning_pdf:
     path:     /planning/pdf/{id}
     defaults: { _controller: FrontendBundle:Planning:pdf }
     methods: [GET]
-planning_liste_stagiaire:
-    path:     /planning/liste_stagiaire
-    defaults: { _controller: FrontendBundle:Planning:listeStagiaire }
-    methods: [post]
-    
+planning_pdf_custom:
+    path:     /planning/pdfcustom/{id}
+    defaults: { _controller: FrontendBundle:Planning:pdfCustom }
+    methods: [GET]
+planning_mail:
+    path:     /planning/mail/{id}-{mail}
+    defaults: { _controller: FrontendBundle:Planning:mail }
+    methods: [GET]
 #PLANNING
 
 #MODULE Independant
@@ -150,6 +163,21 @@ planning_global_recherche:
     defaults: { _controller: FrontendBundle:PlanningGlobal:recherche }
 #PLANNING GLOBAL
 
+#GESTION ERREUR
+erreur_liste:
+    path:     /erreur/liste
+    defaults: { _controller: FrontendBundle:GestionErreur:liste }
+erreur_planning:
+    path:     /erreur/planning
+    defaults: { _controller: FrontendBundle:GestionErreur:detail_planning }
+erreur_replannification:
+    path:     /erreur/replannification
+    defaults: { _controller: FrontendBundle:GestionErreur:replannification_planning }
+erreur_modification:
+    path:     /erreur/modification
+    defaults: { _controller: FrontendBundle:GestionErreur:modification_planning }
+#GESTION ERREUR
+
 
 #ORDRE MODULE
 ordre_module_liste:
@@ -164,3 +192,12 @@ ordre_module_planning:
     path:     /ordreModule/ordrePlanning
     defaults: { _controller: FrontendBundle:OrdreModule:ordrePlanning }
 #ORDRE MODULE
+
+#Mail
+mail_test_motdepasse:
+    path:     /mail/test/motdepasse
+    defaults: { _controller: FrontendBundle:Mail:test_passwordMail }
+mail_test_planning:
+    path:     /mail/test/planning
+    defaults: { _controller: FrontendBundle:Mail:test_planningMail }
+#Mail

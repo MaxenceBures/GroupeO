@@ -169,16 +169,19 @@
                                                 <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                                 <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
                                                 <td id="td_etat_{{ ligne.idPlanning }}">{{ ligne.etat }}</td>
-                                                <td><a href="/planning/pdf/{{ ligne.idPlanning }}" target="blanck"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a></td>
+                                                <td><a><button class="btn btn-default" id="btn_pdf_{{ ligne.idPlanning }}"><i class="fa fa-file-pdf-o"></i></button></a><a><button id="btn_mail_{{ ligne.idPlanning }}" class="btn btn-default"><i class="fa fa-envelope-o"></i></button></a></td>
+                                                <!--<td><a href="/planning/pdfcustom/{{ planning.id }}" target="blank"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a><a href="/planning/mail/{{ planning.id }}" target="blanck"><button class="btn btn-default"><i class="fa fa-envelope-o"></i></button></a></td>-->
                                             </tr>
                                         {% endfor %}
                                     {% else %}
                                         <tr id="liste_planning_ligne_{{ planning.id }}">
-                                            <td>{{ planning.formation }}</td>
+                                            <td>{{ planning.nom }}({{ planning.formation }})</td>
                                             <td>{{ planning.entreprise_raisonsociale }}({{ planning.entreprise_ville }})</td>
                                             <td>{{ planning.entreprise_datedebut |date('d/m/Y') }} - {{ planning.entreprise_datefin |date('d/m/Y')  }}</td>
                                             <td id="td_etat_{{ planning.id }}">{{ planning.etat }}</td>
-                                            <td><a href="/planning/pdf/{{ planning.id }}" target="blanck"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a></td>
+                                            <td><a><button class="btn btn-default" id="btn_pdf_{{ planning.id }}"><i class="fa fa-file-pdf-o"></i></button></a><a><button id="btn_mail_{{ planning.id }}" class="btn btn-default"><i class="fa fa-envelope-o"></i></button></a></td>
+
+                                            <!--<td><a href="/planning/pdfcustom/{{ planning.id }}" target="blank"><button class="btn btn-default"><i class="fa fa-file-pdf-o"></i></button></a><a href="/planning/mail/{{ planning.id }}" target="blanck"><button class="btn btn-default"><i class="fa fa-envelope-o"></i></button></a></td>-->
                                         </tr>
                                     {% endif %}
 
@@ -224,6 +227,33 @@
             <!-- /.modal_password -->
         </form>
     </div><!-- /.login-box -->
+
+    <div class="modal" id="modal_mail" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="btn_close_3" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Selection des destinataires</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="mail_desti">Utiliser le ; afin de séparater les differentes adresses mails (adresse1;adresse2):</label>
+                                <textarea class="form-control" rows="5" id="mail_desti"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-footer">
+                        <span class="pull-left"><a href="#" class="flip-link btn btn-default" id="btn_close_4">Fermer</a></span>
+                        <span class="pull-right"><a class="btn btn-primary" id="btn_save_mail">Envoyer</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 

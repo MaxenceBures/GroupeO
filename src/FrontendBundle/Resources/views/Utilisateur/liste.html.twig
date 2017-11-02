@@ -23,7 +23,10 @@
                                 <td>{{ utilisateur.name }}</td>
                                 <td>{{ utilisateur.email }}</td>
                                 <td>{{ utilisateur.role }}</td>
-                                <td><a class="click" value="{{ utilisateur.id }}">Edit</a> <a class="supprimer" value="{{ utilisateur.id }}">Supprimer</a> <a class="mail" value="{{ utilisateur.id }}">Mail</a></td>
+                                <td>
+                                    <a class="click" value="{{ utilisateur.id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a class="supprimer" value="{{ utilisateur.id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a class="mail" value="{{ utilisateur.id }}"><i class="fa fa-key" aria-hidden="true"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

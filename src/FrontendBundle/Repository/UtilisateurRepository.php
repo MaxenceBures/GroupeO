@@ -15,6 +15,9 @@ use Doctrine\DBAL\DriverManager;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+	/**
+	* Ajout d'un utilisateur
+	*/
     public function insertUtilisateur($utilisateur,$em){
         $em->persist($utilisateur);
         $em->flush();
@@ -22,6 +25,9 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
         return $utilisateur;
     }
 
+	/**
+	* Mise à jour d'un utilisateur
+	*/
     public function updateUtilisateur($utilisateur,$em){
         $em->persist($utilisateur);
         $em->flush();
@@ -29,6 +35,9 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
         return $utilisateur;
     }
 
+	/**
+	* Suppression d'un utilisateur
+	*/
     public function removeUtilisateur($utilisateur,$em){
         $em->remove($utilisateur);
         $em->flush();
@@ -36,12 +45,25 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
         return $utilisateur;
     }
 
+	/**
+	* Recuperation d'un utilisateur
+	*/
     public function getUtilisateur($utilisateur,$em){
         $repository = $em->getRepository('FrontendBundle:Utilisateur');
         $utilisateur_temp = $repository->find($utilisateur);
 
         return $utilisateur_temp;
     }
+
+	/**
+	* Recuperation d'un utilisateur à partir de son mail
+	*/
+    public function getUtilisateurMail($mail,$em){
+        $repository = $em->getRepository('FrontendBundle:Utilisateur');
+        $utilisateur_temp = $repository->findBy(array("email" => $mail));
+
+        return $utilisateur_temp;
+}
 
 
 }

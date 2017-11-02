@@ -60,4 +60,24 @@ class CoursRepository extends EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Recuperation du cours par rapport a son id
+     */
+    public function getCoursByIdCours($id, $em) {
+        $repository = $em->getRepository('EniBundle:Cours');
+        $cours_temp = $repository->findby(array('idcours' => $id));
+
+        return $cours_temp;
+    }
+
+    /**
+     * Recuperation du cours par rapport a l'id de son module
+     */
+    public function getCoursByModuleId($module, $em) {
+        $repository = $em->getRepository('EniBundle:Cours');
+        $cours_temp = $repository->findby(array('idmodule' => $module), array('debut' => 'ASC'));
+
+        return $cours_temp;
+    }
+
 }

@@ -14,7 +14,6 @@ use Doctrine\DBAL\DriverManager;
  */
 class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
 
-
     public function getCoursByPlanning($planning, $em) {
         $sql = "select idPlanningcours,coursId,coursIndependant,ordre,
                 c.debut,c.fin,c.dureeReelleenheures,c.idModule,c.codeLieu,
@@ -36,7 +35,7 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
-    public function getCoursPlanning($cours,$planning,$em) {
+    public function getCoursPlanning($cours, $planning, $em) {
         $repository = $em->getRepository('FrontendBundle:Utilisateur');
         $utilisateur_temp = $repository->findBy(array("coursid" => $cours->getCoursId(), "planning" => $planning->getIdPlanning()));
 
@@ -64,16 +63,36 @@ class PlanningCoursRepository extends \Doctrine\ORM\EntityRepository {
         return $cours;
     }
 
-    public function getPlanningByCours($id,$em){
+    public function getPlanningByCours($id, $em) {
         $repository = $em->getRepository('FrontendBundle:PlanningCours');
         $cours_temp = $repository->findby(array('coursId' => $id));
 
         return $cours_temp;
     }
 
-    public function getPlanningByCoursCustom($id,$em){
+    public function getPlanningByCoursCustom($id, $em) {
         $repository = $em->getRepository('FrontendBundle:PlanningCours');
         $cours_temp = $repository->findby(array('coursIndependant' => $id));
+
+        return $cours_temp;
+    }
+
+    /** 	
+     * Recupere les cours à partir d'un planning
+     */
+    public function getCoursByIdPlanning($planning, $em) {
+        $repository = $em->getRepository('FrontendBundle:PlanningCours');
+        $cours_temp = $repository->findby(array('planning' => $planning));
+
+        return $cours_temp;
+    }
+
+    /** 	
+     * Recupere les cours à partir d'un planning
+     */
+    public function getCoursByIdCoursPlanning($id, $em) {
+        $repository = $em->getRepository('FrontendBundle:PlanningCours');
+        $cours_temp = $repository->findby(array('idPlanningCours' => $id));
 
         return $cours_temp;
     }

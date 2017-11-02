@@ -1,4 +1,5 @@
 <?php
+
 namespace EniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FormationController extends Controller {
+
     /**
      * @Route("/formation/liste", name="formation_liste")
+     * Affichage de la liste des formations
      */
-    public function listeAction(Request $request)
-    {
+    public function listeAction(Request $request) {
         if ($request->isXMLHttpRequest()) {
 
             $em = $this->getDoctrine()->getManager('eni');
@@ -24,13 +26,14 @@ class FormationController extends Controller {
             $formations_temp = $repository->findBy(array("archiver" => "0"));
 
             $temp = array();
-            foreach ($formations_temp as $x){
-                array_push($temp,array('court' => $x->getLibellecourt(), 'long' => $x->getLibellelong(), 'id' => $x->getCodeformation()));
+            foreach ($formations_temp as $x) {
+                array_push($temp, array('court' => $x->getLibellecourt(), 'long' => $x->getLibellelong(), 'id' => $x->getCodeformation()));
             }
 
 
-            return new Response(json_encode(array("status" =>"ok","formations" => json_encode($temp))));
+            return new Response(json_encode(array("status" => "ok", "formations" => json_encode($temp))));
         }
         return new Response(json_encode("error"));
     }
+
 }

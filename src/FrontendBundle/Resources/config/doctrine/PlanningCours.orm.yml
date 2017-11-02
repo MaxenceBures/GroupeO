@@ -32,6 +32,14 @@ FrontendBundle\Entity\PlanningCours:
             nullable: false
             options:
                 unsigned: false
+        debut:
+                    type: date
+                    nullable: false
+                    column: debut
+        fin:
+                    type: date
+                    nullable: false
+                    column: fin
     manyToOne:
         coursIndependant:
             targetEntity: CoursIndependant

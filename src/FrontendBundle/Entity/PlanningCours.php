@@ -50,6 +50,20 @@ class PlanningCours
      */
     private $coursIndependant;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="debut", type="date", nullable=false)
+     */
+    private $debut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fin", type="date", nullable=false)
+     */
+    private $fin;
+
 
 
     /**
@@ -157,5 +171,53 @@ class PlanningCours
     public function getCoursIndependant()
     {
         return $this->coursIndependant;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $debut
+     *
+     * @return FermetureLieu
+     */
+    public function setDebut($debut)
+    {
+        $this->debut = $debut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDebut()
+    {
+        return $this->debut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $fin
+     *
+     * @return FermetureLieu
+     */
+    public function setFin($fin)
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getFin()
+    {
+        return $this->fin;
     }
 }

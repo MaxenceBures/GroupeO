@@ -27,8 +27,8 @@ class ParametrageController extends Controller {
 
         if (trim($this->getUser()->getRole()) == "ROLE_USER") {
             return $this->render("EniBundle:Alternant:user_recherche.html.twig");
-        } 
-        
+        }
+
         $em = $this->getDoctrine()->getManager('eni');
         $repository = $em->getRepository('EniBundle:Formation');
         $formations_temp = $repository->findBy(array("archiver" => "0"));
@@ -425,8 +425,14 @@ class ParametrageController extends Controller {
 
             $indicateur_temp = $request->get("datas");
 
-            dump($indicateur_temp);
-            die('ok');
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Parametre');
+            $indicateur = $repository->getParametre("stagiaire_max", $this->getDoctrine()->getManager());
+
+            $indicateur = $indicateur[0];
+
+            $indicateur->setValeur($indicateur_temp["indicateur"]);
+
+            $repository->updateParametre($indicateur, $this->getDoctrine()->getManager());
 
             return new Response(json_encode(array("status" => "ok")));
         }
@@ -441,7 +447,11 @@ class ParametrageController extends Controller {
 
         if ($request->isXMLHttpRequest()) {
 
-            return new Response(json_encode(array("status" => "ok", "indicateur" => 15)));
+            $repository = $this->getDoctrine()->getRepository('FrontendBundle:Parametre');
+
+            $indicateur = $repository->getParametre("stagiaire_max", $this->getDoctrine()->getManager());
+
+            return new Response(json_encode(array("status" => "ok", "indicateur" => $indicateur[0]->getValeur())));
         }
 
         return "error";

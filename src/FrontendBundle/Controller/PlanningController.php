@@ -145,6 +145,7 @@ class PlanningController extends Controller {
 
     /**
      * @Route("/planning/status_update", name="planning_status_update")
+     * Mise à jour de l'etat d'un planning
      */
     public function status_updateAction(Request $request) {
         if ($request->isXMLHttpRequest()) {
@@ -322,61 +323,222 @@ class PlanningController extends Controller {
         $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
         $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
         $duree_total = 0;
-        foreach ($planning_cours_temp as $k) {
-            // var_dump($k) . "<br>";
-            $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
-            $lieu_temps = ($k->getCoursid() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
-            $cours_temps = ($k->getCoursid() != null) ? array("id" => $k->getCoursid(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
-            $module = ($k->getCoursid() != null) ? $repository_modules->findBy(array("idmodule" => $cours[0]->getIdmodule())) : null;
-            $module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
-            $cours_inde = null;
-            $module_inde = null;
-            $duree_total += ($k->getCoursid() != null) ? $cours[0]->getDureereelleenheures() : 0;
-            $planning_temp = array("cours" => $cours_temps,
-                "module" => $module_temps);
-            array_push($planning_cours, $planning_temp);
+
+        if (count($planning_cours_temp) != 0) {
+
+            foreach ($planning_cours_temp as $k) {
+                // var_dump($k) . "<br>";
+                $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
+                $lieu_temps = ($k->getCoursid() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+                $cours_temps = ($k->getCoursid() != null) ? array("id" => $k->getCoursid(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+                $module = ($k->getCoursid() != null) ? $repository_modules->findBy(array("idmodule" => $cours[0]->getIdmodule())) : null;
+                $module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
+                $cours_inde = null;
+                $module_inde = null;
+                $duree_total += ($k->getCoursid() != null) ? $cours[0]->getDureereelleenheures() : 0;
+                $planning_temp = array("cours" => $cours_temps,
+                    "module" => $module_temps);
+                array_push($planning_cours, $planning_temp);
+            }
+
+
+            $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
+                "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours, "duree_tot" => $duree_total,
+                'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
+
+            $filename = $planning[0]->getNom() . '.pdf';
+
+            $snappy = new Pdf($this->get('kernel')->getRootDir() . '/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf.exe');
+
+            return new Response(
+                    $snappy->getOutputFromHtml($html, array('lowquality' => false,
+                        'encoding' => 'utf-8',
+                        'images' => true, 'load-error-handling' => 'ignore')), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+                    ]
+            );
+        } else {
+            return $this->render('FrontendBundle:Accueil:erreur.html.twig', array("erreur" => "Le planning ne possendant aucun module, il est impossible de le gÃ©nÃ©rer"));
         }
-
-
-        $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
-            "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours, "duree_tot" => $duree_total,
-            'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
-
-        $filename = $planning[0]->getNom() . '.pdf';
-
-        $snappy = new Pdf($this->get('kernel')->getRootDir() . '/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf.exe');
-
-        return new Response(
-                $snappy->getOutputFromHtml($html, array('lowquality' => false,
-                    'encoding' => 'utf-8',
-                    'images' => true, 'load-error-handling' => 'ignore')), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
-                ]
-        );
     }
 
     /**
-     * Liste des stagiaire possédant déja un planning
-     * 
-     * @Route("/planning/liste_stagiaire", name="planning_liste_stagiaire")
+     * @Route("/planning/pdfcustom", name="planning_pdf")
+     * Generation d'un pdf 
      */
-    public function listeStagiaireAction(Request $request) {
-        $stagiaires = array();
+    public function pdfCustomAction(Request $request, $id) {
+
+
+        $planning_cours = array();
         $em_eni = $this->getDoctrine()->getManager('eni');
         $em_front = $this->getDoctrine()->getManager('groupeo');
-        $formation_temp = $request->get("code_formation");
-        $repository = $em_front->getRepository('FrontendBundle:Planning');
-        $repository_stagiaire = $em_eni->getRepository('EniBundle:Stagiaire');
-        $stagiaires_temps = $repository->getPlanningStagiaires($formation_temp, $em_front);
+        /* $formation_temp = $request->get("code_formation");
+          $repository = $em_front->getRepository('FrontendBundle:Planning');
+          $repository_stagiaire = $em_eni->getRepository('EniBundle:Stagiaire');
+          $stagiaires_temps = $repository->getPlanningStagiaires($formation_temp, $em_front); */
 
-        foreach ($stagiaires_temps as $stagiaire) {
-            $stagiaire_temp = $repository_stagiaire->rechercherStagiaireNumLien($stagiaire["stagiaireEntrepriseNumlien"], $em_eni);
-            array_push($stagiaires, $stagiaire_temp[0]);
+        $repository_lieu = $em_eni->getRepository("EniBundle:Lieu");
+        $repository_modules = $em_eni->getRepository("EniBundle:Module");
+        $repository_cours = $em_eni->getRepository("EniBundle:Cours");
+        $repository_formation = $em_eni->getRepository("EniBundle:Formation");
+        $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
+        $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
+        $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
+        $repository_cours_inde = $em_front->getRepository("FrontendBundle:CoursIndependant");
+        $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
+
+        $repo_planning = $em_front->getRepository('FrontendBundle:Planning');
+        $repo_planning_cours = $em_front->getRepository('FrontendBundle:PlanningCours');
+        $planning = $repo_planning->findBy(array("idPlanning" => $id));
+        $planning_cours_temp = $repo_planning_cours->findBy(array("planning" => $id), array('ordre' => 'ASC'));
+
+        $formation = $repository_formation->findBy(array("codeformation" => $planning[0]->getFormationCode()));
+        $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
+        $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
+
+        $duree_total = 0;
+
+        if (count($planning_cours_temp) != 0) {
+            foreach ($planning_cours_temp as $k) {
+                // var_dump($k) . "<br>";
+                $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
+
+
+                if ($k->getCoursid() == null) {
+                    $cours = $repository_cours_inde->getCours2ById($k->getCoursIndependant(), $em_front);
+
+                    $lieu_temps = ($k->getCoursIndependant() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+                    $cours_temps = ($k->getCoursIndependant() != null) ? array("id" => $k->getCoursIndependant()->getIdCours(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+                    $module_temps = array("libelle" => $k->getCoursIndependant()->getLibelleCours());
+                } else {
+                    $lieu_temps = ($k->getCoursid() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+                    $cours_temps = ($k->getCoursid() != null) ? array("id" => $k->getCoursid(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+                    $module = ($k->getCoursid() != null) ? $repository_modules->findBy(array("idmodule" => $cours[0]->getIdmodule())) : null;
+                    //$module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
+                    $module_temps = ($k->getCoursid() != null) ? array("libelle" => $cours[0]->getLibelleCours()) : null;
+                }
+
+                $cours_inde = null;
+                $module_inde = null;
+
+                $duree_total += ($k->getCoursid() != null) ? $cours[0]->getDureereelleenheures() : 0;
+                $planning_temp = array("cours" => $cours_temps,
+                    "module" => $module_temps);
+                array_push($planning_cours, $planning_temp);
+            }
+
+
+            $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
+                "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours, "duree_tot" => $duree_total,
+                'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
+
+            $filename = $planning[0]->getNom() . '.pdf';
+
+
+            return new Response(
+                    $this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('lowquality' => false,
+                        'encoding' => 'utf-8',
+                        'images' => true, 'load-error-handling' => 'ignore')), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+                    ]
+            );
+        } else {
+            return $this->render('FrontendBundle:Accueil:erreur.html.twig', array("erreur" => "Le planning ne possendant aucun module, il est impossible de le gÃ©nÃ©rer"));
         }
+    }
+
+    /**
+     * @Route("/planning/pdfcustom", name="planning_pdf")
+     * Generation d'un planning + envoi par mail
+     */
+    public function mailAction(Request $request, $id, $mail) {
+
+        $planning_cours = array();
+        $em_eni = $this->getDoctrine()->getManager('eni');
+        $em_front = $this->getDoctrine()->getManager('groupeo');
+
+        $repository_lieu = $em_eni->getRepository("EniBundle:Lieu");
+        $repository_modules = $em_eni->getRepository("EniBundle:Module");
+        $repository_cours = $em_eni->getRepository("EniBundle:Cours");
+        $repository_formation = $em_eni->getRepository("EniBundle:Formation");
+        $repository_alternant = $em_eni->getRepository('EniBundle:Stagiaire');
+        $repository_entreprise = $em_eni->getRepository("EniBundle:Entreprise");
+        $repository_modules_inde = $em_front->getRepository("FrontendBundle:ModuleIndependant");
+        $repository_cours_inde = $em_front->getRepository("FrontendBundle:CoursIndependant");
+        $repository_entreprise_stagiaire = $em_eni->getRepository("EniBundle:Stagiaireparentreprise");
+
+        $repo_planning = $em_front->getRepository('FrontendBundle:Planning');
+        $repo_planning_cours = $em_front->getRepository('FrontendBundle:PlanningCours');
+        $planning = $repo_planning->findBy(array("idPlanning" => $id));
+        $planning_cours_temp = $repo_planning_cours->findBy(array("planning" => $id), array('ordre' => 'ASC'));
+
+        $formation = $repository_formation->findBy(array("codeformation" => $planning[0]->getFormationCode()));
+        $entreprise = $repository_entreprise->findBy(array("codeentreprise" => $planning[0]->getEntrepriseCode()));
+        $stagiaire = $repository_alternant->findBy(array("codestagiaire" => $planning[0]->getStagiaireCode()));
+
+        $duree_total = 0;
+
+        if (count($planning_cours_temp) != 0) {
+            foreach ($planning_cours_temp as $k) {
+                // var_dump($k) . "<br>";
+                $cours = ($k->getCoursid() != null) ? $repository_cours->findBy(array("idcours" => $k->getCoursid())) : null;
+
+                if ($k->getCoursid() == null) {
+                    $cours = $repository_cours_inde->getCours2ById($k->getCoursIndependant(), $em_front);
+
+                    $lieu_temps = ($k->getCoursIndependant() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+                    $cours_temps = ($k->getCoursIndependant() != null) ? array("id" => $k->getCoursIndependant()->getIdCours(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+                    $module_temps = array("libelle" => $k->getCoursIndependant()->getLibelleCours());
+                } else {
+                    $lieu_temps = ($k->getCoursid() != null) ? $repository_lieu->findBy(array("codelieu" => $cours[0]->getCodelieu())) : null;
+                    $cours_temps = ($k->getCoursid() != null) ? array("id" => $k->getCoursid(), "debut" => $cours[0]->getDebut(), "fin" => $cours[0]->getFin(), "dureeheure" => $cours[0]->getDureereelleenheures(), "lieu_lib" => $lieu_temps[0]->getLibelle()) : null;
+                    $module = ($k->getCoursid() != null) ? $repository_modules->findBy(array("idmodule" => $cours[0]->getIdmodule())) : null;
+                    //$module_temps = ($k->getCoursid() != null) ? array("libelle" => $module[0]->getLibelle()) : null;
+                    $module_temps = ($k->getCoursid() != null) ? array("libelle" => $cours[0]->getLibelleCours()) : null;
+                }
+
+                $cours_inde = null;
+                $module_inde = null;
+
+                $duree_total += ($k->getCoursid() != null) ? $cours[0]->getDureereelleenheures() : 0;
+                $planning_temp = array("cours" => $cours_temps,
+                    "module" => $module_temps);
+                array_push($planning_cours, $planning_temp);
+            }
 
 
-        return new Response(json_encode(array("status" => "ok", "stagiaires" => $stagiaires)));
+            $html = $this->renderView('FrontendBundle:Planning:pdf.html.twig', array("planning" => $planning[0], "formation" => $formation[0],
+                "entreprise" => $entreprise[0], "stagiaire" => $stagiaire[0], "planning_cours" => $planning_cours, "duree_tot" => $duree_total,
+                'base_dir' => $this->get('kernel')->getRootDir() . '/../web' . $request->getBasePath()));
+
+            $filename = $planning[0]->getNom() . '.pdf';
+
+
+            $name = $stagiaire[0]->getNom() . ' ' . $stagiaire[0]->getPrenom();
+            $formation = $formation[0]->getLibelleLong();
+
+            $message = (new \Swift_Message('Planning de formation ' . $name))
+                    ->setFrom('eniecolegroupeo@gmail.com')
+                    ->setTo($mail)
+                    ->setBody(
+                    $this->renderView(
+                            'Mail/mailPlanning.html.twig', array('name' => $name, 'formation' => $formation)
+                    ), 'text/html'
+            );
+
+            $attachment = \Swift_Attachment::newInstance($this->get('knp_snappy.pdf')->getOutputFromHtml($html, array('lowquality' => false, 'encoding' => 'utf-8', 'images' => true, 'load-error-handling' => 'ignore')), 'Planning ' . $name . '.pdf', 'application/pdf');
+            // Attach it to the message
+            $message->attach($attachment);
+
+
+            $this->get('mailer')->send($message);
+
+            return $this->render('FrontendBundle:Accueil:mail.html.twig');
+        } else {
+            return $this->render('FrontendBundle:Accueil:erreur.html.twig', array("erreur" => "Le planning ne possendant aucun module, il est impossible de le gÃ©nÃ©rer"));
+        }
     }
 
 }

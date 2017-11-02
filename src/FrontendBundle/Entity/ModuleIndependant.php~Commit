@@ -94,7 +94,7 @@ class ModuleIndependant
      *
      * @param string $libelle
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setLibelle($libelle)
     {
@@ -118,7 +118,7 @@ class ModuleIndependant
      *
      * @param integer $dureeEnHeures
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDureeEnHeures($dureeEnHeures)
     {
@@ -142,7 +142,7 @@ class ModuleIndependant
      *
      * @param \DateTime $dateCreation
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDateCreation($dateCreation)
     {
@@ -166,7 +166,7 @@ class ModuleIndependant
      *
      * @param integer $dureeEnSemaines
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setDureeEnSemaines($dureeEnSemaines)
     {
@@ -190,7 +190,7 @@ class ModuleIndependant
      *
      * @param float $prixPublicEnCours
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setPrixPublicEnCours($prixPublicEnCours)
     {
@@ -214,7 +214,7 @@ class ModuleIndependant
      *
      * @param string $libelleCourt
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setLibelleCourt($libelleCourt)
     {
@@ -238,7 +238,7 @@ class ModuleIndependant
      *
      * @param boolean $archiver
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setArchiver($archiver)
     {
@@ -262,7 +262,7 @@ class ModuleIndependant
      *
      * @param integer $typeModule
      *
-     * @return ModuleIndependent
+     * @return ModuleIndependant
      */
     public function setTypeModule($typeModule)
     {

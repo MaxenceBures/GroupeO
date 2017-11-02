@@ -101,76 +101,16 @@
                 </div>
             </div>-->
         </div>
-        <div class="col-md-8">
-            <div class="col-md-4">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">A faire</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <ul class="products-list product-list-in-box">
-                            <li class="item">
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                                        <span class="label label-warning pull-right">$1800</span></a>
-                                    <span class="product-description">
-                                        Samsung 32" 1080p 60Hz LED Smart HDTV.
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">En cours</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <ul class="products-list product-list-in-box">
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                                        <span class="label label-warning pull-right">$1800</span></a>
-                                    <span class="product-description">
-                                        Samsung 32" 1080p 60Hz LED Smart HDTV.
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Envoyés</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <ul class="products-list product-list-in-box">
-                            <li class="item">
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                                        <span class="label label-warning pull-right">$1800</span></a>
-                                    <span class="product-description">
-                                        Samsung 32" 1080p 60Hz LED Smart HDTV.
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-8">
+            <ul>
+                <li><a href="register">Enregistrement</a></li>
+                <li><a href="utilisateur/liste">Utilisateur - Liste</a></li>
+                <li><a href="alternant/recherche">Alternant - Recherche</a></li>
+                <li><a href="#" onclick="getFramePlanning();">Création de planning</a></li>
+                <li><a href="logout">Deconnexion</a></li>
+                <li><a href="erreur">phpinfo</a></li>
+            </ul>
         </div>
     </div>
 

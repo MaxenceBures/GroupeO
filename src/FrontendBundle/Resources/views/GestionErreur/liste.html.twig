@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <H1>Gestion des erreurs</H1>
+
+<div class="row">
+        <div class="col-md-3">
+            <div class="col">
+                <div class="list-group panel">
+                    <a href="#erreur_1" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Modules decalés :<span class="badge badge-pill badge-danger">{{ erreur_1 }}</span></a>
+                    <div class="collapse" id="erreur_1">
+                        {% for item in erreur_val_1 %}
+                            <a id="planning_id_{{ item.planning_id }}" class="list-group-item">{{ item.stagiaire_nominatif }} [{{ item.formation_code }}]</a>
+                        {% endfor %}
+                    </div>
+                    <a href="#erreur_2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Erreurs de programmations :<span class="badge badge-pill badge-danger">{{ erreur_2 }}</span></a>
+                    <div class="collapse" id="erreur_2">
+                        {% for item in erreur_val_2 %}
+                            <a id="planning_id_{{ item.planning_id }}" class="list-group-item">{{ item.stagiaire_nominatif }} [{{ item.formation_code }}]</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-4">
+        <div class="col" id="modules">
+
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="col" id="replannification">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('Js/gestionerreur/liste.js') }}"></script>
+{% endblock %}

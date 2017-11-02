@@ -14,6 +14,9 @@ use Doctrine\DBAL\DriverManager;
  */
 class PlanningRepository extends \Doctrine\ORM\EntityRepository {
 
+    /**
+     * Recuperation d'un code formation
+     */
     public function getPlanningFormation($numlien, $em) {
         $sql = 'SELECT p.formationCode 
                 FROM FrontendBundle:Planning p
@@ -24,6 +27,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Recuperation d'un planning
+     */
     public function getPlanningStagiaires($formation, $em) {
         $sql = "SELECT distinct p.stagiaireEntrepriseNumlien 
                 FROM FrontendBundle:Planning p
@@ -34,6 +40,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Recuperation d'un planning avec son detail
+     */
     public function getPlanningFormationDetail($numlien, $em) {
         $sql = 'SELECT p.idPlanning, p.dateDebut, p.dateFin, p.formationCode, p.etat, p.nom
                 FROM FrontendBundle:Planning p
@@ -44,6 +53,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Insertion d'un planning
+     */
     public function insertPlanning($planning, $em) {
         $em->persist($planning);
         $em->flush();
@@ -51,8 +63,11 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $planning;
     }
 
+    /**
+     * Recherche d'un planning par date
+     */
     public function rechercherPlanningDates($search, $em) {
-        $sql = 'SELECT p.idplanning,p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
+        $sql = 'SELECT p.idPlanning,p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
                 FROM FrontendBundle:Planning p
                 WHERE ';
 
@@ -76,6 +91,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Recherche d'un planning par date
+     */
     public function rechercherPlanningDatesFormation($search, $em) {
         $sql = 'SELECT p.dateDebut, p.dateFin, p.formationCode, p.etat, p.stagiaireEntrepriseNumlien
                 FROM FrontendBundle:Planning p
@@ -101,6 +119,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
+    /**
+     * Modification du statut d'un planning
+     */
     public function modifierPlanningStatus($planning, $em) {
         $em->persist($planning);
         $em->flush();
@@ -108,6 +129,9 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $planning;
     }
 
+    /**
+     * Recherche d'un planning par id
+     */
     public function getPlanningByLien($id, $em) {
         $repository = $em->getRepository('FrontendBundle:Planning');
         $planning_temp = $repository->findBy(array('idPlanning' => $id));
@@ -115,8 +139,36 @@ class PlanningRepository extends \Doctrine\ORM\EntityRepository {
         return $planning_temp;
     }
 
+    /**
+     * Recherche d'un planning par id
+     */
     public function getPlanningNumLienById($id, $em) {
         $sql = "SELECT p.stagiaireEntrepriseNumlien 
+                FROM FrontendBundle:Planning p
+                WHERE p.idPlanning = '" . $id . "'";
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    /**
+     * Recherche d'un planning par id
+     */
+    public function getPlannings($em) {
+        $sql = 'SELECT p.idPlanning 
+                FROM FrontendBundle:Planning p';
+
+        $query = $em->createQuery($sql);
+
+        return $query->getResult();
+    }
+
+    /**
+     * Recherche d'un planning par id
+     */
+    public function getPlanningStagiaireById($id, $em) {
+        $sql = "SELECT p.stagiaireCode, p.formationCode 
                 FROM FrontendBundle:Planning p
                 WHERE p.idPlanning = '" . $id . "'";
 
